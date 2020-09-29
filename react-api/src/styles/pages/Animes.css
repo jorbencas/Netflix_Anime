@@ -1,0 +1,233 @@
+.listanime-page {
+    margin: 0;
+    display: block;
+    padding-bottom: 5px;
+    width: 100%;
+    height: auto;
+  }
+  
+  .toolbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left:39px;
+    padding-right: 39px;
+  }
+  
+  .toolbar .tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .listanime-page .tab .tablinks {
+    display: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 12px;
+  }
+  
+  .listanime-page .tab .tablinks i {
+    padding: 14px 16px;
+  }
+  .listanime-page .tab .tablinks *{
+    font-size: 12px;
+  }
+  
+  .listanime-page .tab .tablinks.active{
+    display:inline-block;
+    background: var(--main-green); 
+    color: var(--color-text);
+  }
+  
+  
+  
+  .listanime-page .tab a[class*='active']{
+    display: none!important;
+  }
+  
+  .listanime-page .tab a:not([class*='active']) {
+    display:inline-block;
+    background: var(--main-green); 
+    color: var(--color-text);
+  }
+  
+  .tabcontent {
+    display: block;
+    padding: 6px 12px;
+    border-top: none;
+    text-align: center;
+    width: auto;
+  }
+  
+  .animes_element{
+    max-height: 145px;
+    width:45%; 
+    max-width: 925px;
+    display: inline-block;
+    text-align: left;
+    height: 125px;
+  }
+  
+  .animes_element .img{
+    display: inline-block;
+    width: 10%;
+    height: 125px;
+    overflow: hidden;
+    vertical-align: top;
+  }
+  
+  .animes_element .img img{
+    width:100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .animes_element .info{
+    display: inline-block;
+    width: 85%;
+    height: 100%; 
+    overflow: hidden;
+    vertical-align: top;
+    margin-left: 6px;
+  }
+  
+  .animes_element .info *{
+    display: block;
+    color: var(--color-text);
+  }
+  
+  .animes_element .info p{
+    max-width: 825px;
+    width:100%;
+    font-size: 14px;
+  }
+  
+  .animes_element .info ul li{
+    display: inline-block;
+    background-color: var(--main-green);
+    margin-right: 8px;
+    padding:2px;   
+    vertical-align: bottom;
+    font-size: 14px;
+  }
+  
+  .table{
+    width:100%;
+    background-color: var(--main-grey);
+    color: var(--color-text);
+    overflow-x: auto;
+  }
+  
+  .table .table-thead {
+    text-align: center;
+  }
+  
+  .table .table-thead .thead-cell {
+    padding: 5px;
+  }
+  
+  .table .table-tbody {
+    text-align: center;
+  }
+  
+  .table .table-tbody .tbody-row{
+    width:100%;
+  }
+  
+  .table .table-tbody .tbody-row .tbody-cell {
+    padding: 5px;
+  }
+  
+   .table .table-tbody .tbody-row .tbody-cell .star-rating {
+    font-size:13px;
+    display: inline-block;
+  }
+  
+  .table .table-tbody .tbody-row .tbody-cell .serie-header_rating .star-rating span .fas {
+    color:var(--main-green);
+  }
+  
+  .table .table-tbody .tbody-row .tbody-cell .serie-header_rating .star-rating span .far {
+    color:var(--main-green);
+  }
+  
+  .table .table-tbody .tbody-row .tbody-cell .favorite{
+    display: inline-block;
+  }
+  
+  .table .table-tbody .tbody-row .tbody-cell .favorite i{
+    color: #f63b3b;
+  }
+  
+  .table .table-tbody .tbody-row .tbody-cell .state_sucess{
+    border-radius: 50px;
+    background-color: #35bb37b3;
+    text-align: center;
+    margin: 0;
+  }
+  
+  .table .table-tbody .tbody-row .tbody-cell .state_danger{
+    border-radius: 50px;
+    background-color: rgba(255, 112, 112, 0.555);
+    text-align: center;
+  }
+  
+  .table .table-tbody .tbody-row .tbody-cell .state_warning{
+    border-radius: 50px;
+    background-color: rgba(255, 209, 83, 0.678);
+    text-align: center;
+  }
+  
+  .table .table-tbody .tbody-row:hover {
+    box-shadow: 0px 0px 10px var(--color-text);
+    transition: all 200ms ease-in;
+  }
+  
+  .paginator{
+    width: 75%;
+    padding: 5px;
+  }
+  .paginator .page{ display: none;}
+  
+  .paginator .page.avable,
+  .paginator .page.arrow{
+    display: inline-block;
+    margin: 4px;
+  }
+  
+  .paginator .page a {
+    border: 1px solid var(--main-green);
+    border-radius: 30px;
+    color: var(--color-text);
+    background: var(--main-green);
+    text-decoration: none;
+    padding: 5px;
+  }
+  
+  @media screen and (max-width: 800px) {
+    .listanime-page {
+      z-index: 0;
+    }
+  
+    #lista .animes_element{
+      width: 100%;
+      margin-top: 15px;
+    }
+  
+    #lista .animes_element .img{
+      width: 20%;
+    }
+  
+    #lista  .animes_element .info{
+      width: 75%;
+      overflow: auto;
+    }
+  
+    .tabcontent{
+      overflow-x: auto;
+    }
+  
+  }
