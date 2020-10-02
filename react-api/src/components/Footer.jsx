@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import axios from 'axios';
 import '../styles/components/Footer.css';
 import 'font-awesome/css/font-awesome.min.css';
 
-class Footer extends Component {
+class Footer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

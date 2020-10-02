@@ -15,9 +15,10 @@ export default class Header extends React.Component {
 
 
     componentDidMount() {
-        axios.get(`http://localhost:3001/episodes/getidrand`)
+        axios.get(`http://localhost:3001/episodes/`)
         .then(res => {
-            this.setState({ random: res.data });
+            console.log(res.data.data);
+            this.setState({ random: res.data.data });
         });
     }
 
@@ -60,50 +61,56 @@ export default class Header extends React.Component {
 
                 <nav id='navbar'>
                     <ul className='list'>
-                        <li className='list_element ". link_active("Home") ."'><a className='link' href='/Home'>
+                        <li className='list_element ". link_active("Home") ."'>
+                            <a className='link' href='/Home'>
                                 <i className='fa fa-home'></i>
-                                <span className='texto'>". translate('Header','titulo') ."</span>
-                            </a></li>
-                        <li className='list_element ". link_active("Anime, AnimeDetails, EpisodesDetails") ."'><a className='link' href='/Anime'>
+                                <span className='texto'>Inicio</span>
+                            </a>
+                        </li>
+                        <li className='list_element ". link_active("Anime, AnimeDetails, EpisodesDetails") ."'>
+                            <a className='link' href='/Anime'>
                                 <i className='fa fa-list-ul'></i>
                                 <span className='texto'>Lista de Animes</span>
-                {/*             if (isLogged()) $v['menu'] .= " <!--<span className='badge movil_disabled'>3</span>--> ";
-                */}        
-                </a></li>
-                      {/*   <li className='list_element ". link_active('ComingSoon') ."'><a className='link' href='/ComingSoon'>
-                                <i className='fas fa-book-open'></i>
+                            {/*             if (isLogged()) $v['menu'] .= " <!--<span className='badge movil_disabled'>3</span>--> ";
+                            */}        
+                            </a>
+                        </li>
+                       <li className='list_element '>
+                           <a className='link' href='/ComingSoon'>
+                                <i className='fa fa-book-open'></i>
                                 <span className='texto'>Mangas</span>
-                                <li className='list_element movil_disabled ". link_active("Auth") ."'><a className='link' href='/Auth'>
-                                    <i className='far fa-user-circle'></i>
-                                    <span className='texto'>". translate('Header','iniciar_sesion') . " / " . translate('Header','registro') ."</span>
-                                    </a></li>
-                                </a></li>    */} 
-                {/*    if (isLogged()) {
-                    $v['menu'] .= "
-                    <li className='list_element movil_disabled ". link_active("User") ."'><a className='link user' href='/User") ."'>
-                            <img  src=' $avatar ' alt=' $usuario '>
-                            <span className='texto'> $usuario </span>
+                            </a>
+                        </li>
+                        <li className='list_element movil_disabled ". link_active("Auth") ."'>
+                            <a className='link' href='/Auth'>
+                                <i className='fa fa-user-circle'></i>
+                                <span className='texto'>Iniciar Sessión / Registro </span>
+                            </a>
+                        </li>
+                                 
+                    {/*    if (isLogged()) {
+                        $v['menu'] .= "
+                        <li className='list_element movil_disabled ". link_active("User") ."'><a className='link user' href='/User") ."'>
+                                <img  src=' $avatar ' alt=' $usuario '>
+                                <span className='texto'> $usuario </span>
+                            </a></li>
+                        <li className='list_element movil_disabled'><a className='link' id='salir' href='".  hrefMake("{$v['lang']}/api&am=Auth&aa=$usuario") ."'>
+                                <i className='fas fa-sign-out-alt'></i> <span className='texto'>". translate('Header','salir') ."</span>
+                            </a></li>
+                        <li className='list_element movil_disabled ". link_active("Cart") ."'><a className='link' href=' hrefMake('{$v['lang']}/Cart')'>
+                            <span className='badge movil_disabled'> $number_products</span>
+                                <i className='fas fa-shopping-cart'></i></a>
+                        </li>
+                        ";};*/
+                
+                        <li className='list_element ". link_active("aleatory") ."'><a className='link' href={'/aleatory/id=' + this.state.random}>
+                            <i className='fa fa-random'></i>
+                            <span className='texto'>Aleatorio</span>
                         </a></li>
-                    <li className='list_element movil_disabled'><a className='link' id='salir' href='".  hrefMake("{$v['lang']}/api&am=Auth&aa=$usuario") ."'>
-                            <i className='fas fa-sign-out-alt'></i> <span className='texto'>". translate('Header','salir') ."</span>
-                        </a></li>
-                    <li className='list_element movil_disabled ". link_active("Cart") ."'><a className='link' href=' hrefMake('{$v['lang']}/Cart')'>
-                        <span className='badge movil_disabled'> $number_products</span>
-                            <i className='fas fa-shopping-cart'></i></a>
-                    </li>
-                    ";};*/
-            
-                    <li className='list_element ". link_active("aleatory") ."'><a className='link' href={'/aleatory/id=' + this.state.random}>
-                        <i className='fas fa-random'></i>
-                        <span className='texto'>Aleatorio</span>
-                    </a></li>
-/*
-                    if ($v['modulo'] !== "Edit") $v['menu'] .= render('Buscador');
-                */}
-                </ul>
-        
+                        /*if ($v['modulo'] !== "Edit") $v['menu'] .= render('Buscador');*/
+                        }
+                    </ul>
                 </nav>
-
             </header>
         )
     }

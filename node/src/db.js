@@ -1,8 +1,3 @@
-/*
-  database.js
-  take care of all necessary database set up
-*/
-
 var pg = require("pg");
 var connectionString = "pg://postgres:postgres@localhost:5432/cosasdeanime";
 const client = new pg.Client(connectionString);

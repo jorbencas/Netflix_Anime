@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export class Collection extends React.Component {
-   
+export class Edit extends React.Component {
+
     constructor(props) {
         super(props);
         // Don't call this.setState() here!
@@ -20,4 +20,4 @@ export class Collection extends React.Component {
     }
 }
 
-export default Collection
+export default Edit

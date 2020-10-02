@@ -10,11 +10,10 @@ import './styles/App.css';
 function App() {
   return (
     //<Provider AnimeStore={AnimeStore}>
-
     <div>
       <Header />
       <Home />
-      <Anime />
+     {/*  <Anime /> */}
       <Footer />
     </div>
     //</Provider>

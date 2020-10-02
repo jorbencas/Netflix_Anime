@@ -23,7 +23,7 @@ router.get('/:as', async function(req, res, next){
         //}
         rset.rows[i] = element;
       });
-      return res.json({"data": rset.rows});
+      res.json({"data": rset.rows});
     }else return res.json({"data":null}); 
     
   } catch (err) {
@@ -31,16 +31,19 @@ router.get('/:as', async function(req, res, next){
   }
 });
 
-router.get('/getid', async function(req, res, next){
+router.get('/', async function(req, res, next){
   try {
-    const rset = await dbpool.query("SELECT id FROM episodes ORDER BY random() LIMIT 1");
+    const rset = await dbpool.query("SELECT id FROM episodes ORDER BY random() OFFSET 0 LIMIT 1");
     if (rset.rows.length > 0) {
-      return res.json({"data": rset.rows});
-    }else return res.json({"data":null}); 
+       res.json({"data": rset.rows[0].id});
+    }else  res.json({"data":null});  
   } catch (err) {
     next(err);
   }
+});
 
+router.get('*', function(req, res){
+  res.status(404).send('Error no existe la ruta especificada episodes');
 });
 
 module.exports = router;
