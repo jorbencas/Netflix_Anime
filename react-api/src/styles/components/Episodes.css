@@ -1,0 +1,89 @@
+#episodegrid .grid-item {
+    width: 150px;
+    height: 100px;
+    margin: 2%;
+    display: inline-block;
+    max-height: 400px;
+    position: relative;
+  }
+  
+  #episodegrid .grid-item .image {
+    width: 100%;
+    height: 90%;
+  }
+  
+  #episodegrid .grid-item .overlay {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: 0.5s ease;
+  }
+  
+  #episodegrid .grid-item:hover .overlay {
+    bottom: 0;
+    height: 100%;
+  }
+  
+  #episodegrid .grid-item:hover .image {
+    opacity: 0.6;
+  }
+  
+  #episodegrid .grid-item .fa-play-circle {
+    margin: auto;
+    white-space: nowrap;
+    font-size: 40px;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+  }
+  
+  #episodegrid .data {
+    height: 35px;
+    letter-spacing: 2.5px;
+    overflow: hidden;
+    font-size: 12px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  #episodegrid .table {
+    width: 100%;
+  }
+  
+  #episodegrid .table .table-tbody {
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: visible;
+    overflow: auto;
+  }
+  
+  #episodegrid .table .table-tbody .tbody-row {
+    width: 100%;
+  }
+  
+  #episodegrid .table .table-tbody .tbody-row .tbody-cell {
+    padding: 5px;
+    max-width: 25%;
+  }
+  
+  #episodegrid .table .table-tbody .tbody-row:hover {
+    transition: all 200ms ease-in;
+  }
+  
+  @media screen and (max-width: 800px) {
+    #episodegrid .grid-item {
+      width: 150px;
+      height: 100px;
+      margin: 2%;
+    }
+  }
+  

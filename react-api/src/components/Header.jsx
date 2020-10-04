@@ -17,8 +17,8 @@ export default class Header extends React.Component {
     componentDidMount() {
         axios.get(`http://localhost:3001/episodes/`)
         .then(res => {
-            console.log(res.data.data);
-            this.setState({ random: res.data.data });
+            console.log(res.data);
+            this.setState({ random: res.data });
         });
     }
 

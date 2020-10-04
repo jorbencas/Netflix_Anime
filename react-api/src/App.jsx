@@ -1,22 +1,48 @@
 import React from 'react';
-//import { Provider } from "mobx-react";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "mobx-react";
+import Admin from './pages/Admin';
 import Anime from './pages/Anime';
+import AnimeDetails from './pages/AnimeDetails';
+import Auth from './pages/Auth';
+import Collection from './pages/Collection';
+import Edit from './pages/Edit';
+import EndingsDetails from './pages/EndingsDetails';
+import EpisodeDetails from './pages/EpisodeDetail';
+import History from './pages/History';
 import Home from './pages/Home';
-//import AnimeStore from "./stores/AnimeStore";
+import OpeningDetails from './pages/OpeningsDetails';
+import User from './pages/User';
+import AnimeStore from "./stores/AnimeStore";
 import Footer from './components/Footer';
 import Header from './components/Header';
 import './styles/App.css';
 
 function App() {
   return (
-    //<Provider AnimeStore={AnimeStore}>
-    <div>
+    <div className="p">
       <Header />
-      <Home />
-     {/*  <Anime /> */}
+    <Provider AnimeStore={AnimeStore}>
+      <Router>
+        <Switch>
+          <Route path="/Home" component={Home}/>
+          <Route path="/Anime" component={Anime} />
+          <Route path="/Admin" component={Admin} />
+          <Route path="/AnimeDetails/:param" component={AnimeDetails} />
+          <Route path="/Auth" component={Auth} />
+          <Route path="/EpisodeDetails/:param" component={EpisodeDetails} />
+          <Route path='/OpeningsDetail/:id' component={OpeningDetails}/>
+          <Route path='/EndingsDetails/:id' component={EndingsDetails} />
+          <Route path="/User" component={User} />
+          <Route path="/Collection/:id" component={Collection} />
+          <Route path='/History' component={History} />
+          <Route path='/Edit' component={Edit}/>
+          <Route path='/EditDetail/:id' component={Edit}/>
+        </Switch>
+      </Router>
       <Footer />
+    </Provider>
     </div>
-    //</Provider>
   );
 }
 

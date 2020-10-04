@@ -1,16 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import '../styles/components/Slider.css';
 import 'font-awesome/css/font-awesome.min.css';
 
-export class Slider extends Component {
-
-  constructor(props) {
-    super(props);
-    /* this.state = {
-        animes : [],
-        date : new Date().getFullYear()
-    } */
-  }
+export class Slider extends React.Component {
 
   render() {
     return (
@@ -21,7 +13,7 @@ export class Slider extends Component {
               {this.props.animes.map(anime => (
                 <a className="anime" href={'/AnimeDetailsid=' + anime.id} key={anime.id}>
                   <article className='first'>
-                    <img src={anime.src} />
+                    <img src={anime.src} alt={anime.titulo} />
                     <div className="titulo">
                       <h2>{anime.titulo} </h2>
                     </div>

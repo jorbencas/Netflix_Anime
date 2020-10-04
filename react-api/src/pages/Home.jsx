@@ -101,7 +101,7 @@ export class Home extends React.Component {
   </div> */}
                     </div>
                     {/* <div className="div" style='display:none;'><?= $v['filters'] ?></div>
- */} <a href="http://www.contadorvisitasgratis.com" target="_Blank"></a><br />
+ */} <a href="http://www.contadorvisitasgratis.com" target="_Blank" rel="noopener noreferrer"></a><br />
                     <script type="text/javascript" src="http://counter2.fcs.ovh/private/countertab.js?c=928439c3c54d65c5411de22048a97cbe"></script>
                 </div>
         </div>

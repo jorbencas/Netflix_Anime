@@ -6,11 +6,4 @@ class AnimeStore {
   }
 }
 
-decorate(AnimeStore, {
-  animes: observable,
- /*  agregarArepa: action,
-  borrar: action,
-  numeroArepas: computed */
-});
-
 export default new AnimeStore();

@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import 'font-awesome/css/font-awesome.min.css';
+import { Link } from "react-router-dom";
 
-export default class AnimeTable extends Component {
+export default class AnimeTable extends React.Component {
   constructor({props}) {
     super(props);
    /*  this.state = {
@@ -40,12 +41,11 @@ export default class AnimeTable extends Component {
           </thead>
           <tbody className="table-tbody" role="tablist" id="idTableRankingBody">
             {this.props.animes.map((anime) => (
+              <Link to={"/Edit/" + anime.id} >
               <tr
               key={anime.id}
                 role="row"
                 className="tbody-row"
-                /* onClick="hrefedit(this)" */
-                data-href={"/Edit&id=" + anime.id}
               >
                 <td role="cell" className="tbody-cell">
                   {anime.titulo_es}
@@ -77,6 +77,7 @@ export default class AnimeTable extends Component {
                   </div>
                 </td>
               </tr>
+              </Link>
             ))}
           </tbody>
         </table>

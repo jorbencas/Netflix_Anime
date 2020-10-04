@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export class Collections extends Component {
+export class Collections extends React.Component {
     render() {
         return (
             <div>

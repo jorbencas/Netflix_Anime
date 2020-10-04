@@ -1,22 +1,29 @@
 import React from 'react';
 import '../styles/components/AnimeGrid.css';
 import 'font-awesome/css/font-awesome.min.css';
+import { Link } from "react-router-dom";
 
 export default class AnimeGrid extends React.Component {
     constructor({props}) {
         super(props);
-       /*  this.state = {
-          listbooks:[]
-        };
-        this.mangment = this.mangment.bind(this);
-        this.editable = this.editable.bind(this); */
+        this.renderkindclass = this.renderkindclass.bind(this);
       } 
+
+      renderkindclass(anime){
+        let state = 'element_kind ';
+        switch (anime.kind) {
+            case 'pelicula': state += 'pelicula'; break;
+            case 'ova': state += 'ova';  break;
+            default: state += 'serie';  break;
+        }
+        return state
+    }
 
     render() {
         return (
             <div id='grid' className="tabcontent">
                 {this.props.animes.map(anime => (
-                    <a href={'/AnimeDetails/id='+anime.id} className="grid-anime" id={anime.id} key={anime.id}>
+                    <Link to={'/AnimeDetails/'+anime.id} className="grid-anime" id={anime.id} key={anime.id}>
                     <div className="element_img"
                         style={{  
                             backgroundImage: "url(" + anime.src + ")",
@@ -24,7 +31,7 @@ export default class AnimeGrid extends React.Component {
                             backgroundSize: 'cover',
                             backgroundRepeat: 'no-repeat'
                           }}></div>
-                    <div className="element_kind <?= $anime['kind_class']?>">{anime.kind} </div>
+                    <div className={this.renderkindclass(anime)} >{anime.kind} </div>
                     {/* <div className="<?= $anime['nuevo'] ?>">Nuevo</div> */}
                     <div className="element_text">
                         <p className='titulo'>{anime.titulo_es}</p>
@@ -43,7 +50,7 @@ export default class AnimeGrid extends React.Component {
                         </div>
                         <?php endif;?> */}
                     </div>
-                </a>
+                </Link>
                     
                 ))}
             </div>

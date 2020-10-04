@@ -35,7 +35,7 @@ router.get('/', async function(req, res, next){
   try {
     const rset = await dbpool.query("SELECT id FROM episodes ORDER BY random() OFFSET 0 LIMIT 1");
     if (rset.rows.length > 0) {
-       res.json({"data": rset.rows[0].id});
+       res.json(rset.rows[0]);
     }else  res.json({"data":null});  
   } catch (err) {
     next(err);

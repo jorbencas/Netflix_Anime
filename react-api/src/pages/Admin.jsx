@@ -1,20 +1,39 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
+import '../styles/pages/Admin.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 export class Admin extends React.Component {
     
-    constructor(props) {
-        super(props);
-        // Don't call this.setState() here!
+    constructor() {
+        super()
         this.state = {
-            animes : []
+            tables : []
         };
-        //this.handleClick = this.handleClick.bind(this);
-      }
+        this.handleadmin = this.handleadmin.bind(this);
+    }
+     
+    componentDidMount() {
+        axios.get(`http://localhost:3001/admin`)
+            .then(res => {
+                console.log(res);
+                this.setState({ tables: res.data });
+            });
+    }
+
+    handleadmin(){
+        
+    }
 
     render() {
+        const buttons = this.state.tables.map( e => {
+            return <div className="admin_element" id={e} onClick={ () => {this.handleadmin(`${e}`)}}>
+                 <i className="fa fa-database"></i>
+                <p>{e}</p>
+             </div>}); 
         return (
             <div>
-                
+                { buttons }
             </div>
         )
     }

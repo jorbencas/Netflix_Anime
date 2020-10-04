@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../styles/components/AnimeList.css';
 import 'font-awesome/css/font-awesome.min.css';
+import { Link } from "react-router-dom";
 
 export default class AnimeList extends Component {
     constructor({props}) {
@@ -17,7 +18,7 @@ export default class AnimeList extends Component {
         return (
             <div id='lista' className="tabcontent" >
                 {this.props.animes.map(anime => (
-                     <a href={'/AnimeDetails&id='+anime.id} className="animes_element" id={anime.id} key={anime.id}>
+                     <Link href={'/AnimeDetails/'+anime.id} className="animes_element" id={anime.id} key={anime.id}>
                          <div className="img">
                              <img src={anime.src} alt={anime.titulo_es} />
                          </div>
@@ -30,7 +31,7 @@ export default class AnimeList extends Component {
                              <?php endforeach;?>
                              </ul> */}
                          </div>
-                     </a>
+                     </Link>
                 ))}
             </div>
         )

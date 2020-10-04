@@ -59,7 +59,7 @@ router.get('/lastanimes', async function (req, res, next) {
 
 router.get('/id/:id', async function (req, res, next) {
   try {
-    const rset = await dbpool.query("SELECT a.id, a.kind, a.valorations, a.generes, a.sinopsis_es, a.temporada, " +
+    const animes = await dbpool.query("SELECT a.id, a.kind, a.valorations, a.generes, a.sinopsis_es, a.temporada, " +
       "a.sinopsis_en, a.sinopsis_va, a.sinopsis_ca, a.titulo_es, a.titulo_en, " +
       "a.titulo_va, a.titulo_ca, a.siglas, a.state, a.idiomas, a.kind," +
       "a.date_publication, a.date_finalization, a.created, m.name, m.extension, m.type, at.favorite " +
@@ -68,12 +68,31 @@ router.get('/id/:id', async function (req, res, next) {
       "INNER JOIN media AS m on m.anime = a.id " +
       `WHERE a.id = ${req.params.id} AND m.type = 'portada'` +
       "ORDER BY a.titulo_es ASC");
-    if (rset.rows.length > 0) {
-      rset.rows.forEach((element, i) => {
-        element.src = `${process.env.MEDIA_PATH}/media/animes/${element.siglas}/${element.type}/${element.name}.${element.extension}`;
-        rset.rows[i] = element;
+    if (animes.rows.length > 0) {
+      animes.rows.forEach((element, i) => {
+        element.portada = `${process.env.MEDIA_PATH}/media/animes/${element.siglas}/${element.type}/${element.name}.${element.extension}`;
+        element.banner = `${process.env.MEDIA_PATH}/media/animes/${element.siglas}/banner/${element.name}.${element.extension}`;
+
+        const rset = dbpool.query("SELECT count(m.episode) AS num FROM media AS m " +
+        `WHERE m.anime = '${element.id}' AND m.type = 'episodes'`);
+        element.num_epis = rset.rows.lenght > 0  ? rset.rows[0].num : 0;
+
+        rset = dbpool.query("SELECT count(m.personage) AS num FROM media AS m " +
+        `WHERE m.anime = '${element.id}' AND m.type = 'personages'`);
+        element.num_pers = rset.rows.lenght > 0  ? rset.rows[0].num : 0;
+        
+        rset = dbpool.query("SELECT count(m.opening) AS num FROM media AS m " +
+        `WHERE m.anime = '${element.id}' AND m.type = 'openings'`);
+        element.num_opes = rset.rows.lenght > 0  ? rset.rows[0].num : 0;
+
+        rset = dbpool.query("SELECT count(m.ending) AS num FROM media AS m " +
+        `WHERE m.anime = '${element.id}' AND m.type = 'endings'`);
+        element.num_ends = rset.rows.lenght > 0  ? rset.rows[0].num : 0;
+
+        animes.rows[i] = element;
+        
       });
-      return res.json(rset.rows);
+      return res.json(animes.rows[0]);
     } else return res.json({ "data": null });
 
   } catch (err) {

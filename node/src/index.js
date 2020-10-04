@@ -20,16 +20,16 @@ app.use(errorhandler());
 app.use('/media', express.static('media'));
 app.use('/admin', require('./routes/admin'));
 app.use('/animes', require('./routes/animes'));
-app.use('/chat', require('./routes/chat'));
-app.use('/collections', require('./routes/collections'));
-app.use('/comments',require('./routes/comments'));
-app.use('/endings', require('./routes/endings'));
+//app.use('/chat', require('./routes/chat'));
+//app.use('/collections', require('./routes/collections'));
+//app.use('/comments',require('./routes/comments'));
+//app.use('/endings', require('./routes/endings'));
 app.use('/episodes', require('./routes/episodes'));
-app.use('/history', require('./routes/history'));
-app.use('/openings', require('./routes/openings'));
-app.use('/personages', require('./routes/personages'));
-app.use('/upload',require('./routes/upload'));
-app.use('/users',require('./routes/users'));
+//app.use('/history', require('./routes/history'));
+//app.use('/openings', require('./routes/openings'));
+//app.use('/personages', require('./routes/personages'));
+//app.use('/upload',require('./routes/upload'));
+//app.use('/users',require('./routes/users'));
 
 app.get('/', (req, res) => { res.status(200).send('Api de cosas de anime') } );
 
@@ -87,7 +87,7 @@ app.use(function(err, req, res, next){
 });
 
 //config server
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT);
 app.listen(app.get('port'), () => {
     console.log(`El servidor esta corriendo ${app.get('port')}`)
 })
