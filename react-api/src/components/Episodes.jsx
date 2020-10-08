@@ -27,9 +27,9 @@ export class Episodes extends React.Component {
 
     renderlist(){
         return (
-            <div>
+            <div className='episodegrid'>
             { this.state.episodes.map( episode => (
-                <article className="grid-item">
+                <article className="grid-item" key={episode.id}>
                     <img className="image" src={episode.src} alt={episode.titulo_es} />
                     <Link to={'EpisodesDetails/id=' + episode.id} className="overlay">
                         <i className="fa fa-play-circle"></i>
@@ -49,7 +49,7 @@ export class Episodes extends React.Component {
                     {
                         this.state.episodes.map( episode => (
                             <Link to={'EpisodesDetails/id=' + episode.id} >
-                            <tr role="row" className="tbody-row" onclick="hrefedit(this)" >
+                            <tr role="row" className="tbody-row" onclick="hrefedit(this)" key={episode.id}>
                                 <td role="cell" className="tbody-cell"><i className="fa fa-play"></i></td>
                                 <td role="cell" className="tbody-cell"> { episode.num} </td>
                                 <td role="cell" className="tbody-cell"> { episode.titulo_es} </td>

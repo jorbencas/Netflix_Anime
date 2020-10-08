@@ -69,30 +69,26 @@ router.get('/id/:id', async function (req, res, next) {
       `WHERE a.id = ${req.params.id} AND m.type = 'portada'` +
       "ORDER BY a.titulo_es ASC");
     if (animes.rows.length > 0) {
-      animes.rows.forEach((element, i) => {
-        element.portada = `${process.env.MEDIA_PATH}/media/animes/${element.siglas}/${element.type}/${element.name}.${element.extension}`;
+      let element = animes.rows[0];
+        element.src = `${process.env.MEDIA_PATH}/media/animes/${element.siglas}/${element.type}/${element.name}.${element.extension}`;
         element.banner = `${process.env.MEDIA_PATH}/media/animes/${element.siglas}/banner/${element.name}.${element.extension}`;
 
-        const rset = dbpool.query("SELECT count(m.episode) AS num FROM media AS m " +
-        `WHERE m.anime = '${element.id}' AND m.type = 'episodes'`);
-        element.num_epis = rset.rows.lenght > 0  ? rset.rows[0].num : 0;
-
-        rset = dbpool.query("SELECT count(m.personage) AS num FROM media AS m " +
-        `WHERE m.anime = '${element.id}' AND m.type = 'personages'`);
-        element.num_pers = rset.rows.lenght > 0  ? rset.rows[0].num : 0;
+        const episodes = await dbpool.query("SELECT DISTINCT ON(m.type) count(m.episode) AS num FROM media AS m " +
+        `WHERE m.anime = '${element.id}' AND m.type = 'episodes' GROUP BY m.type`);
+        element.num_epis = episodes.rows.length > 0 ? episodes.rows[0].num : 0;
         
-        rset = dbpool.query("SELECT count(m.opening) AS num FROM media AS m " +
-        `WHERE m.anime = '${element.id}' AND m.type = 'openings'`);
-        element.num_opes = rset.rows.lenght > 0  ? rset.rows[0].num : 0;
-
-        rset = dbpool.query("SELECT count(m.ending) AS num FROM media AS m " +
-        `WHERE m.anime = '${element.id}' AND m.type = 'endings'`);
-        element.num_ends = rset.rows.lenght > 0  ? rset.rows[0].num : 0;
-
-        animes.rows[i] = element;
+        const personages = await dbpool.query("SELECT DISTINCT ON(m.type) count(m.personage) AS num FROM media AS m " +
+        `WHERE m.anime = '${element.id}' AND m.type = 'personages' GROUP BY m.type`);
+        element.num_pers = personages.rows.length > 0  ? personages.rows[0].num : 0;
         
-      });
-      return res.json(animes.rows[0]);
+        const openings = await dbpool.query("SELECT DISTINCT ON(m.type) count(m.opening) AS num FROM media AS m " +
+        `WHERE m.anime = '${element.id}' AND m.type = 'openings' GROUP BY m.type`);
+        element.num_opes = openings.rows.length > 0  ? openings.rows[0].num : 0;
+
+        const endings = await dbpool.query("SELECT DISTINCT ON(m.type) count(m.ending) AS num FROM media AS m " +
+        `WHERE m.anime = '${element.id}' AND m.type = 'endings' GROUP BY m.type`);
+        element.num_ends = endings.rows.length > 0  ? endings.rows[0].num : 0;
+      return res.json(element);
     } else return res.json({ "data": null });
 
   } catch (err) {

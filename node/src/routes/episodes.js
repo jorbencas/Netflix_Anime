@@ -42,6 +42,28 @@ router.get('/', async function(req, res, next){
   }
 });
 
+
+router.get('/id/:id', async function(req, res, next){
+  try {
+    const rset = await dbpool.query("SELECT e.id, e.titulo_es, e.titulo_en, e.titulo_va, " +
+    " e.titulo_ca, a.siglas, e.anime, m.name, m.extension, m.type, e.num, a.idiomas " +
+    " FROM animes AS a " +
+    " INNER JOIN episodes as e ON a.id = e.anime " +
+    " INNER JOIN media AS m ON m.anime = a.id " +
+    `WHERE e.anime = '${req.params.id}' AND m.type = 'portada'`);
+    if (rset.rows.length > 0) {
+      rset.rows.forEach((element,i) => {
+        element.src = `${process.env.MEDIA_PATH}/media/animes/${element.siglas}/${element.type}/${element.name}.${element.extension}`;
+        rset.rows[i] = element;
+      });
+      res.json(rset.rows);
+    }else return res.json({"data":null}); 
+    
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('*', function(req, res){
   res.status(404).send('Error no existe la ruta especificada episodes');
 });

@@ -24,10 +24,9 @@ export default class AnimeDetails extends React.Component {
     componentDidMount() {
         axios.get(`http://localhost:3001/animes/id/${this.props.match.params.param}`)
             .then(res => {
-                console.log(res);
                 this.setState({ anime: res.data });
             });
-            console.log(this.state.anime);
+            //console.log(this.state.anime);
     }
 
     renderstateclass(){
