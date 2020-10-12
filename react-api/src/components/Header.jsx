@@ -13,6 +13,23 @@ export default class Header extends React.Component {
         //this.handleClick = this.handleClick.bind(this);
     }
 
+    $(document).ready(function () {
+        $('#navbar .list_element .link .texto').first().text("Inicio");
+    });
+    
+    
+    $(window).scroll(() => {
+        let screenwidth = document.body.clientWidth;
+             if (screenwidth > 1000) {
+                var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                var scrolled = (winScroll / height) * 100;
+                document.getElementById("myBar").style.width = scrolled + "%";
+             }
+    });   
+    
+
+    
 
     componentDidMount() {
         axios.get(`http://localhost:3001/episodes/`)

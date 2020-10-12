@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import '../styles/pages/Animes.css';
+import '../styles/pages/Anime.css';
 import 'font-awesome/css/font-awesome.min.css';
 import AnimeGrid from '../components/AnimeGrid';
 import AnimeList from '../components/AnimeList';
@@ -17,6 +17,35 @@ class Anime extends React.Component {
         this.setview = this.setview.bind(this);
       }
 
+
+      function setab(evt, cityName,normal){
+        if (normal) {
+          $(".tabcontent").hide();
+          $("button[class*='tablinks']").addClass("active");
+          $("#" + cityName).show();
+          $(evt.currentTarget).removeClass("active");
+        }
+      }
+      
+      function hrefedit(elem){
+        window.location = $(elem).data('href');
+      }
+      
+      function sliderpages(e,option){
+        e.preventDefault();
+        let id_last = $(".paginator .avable").last().attr("id");
+        let id_first = $(".paginator .avable").first().attr("id");
+        if(parseInt(id_last) - parseInt(id_first) === 9 ){
+          if (option  == 'prev') {
+            $(".paginator li[id='" + parseInt(id_first) - 1 + "']").addClass("avable");
+            $(".paginator li[id='" + id_last + "']").removeClass("avable");
+          } else if (option  == 'next') {
+            $(".paginator li[id='" + parseInt(id_last) + 1 + "']").addClass("avable");
+            $(".paginator li[id='" + id_first + "']").removeClass("avable");
+          }
+        }
+      }
+      
     componentDidMount(){
         axios.get(`http://localhost:3001/Animes`)
         .then(res => {

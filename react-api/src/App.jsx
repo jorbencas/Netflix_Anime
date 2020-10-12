@@ -8,7 +8,7 @@ import Auth from './pages/Auth';
 import Collection from './pages/Collection';
 import Edit from './pages/Edit';
 import EndingsDetails from './pages/EndingsDetails';
-import EpisodeDetails from './pages/EpisodeDetail';
+import EpisodeDetails from './pages/EpisodeDetails';
 import History from './pages/History';
 import Home from './pages/Home';
 import OpeningDetails from './pages/OpeningsDetails';
@@ -28,9 +28,9 @@ function App() {
           <Route path="/Home" component={Home}/>
           <Route path="/Anime" component={Anime} />
           <Route path="/Admin" component={Admin} />
-          <Route path="/AnimeDetails/:param" component={AnimeDetails} />
+          <Route path="/AnimeDetails/:id" component={AnimeDetails} />
           <Route path="/Auth" component={Auth} />
-          <Route path="/EpisodeDetails/:param" component={EpisodeDetails} />
+          <Route path="/EpisodeDetails/:id" component={EpisodeDetails} />
           <Route path='/OpeningsDetail/:id' component={OpeningDetails}/>
           <Route path='/EndingsDetails/:id' component={EndingsDetails} />
           <Route path="/User" component={User} />

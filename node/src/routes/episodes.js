@@ -6,7 +6,7 @@ var router = require('express').Router();
  */
 var dbpool = require('../db');
 
-router.get('/:as', async function(req, res, next){
+router.get('/as/:as', async function(req, res, next){
   try {
     let limit = req.params.as.split("_");
     const rset = await dbpool.query("SELECT DISTINCT ON(e.anime) e.id, a.titulo_es as anime_titulo_es," +
@@ -42,8 +42,38 @@ router.get('/', async function(req, res, next){
   }
 });
 
-
 router.get('/id/:id', async function(req, res, next){
+  try {
+    const rset = await dbpool.query("SELECT e.id, e.titulo_es, e.titulo_en, e.titulo_va, " +
+    " e.titulo_ca, a.siglas, e.anime, m.name, m.extension, m.type, e.num, a.idiomas, " +
+    " a.titulo_es as anime_titulo_es, a.titulo_en as anime_titulo_en, " + 
+    " a.titulo_va as anime_titulo_va, a.titulo_ca as anime_titulo_ca " + 
+    " FROM animes AS a " +
+    " INNER JOIN episodes as e ON a.id = e.anime " +
+    " INNER JOIN media AS m ON m.anime = a.id " +
+    `WHERE e.id = '${req.params.id}' AND m.type = 'episodes'`);
+    if (rset.rows.length > 0) {
+      let element = rset.rows[0];
+      element.src = `${process.env.MEDIA_PATH}/media/animes/${element.siglas}/${element.type}/${element.idiomas}/${element.name}.${element.extension}`;
+      const banner = await dbpool.query(`SELECT m.name, m.extension, m.type FROM media AS m WHERE m.anime = ${element.anime} `);
+      let ban = banner.rows[0];
+      element.poster = `${process.env.MEDIA_PATH}/media/animes/${element.siglas}/${ban.type}/${ban.name}.${ban.extension}`;
+      
+      const prev = await dbpool.query(`SELECT id FROM episodes WHERE anime = ${element.anime} AND ( num = ( SELECT num FROM episodes WHERE id = '${parseInt(element.id) - 1}' ))`);
+      element.prev = prev.rows.length > 0 ? prev.rows[0].id : null;
+
+      const next = await dbpool.query(`SELECT id FROM episodes WHERE anime = ${element.anime} AND ( num = ( SELECT num FROM episodes WHERE id = '${parseInt(element.id) + 1}' ))`);
+      element.next = next.rows.length > 0 ? next.rows[0].id : null;
+      
+      res.json(element);
+    }else return res.json({"data":null}); 
+    
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/anime/:id', async function(req, res, next){
   try {
     const rset = await dbpool.query("SELECT e.id, e.titulo_es, e.titulo_en, e.titulo_va, " +
     " e.titulo_ca, a.siglas, e.anime, m.name, m.extension, m.type, e.num, a.idiomas " +

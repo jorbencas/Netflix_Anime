@@ -18,7 +18,7 @@ export class Episodes extends React.Component {
       
 
     componentDidMount() {
-        axios.get(`http://localhost:3001/episodes/id/${this.props.id}`)
+        axios.get(`http://localhost:3001/episodes/anime/${this.props.id}`)
             .then(res => {
                 console.log(res);
                 this.setState({ episodes: res.data });
