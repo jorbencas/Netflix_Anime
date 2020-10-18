@@ -9,30 +9,25 @@ export class Video extends React.Component {
         super(props);
         // Don't call this.setState() here!
         this.state = {
-            episode: {},
-            breadcrumb: []
+            screenwidth : document.body.clientWidth,
+            element : screenwidth > 800 ? ".controls": ".movil_controls",
+            video : document.getElementById("video"),
+            play : $(element + " #play")[0],
+            stop : $(element + " #stop")[0],
+            progress : $(element + " #progress")[0],
+            timestamp : $(element + " #timestamp")[0],
+            timeend : $(element + " #timeend")[0],
+            ranges : $(element + " #volume")[0],
+            speed : $(element + " #speed")[0],
+            setfullvideo : $(element + " #fullscreen")[0],
+            vol,
+            fullscreen : false,
+            moviendo : false
         };
         //this.handleClick = this.handleClick.bind(this);
     }
 
-
-    
-let screenwidth = document.body.clientWidth;
-let element = screenwidth > 800 ? ".controls": ".movil_controls";
-const video = document.getElementById("video");
-const play = $(element + " #play")[0];
-const stop = $(element + " #stop")[0];
-const progress = $(element + " #progress")[0];
-const timestamp = $(element + " #timestamp")[0];
-const timeend = $(element + " #timeend")[0];
-const ranges = $(element + " #volume")[0];
-const speed = $(element + " #speed")[0];
-const setfullvideo = $(element + " #fullscreen")[0];
-let vol;
-let fullscreen = false;
-var moviendo = false;
-
-// $(element + " #vol-icon").on("click", function () {
+// $(element + " #vol-icon").on("click", () {
 //   if ($(element + " #vol-icon i").attr("class") == "fas fa-volume-up fa-2x") {
 //     vol = video.volume;
 //     $(element + " #vol-icon i").attr("class", "fas fa-volume-mute fa-2x");
@@ -45,7 +40,7 @@ var moviendo = false;
 //   }
 // });
 
-function getduration(operacion = null, tiempo = null){
+getduration(operacion = null, tiempo = null){
   // Get mins
   let mins = Math.floor(video.currentTime / 60);
   if (mins < 10) {
@@ -65,12 +60,12 @@ function getduration(operacion = null, tiempo = null){
   return {"mins":mins,"secs":secs};
 }
 
-$(element + " .overlay").on("click", function () {
+$(element + " .overlay").on("click", () {
   updatePlayIcon();
 });
 
 // Play and Pause video
-function toggleVideoStatus() {
+toggleVideoStatus() {
   if (video.paused || (video.canplaythrough && video.loadeddata)) {
     video.play();
   } else {
@@ -79,7 +74,7 @@ function toggleVideoStatus() {
 }
 
 // Update play/pause icon
-function updatePlayIcon() {
+updatePlayIcon() {
   if (video.paused) {
     play.innerHTML = '<i class="fa fa-play fa-2x"></i>';
     $(".overlay").css("height", "100%");
@@ -90,7 +85,7 @@ function updatePlayIcon() {
 }
 
 // Update progress and timestamp
-function updateProgress(operacion = null, tiempo = null ) {
+updateProgress(operacion = null, tiempo = null ) {
   progress.value = (video.currentTime / video.duration) * 100;
   let time = getduration(operacion,tiempo);
   if(time.secs > 5 && window.location.search.includes("EpisodesDetails")){
@@ -117,11 +112,11 @@ function updateProgress(operacion = null, tiempo = null ) {
 }
 
 // Set video time to progress
-function setVideoProgress() {
+setVideoProgress() {
   video.currentTime = (progress.value * video.duration) / 100;
 }
 
-function setvolumen() {
+setvolumen() {
   if(ranges.value < 0.1 && $(element + " #vol-icon i").attr("class") == "fas fa-volume-up fa-2x") {
     $(element + " #vol-icon i").attr("class", "fas fa-volume-mute fa-2x");
   }else if (ranges.value > 0.1 && $(element + " #vol-icon i").attr("class") == "fas fa-volume-mute fa-2x") {
@@ -130,11 +125,11 @@ function setvolumen() {
   video.volume = ranges.value;
 }
 
-function setvelocity() {
+setvelocity() {
   video.playbackRate = speed.value;
 }
 
-function setfullscreen() {
+setfullscreen() {
   if (fullscreen) {
     fullscreen = false;
     $("#fullscreen i").attr("class", "fas fa-expand fa-2x");
@@ -175,30 +170,30 @@ function setfullscreen() {
   }
 }
 
-function resetprogress(){
+resetprogress(){
   video.currentTime = 0;
 }
 
 // Event Listeners
-video.addEventListener("click", toggleVideoStatus);
-video.addEventListener("pause", updatePlayIcon);
-video.addEventListener("play", updatePlayIcon);
-video.addEventListener("timeupdate", updateProgress);
-ranges.addEventListener("change", setvolumen);
-play.addEventListener("click", toggleVideoStatus);
-stop.addEventListener("click", resetprogress);
-progress.addEventListener("change", setVideoProgress);
-speed.addEventListener("change", setvelocity);
-setfullvideo.addEventListener("click", setfullscreen);
+this.state.video.addEventListener("click", toggleVideoStatus);
+this.state.video.addEventListener("pause", updatePlayIcon);
+this.state.video.addEventListener("play", updatePlayIcon);
+this.state.video.addEventListener("timeupdate", updateProgress);
+this.state.ranges.addEventListener("change", setvolumen);
+this.state.play.addEventListener("click", toggleVideoStatus);
+this.state.stop.addEventListener("click", resetprogress);
+this.state.progress.addEventListener("change", setVideoProgress);
+this.state.speed.addEventListener("change", setvelocity);
+this.state.setfullvideo.addEventListener("click", setfullscreen);
 
-$(document).keydown(function (event) {
+$(document).keydown((event) {
   if (event.keyCode == 32 && !$(".input_enviar").is(":focus")) {
     //play pause video space button
-    toggleVideoStatus();
-    updatePlayIcon();
+    this.state.toggleVideoStatus();
+    this.state.updatePlayIcon();
   } else if (event.keyCode == 70  && !$(".input_enviar").is(":focus") && !fullscreen) {
     // fullscreen f button
-    setfullscreen();
+    this.state.setfullscreen();
   } else if (event.keyCode == 77 && !$(".input_enviar").is(":focus") ) {
     //mute m button
     if ($("#vol-icon i").attr("class") == "fas fa-volume-up fa-2x") {
@@ -240,7 +235,7 @@ $(document).keydown(function (event) {
 
 $(document).bind(
   "fullscreenchange webkitfullscreenchange mozfullscreenchange msfullscreenchange",
-  function (e) {
+  (e) {
     var fullscreenElement =
       document.fullscreenElement ||
       document.webkitFullscreenElement ||
@@ -253,12 +248,12 @@ $(document).bind(
   }
 );
 
-document.onmousemove = function () {
+document.onmousemove = () {
   if (fullscreen == true) {
     moviendo = true;
   }
 };
-setInterval(function () {
+setInterval(() {
   if (fullscreen == true) {
     if (!moviendo) {
       $(".controls").hide();

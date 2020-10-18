@@ -4,7 +4,6 @@ export class User extends React.Component {
 
     constructor(props) {
         super(props);
-        // Don't call this.setState() here!
         this.state = {
             animes : []
         };
@@ -12,7 +11,7 @@ export class User extends React.Component {
       }
 
 
-
+/* 
       $(document).ready(function(){
         let screenwidth = document.body.clientWidth;
         if(screenwidth <= 800){
@@ -20,18 +19,15 @@ export class User extends React.Component {
           $(".configuration .personage").text("Pers");
           $(".configuration .favorites").text("Fav");
           $(".configuration .comments").text("Comen");
-          // $("#datos").show();
-          // $("#datos").show();
-          // $("#datos").show();
         }
           var formulario = document.formulario_registro,
           elementos = formulario.elements;
       
           var validarInputs = function() {
               for (var i = 0; i < elementos.length; i++) {
-                // Identificamos si el elemento es de tipo texto, email, password, radio o checkbox
+
                 if (elementos[i].type == "text" || elementos[i].type == "email" || elementos[i].type == "password") {
-                  // Si es tipo texto, email o password vamos a comprobar que esten completados los input
+
                   if (elementos[i].value.length == 0) {
                     console.log('El campo ' + elementos[i].name + ' esta incompleto');
                     elementos[i].className = elementos[i].className + " error";
@@ -42,7 +38,6 @@ export class User extends React.Component {
                 }
               }
             
-              // Comprobando que las contraseñas coincidan
               if (elementos.pass.value !== elementos.pass2.value) {
                 elementos.pass.value = "";
                 elementos.pass2.value = "";
@@ -62,7 +57,6 @@ export class User extends React.Component {
             
               for (var i = 0; i < elementos.length; i++) {
                 if (elementos[i].type == "radio" && elementos[i].name == "sexo") {
-                  // Recorremos los radio button
                   for (var o = 0; o < opciones.length; o++) {
                     if (opciones[o].checked) {
                       resultado = true;
@@ -75,7 +69,6 @@ export class User extends React.Component {
                     console.log('El campo sexo esta incompleto');
                     return false;
                   } else {
-                    // Eliminamos la clase Error del radio button
                     elementos[i].parentNode.className = elementos[i].parentNode.className.replace(" error", "");
                     return true;
                   }
@@ -101,7 +94,6 @@ export class User extends React.Component {
                     console.log('El campo checkbox esta incompleto');
                     return false;
                   } else {
-                    // Eliminamos la clase Error del checkbox
                     elementos[i].parentNode.className = elementos[i].parentNode.className.replace(" error", "");
                     return true;
                   }
@@ -124,10 +116,6 @@ export class User extends React.Component {
                 e.preventDefault();
               }
             };
-      
-             // --- Eventos ---
-            //formulario.addEventListener("submit", enviar);
-            
       
             var focusInput = function() {
               this.parentElement.children[1].className = "label active";
@@ -198,14 +186,14 @@ export class User extends React.Component {
           }).catch((error) => {
             openalert("d", error);
           });
-      }
+      } */
 
 
       
     render() {
         return (
             <div class="user">
-    <div class="banner">
+  {/*   <div class="banner">
         <div class="jumbotron">
             <img  class="banner_img" src="<?=handleMedia("usuario",$v['avatar'],"jpg")?>" alt="">
         </div>
@@ -270,7 +258,7 @@ export class User extends React.Component {
                         <label for="hombre" class='label'>Hombre</label>
                         <input type="radio" name="genere" id="mujer" <?=$v['genere'] == 'Mujer' ? 'checked' : ''?> value="Mujer">
                         <label for="mujer" class='label'>Mujer</label>
-                    </div>
+                     </div>
                     <!-- <div class="input-group checkbox">
                         <input type="checkbox" name="tipo" id="tipo" value="Hombre">
                         <label for="hombre">Tipo</label>
@@ -304,7 +292,7 @@ export class User extends React.Component {
     </div>
     <div id='comments' class="tabcontent" style='display:none;'>
         <?= render('Comments')?>
-    </div>
+    </div>*/}
 </div>
         )
     }

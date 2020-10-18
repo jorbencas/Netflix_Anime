@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 import '../styles/pages/History.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { Link } from "react-router-dom";
@@ -9,45 +10,55 @@ export class History extends React.Component {
         super(props);
         // Don't call this.setState() here!
         this.state = {
-            animes : []
+            history : []
         };
-        //this.handleClick = this.handleClick.bind(this);
+        this.removeelement = this.removeelement.bind(this);
       }
 
-      function removeelement(id){
-        let data = {"action":"deletelement", "id":id};
-        api_ajax(`History`,false,data).then((resp) => {
-            if (resp['status']['code'] === 200) {
-                $(`#${id}`).remove();
-            }
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
+        removeelement(id){
+            axios.get(`http://localhost:3001/history/user/${this.props.match.params.id}`)
+            .then((res) => {
+              this.setState({history: res.data});
+            });
+        }
     
+        componentDidMount(){
+            axios.get(`http://localhost:3001/history/user/${this.props.match.params.id}`)
+            .then((res) => {
+              this.setState({history: res.data});
+            });
+        }
+
     render() {
         return (
             <div class="history">
-    <div class="list">
-    <?php foreach ($v['history'] as $episode): ?>
-        <li class="lista" id="<?=$episode['id']?>">
-            <a class="texto_line" href="<?=hrefMake("{$v['lang']}/EpisodesDetails&id=" . $episode['episode_id'])?>">
-                <div class="img"
-                    style='background: url("<?=$episode['src']?>"), var(--main-grey); background-repeat: no-repeat; background-position: right; background-size: cover;'>
+                <div class="list">
+                    {
+                        this.state.history.map( episode => {
+                            <li class="lista" id={episode['id']} >
+                            <Link class="texto_line" to={'EpisodeDetails/'+episode.id}>
+                                <div class="img"
+                                    style={{  
+                                        backgroundImage: "url(" + episode.src + ")",
+                                        backgroundPosition: 'center',
+                                        backgroundSize: 'cover',
+                                        backgroundRepeat: 'no-repeat'
+                                      }}>
+                                </div>
+                                <p class="texto">
+                                    {episode.anime_titulo_es} -
+                                    {episode.titulo_es}
+                                    <i class="fa fa-play"></i>
+                                </p>
+                            </Link>
+                            <div class="info_avatar" onclick="removeelement(<?=$episode['id']?>)">
+                                <i class='fa fa-trash' style='font-size:20px;'></i>
+                            </div>
+                        </li>
+                        })
+                    }
                 </div>
-                <p class="texto">
-                    <?=$episode["anime_titulo_{$v['c_lang']}"]?> -
-                    <?=$episode["titulo_{$v['c_lang']}"]?>
-                    <i class="fa fa-play"></i>
-                </p>
-            </a>
-            <div class="info_avatar" onclick="removeelement(<?=$episode['id']?>)">
-                <i class='fa fa-trash' style='font-size:20px;'></i>
             </div>
-        </li>
-    <?php endforeach;?>
-    </div>
-</div>
         )
     }
 }

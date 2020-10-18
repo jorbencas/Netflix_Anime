@@ -17,21 +17,7 @@ class Anime extends React.Component {
         this.setview = this.setview.bind(this);
       }
 
-
-      function setab(evt, cityName,normal){
-        if (normal) {
-          $(".tabcontent").hide();
-          $("button[class*='tablinks']").addClass("active");
-          $("#" + cityName).show();
-          $(evt.currentTarget).removeClass("active");
-        }
-      }
-      
-      function hrefedit(elem){
-        window.location = $(elem).data('href');
-      }
-      
-      function sliderpages(e,option){
+/*   function sliderpages(e,option){
         e.preventDefault();
         let id_last = $(".paginator .avable").last().attr("id");
         let id_first = $(".paginator .avable").first().attr("id");
@@ -44,7 +30,7 @@ class Anime extends React.Component {
             $(".paginator li[id='" + id_first + "']").removeClass("avable");
           }
         }
-      }
+      } */
       
     componentDidMount(){
         axios.get(`http://localhost:3001/Animes`)

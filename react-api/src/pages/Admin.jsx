@@ -12,7 +12,7 @@ export class Admin extends React.Component {
         };
         this.handleadmin = this.handleadmin.bind(this);
     }
-     
+     /* 
 
     var lista = JSON.parse(lista_tablas);
 var elem = document.getElementById("bar");
@@ -121,7 +121,7 @@ function setab(evt, disabled) {
   }
 }
 
-
+ */
     componentDidMount() {
         axios.get(`http://localhost:3001/admin`)
             .then(res => {

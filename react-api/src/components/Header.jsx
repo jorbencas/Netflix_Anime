@@ -2,21 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import 'font-awesome/css/font-awesome.min.css';
 import '../styles/components/Header.css';
+import { Link, animateScroll as scroll } from "react-scroll";
 
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
-        // Don't call this.setState() here!
         this.state = {
             random: 0
         };
         //this.handleClick = this.handleClick.bind(this);
     }
-
-    $(document).ready(function () {
-        $('#navbar .list_element .link .texto').first().text("Inicio");
-    });
-    
     
     $(window).scroll(() => {
         let screenwidth = document.body.clientWidth;
@@ -27,9 +22,8 @@ export default class Header extends React.Component {
                 document.getElementById("myBar").style.width = scrolled + "%";
              }
     });   
-    
 
-    
+    componentwillUpdate(){}
 
     componentDidMount() {
         axios.get(`http://localhost:3001/episodes/`)
@@ -37,8 +31,6 @@ export default class Header extends React.Component {
             this.setState({ random: res.data });
         });
     }
-
-    
 
     render() {
         return (

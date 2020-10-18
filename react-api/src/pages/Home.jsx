@@ -16,7 +16,7 @@ export class Home extends React.Component {
         };
     }
 
-    let filt = JSON.parse(filters);
+/*     let filt = JSON.parse(filters);
 let genere = {};
 let searchable = true;
 
@@ -141,7 +141,7 @@ function inView(element, fullHeightInView) {
     elemTop >= docViewTop
   );
 }
-
+ */
 
 
     componentDidMount() {
@@ -209,24 +209,22 @@ function inView(element, fullHeightInView) {
                 <div className="home_body">
                     <div className="home_body_content">
                         {/*     <?php if (isLogged()) : ?>
-      <?php if (!empty($v['animes'])): ?>
-        <h3>Mis Animes</h3>
-        <?=render("Anime_Grid", $v['animes'])?>
-      <?php endif;?>
-    <?php else :?> */}
-
+                            <?php if (!empty($v['animes'])): ?>
+                              <h3>Mis Animes</h3>
+                              <?=render("Anime_Grid", $v['animes'])?>
+                            <?php endif;?>
+                          <?php else :?> */}
                         <h3>Listado de animes de la temporada</h3>
                         <AnimeGrid animes={this.state.animes} />
                     </div>
                     <div className="home_body_content generes">
-
-                        {/*   <div className='home_slide_banner'><h3>$value</h3> <a className='link' href='". hrefMake("{$v['lang']}/Anime&f=generes_$value") ."'>Ver mas + </p></div>";
-   <AnimeGrid animes={this.state.animes} />
-    <div id='generes_final'></div>
-  </div> */}
+                    {/*   <div className='home_slide_banner'><h3>$value</h3> <a className='link' href='". hrefMake("{$v['lang']}/Anime&f=generes_$value") ."'>Ver mas + </p></div>";
+                      <AnimeGrid animes={this.state.animes} />
+                        <div id='generes_final'></div>
+                      </div> */}
                     </div>
-                    {/* <div className="div" style='display:none;'><?= $v['filters'] ?></div>
- */} <a href="http://www.contadorvisitasgratis.com" target="_Blank" rel="noopener noreferrer"></a><br />
+                    {/* <div className="div" style='display:none;'><?= $v['filters'] ?></div>*/} 
+                    <a href="http://www.contadorvisitasgratis.com" target="_Blank" rel="noopener noreferrer"></a><br />
                     <script type="text/javascript" src="http://counter2.fcs.ovh/private/countertab.js?c=928439c3c54d65c5411de22048a97cbe"></script>
                 </div>
         </div>

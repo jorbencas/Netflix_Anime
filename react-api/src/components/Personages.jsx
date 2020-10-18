@@ -7,6 +7,21 @@ export class Personages extends React.Component {
 
 
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            personages : []
+        };
+        this.rendergrid = this.rendergrid.bind(this);
+        this.rendertabla = this.rendertabla.bind(this);
+      }
+      
+      componentDidMount() {
+        axios.get(`http://localhost:3001/personages/anime/${this.props.id}`)
+        .then(res => {
+            this.setState({ personages: res.data });
+        });
+    }
 
 
 
@@ -83,10 +98,12 @@ export class Personages extends React.Component {
     
     render() {
         return (
-            <?php if(isset($v['personage'])) : ?>
-    <?php if (!isMaster()) : ?>
         <section class='container'>
             <div class="child">
+                {
+
+
+                }
                 <?php foreach ($v['personage'] as $key => $anime):?>
                     <article onclick="detail(<?= $anime['id'] ?>)" id='<?= $anime['id'] ?>' class="personage_list item<?=$key +1?>">
                         <div class="img" style='background: url("<?= $anime['src']?>"); background-size: cover;'></div>

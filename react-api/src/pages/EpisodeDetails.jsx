@@ -10,13 +10,12 @@ class EpisodeDetails extends React.Component {
 
     constructor(props) {
         super(props);
-        // Don't call this.setState() here!
         this.state = {
             episode: {}
         };
     }
 
-    $("#add").click(function () {
+  /*   $("#add").click(function () {
         let cant = $("#cant").val();
         if (cant >= 0) $("#cant").val(parseInt(cant) + 1);
       });
@@ -25,7 +24,7 @@ class EpisodeDetails extends React.Component {
         let cant = $("#cant").val();
         if (cant > 0) $("#cant").val(parseInt(cant) - 1);
       });
-
+ */
       
     componentDidMount(){
         axios.get(`http://localhost:3001/episodes/id/${this.props.match.params.id}`)
@@ -44,8 +43,8 @@ class EpisodeDetails extends React.Component {
                             <h1>{this.state.episode.num} - {this.state.episode.titulo_es}</h1>
                         </div>
                         <div className="element_video">
-                            {/*             <Video video={this.state.episode.src} poster={this.state.episode.poster} />
- */}        </div>
+                            <Video video={this.state.episode.src} poster={this.state.episode.poster} />
+                        </div>
                         {/*< div className="options">
             <ul className="options">
                 <?= $v['prev'] ?>

@@ -8,14 +8,24 @@ export class Collection extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            animes : []
+            collection : {}
         };
+        this.ordenar = this.ordenar.bind(this);
       }
 
+      ordenar(tipo){
+
+        if (tipo == 'ascendente') {
+          this.setState();
+        } else if(tipo == 'descendente'){
+          this.setState();
+        }
 
 
-      
-function removeelement(id){
+      }
+
+/*       
+removeelement(id){
     let data = { 
       "action": 'removeelementcollection', 
       "user":localStorage.getItem("user"),
@@ -35,7 +45,7 @@ function removeelement(id){
     });
   }
 
-  function removeall(id){
+  removeall(id){
     let data = { 
         "action": 'removecollection', 
         "user":localStorage.getItem("user"),
@@ -51,50 +61,59 @@ function removeelement(id){
         openalert("d", error);
       });
   }
-  
+   */
     render() {
         return (
             <div class="collection">
     <div class="info">
-        <div class="img" style='background: url("<?= $v['collection'][count($v['collection']) - 1 ]['src']?>"), var(--main-grey); background-repeat: no-repeat; background-position: right; background-size: cover;'></div>
-        <h2 class="name"><?= $v['collection'][0]['titulo']?></h2>
-        <div class="num"><?= count($v['collection']) ?> - <?= translate("anime_detail_list_episode") ?></div>
-        <div class="info_avatar" onclick="removeall(<?=$v['collection'][0]['id']?>)">
+        <div class="img" style={{  
+                            backgroundImage: "url(" + this.state.collection.src + ")",
+                            backgroundPosition: 'center',
+                            backgroundSize: 'cover',
+                            backgroundRepeat: 'no-repeat'
+                          }}></div>
+        <h2 class="name">{this.state.collection.titulo}</h2>
+        <div class="num">{this.state.collection.count} - Detalle </div>
+        <div class="info_avatar" onclick="removeall(this.state.collection.id})">
             <i class='fa fa-trash' style='font-size:20px;'></i>
         </div>
-        <div class="line"><hr></div>
+        <div class="line"><hr/></div>
         <div class="info_avatar">
             <div class="avatar">
-                <img src="<?= $v['avatar'] ?>" alt="" srcset="">
+                <img src={this.state.collection.avatar} alt="" srcset="" />
             </div>
             <div class="info_usuario">
-                <p class='nombre'><?= $v['usuario']?></p>
+                <p class='nombre'>{this.state.collection.user}</p>
             </div>
         </div>
     </div>
     <div class="list">
         <ul class="toolbar">
-            <a href='<?=hrefMake("{$v['lang']}/Anime&od=id") ?>' class="tablinks"> <i class="fas fa-sort-down"></i> </a>
-            <a href='<?=hrefMake("{$v['lang']}/Anime&oa=id") ?>' class="tablinks"> <i class="fas fa-sort-up"></i> </a>
+            <div onClick={ () => {this.ordenar('descandente')}} class="tablinks"> <i class="fa fa-sort-down"></i> </div>
+            <div onClick={ () => {this.ordenar('ascendente')}} class="tablinks"> <i class="fa fa-sort-up"></i> </div>
             <button class="tablinks active" onclick="setab(event, 'lista', true)"> <i class="fas fa-th"></i></button>
             <button class="tablinks" onclick="setab(event, 'grid', true)"> <i class="fas fa-bars"></i></button>
         </ul>
-        <div class="input-episode" style='display:none;'><?= $v['collection'][0]['id'] ?></div>
-        <?php foreach ($v['collection'] as $episode): ?>
-          <li class="lista" id="<?=$episode['episode_id']?>">
-            <a class="texto_line" href="<?=hrefMake("{$v['lang']}/EpisodesDetails&id=" . $episode['episode_id'])?>">
-                <div class="img" style='background: url("<?=$episode['src']?>"), var(--main-grey); background-repeat: no-repeat; background-position: right; background-size: cover;'></div>
+        <div class="input-episode" style='display:none;'>{this.state.collection.id}</div>
+        { this.state.collection.map( E => {
+          <li class="lista" id="<?=$episode['episode_id}">
+            <Link class="texto_line" to={'/EpisodesDetails/' + episode.episode_id} >
+                <div class="img" style={{  
+                            backgroundImage: "url(" + this.state.collection.src + ")",
+                            backgroundPosition: 'center',
+                            backgroundSize: 'cover',
+                            backgroundRepeat: 'no-repeat'
+                          }}></div>
                 <p class="texto">
-                  <?=$episode["anime_titulo_{$v['c_lang']}"]?> - 
-                  <?=$episode["titulo_{$v['c_lang']}"]?>
+                  {episode.anime_titulo_es} - {episode.titulo_es}
                   <i class="fa fa-play"></i>
                 </p>
-            </a>
-            <div class="info_avatar" onclick="removeelement(<?=$episode['episode_id']?>)">
+            </Link>
+            <div class="info_avatar" onclick="removeelement(<?=$episode['episode_id})">
                     <i class='fa fa-trash' style='font-size:20px;'></i>
                 </div>
           </li>
-        <?php endforeach;?>
+        })}
     </div>
 </div>
         )
