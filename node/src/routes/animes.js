@@ -19,13 +19,11 @@ router.get('/', async function (req, res, next) {
       "ORDER BY a.titulo_es ASC");
     if (rset.rows.length > 0) {
       rset.rows.forEach((element, i) => {
-        //if (fs.existsSync(`${process.env.MEDIA_PATH}/animes/${element.siglas}/${element.type}/${element.name}.${element.extension}`)) {
-        element.src = /*fs.readFile(*/`${process.env.MEDIA_PATH}/media/animes/${element.siglas}/${element.type}/${element.name}.${element.extension}`/*)*/;
-        //}
+        element.src = `${process.env.MEDIA_PATH}/media/animes/${element.siglas}/${element.type}/${element.name}.${element.extension}`;
         rset.rows[i] = element;
       });
       return res.json({ "data": rset.rows });
-    } else return res.json({ "data": null });
+    } else return res.json(null);
 
   } catch (err) {
     next(err);
@@ -43,13 +41,11 @@ router.get('/lastanimes', async function (req, res, next) {
       "WHERE m.type = 'portada' ORDER BY e.anime DESC OFFSET 0 LIMIT 7");
     if (rset.rows.length > 0) {
       rset.rows.forEach((element, i) => {
-        //if (fs.existsSync(`${process.env.MEDIA_PATH}/animes/${element.siglas}/${element.type}/${element.name}.${element.extension}`)) {
-        element.src = /*fs.readFile(*/`${process.env.MEDIA_PATH}/media/animes/${element.siglas}/${element.type}/${element.name}.${element.extension}`/*)*/;
-        //}
+        element.src = `${process.env.MEDIA_PATH}/media/animes/${element.siglas}/${element.type}/${element.name}.${element.extension}`;
         rset.rows[i] = element;
       });
       return res.json({ "data": rset.rows });
-    } else return res.json({ "data": null });
+    } else return res.json(null);
 
   } catch (err) {
     next(err);
@@ -72,7 +68,6 @@ router.get('/id/:id', async function (req, res, next) {
       let element = animes.rows[0];
         element.src = `${process.env.MEDIA_PATH}/media/animes/${element.siglas}/${element.type}/${element.name}.${element.extension}`;
         element.banner = `${process.env.MEDIA_PATH}/media/animes/${element.siglas}/banner/${element.name}.${element.extension}`;
-
         const episodes = await dbpool.query("SELECT DISTINCT ON(m.type) count(m.episode) AS num FROM media AS m " +
         `WHERE m.anime = '${element.id}' AND m.type = 'episodes' GROUP BY m.type`);
         element.num_epis = episodes.rows.length > 0 ? episodes.rows[0].num : 0;
@@ -89,7 +84,7 @@ router.get('/id/:id', async function (req, res, next) {
         `WHERE m.anime = '${element.id}' AND m.type = 'endings' GROUP BY m.type`);
         element.num_ends = endings.rows.length > 0  ? endings.rows[0].num : 0;
       return res.json(element);
-    } else return res.json({ "data": null });
+    } else return res.json(null);
 
   } catch (err) {
     next(err);
@@ -116,7 +111,7 @@ router.get('/as/:as', async function (req, res, next) {
         rset.rows[i] = element;
       });
       return res.json({ "data": rset.rows });
-    } else return res.json({ "data": null });
+    } else return res.json(null);
   } catch (err) {
     next(err);
   }
