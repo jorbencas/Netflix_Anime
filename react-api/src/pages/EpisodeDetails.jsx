@@ -26,10 +26,11 @@ class EpisodeDetails extends React.Component {
       });
  */
       
-    componentDidMount(){
+    componentWillMount(){
         axios.get(`http://localhost:3001/episodes/id/${this.props.match.params.id}`)
         .then(res => {
             this.setState({ episode: res.data });
+            console.log(this.state.episode);
         });
     }
 

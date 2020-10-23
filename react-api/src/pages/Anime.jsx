@@ -33,7 +33,7 @@ class Anime extends React.Component {
       } */
       
     componentDidMount(){
-        axios.get(`http://localhost:3001/Animes`)
+        axios.get(`http://localhost:3001/animes`)
         .then(res => {
         this.setState({animes:res.data.data});
         });

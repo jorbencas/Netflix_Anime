@@ -13,8 +13,9 @@ router.get('/as/:as', async function(req, res, next){
     " a.titulo_en as anime_titulo_en, a.titulo_va as anime_titulo_va," +
     " a.titulo_ca as anime_titulo_ca, e.titulo_es, e.titulo_en, e.titulo_va," +
     " e.titulo_ca, e.updated, e.created, a.siglas, m.name, m.extension, m.type, e.num" +
-    " FROM animes as a, episodes as e LEFT JOIN media as m on(m.anime = e.anime) " +
-    " WHERE a.id = e.anime AND m.type = 'banner' " +
+    " FROM animes as a INNER JOIN episodes as e on(a.id = e.anime)" +
+    " LEFT JOIN media as m on(m.anime = e.anime) " +
+    " WHERE m.type = 'banner' " +
     ` ORDER BY e.anime DESC OFFSET ${limit[0]} LIMIT ${limit[1]}`);
     if (rset.rows.length > 0) {
       rset.rows.forEach((element,i) => {
@@ -49,8 +50,8 @@ router.get('/id/:id', async function(req, res, next){
     " a.titulo_es as anime_titulo_es, a.titulo_en as anime_titulo_en, " + 
     " a.titulo_va as anime_titulo_va, a.titulo_ca as anime_titulo_ca " + 
     " FROM animes AS a " +
-    " INNER JOIN episodes as e ON a.id = e.anime " +
-    " INNER JOIN media AS m ON m.anime = a.id " +
+    " INNER JOIN episodes as e ON(a.id = e.anime) " +
+    " INNER JOIN media AS m ON(m.episode = e.id) " +
     `WHERE e.id = '${req.params.id}' AND m.type = 'episodes'`);
     if (rset.rows.length > 0) {
       let element = rset.rows[0];
@@ -79,7 +80,7 @@ router.get('/anime/:id', async function(req, res, next){
     " e.titulo_ca, a.siglas, e.anime, m.name, m.extension, m.type, e.num, a.idiomas " +
     " FROM animes AS a " +
     " INNER JOIN episodes as e ON a.id = e.anime " +
-    " INNER JOIN media AS m ON m.anime = a.id " +
+    " INNER JOIN media AS m ON m.anime = e.anime " +
     `WHERE e.anime = '${req.params.id}' AND m.type = 'portada'`);
     if (rset.rows.length > 0) {
       rset.rows.forEach((element,i) => {

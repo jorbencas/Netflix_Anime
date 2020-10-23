@@ -29,7 +29,7 @@ export class Endings extends React.Component {
             { this.state.endings.map( (ending,i) => (
                 <article className="grid-item" key={i}>
                     <img className="image" src={ending.src} alt={ending.nombre} />
-                    <Link to={'EndingsDetails/'+ending.id} className="overlay">
+                    <Link to={'/EndingsDetails/'+ending.id} className="overlay">
                         <i className="fa fa-play-circle"></i>
                     </Link>
                     <p className="data">{ending.num} - {ending.nombre} </p>

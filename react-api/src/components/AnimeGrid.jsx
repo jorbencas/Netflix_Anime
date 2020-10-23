@@ -19,14 +19,14 @@ export default class AnimeGrid extends React.Component {
         return state
     }
 
- rendertext(){
+/*  rendertext(){
     $(".grid-anime").each(function(index,element){
         let node = element.children[2].children[1];
         if (node.textContent.length > 150) {
             node.textContent = node.textContent.substring(0,149) +"...";
         }
     });
-}
+} */
 
     render() {
         return (

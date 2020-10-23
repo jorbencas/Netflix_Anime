@@ -10,21 +10,20 @@ export class Video extends React.Component {
         // Don't call this.setState() here!
         this.state = {
             screenwidth : document.body.clientWidth,
-            element : screenwidth > 800 ? ".controls": ".movil_controls",
             video : document.getElementById("video"),
-            play : $(element + " #play")[0],
+            /* play : $(element + " #play")[0],
             stop : $(element + " #stop")[0],
             progress : $(element + " #progress")[0],
             timestamp : $(element + " #timestamp")[0],
             timeend : $(element + " #timeend")[0],
             ranges : $(element + " #volume")[0],
             speed : $(element + " #speed")[0],
-            setfullvideo : $(element + " #fullscreen")[0],
-            vol,
+            setfullvideo : $(element + " #fullscreen")[0], */
+            vol: null,
             fullscreen : false,
             moviendo : false
         };
-        //this.handleClick = this.handleClick.bind(this);
+        this.toggleVideoStatus = this.toggleVideoStatus.bind(this);
     }
 
 // $(element + " #vol-icon").on("click", () {
@@ -40,7 +39,7 @@ export class Video extends React.Component {
 //   }
 // });
 
-getduration(operacion = null, tiempo = null){
+/* getduration(operacion = null, tiempo = null){
   // Get mins
   let mins = Math.floor(video.currentTime / 60);
   if (mins < 10) {
@@ -60,18 +59,9 @@ getduration(operacion = null, tiempo = null){
   return {"mins":mins,"secs":secs};
 }
 
-$(element + " .overlay").on("click", () {
+ $(element + " .overlay").on("click", () {
   updatePlayIcon();
-});
-
-// Play and Pause video
-toggleVideoStatus() {
-  if (video.paused || (video.canplaythrough && video.loadeddata)) {
-    video.play();
-  } else {
-    video.pause();
-  }
-}
+}); 
 
 // Update play/pause icon
 updatePlayIcon() {
@@ -172,7 +162,7 @@ setfullscreen() {
 
 resetprogress(){
   video.currentTime = 0;
-}
+} 
 
 // Event Listeners
 this.state.video.addEventListener("click", toggleVideoStatus);
@@ -231,7 +221,7 @@ $(document).keydown((event) {
     //salir fullscreen esc button
     setfullscreen();
   }
-});
+}); 
 
 $(document).bind(
   "fullscreenchange webkitfullscreenchange mozfullscreenchange msfullscreenchange",
@@ -264,24 +254,31 @@ setInterval(() {
   }
 }, 1000); // Cada segundo, pon el valor que quieras.
 
+ */
 
-
+toggleVideoStatus() {
+  if (this.state.video.paused || (this.state.video.canplaythrough && this.state.video.loadeddata)) {
+    this.state.video.play();
+  } else {
+    this.state.video.pause();
+  }
+}
 
     render() {
         return (
             <div>
-                <video preload className='screen' autoplay id='video' poster={this.props.poster}>
-                    <source src={this.props.video} type='video/mp4' />
+                <video preload className='screen' autoplay id='video' src={this.props.video} poster={this.props.poster}>
+                   {/*  <source src={this.props.video} type='video/mp4' />
                     <source src={this.props.video} type='video/ogg' />
-                    <source src={this.props.video} type='video/webm' />
+                    <source src={this.props.video} type='video/webm' /> */}
                     <p> Navegador no soporta este tipo de formato de video</p>
                 </video>
                 <div className="overlay"> <i className="fa fa-play-circle"></i></div>
                 <div className="controls">
-                    <button className="btn" id="play">
+                    <button className="btn" onClick={this.toggleVideoStatus}>
                         <i className="fa fa-play fa-2x"></i>
                     </button>
-                    <button className="btn" id="stop">
+                    <button className="btn" onClick={this.toggleVideoStatus}>
                         <i className="fa fa-stop fa-2x"></i>
                     </button>
                     <div className="vol-controls">
@@ -304,7 +301,7 @@ setInterval(() {
                     </button>
                 </div>
 
-                <div className="movil_controls">
+               {/*  <div className="movil_controls">
                     <div className="first_line">
                         <input type="range" id="progress" className="progress" min="0" max="1" step="0.1" value="0" />
                     </div>
@@ -333,7 +330,7 @@ setInterval(() {
                             <i className="fas fa-expand"></i>
                         </button>
                     </div>
-                </div>
+                </div> */}
             </div>
         )
     }

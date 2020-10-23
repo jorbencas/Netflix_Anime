@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import 'font-awesome/css/font-awesome.min.css';
 import '../styles/components/Header.css';
-import { Link, animateScroll as scroll } from "react-scroll";
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -13,7 +12,7 @@ export default class Header extends React.Component {
         //this.handleClick = this.handleClick.bind(this);
     }
     
-    $(window).scroll(() => {
+   /*  $(window).scroll(() => {
         let screenwidth = document.body.clientWidth;
              if (screenwidth > 1000) {
                 var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -21,9 +20,7 @@ export default class Header extends React.Component {
                 var scrolled = (winScroll / height) * 100;
                 document.getElementById("myBar").style.width = scrolled + "%";
              }
-    });   
-
-    componentwillUpdate(){}
+    });    */
 
     componentDidMount() {
         axios.get(`http://localhost:3001/episodes/`)

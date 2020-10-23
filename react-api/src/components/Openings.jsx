@@ -26,10 +26,10 @@ export class Openings extends React.Component {
     rendergrid(){
         return(
 <div id='openingrid'>
-        { this.state.openings.map( (opening,i) => (
-        <article className="grid-item" key={i}>
+        { this.state.openings.map( opening => (
+        <article className="grid-item" key={opening.id}>
             <img className="image" src={opening.src} alt={opening.nombre} />
-            <Link to={'OpeningsDetails/'+opening.id} className="overlay">
+            <Link to={'/OpeningsDetails/'+opening.id} className="overlay">
                 <i className="fa fa-play-circle"></i>
             </Link>
             <p className="data">{opening.num} - {opening.nombre} </p>

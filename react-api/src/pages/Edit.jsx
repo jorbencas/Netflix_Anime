@@ -7,7 +7,6 @@ export class Edit extends React.Component {
 
     constructor(props) {
         super(props);
-        // Don't call this.setState() here!
         this.state = {
             animes : []
         };
@@ -19,7 +18,7 @@ export class Edit extends React.Component {
 
 
 
-
+/* 
 
     let page_mode;
 let action; getmode();
@@ -40,14 +39,14 @@ $(document).ready(function(){
   }
 });
 
-function inputchanges(e) {
+inputchanges(e) {
   if (e.type == "checkbox" || e.type == "radio") {
     if (e.checked) $(e).attr("checked", true);
     else $(e).attr("checked", false);
   } else $(e).attr("value", e.value);
 }
 
-function setvalorations(valoration){
+setvalorations(valoration){
   let star;
   $(geteditnode() + " .star-rating span").each((i,e) => {
     star = i <= valoration ? "fas fa-star" : "far fa-star";
@@ -56,8 +55,7 @@ function setvalorations(valoration){
   $(geteditnode() + " input[name*='valorations']").attr("value",valoration + 1);
 }
 
-//Edit
-function setab(evt, cityName) {
+setab(evt, cityName) {
   if (!evt.currentTarget.className.includes("active")) {
     $(".tabcontent").hide();
     $(".tablinks").removeClass("active");
@@ -89,7 +87,7 @@ function setab(evt, cityName) {
   }
 }
 
-function remove(id) {
+remove(id) {
   let res = getcallapi($(".tabcontent[style*='block']").attr("id"), "delete");
   api_ajax(res['mod'], false, { "action": `deleteOne${res['func']}`, "id": id }).then((resp) => {
     if (resp['status']['code'] === 200) {
@@ -112,8 +110,7 @@ function remove(id) {
   });
 }
 
-//Insert
-function setstep() {
+setstep() {
   $(".tabcontent").hide();
   $("#" + getstep()).remove();
   $(".steps .content:not([class*='active'])").first().addClass("active");
@@ -122,14 +119,13 @@ function setstep() {
   if (getstep() == 'all') handledata();
 }
 
-function getstep() {
+getstep() {
   let node = $(".steps .content[class*='active']").last().attr("class");
   let p = node.split(" ");
   return p[1];
 }
 
-//BOTH
-function setabform(event, cityName) {
+setabform(event, cityName) {
   let elem = cityName.split("_");
   $(geteditnode() + `input[name*='${elem[0]}']`).hide();
   $(geteditnode() + "#" + elem[0] + " .tablink").removeClass("active");
@@ -137,11 +133,10 @@ function setabform(event, cityName) {
   $(event.currentTarget).addClass("active");
 }
 
-function addform() {
+addform() {
   $(".tabcontent[id!='anime'] .forms .wrap").css("height", "0");
   let res = getcallapi($(".tabcontent[style*='block']").attr("id"), "delete");
   let mod = res["mod"];
-  //last id
   api_ajax(mod + `&aq=lastid${res["func"]}`).then((resp) => {
     if (resp['status']['code'] === 200) {
       if (action === "update") $(".tabcontent[style*='block'] .form_oculto .wrap input[class*='submit']:last").hide();
@@ -155,7 +150,7 @@ function addform() {
   });
 }
 
-function geteditnode() {
+geteditnode() {
   let tab = $(".tabcontent[style*='block']").attr("id");
   let item = " > .wrap ";
   let expand = $("#" + tab + " .forms > div:not([style*='height: 0px'])").attr("id");
@@ -165,7 +160,7 @@ function geteditnode() {
   return "#" + tab + item;
 }
 
-function getmode() {
+getmode() {
   let searched = window.location.search.split("&");
   if (searched[1]) {
     page_mode = 'update';
@@ -176,7 +171,7 @@ function getmode() {
   }
 }
 
-function handledata() {
+handledata() {
   let data = {};
   let tab = page_mode === 'insert' ? getstep() : $(".tabcontent[style*='block']").attr("id");
   let res = getcallapi(tab, "insert");
@@ -269,7 +264,7 @@ function handledata() {
   }
 }
 
-function validator(data, mod) {
+validator(data, mod) {
   if (mod == 'Anime') {
     if (data['siglas'] === '' || data['siglas'] === null || data['siglas'] === undefined) {
       openalert("d", "Debes de introducir la siglas para poder añadir un anime");
@@ -281,25 +276,25 @@ function validator(data, mod) {
       openalert("d", "Debes de introducir la sinopsis en español para poder añadir un anime");
       return false;
     } else {
-      // let media = $(geteditnode() + " tr img");
-      // if (media.length == 0) {
-      //   openalert("d", "Debes de introducir algun fichero multimedia añadir un anime");
-      //   return false;
-      // } else if(media.length > 3){
-      //   openalert("d", "Debes de introducir solamente 2 ficheros uno de tipo banner y otro de tipo portada fichro multimedia añadir un anime");
-      //   return false;
-      // } else {
-      //   let first = $(geteditnode() + " td:first-child img").attr("type");
-      //   let second = $(geteditnode() + " tr:nth-child(2) img").attr("type");
+      let media = $(geteditnode() + " tr img");
+      if (media.length == 0) {
+        openalert("d", "Debes de introducir algun fichero multimedia añadir un anime");
+        return false;
+      } else if(media.length > 3){
+        openalert("d", "Debes de introducir solamente 2 ficheros uno de tipo banner y otro de tipo portada fichro multimedia añadir un anime");
+        return false;
+      } else {
+        let first = $(geteditnode() + " td:first-child img").attr("type");
+        let second = $(geteditnode() + " tr:nth-child(2) img").attr("type");
 
-      //   if (first !== 'banner' && second !== 'banner') {
-      //     openalert("d", "Debes de introducir una imagen de banner");
-      //     return false;
-      //   } else if (first !== 'portada' && second !== 'portada') {
-      //     openalert("d", "Debes de introducir una imagen de portada");
-      //     return false;
-      //   } else return true;
-      // }
+        if (first !== 'banner' && second !== 'banner') {
+          openalert("d", "Debes de introducir una imagen de banner");
+          return false;
+        } else if (first !== 'portada' && second !== 'portada') {
+          openalert("d", "Debes de introducir una imagen de portada");
+          return false;
+        } else return true;
+      }
       return true;
     }
   } else if (mod == 'Personage') {
@@ -310,11 +305,11 @@ function validator(data, mod) {
       openalert("d", "Debes de introducir la descripción para poder añadir un personage");
       return false;
     } else {
-      // let media = $(geteditnode() + " tr:first-child img");
-      // if (!media) {
-      //   openalert("d", "Debes de introducir la imagen del personage");
-      //   return false;
-      // } else return true;
+      let media = $(geteditnode() + " tr:first-child img");
+      if (!media) {
+        openalert("d", "Debes de introducir la imagen del personage");
+        return false;
+      } else return true;
       return true;
     }
   } else if (mod == 'Episodes') {
@@ -374,7 +369,7 @@ function validator(data, mod) {
   } else return true;
 }
 
-function calculatediamantynimg(tab = null) {
+calculatediamantynimg(tab = null) {
   let left;
   let list_elem;
   if (tab) {
@@ -408,7 +403,7 @@ function calculatediamantynimg(tab = null) {
   });
 }
 
-function expand(element, height) {
+expand(element, height) {
   let list = element.attributes.elem.nodeValue;
   if (parseInt($(`.tabcontent[style*='block'] > .forms > div[id='${list}']`).css("height")) < height) {
     $(".tabcontent[style*='block'] .forms .wrap").css("height", "0");
@@ -416,7 +411,7 @@ function expand(element, height) {
   }
 }
 
-function getcallapi(tab, kind = null) {
+getcallapi(tab, kind = null) {
   switch (tab) {
     case "anime":
       mod = "Anime";
@@ -449,7 +444,7 @@ function getcallapi(tab, kind = null) {
   return kind === 'delete' ? { "mod": mod, "func": func } : { "mod": mod, "height": height };
 }
 
-
+ */
 
 
 
@@ -463,7 +458,8 @@ function getcallapi(tab, kind = null) {
 
     render() {
         return (
-            <?php if (isset($v['anime'])) : ?>
+          <div className="p"></div>
+            /* <?php if (isset($v['anime'])) : ?>
     <div class="toolbar">
         <ul class="tab">
             <button class="tablinks active anime" onclick="setab(event, 'anime')">
@@ -610,7 +606,7 @@ function getcallapi(tab, kind = null) {
 <div id="all" class='tabcontent all' style='display:none;'>
     <a class="link detail">Ver</a>
     <a class="link edit">Editar</a>
-</div>
+</div> */
         )
     }
 }

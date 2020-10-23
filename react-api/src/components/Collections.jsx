@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 import '../styles/components/Collections.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { Link } from "react-router-dom";
@@ -6,8 +7,25 @@ import { Link } from "react-router-dom";
 export class Collections extends React.Component {
 
 
+  constructor(props) {
+    super(props);
+    this.state = {
+        personages : [],
+        id:0
+    };
+    this.rendergrid = this.rendergrid.bind(this);
+    this.rendertabla = this.rendertabla.bind(this);
+  }
+  
+  componentDidMount() {
+    axios.get(`http://localhost:3001/personages/anime/${this.props.id}`)
+    .then(res => {
+        this.setState({ personages: res.data });
+    });
+}
 
-    function addelement(name){
+/* 
+    addelement(name){
         let data = { 
           "action": 'addelementcollection', 
           "name": $(" .collections .input_enviar").val() !== '' ? $(" .collections .input_enviar").val() : name,
@@ -32,13 +50,13 @@ export class Collections extends React.Component {
         }).catch((error) => {
           openalert("d", error);
         });
-      }
+      } */
 
       
     render() {
         return (
             <div class="collections">
-<?php if(isset($v['collections']) || isset($v['inputs'])) : ?>
+{/* <?php if(isset($v['collections']) || isset($v['inputs'])) : ?>
     <?php if($v['modulo'] == 'User') : ?>
         <?php foreach($v['collections'] as $key => $comment ) : ?>
             <article class="grid-item">
@@ -65,7 +83,7 @@ export class Collections extends React.Component {
             <i class="fas fa-paper-plane"></i>
         </div>
     </form>
-<?php endif;?>
+<?php endif;?> */}
 </div>
 
         )

@@ -13,7 +13,7 @@ class Footer extends React.Component {
     }
 
     componentDidMount(){
-        axios.get(`http://localhost:3001/animes`)
+        axios.get(`http://localhost:3001/animes/as/0_10`)
         .then(res => {
         this.setState({animes:res.data.data});
         });

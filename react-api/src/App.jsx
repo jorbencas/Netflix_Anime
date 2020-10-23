@@ -30,8 +30,8 @@ function App() {
           <Route path="/Admin" component={Admin} />
           <Route path="/AnimeDetails/:id" component={AnimeDetails} />
           <Route path="/Auth" component={Auth} />
-          <Route path="/EpisodeDetails/:id" component={EpisodeDetails} />
-          <Route path='/OpeningsDetail/:id' component={OpeningDetails}/>
+          <Route path="/EpisodesDetails/:id" component={EpisodeDetails} />
+          <Route path='/OpeningsDetails/:id' component={OpeningDetails}/>
           <Route path='/EndingsDetails/:id' component={EndingsDetails} />
           <Route path="/User" component={User} />
           <Route path="/Collection/:id" component={Collection} />

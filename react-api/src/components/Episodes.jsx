@@ -19,10 +19,10 @@ export class Episodes extends React.Component {
 
     componentDidMount() {
         axios.get(`http://localhost:3001/episodes/anime/${this.props.id}`)
-            .then(res => {
-                console.log(res);
-                this.setState({ episodes: res.data });
-            });
+        .then(res => {
+            this.setState({ episodes: res.data });
+            console.log(this.state.episodes);
+        });
     }
 
     renderlist(){
@@ -31,7 +31,7 @@ export class Episodes extends React.Component {
             { this.state.episodes.map( episode => (
                 <article className="grid-item" key={episode.id}>
                     <img className="image" src={episode.src} alt={episode.titulo_es} />
-                    <Link to={'EpisodesDetails/id=' + episode.id} className="overlay">
+                    <Link to={'/EpisodesDetails/' + episode.id} className="overlay">
                         <i className="fa fa-play-circle"></i>
                     </Link>
                     <p className="data">{ episode.num} {episode.titulo_es}</p>
@@ -48,7 +48,7 @@ export class Episodes extends React.Component {
                 <tbody className="table-tbody" role="tablist">
                     {
                         this.state.episodes.map( episode => (
-                            <Link to={'EpisodesDetails/id=' + episode.id} >
+                            <Link to={'/EpisodesDetails/ ' + episode.id} >
                             <tr role="row" className="tbody-row" onclick="hrefedit(this)" key={episode.id}>
                                 <td role="cell" className="tbody-cell"><i className="fa fa-play"></i></td>
                                 <td role="cell" className="tbody-cell"> { episode.num} </td>

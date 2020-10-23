@@ -23,7 +23,7 @@ export default class AnimeDetails extends React.Component {
       
 
 
-      $(document).ready(function(){
+     /*  $(document).ready(function(){
         let screenwidth = document.body.clientWidth;
         if(screenwidth <= 800){
           $("#episodes p").text("Epi");
@@ -31,19 +31,13 @@ export default class AnimeDetails extends React.Component {
           $("#openings p").text("Op");
           $("#endings p").text("Ed");
         }
-        // let node = $("#sinopsis")[0];
-        // if (node.textContent.length > 150) {
-        //   node.textContent = node.textContent.substring(0,149) +"...";
-        // }else{
-        //   node.textContent = $(node).attr("text");
-        // }
       });
       
-      function hrefedit(elem){
+      hrefedit(elem){
         window.location = $(elem).data('href');
       }
       
-      function more_less(event){
+      more_less(event){
         let node = $("#sinopsis")[0];
         if ($(event).hasClass("mas")) {
           $(event).html('<i class="fas fa-plus"></i>');
@@ -56,7 +50,7 @@ export default class AnimeDetails extends React.Component {
         }
       }
       
-      function setab(evt, tab, permited){
+      setab(evt, tab, permited){
         $(".tabcontent").hide();
         $(".tablinks").removeClass("active");
         $("#" + tab).show();
@@ -72,7 +66,7 @@ export default class AnimeDetails extends React.Component {
         $(evt.currentTarget).addClass("active");
       }
       
-      function setabcontent(evt,disabled){
+      setabcontent(evt,disabled){
         let active = $(".tablink.active").attr("id");
         if(disabled !== active){
           $(".tablink").removeClass("active");
@@ -89,7 +83,7 @@ export default class AnimeDetails extends React.Component {
         }
       }
       
-      function setvalorations(valoration, anime){
+      setvalorations(valoration, anime){
         let star;
         $("#" + anime + " .star-rating span").each((i,e) => {
           star = i <= valoration ? "fas fa-star" : "far fa-star";
@@ -98,7 +92,7 @@ export default class AnimeDetails extends React.Component {
         $("#" + anime + " input[name*='valorations']").attr("value",valoration + 1);
       }
       
-      function setfavorite(fav, id, elem){
+      setfavorite(fav, id, elem){
         let action = fav === "far fa-heart" ? 'addfav': 'removefav';
         api_ajax("Anime", false,{"action": action,"id":id, "user":localStorage.getItem("user")})
         .then( (data) => {
@@ -106,14 +100,13 @@ export default class AnimeDetails extends React.Component {
           if (resp['status']['code'] === 200) {
             $(elem).attr("onclick",$(elem).attr("onclick").replace(fav,resp['data']));
             $(".favorite i").removeClass(`${fav}`).addClass(`${resp['data']}`);
-            //openalert("s", resp['status']['message']);
           } else openalert("d", resp['status']['message']);
         }).catch((error) => {
           console.log(error);
           openalert("d", error);
         });
       }
-      
+       */
     componentDidMount() {
         axios.get(`http://localhost:3001/animes/id/${this.props.match.params.id}`)
         .then(res => {

@@ -95,9 +95,9 @@ removeelement(id){
             <button class="tablinks" onclick="setab(event, 'grid', true)"> <i class="fas fa-bars"></i></button>
         </ul>
         <div class="input-episode" style='display:none;'>{this.state.collection.id}</div>
-        { this.state.collection.map( E => {
-          <li class="lista" id="<?=$episode['episode_id}">
-            <Link class="texto_line" to={'/EpisodesDetails/' + episode.episode_id} >
+        { this.state.collection.list.map( episodes => (
+          <li class="lista" key={episodes.id}>
+            <Link class="texto_line" to={'/EpisodesDetails/' + episodes.episode_id} >
                 <div class="img" style={{  
                             backgroundImage: "url(" + this.state.collection.src + ")",
                             backgroundPosition: 'center',
@@ -105,15 +105,15 @@ removeelement(id){
                             backgroundRepeat: 'no-repeat'
                           }}></div>
                 <p class="texto">
-                  {episode.anime_titulo_es} - {episode.titulo_es}
+                  {episodes.anime_titulo_es} - {episodes.titulo_es}
                   <i class="fa fa-play"></i>
                 </p>
             </Link>
-            <div class="info_avatar" onclick="removeelement(<?=$episode['episode_id})">
+            <div class="info_avatar" onclick="removeelement({episodes.episode_id})">
                     <i class='fa fa-trash' style='font-size:20px;'></i>
                 </div>
           </li>
-        })}
+        ))}
     </div>
 </div>
         )

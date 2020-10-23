@@ -3,6 +3,9 @@ import axios from 'axios';
 import '../styles/pages/OpeningsDetails.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { Link } from "react-router-dom";
+import BreadCrumb from '../components/Breadcrumb';
+import Video from '../components/Video';
+
 export class OpeningsDetails extends React.Component {
 
     constructor(props) {
@@ -16,6 +19,8 @@ export class OpeningsDetails extends React.Component {
         axios.get(`http://localhost:3001/openings/id/${this.props.match.params.id}`)
         .then((res) => {
           this.setState({opening: res.data});
+          console.log(this.state.opening);
+
         });
     }
 
@@ -26,7 +31,7 @@ export class OpeningsDetails extends React.Component {
               <BreadCrumb params={this.state.opening} />
               <div className="element video">
                   <div className="element_title">
-                      <h1>{this.state.opening.num} - {this.state.opening.titulo_es}</h1>
+                      <h1>{this.state.opening.num} - {this.state.opening.nombre}</h1>
                   </div>
                   <div className="element_video">
                     <Video video={this.state.opening.src} poster={this.state.opening.poster} />

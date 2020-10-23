@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import '../styles/pages/EndingsDetails.css';
 import 'font-awesome/css/font-awesome.min.css';
+import BreadCrumb from '../components/Breadcrumb';
+import Video from '../components/Video';
 
 export class EndingsDetails extends React.Component {
 
@@ -24,7 +26,7 @@ export class EndingsDetails extends React.Component {
 
       
     componentDidMount(){
-        axios.get(`http://localhost:3001/endings/id/${his.props.match.params.id}`)
+        axios.get(`http://localhost:3001/endings/id/${this.props.match.params.id}`)
         .then((res) => {
           this.setState({ending: res.data});
         });
@@ -37,7 +39,7 @@ export class EndingsDetails extends React.Component {
               <BreadCrumb params={this.state.ending} />
               <div className="element video">
                   <div className="element_title">
-                      <h1>{this.state.ending.num} - {this.state.ending.titulo_es}</h1>
+                      <h1>{this.state.ending.num} - {this.state.ending.nombre}</h1>
                   </div>
                   <div className="element_video">
                     <Video video={this.state.ending.src} poster={this.state.ending.poster} />

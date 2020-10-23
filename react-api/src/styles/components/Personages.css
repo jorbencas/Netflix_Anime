@@ -96,10 +96,7 @@
   .table .table-tbody .tbody-row:hover {
     transition: all 200ms ease-in;
   }
-  
-  .PersonageDetails{
-    display: none;
-}
+
 
 .PersonageDetails .modal_container{
     display: flex;

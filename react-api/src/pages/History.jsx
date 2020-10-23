@@ -34,8 +34,8 @@ export class History extends React.Component {
             <div class="history">
                 <div class="list">
                     {
-                        this.state.history.map( episode => {
-                            <li class="lista" id={episode['id']} >
+                        this.state.history.map( episode => (
+                            <li class="lista" key={episode.id} >
                             <Link class="texto_line" to={'EpisodeDetails/'+episode.id}>
                                 <div class="img"
                                     style={{  
@@ -55,7 +55,7 @@ export class History extends React.Component {
                                 <i class='fa fa-trash' style='font-size:20px;'></i>
                             </div>
                         </li>
-                        })
+                        ))
                     }
                 </div>
             </div>

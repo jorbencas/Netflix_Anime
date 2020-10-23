@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 import '../styles/components/Comments.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { Link } from "react-router-dom";
@@ -6,8 +8,8 @@ import { Link } from "react-router-dom";
 export class Comments extends React.Component {
 
 
-
-    function add(){
+/* 
+    add(){
         let data = { 
            "action": 'insertcomment', 
            "comment": $(".estado .input_enviar").val(),
@@ -54,7 +56,7 @@ export class Comments extends React.Component {
          });
       }
       
-      function remove(id){
+      remove(id){
        api_ajax("Comments", false, {"action": 'deleteOnecomment', "id": id, 'user':localStorage.getItem("user")}).then((resp) => {
          if (resp['status']['code'] === 200) {
            if (resp['data'].length > 0) {
@@ -97,12 +99,13 @@ export class Comments extends React.Component {
        }).catch((error) => {
          openalert("d", error);
        });
-      }
+      } */
 
       
     render() {
         return (
-            <?php if(islogged()) : ?>
+          <div className="p"></div>
+           /*  <?php if(islogged()) : ?>
     <?php if ($v['modulo'] !== 'User') : ?>
         <div class="info_avatar">
             <div class="avatar">
@@ -156,7 +159,7 @@ export class Comments extends React.Component {
     <div class='wrapper'>
         <?= msg($v['error_msg'],"info") ?>
     </div>
-<?php endif;?></ul>
+<?php endif;?></ul> */
         )
     }
 }

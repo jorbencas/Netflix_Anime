@@ -27,7 +27,7 @@ app.use('/endings', require('./routes/endings'));
 app.use('/episodes', require('./routes/episodes'));
 //app.use('/history', require('./routes/history'));
 app.use('/openings', require('./routes/openings'));
-//app.use('/personages', require('./routes/personages'));
+app.use('/personages', require('./routes/personages'));
 //app.use('/upload',require('./routes/upload'));
 //app.use('/users',require('./routes/users'));
 
