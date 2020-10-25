@@ -9,6 +9,7 @@
 node/node_modules/
 node/.env
 node/media
+node/backup
 
 #React
 /react-api/node_modules/

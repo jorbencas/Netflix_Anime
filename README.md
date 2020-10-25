@@ -15,13 +15,6 @@ Proyecto Anime realizado con la siguientes tecnologias, frameworks y librerias:
 ------
 * Enlace simbolico del contenido media en linux: sudo ln -s /media/jorge/9A3EB3183EB2EBFF/media/ /var/www/html/Anime/php
 
------- 
-* Instalación de apache2: 
-    - sudo apt-get update && sudo apt-get upgrade 
-    - sudo apt install -y apache2 apache2-utils
-    - sudo systemctl status apache2
-    - apache2 -v
-   
 * Conectar postgresql con pgadmin4 
 
     -    sudo nano /etc/postgresql/12/main/postgresql.conf
@@ -81,12 +74,13 @@ Proyecto Anime realizado con la siguientes tecnologias, frameworks y librerias:
 ## Actualizar Nodejs y NPM versiones 
 NVM: https://github.com/coreybutler/nvm-windows
 
-### Modulos
-Lista de Anime
--------
-    Este modulo es que se utiliza para listar los animes
-Blog
--------
-    Este modulo es que se utiliza para listar los articulos del blog
+## Instalar docker
 
-### React Información
+* Instalar Docker
+    - sudo apt-get install docker docker.io
+
+* Instalar Docker Compose
+    - sudo apt-get install docker-compose
+
+## Información para dockerizar la aplicación
+https://medium.com/bb-tutorials-and-thoughts/dockerizing-react-app-with-nodejs-backend-26352561b0b7
