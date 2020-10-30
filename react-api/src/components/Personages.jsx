@@ -7,7 +7,7 @@ export class Personages extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = { 
             personages: [],
             personage: {},
             diamond_left:0
