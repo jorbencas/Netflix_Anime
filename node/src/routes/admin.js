@@ -45,7 +45,10 @@ router.get('/backup', async function (req, res, next) {
     let num = 0;
     let limit = 50;
     let max_num = limit;
-
+    execFile("sudo pg_dump -h localhost -U postgres -W cosasdeanime -F t > /media/jorge/9A3EB3183EB2EBFF/backup.tar ")
+    file = "psql -h localhost -U dbuser -d stagingdb -f backup.sql";
+    file = "pg_restore -h localhost -U postgres -d dump backup.tar"
+    execFile(file)
     tablas.forEach( async (tabla,i) => {
       let path = `backup/${tabla}.sql`;
       const episodes = await dbpool.query(`SELECT * FROM ${tabla}`);
