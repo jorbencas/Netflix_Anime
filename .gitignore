@@ -11,8 +11,70 @@ node/.env
 node/media
 node/backup
 
+# Angular
+/Angular/node_modules/
+/Angular/Server.rar
+
+#Inoic
+/Ionic
+/Ionic/node_modules/
+/Ionic/platforms/
+/Ionic/www/
+
+/Ionic/*~
+/Ionic/*.sw[mnpcod]
+/Ionic/*.log
+/Ionic/*.tmp
+/Ionic/*.tmp.*
+/Ionic/log.txt
+/Ionic/*.sublime-project
+/Ionic/*.sublime-workspace
+/Ionic/.vscode/
+/Ionic/npm-debug.log*
+
+/Ionic/.idea/
+/Ionic/.ionic/
+/Ionic/.sourcemaps/
+/Ionic/.sass-cache/
+/Ionic/.tmp/
+/Ionic/.versions/
+/Ionic/coverage/
+/Ionic/tmp/
+/Ionic/temp/
+/Ionic/platforms/
+/Ionic/plugins/
+/Ionic/plugins/android.json
+/Ionic/plugins/ios.json
+/Ionic/$RECYCLE.BIN/
+
+
 #React
 /react-api/node_modules/
+
+#Vue
+/Vue/node_modules/
+/Vue/dist/
+# local env files
+/Vue/.env.local
+/Vue/.env.*.local
+
+# Log files
+/Vue/npm-debug.log*
+/Vue/yarn-debug.log*
+/Vue/yarn-error.log*
+
+#Vue_Cordova
+/Vue_Cordova/platforms/android*
+/Vue_Cordova/node_modules*
+# local env files
+/Vue_Cordova/.env.local
+/Vue_Cordova/.env.*.local
+
+# Log files
+/Vue_Cordova/npm-debug.log*
+/Vue_Cordova/yarn-debug.log*
+/Vue_Cordova/yarn-error.log*
+
 
 # IDEs and editors
 .vscode/

@@ -3,6 +3,8 @@ Proyecto Anime realizado con la siguientes tecnologias, frameworks y librerias:
 * NodeJS 
 * React
 * React Native
+* Vue
+
 
 ### Definición del esquema de cada miniproyecto
     Front-end - Backend
@@ -13,7 +15,7 @@ Proyecto Anime realizado con la siguientes tecnologias, frameworks y librerias:
 
 ### Configuración del proyecto
 ------
-* Enlace simbolico del contenido media en linux: sudo ln -s /media/jorge/9A3EB3183EB2EBFF/media/ /var/www/html/Anime/php
+* Enlace simbolico del contenido media en linux: sudo ln -s /media/jorge/9A3EB3183EB2EBFF/media/ /var/www/Anime/php
 
 * Conectar postgresql con pgadmin4 
 
