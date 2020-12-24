@@ -5,7 +5,6 @@ Proyecto Anime realizado con la siguientes tecnologias, frameworks y librerias:
 * React Native
 * Vue
 
-
 ### Definición del esquema de cada miniproyecto
     Front-end - Backend
 
@@ -14,51 +13,6 @@ Proyecto Anime realizado con la siguientes tecnologias, frameworks y librerias:
     React Native - NodeJS
 
 ### Configuración del proyecto
-------
-* Enlace simbolico del contenido media en linux: sudo ln -s /media/jorge/9A3EB3183EB2EBFF/media/ /var/www/Anime/php
-
-* Conectar postgresql con pgadmin4 
-
-    -    sudo nano /etc/postgresql/12/main/postgresql.conf
-
-            listen_addresses = '*' 
-
-    -    sudo nano /etc/postgresql/12/main/pg_hba.conf
-
-        -    local all postgres trust 
-        
-            Añadir al final del fichero
-            
-        -    host all all 127.0.0.1:128 trust 
-
-    -   sudo passwd postgres
-    -   su postgres
-    -    psql
-
-        -    alter user postgres with password 'postgres';
-        
-    -    sudo systemctl restart postgresql.service / sudo /etc/init.d/postgresql restart
-
-*    Instalar pgadmin4 
-
-    -    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-
-    -    echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
-
-    -    sudo apt-get update
-
-    -    sudo apt-get install pgadmin4 pgadmin4-apache2
-
-    -    http://localhost/pgadmin4
-
-    -    user: postgres@localhost
-
-    -    password: localhost
-    
-* Instalar potgresql 
-    -   sudo apt-get update
-    -   sudo apt-get install -y postgresql-12
-    -   sudo systemctl status postgresql
 
 * Instalar node y npm en linux 
     -   sudo apt-get install wget
@@ -76,13 +30,68 @@ Proyecto Anime realizado con la siguientes tecnologias, frameworks y librerias:
 ## Actualizar Nodejs y NPM versiones 
 NVM: https://github.com/coreybutler/nvm-windows
 
-## Instalar docker
 
-* Instalar Docker
-    - sudo apt-get install docker docker.io
+### Angular Font-Awesome
+    https://github.com/FortAwesome/angular-fontawesome
 
-* Instalar Docker Compose
-    - sudo apt-get install docker-compose
+### Angular Información 
 
-## Información para dockerizar la aplicación
-https://medium.com/bb-tutorials-and-thoughts/dockerizing-react-app-with-nodejs-backend-26352561b0b7
+### React Información
+
+### Vue Informacion
+    https://vuejs.org
+    Core Docs
+          
+    https://forum.vuejs.org
+    Forum
+          
+    https://chat.vuejs.org
+    Community Chat
+          
+    https://twitter.com/vuejs
+    Twitter
+          
+    http://vuejs-templates.github.io/webpack/
+    Vue Templates    
+    
+    http://router.vuejs.org/
+    vue-router
+          
+    http://vuex.vuejs.org/
+    vuex
+          
+    
+    http://vue-loader.vuejs.org/
+    vue-loader
+    
+    https://github.com/vuejs/awesome-vue
+    awesome-vue
+
+### Vue Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+#### Compiles and minifies for production
+```
+npm run build
+```
+
+### Run your tests
+```
+npm run test
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+

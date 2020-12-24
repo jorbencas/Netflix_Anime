@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(errorhandler());
 
 //routes of api
-app.use('/media', express.static('media'));
+// app.use('/media', express.static('media'));
 //app.use('/admin', (element, res) => { res.status(200).json({'src': `${process.env.MEDIA_PATH}/` }) });
 
 app.get('*', function(req, res){

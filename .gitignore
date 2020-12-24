@@ -16,64 +16,62 @@ node/backup
 /Angular/Server.rar
 
 #Inoic
-/Ionic
-/Ionic/node_modules/
-/Ionic/platforms/
-/Ionic/www/
+/ionic-api/node_modules/
+/ionic-api/platforms/
+/ionic-api/www/
 
-/Ionic/*~
-/Ionic/*.sw[mnpcod]
-/Ionic/*.log
-/Ionic/*.tmp
-/Ionic/*.tmp.*
-/Ionic/log.txt
-/Ionic/*.sublime-project
-/Ionic/*.sublime-workspace
-/Ionic/.vscode/
-/Ionic/npm-debug.log*
-
-/Ionic/.idea/
-/Ionic/.ionic/
-/Ionic/.sourcemaps/
-/Ionic/.sass-cache/
-/Ionic/.tmp/
-/Ionic/.versions/
-/Ionic/coverage/
-/Ionic/tmp/
-/Ionic/temp/
-/Ionic/platforms/
-/Ionic/plugins/
-/Ionic/plugins/android.json
-/Ionic/plugins/ios.json
-/Ionic/$RECYCLE.BIN/
+/ionic-api/*~
+/ionic-api/*.sw[mnpcod]
+/ionic-api/*.log
+/ionic-api/*.tmp
+/ionic-api/*.tmp.*
+/ionic-api/log.txt
+/ionic-api/*.sublime-project
+/ionic-api/*.sublime-workspace
+/ionic-api/.vscode/
+/ionic-api/npm-debug.log*
+/ionic-api/.idea/
+/ionic-api/.ionic/
+/ionic-api/.sourcemaps/
+/ionic-api/.sass-cache/
+/ionic-api/.tmp/
+/ionic-api/.versions/
+/ionic-api/coverage/
+/ionic-api/tmp/
+/ionic-api/temp/
+/ionic-api/platforms/
+/ionic-api/plugins/
+/ionic-api/plugins/android.json
+/ionic-api/plugins/ios.json
+/ionic-api/$RECYCLE.BIN/
 
 
 #React
 /react-api/node_modules/
 
-#Vue
-/Vue/node_modules/
-/Vue/dist/
+#vue-api
+/vue-api/node_modules/
+/vue-api/dist/
 # local env files
-/Vue/.env.local
-/Vue/.env.*.local
+/vue-api/.env.local
+/vue-api/.env.*.local
 
 # Log files
-/Vue/npm-debug.log*
-/Vue/yarn-debug.log*
-/Vue/yarn-error.log*
+/vue-api/npm-debug.log*
+/vue-api/yarn-debug.log*
+/vue-api/yarn-error.log*
 
-#Vue_Cordova
-/Vue_Cordova/platforms/android*
-/Vue_Cordova/node_modules*
+#vue-api_Cordova
+/vue-api_Cordova/platforms/android*
+/vue-api_Cordova/node_modules*
 # local env files
-/Vue_Cordova/.env.local
-/Vue_Cordova/.env.*.local
+/vue-api_Cordova/.env.local
+/vue-api_Cordova/.env.*.local
 
 # Log files
-/Vue_Cordova/npm-debug.log*
-/Vue_Cordova/yarn-debug.log*
-/Vue_Cordova/yarn-error.log*
+/vue-api_Cordova/npm-debug.log*
+/vue-api_Cordova/yarn-debug.log*
+/vue-api_Cordova/yarn-error.log*
 
 
 # IDEs and editors
