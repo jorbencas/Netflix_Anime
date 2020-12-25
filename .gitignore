@@ -1,19 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/React/dist
 /tmp
 /out-tsc
 
 # dependencies
 node/node_modules/
 node/.env
-node/media
-node/backup
-
-# Angular
-/Angular/node_modules/
-/Angular/Server.rar
+node/package-lock.json
 
 #Inoic
 ionic-api/node_modules/
@@ -45,13 +39,14 @@ ionic-api/plugins/android.json
 ionic-api/plugins/ios.json
 ionic-api/$RECYCLE.BIN/
 
-
 #React
 react-api/node_modules/
-
+react-api/dist
+react-api/package-lock.json
 #vue-api
 vue-api/node_modules/
 vue-api/dist/
+vue-api/package-lock.json
 # local env files
 vue-api/.env.local
 vue-api/.env.*.local
