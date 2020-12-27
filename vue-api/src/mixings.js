@@ -1,14 +1,18 @@
-// inyectar un controlador para la opción personalizada `myOption`
-Vue.mixin({
-    created: function () {
-      var myOption = this.$options.myOption
-      if (myOption) {
-        console.log(myOption)
-      }
+import router from "./router";
+export default {
+    name:'Core',
+    computed: {
+        $currentUser(){
+            return localStorage.getItem('auth')
+        }
+    },
+    data: function () {
+        return {
+            lang:'es',
+            api: 'http://cosasdeanime.com?r=es/api&am='
+        }
+    },
+    to(_param){
+        router.push(_param);
     }
-  })
-  
-  new Vue({
-    myOption: 'hola!'
-  })
-  // => "hola!"
+}

@@ -1,0 +1,73 @@
+ @import url('fonts/Roboto/Roboto-Black.ttf');
+ @import url('fonts/Roboto/Roboto-Blackitalic.ttf');
+ @import url('fonts/Roboto/Roboto-Bold.ttf');
+ @import url('fonts/Roboto/Roboto-Bolditalic.ttf');
+ @import url('fonts/Roboto/Roboto-Italic.ttf');
+ @import url('fonts/Roboto/Roboto-Light.ttf');
+ @import url('fonts/Roboto/Roboto-Lightitalic.ttf');
+ @import url('fonts/Roboto/Roboto-Medium.ttf');
+ @import url('fonts/Roboto/Roboto-Mediumitalic.ttf');
+ @import url('fonts/Roboto/Roboto-Regular.ttf');
+ @import url('fonts/Roboto/Roboto-Thin.ttf');
+ @import url('fonts/Roboto/Roboto-Thinitalic.ttf');
+ @import url('fonts/Lobster_Two/LobsterTwo-Bold.ttf');
+ @import url('fonts/Lobster_Two/LobsterTwo-Bolditalic.ttf');
+ @import url('fonts/Lobster_Two/LobsterTwo-Italic.ttf');
+ @import url('fonts/Lobster_Two/LobsterTwo-Regular.ttf');
+ @import url('fonts/Inconsolata/Inconsolata-Bold.ttf');
+ @import url('fonts/Inconsolata/Inconsolata-Regular.ttf');
+/* @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf'); */
+ @import url('fonts/Hitchhiker b.ttf');
+ @import url('fonts/Hitchhiker.ttf');
+ @import url('fonts/Johanna italic.ttf');
+ @import url('fonts/Johanna.ttf');
+ @import url('fonts/nougatine.ttf');
+/* @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');
+ @import url('fonts/.ttf');*/
+
+
+
+ /* Define the "system" font family */
+@font-face {
+    font-family: system;
+    font-style: normal;
+    font-weight: 300;
+    src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"), local("Roboto-Light"), local("DroidSans"), local("Tahoma");
+  }
+  
+  /* Now, let's apply it on an element */
+  body {
+    font-family: "system";
+  }
