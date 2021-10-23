@@ -1,15 +1,32 @@
 import React from 'react';
-import axios from 'axios';
+import Communication from '../services/index';
 import 'font-awesome/css/font-awesome.min.css';
 import '../styles/components/Header.css';
+import Menu from './Menu';
+import Filters from './Filters';
 
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            random: 0
+            random: 0,
+            user : '',
+            langs : [],
+            letters : [],
+            years : [],
+            generes : [],
+            languajes : [],
+            kinds : [],
+            temporadas : [],
+            filters : [
+                {'title' : 'genere'},
+                {'title' : 'type'},
+                {'title' : 'year'},
+                {'title' : 'lang'},
+                {'title' : 'temporada'}
+            ]
         };
-        //this.handleClick = this.handleClick.bind(this);
     }
     
    /*  $(window).scroll(() => {
@@ -23,21 +40,95 @@ export default class Header extends React.Component {
     });    */
 
     componentDidMount() {
-        axios.get(`http://localhost:3001/episodes/`)
+        let that = this;
+        Communication.getMethod(1,`Episodes&aq=getidrand`)
         .then(res => {
-            this.setState({ random: res.data });
-        });
+            that.setState({ random: res.id });
+        }).catch(() => {
+            // dispatch({
+            //     type: 'ERROR_USERS',
+            //     payload: null
+            // })
+        }).finally(() => {
+
+        })
+
+        Communication.getMethod(1,`Langs`, {
+            "action" : "gettranslations", 
+            "code" : 1, 
+            "translations" : [
+                {"kind" : "langs"}
+            ]
+        }).then(res => {
+            that.setState({ langs: res });
+        })
+        .catch(() => {
+            // dispatch({
+            //     type: 'ERROR_USERS',
+            //     payload: null
+            // })
+        }).finally(() => {
+
+        })
+
+        Communication.getMethod(1,`Filters`, {
+            "action" : "getFilters"
+        }).then(res => {
+            that.setState({
+                letters : res.letters,
+                years : res.years,
+                generes : res.generes,
+                languajes : res.languajes,
+                kinds : res.kinds,
+                temporadas : res.temporadas,
+            });
+        })
+        .catch(() => {
+            // dispatch({
+            //     type: 'ERROR_USERS',
+            //     payload: null
+            // })
+        })
+        .finally(() => {
+
+        })
+
     }
 
+
     render() {
+        const langs = this.state.langs.map((lang, key) => {
+            const activeClass = lang.code == 'es' ? 'active' :  '';
+            return ( <li key={key} className={activeClass + ' list_element'}><a className='link' href="es">{lang[lang['kind']]}</a> </li>);
+        });
+
+        const lettersFilter = "";
+        if (this.state.letters > 0) {
+            lettersFilter = this.state.filters.map( (filter, key) => {
+                return ( <li key={key}>
+                    <a className="link" role="menuitem">
+                        {filter.title}
+                    </a>
+                </li> );
+            });
+        }
+
+        const filters = this.state.filters.map( (filter ,key) => {
+            return (
+                <li key={key} className="letra-link collapsed" id={filter.id} onClick="tooglefilter(`<?=$filter['id']?>`)"
+                    title={filter.title}>
+                    <div className='link' role="button">
+                        {filter.title}
+                    </div>
+                </li>
+            );
+        });
+
         return (
             <header>
                 <section className="header">
                     <ul className="langs">
-                        <li className='list_element active'><a className='link' href="es">Español</a> </li>
-                        <li className='list_element'><a className='link' href="en">Ingles</a> </li>
-                        <li className='list_element'><a className='link' href="ca">Catalan</a> </li>
-                        <li className='list_element'><a className='link' href="va">Valenciano</a> </li>
+                        {langs}
                     </ul>
                 </section>
 
@@ -55,68 +146,37 @@ export default class Header extends React.Component {
                             <img  src="avatar" alt='usuario' />
                             <span className='texto'>usuario</span>
                         </a>
-                        {/* <a className='link cart' href="/Cart">
+                        {/*<a className='link cart' href="/Cart">
                             <span className="badge">number_products']?></span>
                             <i className="fas fa-shopping-cart"></i>
                         </a> 
-                        <a className='link' id='salir' href='/api&am=Auth&aa={$v['usuario']}") ?>'>
+                         <a className='link' id='salir' href='/api&am=Auth&aa={$v['usuario']}") ?>'>
                             <i className='fas fa-sign-out-alt'></i> <span className='texto'>salir</span>
-                        </a> */}
-                </div>
-
-                <nav id='navbar'>
-                    <ul className='list'>
-                        <li className='list_element ". link_active("Home") ."'>
-                            <a className='link' href='/Home'>
-                                <i className='fa fa-home'></i>
-                                <span className='texto'>Inicio</span>
-                            </a>
-                        </li>
-                        <li className='list_element ". link_active("Anime, AnimeDetails, EpisodesDetails") ."'>
-                            <a className='link' href='/Anime'>
-                                <i className='fa fa-list-ul'></i>
-                                <span className='texto'>Lista de Animes</span>
-                            {/*             if (isLogged()) $v['menu'] .= " <!--<span className='badge movil_disabled'>3</span>--> ";
-                            */}        
-                            </a>
-                        </li>
-                       <li className='list_element '>
-                           <a className='link' href='/ComingSoon'>
-                                <i className='fa fa-book-open'></i>
-                                <span className='texto'>Mangas</span>
-                            </a>
-                        </li>
-                        <li className='list_element movil_disabled ". link_active("Auth") ."'>
-                            <a className='link' href='/Auth'>
-                                <i className='fa fa-user-circle'></i>
-                                <span className='texto'>Iniciar Sessión / Registro </span>
-                            </a>
-                        </li>
-                                 
-                    {/*    if (isLogged()) {
-                        $v['menu'] .= "
-                        <li className='list_element movil_disabled ". link_active("User") ."'><a className='link user' href='/User") ."'>
-                                <img  src=' $avatar ' alt=' $usuario '>
-                                <span className='texto'> $usuario </span>
-                            </a></li>
-                        <li className='list_element movil_disabled'><a className='link' id='salir' href='".  hrefMake("{$v['lang']}/api&am=Auth&aa=$usuario") ."'>
-                                <i className='fas fa-sign-out-alt'></i> <span className='texto'>". translate('Header','salir') ."</span>
-                            </a></li>
-                        <li className='list_element movil_disabled ". link_active("Cart") ."'><a className='link' href=' hrefMake('{$v['lang']}/Cart')'>
-                            <span className='badge movil_disabled'> $number_products</span>
-                                <i className='fas fa-shopping-cart'></i></a>
-                        </li>
-                        ";};*/
-                
-                        <li className='list_element ". link_active("aleatory") ."'><a className='link' href={'/aleatory/id=' + this.state.random}>
-                            <i className='fa fa-random'></i>
-                            <span className='texto'>Aleatorio</span>
-                        </a></li>
-                        /*if ($v['modulo'] !== "Edit") $v['menu'] .= render('Buscador');*/
-                        }
+                        </a>  */}
+                </div> 
+                <Menu random={this.state.random} user={this.state.user}/>
+                <div className="filters">
+                    <ul className='menu' role="menu">
+                        {lettersFilter}
+                        {filters}
                     </ul>
-                </nav>
+                    <Filters elements={this.state.generes} id="g" />
+                    <Filters elements={this.state.years} id="y" />
+                    <Filters elements={this.state.kinds} id="k" />
+                    <Filters elements={this.state.languajes} id="i" />
+                    <Filters elements={this.state.temporadas} id="t" />
+                </div>
             </header>
         )
     }
 }
+
+
+/*
+
+
+
+
+
+
+*/

@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../styles/components/Footer.css';
 import 'font-awesome/css/font-awesome.min.css';
 
-class Footer extends React.Component {
+export default class Footer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,25 +13,30 @@ class Footer extends React.Component {
     }
 
     componentDidMount(){
-        axios.get(`http://localhost:3001/animes/as/0_10`)
-        .then(res => {
-        this.setState({animes:res.data.data});
+        let that = this;
+        axios.get(`http://cosasdeanime.com?r=es/api&am=Anime&aq=lastanimes&as=0_9&od=id`,
+        {headers: {
+            'api_token': '???123456789Azsxdcfvgnbhknljopimuhytgrfqew127364lpñokmni**/-++89¿juhvtcfdr65es123\\~~xza_qw',
+            'current_lang': 1
+        }}).then(res => {
+            that.setState({animes:res.data.data});
         });
     }
 
     render() {
+        const lastAnimes = this.state.animes.map( (anime, key) => {
+            return (
+                <a className='element_container' href={'/AnimeDetails/'+anime.id} key={key}>
+                    <div className="element_text"><p>{anime.titulo}</p></div>
+                </a>
+            );
+        });
+
         return (
             <footer>
                 <div className="footer-list">
-                    {
-                        this.state.animes.map( anime => (
-                            <a className='element_container' href={'/AnimeDetails/'+anime.id} key={anime.id}>
-                                <div className="element_text"><p>{anime.titulo_es}</p></div>
-                            </a>
-                        ))
-                    }
+                    {lastAnimes}
                 </div>
-
 
                 <div className='footer-logo'>
                     <a className='logo' href="/">
@@ -65,8 +70,3 @@ class Footer extends React.Component {
         )
     }
 }
-
-export default Footer;
-
-
-
