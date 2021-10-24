@@ -1,7 +1,7 @@
 import React from 'react'
-import axios from 'axios';
 import '../styles/components/Footer.css';
 import 'font-awesome/css/font-awesome.min.css';
+import Communication from '../services';
 
 export default class Footer extends React.Component {
     constructor(props) {
@@ -13,29 +13,34 @@ export default class Footer extends React.Component {
     }
 
     componentDidMount(){
-        let that = this;
-        axios.get(`http://cosasdeanime.com?r=es/api&am=Anime&aq=lastanimes&as=0_9&od=id`,
-        {headers: {
-            'api_token': '???123456789Azsxdcfvgnbhknljopimuhytgrfqew127364lpñokmni**/-++89¿juhvtcfdr65es123\\~~xza_qw',
-            'current_lang': 1
-        }}).then(res => {
-            that.setState({animes:res.data.data});
+        Communication.getMethod(1,`Anime&aq=lastanimes&as=0_9&od=id`)
+        .then(res => {
+            this.setState({animes:res.data.data});
+        })
+        .catch(() => {
+            // dispatch({
+            //     type: 'ERROR_USERS',
+            //     payload: null
+            // })
+        }).finally(() => {
+            //console.log(this.state);
+
         });
     }
 
     render() {
-        const lastAnimes = this.state.animes.map( (anime, key) => {
-            return (
-                <a className='element_container' href={'/AnimeDetails/'+anime.id} key={key}>
-                    <div className="element_text"><p>{anime.titulo}</p></div>
-                </a>
-            );
-        });
-
         return (
             <footer>
                 <div className="footer-list">
-                    {lastAnimes}
+                    {
+                        this.state.animes.map( (anime, key) => {
+                            return (
+                                <a className='element_container' href={'/AnimeDetails/'+anime.id} key={key}>
+                                    <div className="element_text"><p>{anime.titulo}</p></div>
+                                </a>
+                            );
+                        })
+                    }
                 </div>
 
                 <div className='footer-logo'>

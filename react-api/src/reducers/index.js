@@ -16,8 +16,6 @@ export function printerrors(state = initialState,action){
   if (action.type === 'AUTH_ERROR') {
     return [...state.errors][0];
   }else{
-    console.log("FUFUFUFUFUF");
-    console.log(state);
     return state
   }
 }
