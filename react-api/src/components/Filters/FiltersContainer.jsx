@@ -1,40 +1,26 @@
-import React from 'react';
-import Communication from '../../services/index';
-import './Filters.css';
-import 'font-awesome/css/font-awesome.min.css';
+import React, { useCallback, useEffect, useState } from 'react'
+import Filters from 'components/Filters/Filters';
 import { Link } from "react-router-dom";
-import Filters from './Filters';
+import Communication from 'services';
+import Loading from "components/Loading/Loading";
+import 'components/Filters/Filters.css';
 
-export default class FiltersContainer extends React.Component {
-    state = {
-        filterVisible: '',
-        letters : [],
-        years : [],
-        generes : [],
-        languajes : [],
-        kinds : [],
-        temporadas : [],
-        filters : [
-            { title : 'genere', kind : 'generes' },
-            { title : 'type', kind : 'kinds' },
-            { title : 'year', kind : 'years' },
-            { title : 'lang', kind : 'languajes' },
-            { title : 'temporada', kind : 'temporadas' }
-        ]
-    };
+const FiltersContainer = () => {
+    const [ filterVisible, setFilterVisible ] = useState('');
+    const [ letters, setLetters ] = useState(null);
+    const [ filters ] = useState([
+        { title : 'genere', kind : 'generes' },
+        { title : 'type', kind : 'kind' },
+        { title : 'year', kind : 'years' },
+        { title : 'lang', kind : 'lang' },
+        { title : 'temporada', kind : 'temporadas' }
+    ]);
 
-    componentDidMount(){
+    useEffect(() => {
         Communication.getMethod(1,`Filters`, {
-            "action" : "getFilters"
+            "action" : "getFilters", 'kind': 'letters'
         }).then(res => {
-            this.setState({
-                letters : res.letters,
-                years : res.years,
-                generes : res.generes,
-                languajes : res.lang,
-                kinds : res.kind,
-                temporadas : res.temporadas,
-            });
+            setLetters(res);
         })
         .catch(() => {
             // dispatch({
@@ -42,46 +28,54 @@ export default class FiltersContainer extends React.Component {
             //     payload: null
             // })
         })
-        .finally(() => {
-            console.log(this.state);
-        })
-    }
 
-    render() {
-        return (
-            <div className="filters">
-                <ul className='menu' role="menu">
-                    {
-                        this.state.letters.map( (filter, key) => {
-                            return ( 
-                                <li key={key}>
-                                    <Link className="link" role="menuitem" to={'Anime/'+filter.filter}>
-                                        {filter.title}
-                                    </Link>
-                                </li> 
-                            );
-                        })
-                    }
+        return () => {
+            setLetters(null);
+        }
+    }, []);
 
-                    {
-                        this.state.filters.map( (filter ,key) => {
-                            return (
-                                <li key={key} className="letra-link collapsed" id={filter.id} onClick={ () => this.setState({filterVisible:filter.kind})}
-                                    title={filter.title}>
-                                    <div className='link' role="button">
-                                        {filter.title}
-                                    </div>
-                                </li>
-                            );
-                        })
-                    }
-                </ul>
-                { this.state.filterVisible === 'generes' ? <Filters elements={this.state.generes} height='329' /> : null }
-                { this.state.filterVisible === 'years' ? <Filters elements={this.state.years} height='188' /> : null }
-                { this.state.filterVisible === 'kinds' ? <Filters elements={this.state.kinds} height='47' /> : null }
-                { this.state.filterVisible === 'languajes' ? <Filters elements={this.state.languajes} height='47' /> : null }
-                { this.state.filterVisible === 'temporadas' ? <Filters elements={this.state.temporadas} height='47' /> : null }
-            </div>
-        )
-    }
+    const handleFilters = useCallback(
+        (filter) => {
+            if (filterVisible === filter) {
+                setFilterVisible('');
+            } else {
+                setFilterVisible('');
+                setFilterVisible(filter);
+            }
+        },
+        [filterVisible],
+    );
+
+    return (
+        <div className="filters">
+            <ul className='menu' role="menu">
+                {
+                    letters !== null ? letters.map( (filter, key) => {
+                        return ( 
+                            <li key={key}>
+                                <Link className="link" role="menuitem" to={'Anime/'+filter.filter}>
+                                    {filter.title}
+                                </Link>
+                            </li> 
+                        );
+                    }) : <Loading />
+                }
+
+                {
+                    filters.map( (filter ,key) => {
+                        return (
+                            <li key={key} className="letra-link" onClick={ () => { handleFilters(filter.kind) }}
+                                title={filter.title}>
+                                <div className='link' role="button">
+                                    {filter.title}
+                                </div>
+                            </li>
+                        );
+                    })
+                }
+            </ul>
+            { filterVisible !== '' ? <Filters kind={filterVisible} /> : null }
+        </div>
+    )
 }
+export default FiltersContainer;

@@ -3,11 +3,12 @@ const baseUrl = 'http://cosasdeanime.com?r=es/api&am=';
 
 const Communication = {
     getMethod(lang, endpoint, data = null) {
-        if (data !== null || data !== undefined) {
+        if (data !== null) {
             return axios.post(baseUrl + endpoint, data, {
                 headers: {
                     'api_token': '???123456789Azsxdcfvgnbhknljopimuhytgrfqew127364lpñokmni**/-++89¿juhvtcfdr65es123\\~~xza_qw',
-                    'current_lang': lang
+                    'current_lang': lang,
+                    'X-Requested-With': 'XMLHttpRequest'
                 }
             }).then(response => {
                 if (response.data.data) {
@@ -20,7 +21,8 @@ const Communication = {
             return axios.get(baseUrl + endpoint, {
                 headers: {
                     'api_token': '???123456789Azsxdcfvgnbhknljopimuhytgrfqew127364lpñokmni**/-++89¿juhvtcfdr65es123\\~~xza_qw',
-                    'current_lang': lang
+                    'current_lang': lang,
+                    'X-Requested-With': 'XMLHttpRequest'
                 }
             }).then(response => {
                 if (response.data.data) {

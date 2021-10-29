@@ -1,10 +1,6 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-node/node_modules/
-node/.env
-node/package-lock.json
-
 #Inoic
 ionic-api/node_modules/
 ionic-api/platforms/
@@ -36,9 +32,10 @@ ionic-api/plugins/ios.json
 ionic-api/$RECYCLE.BIN/
 
 #React
-react-api/node_modules/
+react-api/node_modules
 react-api/dist
 react-api/package-lock.json
+
 #vue-api
 vue-api/node_modules/
 vue-api/dist/

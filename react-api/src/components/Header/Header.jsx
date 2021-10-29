@@ -1,15 +1,19 @@
 import React from 'react';
-import Communication from '../../services/index';
+import Communication from 'services/index';
 import 'font-awesome/css/font-awesome.min.css';
-import './Header.css';
-import Menu from '../Menu/Menu';
-import FiltersContainer from '../Filters/FiltersContainer';
+import 'components/Header/Header.css';
+import 'components/Filters/Filters.css';
+import Langs from 'components/Langs/Langs';
+import { Link } from "react-router-dom";
+import FiltersContainer from 'components/Filters/FiltersContainer';
 
 export default class Header extends React.Component {
     state = {
+        langVisible: false,
         random: 0,
+        kind:'',
         user : '',
-        langs : []
+        numProducts: 0
     };
     
    /*  $(window).scroll(() => {
@@ -22,79 +26,129 @@ export default class Header extends React.Component {
              }
     });    */
 
-    componentWillMount() {
-        let ran;
+    componentDidMount() {
         Communication.getMethod(1,`Episodes&aq=getidrand`)
         .then(res => {
-            ran = res.id;
+            this.setState({ random : res.id, kind: res.kind });
         }).catch(() => {
             // dispatch({
             //     type: 'ERROR_USERS',
             //     payload: null
             // })
-        }).finally(() => {
-            //console.log(this.state);
-            console.log("**************");
         })
+    }
 
-        Communication.getMethod(1,`Langs`, {
-            "action" : "gettranslations", 
-            "code" : 1, 
-            "translations" : [
-                {"kind" : "langs"}
-            ]
-        }).then(res => {
-            this.setState({ langs: res, random : ran });
-        })
-        .catch(() => {
-            // dispatch({
-            //     type: 'ERROR_USERS',
-            //     payload: null
-            // })
-        }).finally(() => {
-            //console.log(this.state);
+    LogIn(menu){
+        if (menu === 'movil') {
+            return(
+                <>
+                    <Link className='link cart' href="/Cart">
+                        <span className="badge">{this.state.numProducts}</span>
+                        <i className="fas fa-shopping-cart"></i>
+                    </Link> 
+                        <Link className='link' id='salir' >
+                        <i className='fas fa-sign-out-alt'></i> <span className='texto'>salir</span>
+                    </Link>
+                </>
+            )
+        }else {
+            return (
+                <>
+                    <li className='list_element movil_disabled'>
+                        <Link className='link user' to='/User'>
+                            <img src=' $avatar ' alt=' $usuario ' />
+                            <span className='texto'>{this.state.user}</span>
+                        </Link>
+                    </li>
+                    <li className='list_element movil_disabled'>
+                        <Link className='link' id='salir' to='' >
+                            <i className='fas fa-sign-out-alt'></i> 
+                            <span className='texto'>Salir</span>
+                        </Link>
+                    </li>
+                    <li className='list_element movil_disabled'>
+                        <Link className='link' to='/Cart'>
+                            <span className='badge movil_disabled'> {this.state.numProducts}</span>
+                            <i className='fas fa-shopping-cart'></i>
+                        </Link>
+                    </li>
+                </>
+            )
+        }
+    }
 
-        })
+    toggleLangs(){
+        if (!this.state.langVisible) {
+            this.setState({ langVisible : true});
+        } else {
+            this.setState({ langVisible : false});
+        }
     }
 
     render() {
         return (
             <header>
-                <section className="header">
-                    <ul className="langs">
-                        {
-                            this.state.langs.map((lang, key) => {
-                                const activeClass = lang.code === 'es' ? 'active' :  '';
-                                return ( <li key={key} className={activeClass + ' list_element'}><a className='link' href="es">{lang[lang['kind']]}</a> </li>);
-                            })
-                        }
-                    </ul>
-                </section>
-
+                { this.state.langVisible ? <Langs /> : null }
                 <div className="menu_bar">
-                        <a className='link' href="/Login">
-                            <i className="fas fa-user-circle"></i>
-                            <span className='texto'>iniciar_sesion</span>
-                        </a>
-                        <a className='link' href="/Register">
-                            <i className="fas fa-user"></i>
-                            <span className='texto'>registro</span>
-                        </a>
-                    
-                        <a className='link user' href="/User">
-                            <img  src="avatar" alt='usuario' />
-                            <span className='texto'>usuario</span>
-                        </a>
-                        {/*<a className='link cart' href="/Cart">
-                            <span className="badge">number_products']?></span>
-                            <i className="fas fa-shopping-cart"></i>
-                        </a> 
-                         <a className='link' id='salir' href='/api&am=Auth&aa={$v['usuario']}") ?>'>
-                            <i className='fas fa-sign-out-alt'></i> <span className='texto'>salir</span>
-                        </a>  */}
+                    <Link className='link' to="/Login">
+                        <i className="fas fa-user-circle"></i>
+                        <span className='texto'>iniciar_sesion</span>
+                    </Link>
+                    <Link className='link' to="/Register">
+                        <i className="fas fa-user"></i>
+                        <span className='texto'>registro</span>
+                    </Link>
+                
+                    <Link className='link user' to="/User">
+                        <img src="avatar" alt='usuario' />
+                        <span className='texto'>usuario</span>
+                    </Link>
+                    { this.state.user !== '' ? this.LogIn('movil'): null}
                 </div> 
-                {/* <Menu random={this.state.random} user={this.state.user}/>
-                <FiltersContainer/> */}
+                <nav id="navbar">
+                    <ul className="list">
+                        <li className='list_element'>
+                            <Link className="link" to="/">
+                                <i className="fa fa-home"></i>
+                                <span className="texto">Inicio</span>
+                            </Link>
+                        </li>
+                        <li className='list_element'>
+                            <Link className="link" to="/Anime">
+                                <i className="fa fa-list-ul"></i>
+                                <span className="texto">Animes</span>
+                                {/* if (isLogged()) $v['menu'] .= " <!--<span className='badge movil_disabled'>3</span>--> "; */}
+                            </Link>
+                        </li>
+                        <li className='list_element'>
+                            <Link className='link' to='/blog'>
+                                <i className='fas fa-blog'></i>
+                                <span className='texto'>Blog</span>;
+                                {/* if ($v['islogged']) $v['menu'] .= " <span className='badge movil_disabled'>3</span> "; */}
+                            </Link>
+                        </li>
+                        <li className='list_element movil_disabled ". link_active("Auth") ."'>
+                            <Link className="link" to="/auth">
+                                <i className="fa fa-user-circle"></i>
+                                <span className="texto">Iniciar Sessión / Registro </span>
+                            </Link>
+                        </li>
+                        { this.state.user !== '' ? this.LogIn : null}
+                        <li className='list_element ". link_active("aleatory") ."'>
+                            <Link className="link" to={"/aleatory/" + this.state.random + '/'+ this.state.kind}>
+                                <i className="fa fa-random"></i>
+                                <span className="texto">Aleatorio</span>
+                            </Link>
+                        </li>
+                        <li className='list_element'>
+                            <div className='link' onClick={ () => { this.toggleLangs()}}>
+                                <i className='fa fa-language'></i>
+                                <span className='texto'>Idiomas</span>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <FiltersContainer/>
             </header>
         )
     }
