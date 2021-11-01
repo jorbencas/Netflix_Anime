@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Anime.css";
+import "pages/Anime/Anime.css";
 import "font-awesome/css/font-awesome.min.css";
 import Grid from "components/Grid/Grid";
 import Communication from "services";

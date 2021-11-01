@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { useParams, useLocation, useRouteMatch } from "react-router-dom";
 
 const Grid = (props) => {
-    const renderkindclass = (anime) => {
+    const renderkindclass = (kind) => {
         let state = 'element_kind ';
-        switch (anime.kind) {
+        switch (kind) {
             case 'pelicula': state += 'pelicula'; break;
             case 'ova': state += 'ova';  break;
             default: state += 'serie';  break;
@@ -26,7 +26,7 @@ const Grid = (props) => {
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat'
                     }}></div>
-                <div className={renderkindclass(anime)} >{anime.kind} </div>
+                <div className={renderkindclass(anime.kind)} >{anime.kind} </div>
                 {/* <div className="<?= $anime['nuevo'] ?>">Nuevo</div> */}
                 <div className="element_text">
                     <p className='titulo'>{anime.titulo}</p>

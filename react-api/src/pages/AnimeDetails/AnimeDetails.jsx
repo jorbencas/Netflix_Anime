@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./AnimeDetails.css";
+import "pages/AnimeDetails/AnimeDetails.css";
 import "font-awesome/css/font-awesome.min.css";
 import { useParams } from "react-router-dom";
 import Communication from "services";
@@ -14,7 +14,6 @@ const AnimeDetails = () => {
     const { id, kind, seasion } = useParams();
     const [ anime, setAnime ] = useState(null);
     const [ view, setView ] = useState("episodes");
-    const [ urlId ] = useState(id);
     const [ user ] = useState(null);
 
   /*  $(document).ready(function(){
@@ -66,7 +65,7 @@ const AnimeDetails = () => {
           s = `&seasion=${seasion}`;
       }
 
-      Communication.getMethod(1, `Anime&ap=${urlId}&kind=${kind}${s}`)
+      Communication.getMethod(1, `Anime&ap=${id}&kind=${kind}${s}`)
       .then((res) => {
           setAnime(res);
       })
@@ -130,12 +129,22 @@ const AnimeDetails = () => {
             value={anime.valorations}
           />
         </div>
-        <div className="favorite" onClick={ () => { setfavorite(anime.favorite, urlId) } }>
+        <div className="favorite" onClick={ () => { setfavorite(anime.favorite, id) } }>
           <i className={headFavorite}></i>
         </div>
       </>
     );
   };
+
+  const renderkindclass = (kind) => {
+    let state = 'element_kind ';
+    switch (kind) {
+        case 'pelicula': state += 'pelicula'; break;
+        case 'ova': state += 'ova';  break;
+        default: state += 'serie';  break;
+    }
+    return state
+}
 
   return (
     <>
@@ -186,7 +195,7 @@ const AnimeDetails = () => {
                   </div>
                   <div className="serie-header_genero">
                     <h3>Tipo </h3>
-                    <li>{anime.kind}</li>
+                    <li className={renderkindclass(anime.kind)}>{anime.kind}</li>
                   </div>
                   {user !== null ? renderSometing() : null}
                 </div>
@@ -233,10 +242,10 @@ const AnimeDetails = () => {
             </ul>
           </div>
           <div className="tabcontent">
-            { view == 'episodes' ? <Episodes id={urlId} /> : null }
-            { view == 'personages' ? <Personages id={urlId} /> : null }
-            { view == 'openings' ? <Openings id={urlId} /> : null }
-            { view == 'endings' ? <Endings id={urlId} /> : null }
+            { view == 'episodes' ? <Episodes id={id} /> : null }
+            { view == 'personages' ? <Personages id={id} /> : null }
+            { view == 'openings' ? <Openings id={id} /> : null }
+            { view == 'endings' ? <Endings id={id} /> : null }
           </div>
           {/* <Comments /> */}
         </div>

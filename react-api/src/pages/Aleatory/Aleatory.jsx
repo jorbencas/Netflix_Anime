@@ -1,40 +1,73 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import Communication from "services";
 import "./Aleatory.css";
 import "font-awesome/css/font-awesome.min.css";
-// import BreadCrumb from '../components/Breadcrumb';
-// import Video from '../components/Video';
+import Comments from "TODO/Comments";
+import BreadCrumb from 'components/Breadcrumb/Breadcrumb';
+import Video from 'components/Video/Video';
+import { Link } from "react-router-dom";
 
 const Aleatory = () => {
     const location = useLocation();
     const { id, kind, seasion } = useParams();
     const [ elements, setElements ] = useState(null);
-    const [ urlId ] = useState(id);
+    const [ field, setField ] = useState('epititulo');
+    const [ user, setUser ] = useState(null);
+    const [ breadcrumb, setBreadcrumb ] = useState(null);
 
     useEffect(() => {
         let s = "";
         let k = "";
+        let urlseasion = "";
+        let urlKind = "";
+
         if (seasion !== undefined) {
             s = `&seasion=${seasion}`;
+            urlseasion = '/'+seasion;
         }
 
         if (kind !== undefined) {
-            k = "&kind=${kind}";
+            k = `&kind=${kind}`;
+            urlKind = '/'+kind;
         }
+
         let ruta = location.pathname;
-        console.log(ruta);
-        console.log("*******************");
-        console.log("                    ");
         let basePath = 'Episodes';
+        let preTexto = 'Capitulo ';
         if (ruta.includes('openings')) {
             basePath = 'Openings';
+            setField('nombre');
+            preTexto = 'Opening ';
         } else if(ruta.includes('endings')){
             basePath = 'Endings';
+            setField('nombre');
+            preTexto = 'Ending ';
         }
-        Communication.getMethod(1, `${basePath}&ap=${urlId}${k}${s}`)
+        
+        Communication.getMethod(1, `${basePath}&ap=${id}${k}${s}`)
         .then((res) => {
             setElements(res);
+            let bread = [{
+                name: "Anime" ,
+                href: "/Anime"
+            }];            
+            bread.push({
+                name: res.anime_titulo !== undefined ? res.anime_titulo : res.titulo,
+                href: '/AnimeDetails/' + res.anime + urlKind
+            });
+            if (res.seasions !== undefined) {
+                urlseasion = '/' + res.id_external;
+                bread.push({
+                    name: "Temporada " + res.seasions,
+                    href: '/AnimeDetails/' + res.anime + urlKind + urlseasion
+                });
+            }
+            bread.push({
+                name: preTexto + res+ res[field],
+                href: '/aleatory/' + res.id + urlKind + urlseasion
+            });
+            setBreadcrumb(bread);
         })
         .catch(() => {
             // dispatch({
@@ -42,32 +75,36 @@ const Aleatory = () => {
             //     payload: null
             // })
         });
-
         return () => {
-        setElements(null);
+            setElements(null);
         };
     }, []);
 
+    const makeUrl = (nextId) => {
+        let ruta = location.pathname;
+        return ruta.replace(id,nextId);
+    }
+
     return (
-        <>
-        {/* <section className="episode-page">
-                <BreadCrumb params={elements} />
+        <>{ elements !== null ?
+        <section className="episode-page">
+                { breadcrumb !== null ? <BreadCrumb breadcrumb={breadcrumb} counter={(breadcrumb.length - 1)}/> : null }
                 <div className="element video">
                     <div className="element_title">
-                        <h1>{elements.num} - {elements.nombre}</h1>
+                        <h1>{elements.num} - {elements[field]}</h1>
                     </div>
                     <div className="element_video">
                         <Video video={elements.src} poster={elements.poster} />
                     </div>
-                    {/*< div className="options">
+                    <div className="options">
                         <ul className="options">
-                            <?= $v['prev'] ?>
-                            <?= $v['next'] ?>
+                            { elements.prev !== null ? <Link className='first-child option' to={makeUrl(elements.prev)}><i className='fa fa-caret-left'></i>Anterior</Link> : null }
+                            { elements.next !== null ? <Link className='first-child option' to={makeUrl(elements.next)}>Siguiente <i className='fa fa-caret-left'></i></Link> : null }
                         </ul>
                     </div> 
                 </div>
 
-                    <?php if (isLogged() && ($v['modulo'] == 'aleatory' ||  $v['modulo'] == 'EpisodesDetails')) : ?>
+                    { user ?
                     <div className="element">
                         <div className="options">
                             <div className="option">
@@ -87,19 +124,18 @@ const Aleatory = () => {
                             </div>
                             <div className="option actions">
                                 <button className='submit' id='remove'><i className="fas fa-minus"></i></button>
-                                <input type="number" name="cant" id="cant" min='0' max='100' value='0'>
+                                <input type="number" name="cant" id="cant" min='0' max='100' value='0'/>
                                 <button className='submit' id='add'><i className="fas fa-plus"></i></button>
                             </div>
                             <div className="option actions">
                                 <button className='submit' type="submit"><i className="fas fa-shopping-cart"></i> Añadir al carrito</button>
                             </div>
                         </div>
-                    </div>
-                    <?= render('Collections')>
-                    <?php endif; ?>
-                    <?= render('Comments')?>
-                    </section> 
-            </section> */}
+                    </div> : null }
+                    {/*<Collections id={id} />
+                     <?php endif; ?> */}
+                    <Comments idElement={id} />
+            </section> : null}
         </>
     );
 };

@@ -2,7 +2,6 @@ import React from 'react';
 import Communication from 'services/index';
 import 'font-awesome/css/font-awesome.min.css';
 import 'components/Header/Header.css';
-import 'components/Filters/Filters.css';
 import Langs from 'components/Langs/Langs';
 import { Link } from "react-router-dom";
 import FiltersContainer from 'components/Filters/FiltersContainer';
@@ -77,14 +76,6 @@ export default class Header extends React.Component {
         }
     }
 
-    toggleLangs(){
-        if (!this.state.langVisible) {
-            this.setState({ langVisible : true});
-        } else {
-            this.setState({ langVisible : false});
-        }
-    }
-
     render() {
         return (
             <header>
@@ -141,7 +132,7 @@ export default class Header extends React.Component {
                             </Link>
                         </li>
                         <li className='list_element'>
-                            <div className='link' onClick={ () => { this.toggleLangs()}}>
+                            <div className='link' onClick={ () => { this.setState({ langVisible : !this.state.langVisible}) }}>
                                 <i className='fa fa-language'></i>
                                 <span className='texto'>Idiomas</span>
                             </div>

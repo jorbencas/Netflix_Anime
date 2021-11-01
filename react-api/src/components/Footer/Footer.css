@@ -1,468 +1,156 @@
 footer{
+  display: block;
+  width:100%;
+  border-top: 2px solid;
+  min-height: 115px;
+}
+
+footer .footer-list {
+  padding-top: 8px;
+  height: 100%;
+  width: 73%;
+  display: inline-block;
+  text-align: left;
+  vertical-align:top;
+}
+
+footer .footer-list .element_container {
+  overflow: hidden;
+  width: 19%;
+  height: 24px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+} 
+
+footer .footer-list .element_container:hover {
+  cursor: pointer;
+}
+
+footer .footer-list .element_container .element_text{
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+  width:100%;
+  vertical-align: middle;
+}
+
+footer .footer-logo {
+  padding-top: 8px;
+  display: inline-block;
+  width:25%;
+  text-align: center;
+  height: 100%;
+}
+
+footer .footer-logo .logo {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 25px;
+} 
+
+/*Contador*/
+footer .footer-list .contador{
+  height: 25px;
+  display: block;
+}
+
+footer .footer-list .contador li:hover{
+  background-color: transparent;
+}
+
+footer .footer-list .contador li{
+  display: inline-block;
+  padding-right: 8px;
+}
+
+footer .footer-list .contador li i{
+  font-size: 35px;
+  position: relative;
+  display: inline-block;
+  font-weight: 5;
+}
+
+footer .footer-list .contador li i b{
+  position: absolute;
+  top: 3px;
+  left: 8px;
+  bottom: 0;
+  font-size: 20px;
+}
+
+footer .footer-logo .sidenav{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+footer .footer-logo .sidenav .element{
+  text-decoration: none;
+  list-style: none;
+}
+
+footer .footer-logo .sidenav .element * {
+  display: block;
+}
+
+footer .footer-logo .sidenav .element  i{
+  font-size: 25px;
+}
+
+@media screen and (max-width: 800px) { 
+  footer{
+    width: 100%;
+  }
+
+  footer .footer-list .element_container{
     display: block;
-    width:auto;
-    border-top: 2px solid;
-    height: fit-content;
-    min-height: 115px;
+    width: 100%;
+    margin: auto;
+    margin-top: 7px;
   }
-  
-  footer .footer-list {
-    padding-top: 8px;
-    height: 100%;
-    width: 73%;
-    display: inline-block;
-    text-align: left;
-    vertical-align:top;
-  }
-  
-  footer .footer-list .element_container {
-    overflow: hidden;
-    width: 19%;
-    height: 24px;
-    display: inline-block;
-    text-decoration: none;
-    text-align: center;
-  } 
-  
-  footer .footer-list .element_container:hover {
-    cursor: pointer;
-  }
-  
-  footer .footer-list .element_container .element_text{
-    text-align: center;
-    text-decoration: none;
-    overflow: hidden;
+
+  footer .footer-list,
+  footer .footer-logo{
+    display: block;
     width:100%;
-    vertical-align: middle;
-  }
-  
-  footer .footer-logo {
-    padding-top: 8px;
-    display: inline-block;
-    width:25%;
-    text-align: center;
-    height: 100%;
-  }
-  
-  footer .footer-logo .logo {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 25px;
-  } 
-  
-   /*Contador*/
-   footer .footer-logo .contador{
-     height: 25px;
-    display: block;
-   }
-  
-   footer .footer-logo .contador li:hover{
-     background-color: transparent;
-   }
-   
-   footer .footer-logo .contador li{
-     display: inline-block;
-     padding-right: 8px;
-   }
-   
-   footer .footer-logo .contador li i{
-    font-size: 35px;
-    position: relative;
-    display: inline-block;
-   }
-  
-   footer .footer-logo .contador li i span{
-     position: absolute;
-     top: 3px;
-     right: 5px;
-     left: 5px;
-     bottom: 0;
-     font-size: 20px;
-   }
-  
-  footer .footer-logo .sidenav{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  footer .footer-logo .sidenav .element{
-    text-decoration: none;
-    list-style: none;
-  }
-  
-  footer .footer-logo .sidenav .element * {
-    display: block;
-  }
-  
-  footer .footer-logo .sidenav .element  i{
-    font-size: 25px;
-  }
-  
-  @media screen and (max-width: 800px) { 
-    footer{
-      width: 100%;
-    }
-  
-    footer .footer-list .element_container{
-      display: block;
-      width: 100%;
-      margin: auto;
-      margin-top: 7px;
-    }
-  
-    footer .footer-list,
-    footer .footer-logo{
-      display: block;
-      width:100%;
-      height: auto;
-      overflow: hidden;
-    }
-  
+    height: auto;
+    overflow: hidden;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-  :root {
-    --color-text: #fff;
-    --main-green: #ff1e00/*#07c24f*/;
-    --main-grey: #3d3d3d;
-    --opacity-grey: #3d3d3da4;
-    --opacity-green: #07c24fbd;
-
-
-    --main-green: #23a7ff;
-    --opacity-green: #23a7ffb7;
-
 }
-/* Track */
-::-webkit-scrollbar-track {
-    background: var(--main-grey);
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: var(--opacity-green);
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--main-green);
-  }
-
-  main{
-    background-color: #666666;
-  }
-
-.progress-container{
-    background: var(--opacity-grey);
-}
-
-.progress-bar{
-    background: var(--main-green);
-}
-
-.button_fixed{
-    border-color: var(--color-text);
-    color: var(--color-text);
-    background: var(--main-green);
-}
-
-.alert{
-    color: var(--color-text);
-}
-
-.mensajes .notification{
-    color: var(--color-text);
-}
-
-.mensajes .delete:hover {
-    color: var(--color-text);
-  }
-
-.pre{
-    background-color: var(--opacity-grey);
-    color: var(--opacity-grey);
-}
-
-.pre:hover{
-    background-color: var(--opacity-grey);
-  color: var(--main-green);
-}
-
-.admin{
-    background: var(--main-grey);
-}
-
-.admin_element {
-    color: var(--main-green);
-    border: 1px solid var(--main-green);
-}
-
-.admin_element.active {
-    background-color: var(--main-green);
-    color: var(--color-text);
-  }
-
-.toolbar .tab{
-    color: var(--main-green);
-    background-color: var(--opacity-grey);
-}
-
-.toolbar .tab .tablinks{
-    color: var(--color-text);
-}
-
-.toolbar .tab .tablinks:hover {
-    background-color: var(--opacity-grey);
-    color: var(--color-text);
-}
-
-/* .toolbar .tab .tablink.active, */
-.toolbar .tab .tablinks.active {
-    background: var(--main-green);
-    color: var(--color-text);
-}
-
-.importador #myProgress{
-    background-color: var(--main-grey);
-}
-
-.importador .percent{
-    color: white !important;
-}
-
-.container-loading{
-    background-color: var(--opacity-grey);
-}
-
-.container-loading .texto{
-    color: var(--main-green);
-}
-
-.container-loading .folding .sk-cube:before{
-    background-color: var(--main-green);
-}
-
-.commingsoon{
-    color: var(--color-text);
-}
-
-
-.comments .info_avatar .info_usuario .estado .input_enviar{
-    border: 1px solid var(--main-green);
-    color: var(--color-text);
-}
-
-.comments .info_avatar .info_usuario .estado .btn_enviar{
-    border: 1px solid var(--main-green);
-    background-color: var(--main-green);
-    color: var(--color-text);
-}
- 
-.comentario{
-    color: var(--color-text);
-}
-
-.tarjeta {
-    background: var(--main-grey);
-}
-
-.slider_banner .banner .anime .first .titulo{
-	-webkit-box-shadow: 0 -6px 16px 10px var(--opacity-grey);
-	-moz-box-shadow: 0 -6px 16px 10px var(--opacity-grey);
-	box-shadow: 0 -6px 16px 10px var(--opacity-grey);
-    background-color: var(--opacity-grey);
-    color: var(--color-text);
-}
-
-.slider_banner .flecha-banner {
-    color:var(--opacity-green);
-}
-
-.slider_banner .flecha-banner:hover {
-	color: var(--main-green);
-}
-
-.filters{
-    background: var(--main-grey);
-}
-
-.filters .link {
-    color: var(--color-text);
-}
-
-.filters .link:hover {
-    background: var(--opacity-green);
-}
-
-.error{
-    color: var(--main-green);
-}
-
-.error .text{
-    background-color: var(--opacity-green);
-    color: var(--main-grey);
-    border: 2px solid var(--main-grey);
-}
-
-.error .link {
-    background: var(--main-green);
-    border: 2px solid var(--color-text);
-    color: var(--color-text);
-}
-
-.error .link:hover{
-    border-color: var(--main-green);
-    background: var(--opacity-grey);
-    color: var(--color-text);
-}
-
-#endingrid .grid-item .fa-play-circle {
-    color: var(--opacity-green);
-}
-
-#endingrid .data {
-    background-color: var(--main-green);
-    color: var(--color-text);
-    -webkit-box-shadow: 0 -4px 6px 0 var(--opacity-green);
-    -moz-box-shadow: 0 -4px 6px 0 var(--opacity-green);
-    box-shadow: 0 -4px 6px 0 var(--opacity-green);
-}
-
-#endingrid .table {
-    background-color: var(--opacity-grey);
-    color: var(--color-text);
-}
-
-#endingrid .table.table-tbody .tbody-row:hover {
-    box-shadow: 0px 0px 10px var(--color-text);
-}
-
-#episodegrid .grid-item .fa-play-circle {
-    color: var(--opacity-green);
-}
-
-#episodegrid .data {
-    background-color: var(--main-green);
-    color: var(--color-text);
-    -webkit-box-shadow: 0 -4px 6px 0 var(--opacity-green);
-    -moz-box-shadow: 0 -4px 6px 0 var(--opacity-green);
-    box-shadow: 0 -4px 6px 0 var(--opacity-green);
-}
-
-#episodegrid .table {
-    background-color: var(--opacity-grey);
-    color: var(--color-text);
-}
-
-#episodegrid .table .table-tbody .tbody-row:hover {
-    box-shadow: 0px 0px 10px var(--color-text);
-}
-
-
-#openingrid .grid-item .fa-play-circle {
-    color: var(--opacity-green);
-}
-  
-  #openingrid .data {
-    background-color: var(--main-green);
-    color: var(--color-text);
-    -webkit-box-shadow: 0 -4px 6px 0 var(--opacity-green);
-    -moz-box-shadow: 0 -4px 6px 0 var(--opacity-green);
-    box-shadow: 0 -4px 6px 0 var(--opacity-green);
-  }
-  
-  #openingrid .table {
-    background-color: var(--opacity-grey);
-    color: var(--color-text);
-  }
-  
-  #openingrid .table.table-tbody .tbody-row:hover {
-    box-shadow: 0px 0px 10px var(--color-text);
-  }
-  
-
-.personage_list{
-    background-color: black;
-}
-
- .personage_list .info{ 
-    color: var(--opacity-green);
-}
-
-.table{
-    background-color: var(--opacity-grey);
-    color: var(--color-text);
-  }
-  
-  .table .table-tbody .tbody-row:hover {
-    box-shadow: 0px 0px 10px var(--color-text);
-  }
-
-.PersonageDetails .modal_container{
-    color: var(--color-text);
-}
-
-.PersonageDetails  .modal_container .personage-modal.first .image{
-    border: 1px solid  var(--main-green);
-}
-
 
 footer{
-    background:var(--main-grey);
-    border-top-color: var(--main-green);
-    color: var(--color-text);
+  background:var(--main-grey);
+  border-top-color: var(--main-green);
+  color: var(--color-text);
 }
 
-  footer .footer-list .element_container {
-    color: var(--color-text);
-    background: var(--main-green);
-  } 
-  
-  footer .footer-list .element_container .element_text{
-    background-color: var(--main-green);
-    color:var(--color-text);
-  }
-  
-  footer .footer-logo .logo {
-    color: var(--color-text);
-  } 
-  
-   footer .footer-logo .contador li:hover{
-     background-color: transparent;
-   }
-   
-   footer .footer-logo .contador li i{
-    color: var(--color-text);
-    background-color: linear-gradient(to bottom, #ffffff, var(--main-green))!important;
-   }
-  
-  footer .footer-logo .sidenav .element * {
-    display: block;
-    color: var(--color-text);
-  }
-  
-  .listanime-page {
-    color: var(--color-text);
+footer .footer-list .element_container {
+  color: var(--color-text);
+  background: var(--main-green);
+} 
+
+footer .footer-list .element_container .element_text{
+  background-color: var(--main-green);
+  color:var(--color-text);
 }
 
-.listanime-page .tab .tablinks {
-    background-color: var(--opacity-grey);
-    color: var(--main-green);
-}
+footer .footer-logo .logo {
+  color: var(--color-text);
+} 
 
-.listanime-page .tab .tablinks:hover {
-    background-color: var(--opacity-grey);
-    color: var(--main-green);
+ footer .footer-logo .contador li:hover{
+   background-color: transparent;
+ }
+ 
+ footer .footer-logo .contador li i{
+  color: var(--color-text);
+  background-color: linear-gradient(to bottom, #ffffff, var(--main-green))!important;
+ }
+
+footer .footer-logo .sidenav .element * {
+  display: block;
+  color: var(--color-text);
 }
