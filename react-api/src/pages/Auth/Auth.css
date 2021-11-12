@@ -1,0 +1,124 @@
+.wrap{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  min-height: inherit;
+  overflow: hidden;
+}
+
+.contenedor-formulario {
+  color: var(--main-green);
+  width: 100%;
+  max-width: 545px;
+  border: 5px solid var(--main-green); 
+  border-style: dotted;
+}
+
+.contenedor-formulario .formulario {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.contenedor-formulario .formulario .input-group {
+  margin: 22px;
+  width: 85%;
+  text-align: center;
+}
+
+.contenedor-formulario .formulario input {
+  display: block;
+  border: 1px solid var(--main-green);
+  background: transparent;
+  margin: 22px;
+  color: var(--main-green);
+  font-family: "Roboto";
+  font-size: 18px;
+  width: 85%;
+  padding: 10px;
+  outline: 0px;
+}
+
+.contenedor-formulario .formulario .concret {
+  position: relative;
+  width: 88%;
+  margin: 22px 0;
+  border: 1px solid var(--main-green);
+  background: transparent;
+}
+
+.contenedor-formulario .formulario .concret input {
+  width: 85%;
+  margin: 0;
+  border: 0px!important;
+  display: inline-block;
+  background: transparent;
+}
+
+.contenedor-formulario .formulario .concret i {
+  display: inline-block;
+ vertical-align: middle;
+}
+
+.contenedor-formulario .formulario .submit {
+  background: var(--main-green);
+  /* border: 2px solid var(--color-text); */
+  color: var(--color-text);
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Roboto";
+  font-size: 16px;
+}
+
+.contenedor-formulario .formulario .submit:hover {
+  /* border: 2px solid var(--main-green); */
+  background: var(--opacity-grey);
+  /* color: var(--color-text); */
+}
+
+.formulario a{
+  color: var(--main-green);
+}
+
+@media screen and (max-width: 800px) {
+  
+  .wrap{
+    flex-direction: column;
+  }
+
+  .contenedor-formulario {
+    max-width: 90%;
+    border-width: 0px;
+  }
+
+  .contenedor-formulario .formulario {
+    width: 90%;
+  }
+
+  .contenedor-formulario .formulario .input-group {
+    margin: 22px;
+    width: 85%;
+  }
+
+  .contenedor-formulario .formulario input {
+    margin: 22px;
+    font-size: 18px;
+    width: 85%;
+    padding: 10px;
+    outline: 0px;
+  }
+
+  .contenedor-formulario .formulario .concret {
+    width: 91%;
+    margin: 22px;
+  }
+
+  .contenedor-formulario .formulario .concret input {
+    width: 81%;
+  }
+
+}
