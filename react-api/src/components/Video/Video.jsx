@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import 'components/Video/Video.css';
-import 'font-awesome/css/font-awesome.min.css';
+import React, { useEffect, useRef, useState } from "react";
+import "components/Video/Video.css";
+import "font-awesome/css/font-awesome.min.css";
 
 // export class Video extends React.Component {
 
@@ -60,7 +60,7 @@ import 'font-awesome/css/font-awesome.min.css';
 
 //  $(element + " .overlay").on("click", () {
 //   updatePlayIcon();
-// }); 
+// });
 
 // // Update play/pause icon
 // updatePlayIcon() {
@@ -88,7 +88,7 @@ import 'font-awesome/css/font-awesome.min.css';
 //         'episode_id':id,
 //         'time':`${time.mins}:${time.secs}`
 //       };
-      
+
 //       api_ajax("History", false,data).then((resp) => {
 //         console.log(resp);
 //       }).catch((error) => {
@@ -161,7 +161,7 @@ import 'font-awesome/css/font-awesome.min.css';
 
 // resetprogress(){
 //   video.currentTime = 0;
-// } 
+// }
 
 // // Event Listeners
 // this.state.video.addEventListener("click", toggleVideoStatus);
@@ -220,7 +220,7 @@ import 'font-awesome/css/font-awesome.min.css';
 //     //salir fullscreen esc button
 //     setfullscreen();
 //   }
-// }); 
+// });
 
 // $(document).bind(
 //   "fullscreenchange webkitfullscreenchange mozfullscreenchange msfullscreenchange",
@@ -338,127 +338,185 @@ import 'font-awesome/css/font-awesome.min.css';
 // export default Video;
 
 const Video = (props) => {
-  const textInput = useRef();
-  const [ video, setVideo ] =  useState(null);
-  const [ progress, setProgress ] =  useState('0%');
-  const [ playbackRate, setPlaybackRate ] =  useState(1);
-  const [ volume, setVolume ] =  useState(1);
-  const [ isMouseDown, setIsMouseDown ] =  useState(false);
-  
+  const textInput = useRef(null);
+  const [video, setVideo] = useState(null);
+  const [progress, setProgress] = useState("0%");
+  const [playbackRate, setPlaybackRate] = useState(1);
+  const [volume, setVolume] = useState(1);
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [timeStand, seTimeStand] = useState("00:00");
+
   useEffect(() => {
-    setVideo(textInput.current);
-    ['pause', 'play'].forEach(event => {
-      video.addEventListener(event, () => {
-        this.forceUpdate();
-      });
-    });
-    video.addEventListener('timeupdate', handleProgress);
+    if (video === null) setVideo(textInput.current);
+    // console.log(video);
+    // ['pause', 'play'].forEach(event => {
+    //   video.addEventListener(event, () => {
+    //     this.forceUpdate();
+    //   });
+    // });
+    // video.addEventListener('timeupdate', handleProgress);
     return () => {
       setVideo(null);
-    }
+    };
   }, []);
 
   const togglePlay = () => {
-    const method = video.paused ? 'play' : 'pause';
+    const method = video.paused ? "play" : "pause";
     video[method]();
-  }
-  
+  };
+
   const handleProgress = () => {
     const percent = (video.currentTime / video.duration) * 100;
     setProgress(`${percent}%`);
-  }
-  
+    changeTimeStand();
+  };
+
+  const changeTimeStand = (operacion = null, tiempo = null) => {
+    // Get mins
+    let mins = Math.floor(video.currentTime / 60);
+    if (mins < 10) {
+      mins = "0" + String(mins);
+    }
+
+    // Get secs
+    let secs = Math.floor(video.currentTime % 60);
+    if (operacion !== null && tiempo !== null) {
+      if (operacion === "+") secs = secs + tiempo;
+      else if (operacion === "-") secs = secs - tiempo;
+    }
+    if (secs < 10) {
+      secs = "0" + String(secs);
+    }
+
+    seTimeStand(`${mins}:${secs}`);
+  };
+
   const handleRangeUpdate = (e) => {
     const { name, value } = e.target;
     `set${name}`(value);
     // Todo: Check how to update state with Immutable JS
     // instead of using refs
-    textInput.current[name] = value;
-  }
-  
+    video[name] = value;
+  };
+
   const scrub = (e) => {
-    const scrubTime = (e.nativeEvent.offsetX / this.textInput.current.clientWidth) * this.textInput.current.duration;
+    const scrubTime =
+      (e.nativeEvent.offsetX / video.clientWidth) * video.duration;
     if (!isNaN(scrubTime)) {
-      textInput.current.currentTime = scrubTime;
+      video.currentTime = scrubTime;
     }
-  }
-  
+  };
+
   const skip = (e) => {
+    console.log("FUFUFUFUFUFUUFUFUFUF");
     const skipValue = e.target.attributes[0].value;
     if (!isNaN(skipValue)) {
-      textInput.current.currentTime += Number(skipValue);
+      let operacion = "+";
+      if (skipValue.includes(".")) {
+        operacion = "-";
+      }
+      changeTimeStand(operacion, Number(skipValue));
+      video.currentTime += Number(skipValue);
     }
-  }
+  };
 
-    return (
-      
-      <div className="player">
-      
-        <video
-          className="player__video viewer"
-          ref={textInput}
-          autoPlay
-          src={props.video}
-          poster={props.poster}
-          onClick={ () => togglePlay}
-        />
-        
-        <div className="player__controls">
-
-          <div 
-            className="progress"
-            onMouseDown={ () => setIsMouseDown(true)}
-            onMouseUp={ () => setIsMouseDown(false)}
-            onMouseLeave={ () => setIsMouseDown(false)}
-            onMouseMove={(e) => isMouseDown && scrub(e)}
-            onClick={ () => scrub}
-          >
-           <div
-             className="progress__filled"
-             style={{'flexBasis': progress}}
-           ></div>
-          </div>
-          
-          <button 
-            className="player__button toggle" 
-            title="Toggle Play"
-            onClick={() => togglePlay}>
-            { video && video.paused ? '►' : '❚ ❚' }
-          </button>
-          
-          <input 
-            type="range" 
-            name="Volume" 
-            className="player__slider" 
-            min="0" max="1" step="0.05" value={volume}
-            onChange={ () => handleRangeUpdate}
-          />
-          <input 
-            type="range" 
-            name="PlaybackRate" 
-            className="player__slider" 
-            min="0.5" max="2" step="0.1" value={playbackRate}
-            onChange={ () => handleRangeUpdate}
-          />
-          
-          <button 
-            data-skip="-10" 
-            className="player__button"
-            onClick={() => skip}
-          >« 10s
-          </button>
-          
-          <button 
-            data-skip="25" 
-            className="player__button"
-            onClick={() => skip}
-          >25s »
-          </button>
-          
-        </div>
-
+  return (
+    <div className="element_video">
+      <video
+        preload
+        className="screen"
+        autoplay
+        ref={textInput}
+        autoPlay
+        poster={props.poster}
+        onClick={() => togglePlay()}
+        onTimeUpdate={() => handleProgress()}
+      >
+        <source src={props.video} type="video/mp4" />
+        <source src={props.video} type="video/ogg" />
+        <source src={props.video} type="video/webm" />
+        <p> Navegador no soporta este tipo de formato de video</p>
+      </video>
+      <div className="overlay">
+        {" "}
+        <i className="fa fa-play-circle"></i>
       </div>
-      
-    );
-}
+      <div className="controls">
+        <button className="btn" onClick={() => togglePlay}>
+          <i onClick={() => togglePlay} 
+            className={
+              video && video.paused ? "fa fa-2x fa-play" : "fa fa-2x fa-pause"
+            }
+          ></i>
+        </button>
+        <button className="btn" onClick={() => togglePlay}>
+          <i onClick={() => togglePlay} className="fa fa-2x fa-stop"></i>
+        </button>
+        <div className="vol-controls">
+          <div id="vol-icon" className="vol-icon">
+            <i className="fa fa-volume-up fa-2x"></i>
+          </div>
+          <div id="vol-range" className="vol__slider">
+            <input
+              type="range"
+              name="Volume"
+              className="progress"
+              min="0"
+              max="1"
+              step="0.1"
+              step="0.05"
+              value={volume}
+              onChange={() => handleRangeUpdate}
+            />
+          </div>
+        </div>
+        <input
+          type="range"
+          name="Progress"
+          className="progress"
+          min="0 "
+          max="100"
+          step="0.1"
+          onMouseDown={() => setIsMouseDown(true)}
+          onMouseUp={() => setIsMouseDown(false)}
+          onMouseLeave={() => setIsMouseDown(false)}
+          onMouseMove={(e) => isMouseDown && scrub(e)}
+          onClick={() => scrub}
+        />
+        <select name="setvelocity" id="speed" className="speed">
+          <option value="0.25">-0.25</option>
+          <option value="0.75">0.75</option>
+          <option value="1.0" selected>
+            Normal
+          </option>
+          <option value="1.25">1.25</option>
+          <option value="1.75">1.75</option>
+        </select>
+        <span className="timestamp">{timeStand}</span>
+        <button className="btn" id="fullscreen">
+          <i className="fa fa-expand"></i>
+        </button>
+
+        <input
+          type="range"
+          name="PlaybackRate"
+          className="progress"
+          min="0.5"
+          max="2"
+          step="0.1"
+          value={playbackRate}
+          onChange={() => handleRangeUpdate}
+        />
+
+        <button data-skip="-10" className="btn" onClick={() => skip}>
+          « 10s
+        </button>
+
+        <button data-skip="25" className="btn" onClick={() => skip}>
+          25s »
+        </button>
+      </div>
+    </div>
+  );
+};
 export default Video;

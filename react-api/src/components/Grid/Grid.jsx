@@ -1,8 +1,7 @@
 import React from 'react';
-import 'components/Grid/Grid.css';
+import './Grid.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { Link } from "react-router-dom";
-import { useParams, useLocation, useRouteMatch } from "react-router-dom";
 
 const Grid = (props) => {
     const renderkindclass = (kind) => {

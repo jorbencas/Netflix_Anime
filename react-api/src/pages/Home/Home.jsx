@@ -212,7 +212,7 @@ function inView(element, fullHeightInView) {
                       }}
                     ></div>
                     <p className="texto">
-                      {episode.anime_titulo} -{episode.titulo}
+                      {episode.anime_titulo} -{episode.epititulo}
                       <i className="fa fa-play"></i>
                     </p>
                   </Link>

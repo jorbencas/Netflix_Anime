@@ -15,7 +15,7 @@ const List = (props) => {
           <div className="info">
             <h3>{anime.titulo}</h3>
             <p>{anime.sinopsis}</p>
-            {anime.generes.length > 0 ? <Generes generes={anime.generes} /> : null} 
+            {anime.genere !== undefined && anime.generes.length > 0 ? <Generes generes={anime.generes} /> : null} 
           </div>
       </Link>
       ))}

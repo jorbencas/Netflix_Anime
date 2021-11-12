@@ -21,6 +21,7 @@ footer .footer-list .element_container {
   display: inline-block;
   text-decoration: none;
   text-align: center;
+  margin: 0px 5px;
 } 
 
 footer .footer-list .element_container:hover {
@@ -120,6 +121,10 @@ footer .footer-logo .sidenav .element  i{
   }
 
 }
+
+
+
+
 
 footer{
   background:var(--main-grey);

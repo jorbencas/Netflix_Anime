@@ -15,10 +15,6 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-    border-bottom-left-radius: 0px;
     padding: 3px 7px;
     font-size: 12px;
 }
@@ -28,6 +24,8 @@
 .grid-anime .element_kind.pelicula { background-color: #357fbb;}
 
 .grid-anime .element_kind.ova { background-color: #eeae36;}
+
+.grid-anime .element_kind.temporada { background-color: #ee3636;}
 
 .grid-anime .element_img {
     height: 230px;
@@ -61,15 +59,13 @@
     font-size: 15px;
 }
 
-.grid-anime .element_text .buttons {
+.grid-anime .element_text ul li{
     display: inline-block;
-    text-align: center;
-    cursor: pointer;
-    background: var(--main-grey);
-    color: var(--color-text);
-    font-weight: bold;
-    margin: 4px;
-    padding: 2px 15px;
+    background-color: var(--main-green);
+    margin-right: 8px;
+    padding:2px;   
+    vertical-align: bottom;
+    font-size: 14px;
 }
 
 .nuevo{

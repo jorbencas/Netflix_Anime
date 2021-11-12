@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import 'components/Grid/Grid.css';
+import './Grid.css';
 import { useParams } from "react-router-dom";
 
 function GridVideo(props) {
-    const { kind, seasion } = useParams();
+    const { kind } = useParams();
 
     return (
         <div className='episodegrid'>

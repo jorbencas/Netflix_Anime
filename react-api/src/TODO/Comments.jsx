@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 import '../styles/components/Comments.css';
 import 'font-awesome/css/font-awesome.min.css';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "pages/Anime/Anime.css";
+import "./Anime.css";
 import "font-awesome/css/font-awesome.min.css";
 import Grid from "components/Grid/Grid";
 import Communication from "services";
@@ -7,12 +7,6 @@ import Communication from "services";
 // import AnimeTable from 'components/AnimeTable';
 // import Loading from "components/Loading/Loading";
 import { Link } from "react-router-dom";
-import {
-  useParams,
-  useHistory,
-  useLocation,
-  useRouteMatch,
-} from "react-router-dom";
 import List from "components/List/List";
 
 const Anime = () => {

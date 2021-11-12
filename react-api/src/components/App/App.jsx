@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import Admin from './pages/Admin';
 import Anime from 'pages/Anime/Anime';
 import AnimeDetails from 'pages/AnimeDetails/AnimeDetails';
-// import Auth from './pages/Auth';
+import Auth from 'pages/Auth/Auth';
 // import Collection from './pages/Collection';
 // import Edit from './pages/Edit';
 // import History from './pages/History';
@@ -15,7 +15,6 @@ import './App.css';
 import Aleatory from 'pages/Aleatory/Aleatory';
 
 const App = () => {
-  
   // useEffect(() => {
   //   const token = localStorage.getItem('token');
   //   const user = store.getState().loginReducer.user;
@@ -38,9 +37,10 @@ const App = () => {
           <Route exact path='/' component={Home}/>
           <Route path={["/Anime", "/filters/:filter", "/Anime/od", "/Anime/oa"]} component={Anime} />
           <Route path="/AnimeDetails/:id/:kind/:seasion?" component={AnimeDetails} />
-          <Route path={["/episodes/:id/:kind"],["/endings/:id"],["/openings/:id"],["/aleatory/:id/:kind"]} component={Aleatory} />
+          <Route path={["/episodes/:id/:kind","/endings/:id", "/openings/:id", "/aleatory/:id/:kind"]} component={Aleatory} />
+          <Route path={["/signup","/signin"]} component={Auth} />
           {/*<Route path="/Admin" component={Admin} />
-          <Route path="/Auth" component={Auth} />
+          
           <Route path='/OpeningsDetails/:id' component={OpeningDetails}/>
           <Route path='/EndingsDetails/:id' component={EndingsDetails} />
           <Route path="/User" component={User} />

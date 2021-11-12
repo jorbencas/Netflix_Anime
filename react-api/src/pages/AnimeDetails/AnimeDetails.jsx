@@ -8,6 +8,7 @@ import Generes from "components/Generes/Generes";
 import Endings from "components/Endings/Endings";
 import Openings from "components/Openings/Openings";
 import Personages from "components/Personages/Personages";
+import GridSeassion from "components/Grid/GridSeassion";
 // import Comments from "components/Comments";
 
 const AnimeDetails = () => {
@@ -201,52 +202,56 @@ const AnimeDetails = () => {
                 </div>
               </section>
             </div>
-          </div>
-
-          <div className="toolbar">
-            <ul className="tab">
-              <button
-                className={view === "episodes" ? "tablinks active" : "tablinks"}
-                onClick={() => {
-                  setView("episodes");
-                }}
-              >
-                <p>Episodios ( {anime.num_epis} )</p>
-              </button>
-              <button
-                className={
-                  view === "personages" ? "tablinks active" : "tablinks"
-                }
-                onClick={() => {
-                  setView("personages");
-                }}
-              >
-                <p>Personages ( {anime.num_pers} )</p>
-              </button>
-              <button
-                className={view === "openings" ? "tablinks active" : "tablinks"}
-                onClick={() => {
-                  setView("openings");
-                }}
-              >
-                <p>Openings ( {anime.num_opes} )</p>
-              </button>
-              <button
-                className={view === "endings" ? "tablinks active" : "tablinks"}
-                onClick={() => {
-                  setView("endings");
-                }}
-              >
-                <p>Endings ( {anime.num_ends} )</p>
-              </button>
-            </ul>
+            <div className="toolbar">
+              <ul className="tab">
+                <button
+                  className={view === "episodes" ? "tablinks active" : "tablinks"}
+                  onClick={() => {
+                    setView("episodes");
+                  }}
+                >
+                  <p>Episodios ( {anime.num_epis} )</p>
+                </button>
+                <button
+                  className={
+                    view === "personages" ? "tablinks active" : "tablinks"
+                  }
+                  onClick={() => {
+                    setView("personages");
+                  }}
+                >
+                  <p>Personages ( {anime.num_pers} )</p>
+                </button>
+                <button
+                  className={view === "openings" ? "tablinks active" : "tablinks"}
+                  onClick={() => {
+                    setView("openings");
+                  }}
+                >
+                  <p>Openings ( {anime.num_opes} )</p>
+                </button>
+                <button
+                  className={view === "endings" ? "tablinks active" : "tablinks"}
+                  onClick={() => {
+                    setView("endings");
+                  }}
+                >
+                  <p>Endings ( {anime.num_ends} )</p>
+                </button>
+              </ul>
+            </div>
           </div>
           <div className="tabcontent">
-            { view == 'episodes' ? <Episodes id={id} /> : null }
-            { view == 'personages' ? <Personages id={id} /> : null }
-            { view == 'openings' ? <Openings id={id} /> : null }
-            { view == 'endings' ? <Endings id={id} /> : null }
+            { view === 'episodes' ? <Episodes id={id} /> : null }
+            { view === 'personages' ? <Personages id={id} /> : null }
+            { view === 'openings' ? <Openings id={id} /> : null }
+            { view === 'endings' ? <Endings id={id} /> : null }
           </div>
+          {
+            anime !== null && anime.seasions !== null ?  
+            <GridSeassion seasions={anime.seasions} src={anime.src}/>
+            : null
+          }
           {/* <Comments /> */}
         </div>
       ) : null}
