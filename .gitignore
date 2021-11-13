@@ -32,9 +32,9 @@ ionic-api/plugins/ios.json
 ionic-api/$RECYCLE.BIN/
 
 #React
-react-api/node_modules
-react-api/dist
-react-api/package-lock.json
+node_modules
+dist
+package-lock.json
 
 #vue-api
 vue-api/node_modules/

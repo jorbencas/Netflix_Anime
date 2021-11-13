@@ -2,7 +2,6 @@
 Proyecto Anime realizado con la siguientes tecnologias, frameworks y librerias: 
 * React
 * React Native
-* Vue
 
 ### Configuración del proyecto
 
