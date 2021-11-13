@@ -1,16 +1,8 @@
 # Cosas de Anime
-Proyecto Anime realizado con la siguientes tecnologias, frameworks y librerias:
-* NodeJS 
+Proyecto Anime realizado con la siguientes tecnologias, frameworks y librerias: 
 * React
 * React Native
 * Vue
-
-### Definición del esquema de cada miniproyecto
-    Front-end - Backend
-
-    React - NodeJS
-
-    React Native - NodeJS
 
 ### Configuración del proyecto
 
