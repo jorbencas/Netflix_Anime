@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/colors/dark.css';
-import './styles/themes/dark.css';
-import './index.css';
+import 'styles/colors/dark.css';
+import 'styles/themes/dark.css';
+import 'index.css';
 import store from "./store";
 import { Provider } from "react-redux";
-import App from './components/App/App';
+import App from 'components/App/App';
 //import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
     // <React.StrictMode>
