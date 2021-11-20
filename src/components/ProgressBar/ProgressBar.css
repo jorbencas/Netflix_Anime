@@ -1,0 +1,22 @@
+.progress-container {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 4px;
+  border-radius: 8px;
+}
+
+.progress-bar {
+  height: 4px;
+  width: 0;
+  border-radius: 8px;
+}
+
+.progress-container{
+  background: var(--opacity-grey);
+}
+
+.progress-bar{
+    background: var(--main-green);
+}

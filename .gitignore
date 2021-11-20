@@ -1,66 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-#Inoic
-ionic-api/node_modules/
-ionic-api/platforms/
-ionic-api/www/
-ionic-api/resources/
-ionic-api/*~
-ionic-api/*.sw[mnpcod]
-ionic-api/*.log
-ionic-api/*.tmp
-ionic-api/*.tmp.*
-ionic-api/log.txt
-ionic-api/*.sublime-project
-ionic-api/*.sublime-workspace
-ionic-api/.vscode/
-ionic-api/npm-debug.log*
-ionic-api/.idea/
-ionic-api/.ionic/
-ionic-api/.sourcemaps/
-ionic-api/.sass-cache/
-ionic-api/.tmp/
-ionic-api/.versions/
-ionic-api/coverage/
-ionic-api/tmp/
-ionic-api/temp/
-ionic-api/platforms/
-ionic-api/plugins/
-ionic-api/plugins/android.json
-ionic-api/plugins/ios.json
-ionic-api/$RECYCLE.BIN/
-
-#React
 node_modules
 dist
 package-lock.json
-
-#vue-api
-vue-api/node_modules/
-vue-api/dist/
-vue-api/package-lock.json
-# local env files
-vue-api/.env.local
-vue-api/.env.*.local
-
-# Log files
-vue-api/npm-debug.log*
-vue-api/yarn-debug.log*
-vue-api/yarn-error.log*
-
-#vue-api_Cordova
-vue-api_Cordova/platforms/android*
-vue-api_Cordova/node_modules*
-# local env files
-vue-api_Cordova/.env.local
-vue-api_Cordova/.env.*.local
-
-# Log files
-vue-api_Cordova/npm-debug.log*
-vue-api_Cordova/yarn-debug.log*
-vue-api_Cordova/yarn-error.log*
-
 
 # IDEs and editors
 .vscode/

@@ -13,6 +13,7 @@ import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
 import './App.css';
 import Aleatory from 'pages/Aleatory/Aleatory';
+import ProgressBar from 'components/ProgressBar/ProgressBar';
 
 const App = () => {
   // useEffect(() => {
@@ -32,6 +33,7 @@ const App = () => {
   return (
     <>
       <Router>
+        <ProgressBar />
         <Header />
         <Switch>
           <Route exact path='/' component={Home}/>

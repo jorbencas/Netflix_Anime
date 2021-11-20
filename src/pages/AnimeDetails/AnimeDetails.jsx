@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "pages/AnimeDetails/AnimeDetails.css";
+import "./AnimeDetails.css";
 import "font-awesome/css/font-awesome.min.css";
 import { useParams } from "react-router-dom";
 import Communication from "services";

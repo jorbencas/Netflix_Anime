@@ -3,7 +3,7 @@ import { useParams, useLocation, Link } from "react-router-dom";
 import Communication from "services";
 import "./Aleatory.css";
 import "font-awesome/css/font-awesome.min.css";
-import Comments from "TODO/Comments";
+// import Comments from "components/TODO/Comments";
 import BreadCrumb from "components/Breadcrumb/Breadcrumb";
 import Video from "components/Video/Video";
 import Grid from "components/Grid/Grid";
@@ -190,8 +190,8 @@ const Aleatory = () => {
             </div>
           ) : null}
           {/*<Collections id={id} />
-                     <?php endif; ?> */}
-          <Comments idElement={id} />
+                     <?php endif; ?> 
+          <Comments idElement={id} />*/}
 
           {animes !== null ? (
             <section className="animes_intereseted">

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../styles/components/Comments.css';
+import './Comments.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { Link } from "react-router-dom";
 
