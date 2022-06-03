@@ -1,17 +1,15 @@
-import React from 'react'
+import React from "react";
 
 export class User extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      animes: [],
+    };
+    //this.handleClick = this.handleClick.bind(this);
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            animes : []
-        };
-        //this.handleClick = this.handleClick.bind(this);
-      }
-
-
-/* 
+  /* 
       $(document).ready(function(){
         let screenwidth = document.body.clientWidth;
         if(screenwidth <= 800){
@@ -188,12 +186,10 @@ export class User extends React.Component {
           });
       } */
 
-
-      
-    render() {
-        return (
-            <div class="user">
-  {/*   <div class="banner">
+  render() {
+    return (
+      <div class="user">
+        {/*   <div class="banner">
         <div class="jumbotron">
             <img  class="banner_img" src="<?=handleMedia("usuario",$v['avatar'],"jpg")?>" alt="">
         </div>
@@ -278,11 +274,11 @@ export class User extends React.Component {
         <?=render('Collections')?>
     </div>
     <div id='favorites' class="tabcontent" style='display:none;'>
-        <?php if(isset($v['favorites'])) : ?>
+        if(isset($v['favorites'])) : ?>
             <?= render('Anime_Grid', $v['favorites'])?>
-        <?php else : ?>
+        else : ?>
             <?= msg($v['error_favorites_msg'])?>
-        <?php endif;?>
+        endif;?>
     </div>
     <div id='config' class="tabcontent" style='display:none;'>
         <?=render('Config')?>
@@ -293,9 +289,9 @@ export class User extends React.Component {
     <div id='comments' class="tabcontent" style='display:none;'>
         <?= render('Comments')?>
     </div>*/}
-</div>
-        )
-    }
+      </div>
+    );
+  }
 }
 
-export default User
+export default User;

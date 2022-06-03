@@ -1,24 +1,18 @@
-import React from 'react';
-import '../styles/pages/Edit.css';
-import 'font-awesome/css/font-awesome.min.css';
+import React from "react";
+import "../styles/pages/Edit.css";
+import "font-awesome/css/font-awesome.min.css";
 import { Link } from "react-router-dom";
 
 export class Edit extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      animes: [],
+    };
+    //this.handleClick = this.handleClick.bind(this);
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            animes : []
-        };
-        //this.handleClick = this.handleClick.bind(this);
-    }
-
-
-
-
-
-
-/* 
+  /* 
 
     let page_mode;
 let action; getmode();
@@ -446,20 +440,10 @@ getcallapi(tab, kind = null) {
 
  */
 
-
-
-
-
-
-
-
-
-
-
-    render() {
-        return (
-          <div className="p"></div>
-            /* <?php if (isset($v['anime'])) : ?>
+  render() {
+    return (
+      <div className="p"></div>
+      /* if (isset($v['anime'])) : ?>
     <div class="toolbar">
         <ul class="tab">
             <button class="tablinks active anime" onclick="setab(event, 'anime')">
@@ -540,75 +524,75 @@ getcallapi(tab, kind = null) {
     <div class="list"><div class="child"></div></div>
     <div class="movil_list"><div class="movil_child"></div></div>
     <div class="forms"></div>
-    <?php if (isset($v['personage'])) : ?>
-        <?php foreach ($v['personage'] as $key => $personage) : ?>
+    if (isset($v['personage'])) : ?>
+        foreach ($v['personage'] as $key => $personage) : ?>
             <div class="list_element" elem='<?=$personage['id'] ?>' onclick="expand(event.currentTarget, 701)">
                 <div class="img"  style='background: url("<?= $personage['src']?>"); background-size: cover;' ></div>
                 <div class="info"><?= $personage['nombre'] ?></div>
             </div>
             <?= render('Edit_Personages', $personage); ?>
-        <?php endforeach; ?>   
-    <?php else : ?>
+        endforeach; ?>   
+    else : ?>
         <?= render('Edit_Personages', $v['personage']); ?>
-    <?php endif; ?>   
+    endif; ?>   
 </div>
 <div id='episodes' class="tabcontent" style='display:none;'>
     <div class="form_oculto"><?= render('Edit_Episodes', $v['episode']); ?></div>
     <div class="list"><div class="child"></div></div>
     <div class="movil_list"><div class="movil_child"></div></div>
     <div class="forms"></div>
-    <?php if (isset($v['episode'])) : ?>
-        <?php foreach ($v['episode'] as $key => $episode) : ?>
+    if (isset($v['episode'])) : ?>
+        foreach ($v['episode'] as $key => $episode) : ?>
             <div class="list_element" elem='<?=$episode['id'] ?>' onclick="expand(event.currentTarget, 901)">
                 <div class="img" style='background: url("<?= $episode['src']?>"); background-size: cover;' ></div>
                 <div class="info"><?= $episode['num'] ?></div>
             </div>
             <?= render('Edit_Episodes', $episode); ?>
-        <?php endforeach; ?>
-    <?php else : ?>
+        endforeach; ?>
+    else : ?>
         <?= render('Edit_Episodes', $v['episode']); ?>
-    <?php endif; ?> 
+    endif; ?> 
 </div>
 <div id='openings' class="tabcontent" style='display:none;'>
     <div class="form_oculto"><?= render('Edit_Openings', $v['opening']); ?> </div>
     <div class="list"><div class="child"></div></div>
     <div class="movil_list"><div class="movil_child"></div></div>
     <div class="forms"></div>
-    <?php if (isset($v['opening'])) : ?>
-        <?php foreach ($v['opening'] as $key => $opening) : ?>
+    if (isset($v['opening'])) : ?>
+        foreach ($v['opening'] as $key => $opening) : ?>
             <div class="list_element" elem='<?=$opening['id'] ?>' onclick="expand(event.currentTarget, 701)">
                 <div class="img" style='background: url("<?= $opening['src']?>"); background-size: cover;' ></div>
                 <div class="info"><?= $opening['num'] ?></div>
             </div>
             <?= render('Edit_Openings', $opening); ?>
-        <?php endforeach; ?>
-    <?php else : ?>
+        endforeach; ?>
+    else : ?>
         <?= render('Edit_Openings', $v['opening']); ?>
-    <?php endif; ?> 
+    endif; ?> 
 </div>
 <div id='endings' class="tabcontent" style='display:none;'>
     <div class="form_oculto"><?= render('Edit_Endings', $v['ending']); ?></div>
     <div class="list"><div class="child"></div></div>
     <div class="movil_list"><div class="movil_child"></div></div>
     <div class="forms"></div>
-    <?php if (isset($v['ending'])) : ?>
-        <?php foreach ($v['ending'] as $key => $ending) : ?>
+    if (isset($v['ending'])) : ?>
+        foreach ($v['ending'] as $key => $ending) : ?>
             <div class="list_element" elem='<?=$ending['id'] ?>' onclick="expand(event.currentTarget, 701)">
                 <div class="img" style='background: url("<?= $ending['src']?>"); background-size: cover;' ></div>
                 <div class="info"><?= $ending['num'] ?></div>
             </div>
             <?= render('Edit_Endings', $ending); ?>
-        <?php endforeach; ?>
-    <?php else : ?>
+        endforeach; ?>
+    else : ?>
         <?= render('Edit_Endings', $v['ending']); ?>
-    <?php endif; ?> 
+    endif; ?> 
 </div>
 <div id="all" class='tabcontent all' style='display:none;'>
     <a class="link detail">Ver</a>
     <a class="link edit">Editar</a>
 </div> */
-        )
-    }
+    );
+  }
 }
 
-export default Edit
+export default Edit;

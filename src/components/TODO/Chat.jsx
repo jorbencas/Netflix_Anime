@@ -117,14 +117,14 @@ export class Chat extends React.Component {
     render() {
         return (
             <div class="chat">
-                <?php if(isset($v['list_users'])): ?>
+                if(isset($v['list_users'])): ?>
                 <div class="list_users">
                     <div class="toolkit" onclick='setcontact()'>
                         <div class="back">
                             <i class='fa fa-caret-left'></i>
                         </div>
                     </div>
-                    <?php foreach ($v['list_users'] as $key => $value) : ?>
+                    foreach ($v['list_users'] as $key => $value) : ?>
                 <div class="user">
                         <div class="info_avatar" onclick='selectcontact(this)'>
                             <div class="avatar">
@@ -136,9 +136,9 @@ export class Chat extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <?php endforeach; ?>
+                        endforeach; ?>
         </div>
-                    <?php endif; ?>
+                    endif; ?>
     <div class="toolbar">
                         <div class="info_avatar" onclick='setcontact()'>
                             <div class="avatar">
@@ -153,17 +153,17 @@ export class Chat extends React.Component {
                         </div>
 
                         <div class="lista_mensagues">
-                            <?php if(isset($v['chat'])) : ?>
-        <?php foreach ($v['chat'] as $key => $value) : ?>
+                            if(isset($v['chat'])) : ?>
+        foreach ($v['chat'] as $key => $value) : ?>
         <div class="item">
                                 <div class="<?php echo $value['emiitter'] === $v['user'] && $value['receptor'] !== $v['user']   ? 'mymessague': 'message'?>">
                                     <?= $value['message'] ?>
             </div>
                             </div>
-                            <?php endforeach; ?>
-        <?php else: ?>
+                            endforeach; ?>
+        else: ?>
         <p>No hay mensages, seleciona otro contacto</p>
-                            <?php endif;?>
+                            endif;?>
     </div>
                         <div class="box_text">
                             <input type="text" class='input_enviar' name="mensage" id="mensage" placeholder='Escribe aqui tu mensage'>

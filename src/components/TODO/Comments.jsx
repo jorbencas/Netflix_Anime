@@ -1,13 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import './Comments.css';
-import 'font-awesome/css/font-awesome.min.css';
+import "./Comments.css";
+import "font-awesome/css/font-awesome.min.css";
 import { Link } from "react-router-dom";
 
 export class Comments extends React.Component {
-
-
-/* 
+  /* 
     add(){
         let data = { 
            "action": 'insertcomment', 
@@ -100,12 +98,11 @@ export class Comments extends React.Component {
        });
       } */
 
-      
-    render() {
-        return (
-          <div className="p"></div>
-           /*  <?php if(islogged()) : ?>
-    <?php if ($v['modulo'] !== 'User') : ?>
+  render() {
+    return (
+      <div className="p"></div>
+      /*  if(islogged()) : ?>
+    if ($v['modulo'] !== 'User') : ?>
         <div class="info_avatar">
             <div class="avatar">
                 <img src="<?= $v['avatar'] ?>" alt="" srcset="">
@@ -123,11 +120,11 @@ export class Comments extends React.Component {
                 </form>
             </div>
         </div>
-    <?php endif;?>
+    endif;?>
 
-    <?php if(isset($v['comments'])) : ?>
+    if(isset($v['comments'])) : ?>
         <ul class="commentarios">
-        <?php foreach ($v['comments'] as $key => $comment) : ?>
+        foreach ($v['comments'] as $key => $comment) : ?>
             <li class="comentario">
                 <div class="info_avatar">
                     <div class="avatar">
@@ -141,26 +138,26 @@ export class Comments extends React.Component {
                         <p class=""><?= $comment['hora']?></p>
                     </div>
                 </div>
-                <?php if ($v['modulo'] == 'User') : ?>
+                if ($v['modulo'] == 'User') : ?>
                     <div class="info_avatar" onclick="remove(<?=$comment['id']?>)">
                         <i class='fa fa-trash' style='font-size:20px;'></i>
                     </div>
-                <?php endif;?>
+                endif;?>
             </li>
-        <?php endforeach; ?>   
+        endforeach; ?>   
         </ul>
-    <?php else : ?>
+    else : ?>
         <div class='wrapper'>
             <?= msg($v['error_msg'],"info") ?>
         </div>
-    <?php endif;?>
+    endif;?>
 <?php else : ?>
     <div class='wrapper'>
         <?= msg($v['error_msg'],"info") ?>
     </div>
 <?php endif;?></ul> */
-        )
-    }
+    );
+  }
 }
 
-export default Comments
+export default Comments;

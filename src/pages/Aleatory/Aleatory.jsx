@@ -190,7 +190,7 @@ const Aleatory = () => {
             </div>
           ) : null}
           {/*<Collections id={id} />
-                     <?php endif; ?> 
+                     endif; ?> 
           <Comments idElement={id} />*/}
 
           {animes !== null ? (

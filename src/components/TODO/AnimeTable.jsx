@@ -1,21 +1,20 @@
 import React from "react";
-import 'font-awesome/css/font-awesome.min.css';
+import "font-awesome/css/font-awesome.min.css";
 import { Link } from "react-router-dom";
 
 export default class AnimeTable extends React.Component {
-  constructor({props}) {
+  constructor({ props }) {
     super(props);
-   /*  this.state = {
+    /*  this.state = {
       listbooks:[]
     };
     this.mangment = this.mangment.bind(this);
     this.editable = this.editable.bind(this); */
-  } 
-
+  }
 
   render() {
     return (
-      <div id="tabla" className="tabcontent" >
+      <div id="tabla" className="tabcontent">
         <table className="table" role="table">
           <thead className="table-thead">
             <tr role="rowheader">
@@ -41,42 +40,38 @@ export default class AnimeTable extends React.Component {
           </thead>
           <tbody className="table-tbody" role="tablist" id="idTableRankingBody">
             {this.props.animes.map((anime) => (
-              <Link to={"/Edit/" + anime.id} >
-              <tr
-              key={anime.id}
-                role="row"
-                className="tbody-row"
-              >
-                <td role="cell" className="tbody-cell">
-                  {anime.titulo_es}
-                </td>
-                <td role="cell" className="tbody-cell">
-                  {anime.date_publication}
-                </td>
-                <td role="cell" className="tbody-cell">
-                  {anime.date_finalization}
-                </td>
-                <td role="cell" className="tbody-cell">
-                  {anime.state}
-                </td>
-                {/* <td role="cell" className="tbody-cell" >
+              <Link to={"/Edit/" + anime.id}>
+                <tr key={anime.id} role="row" className="tbody-row">
+                  <td role="cell" className="tbody-cell">
+                    {anime.titulo_es}
+                  </td>
+                  <td role="cell" className="tbody-cell">
+                    {anime.date_publication}
+                  </td>
+                  <td role="cell" className="tbody-cell">
+                    {anime.date_finalization}
+                  </td>
+                  <td role="cell" className="tbody-cell">
+                    {anime.state}
+                  </td>
+                  {/* <td role="cell" className="tbody-cell" >
                                                 <div className="serie-header_rating">
                                                     <div className="star-rating">
-                                                        <?php foreach ($anime['star_valorations'] as $k => $value): ?>
+                                                        foreach ($anime['star_valorations'] as $k => $value): ?>
                                                         <span id="star-<?=$k?>-<?=$key?>">
                                                             <i className="<?=$value?>"></i>
                                                         </span>
-                                                        <?php endforeach;?>
+                                                        endforeach;?>
                                                     </div> 
                                                     <input type="hidden" className="rating-value" value="<?=$v['stars']?>">
                                                 </div>
                                             </td>*/}
-                <td role="cell" className="tbody-cell">
-                  <div className="favorite">
-                    <i className={anime.head_favorite}></i>
-                  </div>
-                </td>
-              </tr>
+                  <td role="cell" className="tbody-cell">
+                    <div className="favorite">
+                      <i className={anime.head_favorite}></i>
+                    </div>
+                  </td>
+                </tr>
               </Link>
             ))}
           </tbody>

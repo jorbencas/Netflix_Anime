@@ -1,30 +1,29 @@
-import React from 'react';
-import axios from 'axios';
-import '../styles/components/Collections.css';
-import 'font-awesome/css/font-awesome.min.css';
+import React from "react";
+import axios from "axios";
+import "../styles/components/Collections.css";
+import "font-awesome/css/font-awesome.min.css";
 import { Link } from "react-router-dom";
 
 export class Collections extends React.Component {
-
-
   constructor(props) {
     super(props);
     this.state = {
-        personages : [],
-        id:0
+      personages: [],
+      id: 0,
     };
     this.rendergrid = this.rendergrid.bind(this);
     this.rendertabla = this.rendertabla.bind(this);
   }
-  
-  componentDidMount() {
-    axios.get(`http://localhost:3001/personages/anime/${this.props.id}`)
-    .then(res => {
-        this.setState({ personages: res.data });
-    });
-}
 
-/* 
+  componentDidMount() {
+    axios
+      .get(`http://localhost:3001/personages/anime/${this.props.id}`)
+      .then((res) => {
+        this.setState({ personages: res.data });
+      });
+  }
+
+  /* 
     addelement(name){
         let data = { 
           "action": 'addelementcollection', 
@@ -52,13 +51,12 @@ export class Collections extends React.Component {
         });
       } */
 
-      
-    render() {
-        return (
-            <div class="collections">
-{/* <?php if(isset($v['collections']) || isset($v['inputs'])) : ?>
-    <?php if($v['modulo'] == 'User') : ?>
-        <?php foreach($v['collections'] as $key => $comment ) : ?>
+  render() {
+    return (
+      <div class="collections">
+        {/* if(isset($v['collections']) || isset($v['inputs'])) : ?>
+    if($v['modulo'] == 'User') : ?>
+        foreach($v['collections'] as $key => $comment ) : ?>
             <article class="grid-item">
                     <img class="image" src="<?=$comment['src'] ?>" alt="<?= $comment["titulo"] ?>">
                     <a href="<?= hrefMake("{$v['lang']}/Collection&id=" . $comment['id']) ?>"
@@ -67,10 +65,10 @@ export class Collections extends React.Component {
                     </a>
                     <p class="data"><?= $comment['num'] . ' ' . $comment["titulo"] ?></p>
                 </article>
-        <?php endforeach; ?>
-    <?php else : ?>
+        endforeach; ?>
+    else : ?>
         <?= $v['inputs']?>
-    <?php endif;?>
+    endif;?>
 <?php else : ?>
     <?= msg($v['error_collections_msg'])?>
 <?php endif;?>
@@ -84,10 +82,9 @@ export class Collections extends React.Component {
         </div>
     </form>
 <?php endif;?> */}
-</div>
-
-        )
-    }
+      </div>
+    );
+  }
 }
 
-export default Collections
+export default Collections;

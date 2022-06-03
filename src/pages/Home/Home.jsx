@@ -175,7 +175,6 @@ function inView(element, fullHeightInView) {
         // })
       });
 
-      
     /*   $data = api('Filters&aq=getFilters');
           $filters = $data['status']['code'] == 200 ? $data['data'] : null;
         
@@ -191,46 +190,58 @@ function inView(element, fullHeightInView) {
       <div>
         <div id="home">
           <div className="slider">
-            {this.state.sliders ? <Slider animes={this.state.sliders} /> : <Loading />}
+            {this.state.sliders ? (
+              <Slider animes={this.state.sliders} />
+            ) : (
+              <Loading />
+            )}
           </div>
           <div className="lista_proximas">
             <h3>Proximos Estrenos</h3>
             <ul>
-              {this.state.episodes ? this.state.episodes.map((episode) => (
-                <li className="lista" key={episode.id}>
-                  <Link
-                    className="texto_line"
-                    to={"EpisodesDetail/&id=" + episode.id}
-                  >
-                    <div
-                      className="img"
-                      style={{
-                        backgroundImage: "url(" + episode.src + ")",
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                      }}
-                    ></div>
-                    <p className="texto">
-                      {episode.anime_titulo} -{episode.epititulo}
-                      <i className="fa fa-play"></i>
-                    </p>
-                  </Link>
-                </li>
-              )) : <Loading /> }
+              {this.state.episodes ? (
+                this.state.episodes.map((episode) => (
+                  <li className="lista" key={episode.id}>
+                    <Link
+                      className="texto_line"
+                      to={"EpisodesDetail/&id=" + episode.id}
+                    >
+                      <div
+                        className="img"
+                        style={{
+                          backgroundImage: "url(" + episode.src + ")",
+                          backgroundPosition: "center",
+                          backgroundSize: "cover",
+                          backgroundRepeat: "no-repeat",
+                        }}
+                      ></div>
+                      <p className="texto">
+                        {episode.anime_titulo} -{episode.epititulo}
+                        <i className="fa fa-play"></i>
+                      </p>
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <Loading />
+              )}
             </ul>
           </div>
         </div>
         <div className="home_body">
           <div className="home_body_content">
-            {/*     <?php if (isLogged()) : ?>
-                            <?php if (!empty($v['animes'])): ?>
+            {/*     if (isLogged()) : ?>
+                            if (!empty($v['animes'])): ?>
                               <h3>Mis Animes</h3>
                               <?=render("Anime_Grid", $v['animes'])?>
-                            <?php endif;?>
-                          <?php else :?> */}
+                            endif;?>
+                          else :?> */}
             <h3>Listado de animes de la temporada</h3>
-            { this.state.animes ? <Grid animes={this.state.animes} />  : <Loading /> }
+            {this.state.animes ? (
+              <Grid animes={this.state.animes} />
+            ) : (
+              <Loading />
+            )}
           </div>
           <div className="home_body_content generes">
             {/*   <div className='home_slide_banner'><h3>$value</h3> <a className='link' href='". hrefMake("{$v['lang']}/Anime&f=generes_$value") ."'>Ver mas + </p></div>";
