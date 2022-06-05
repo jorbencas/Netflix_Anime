@@ -1,5 +1,5 @@
-// import React, { useEffect, useState } from 'react';
-import './ProgressBar.css';
+// import { useEffect, useState } from 'react';
+import "./ProgressBar.css";
 
 // function ProgressBar() {
 //     const [completed, setCompleted] = useState(0);
@@ -27,7 +27,6 @@ import './ProgressBar.css';
 //             console.log(oError);
 //           }
 
-
 //           return () => {
 //             try {
 //                 window.removeEventListener("scroll", scrolled());
@@ -37,7 +36,7 @@ import './ProgressBar.css';
 //           };
 
 //     });
-    
+
 //     return (
 //         <div className='progress-container'>
 //             <div className='progress-bar' style={{width:completed+"%"}}></div>
@@ -50,7 +49,12 @@ import './ProgressBar.css';
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-const scrollStyle = (width, height = "3", bgcolor = "#F43059", duration = "1") => ({
+const scrollStyle = (
+  width,
+  height = "3",
+  bgcolor = "#F43059",
+  duration = "1"
+) => ({
   margin: 0,
   padding: 0,
   position: "fixed",
@@ -68,7 +72,7 @@ class ProgressBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: null
+      width: null,
     };
     this.Scrolling = this.Scrolling.bind(this);
   }
@@ -113,7 +117,7 @@ class ProgressBar extends Component {
 ProgressBar.propTypes = {
   height: PropTypes.number,
   duration: PropTypes.number,
-  color: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired,
 };
 
 export default ProgressBar;

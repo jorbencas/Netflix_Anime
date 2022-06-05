@@ -1,13 +1,13 @@
-import React from "react";
-import Grid from "components/Grid/Grid";
-import Slider from "components/Slider/Slider";
-import "font-awesome/css/font-awesome.min.css";
+import Grid from "../../components/Grid/Grid.jsx";
+import Slider from "../../components/Slider/Slider.jsx";
+// import "font-awesome/css/font-awesome.min.css";
 import "./Home.css";
-import Communication from "services";
-import { Link } from "react-router-dom";
-import Loading from "components/Loading/Loading";
+// import Communication from "services";
+import { Link } from "wouter";
+import Loading from "../../components/Loading/Loading";
+import { Component } from "react";
 
-export class Home extends React.Component {
+export class Home extends Component {
   state = {
     animes: null,
     sliders: null,
@@ -142,39 +142,36 @@ function inView(element, fullHeightInView) {
  */
 
   componentDidMount() {
-    Communication.getMethod(1, `Anime&as=0_7&oa=created`)
-      .then((res) => {
-        this.setState({ sliders: res });
-      })
-      .catch(() => {
-        // dispatch({
-        //     type: 'ERROR_USERS',
-        //     payload: null
-        // })
-      });
-
-    Communication.getMethod(1, `Episodes&as=0_9`)
-      .then((res) => {
-        this.setState({ episodes: res });
-      })
-      .catch(() => {
-        // dispatch({
-        //     type: 'ERROR_USERS',
-        //     payload: null
-        // })
-      });
-
-    Communication.getMethod(1, `Anime&as=0_8&od=created`)
-      .then((res) => {
-        this.setState({ animes: res });
-      })
-      .catch(() => {
-        // dispatch({
-        //     type: 'ERROR_USERS',
-        //     payload: null
-        // })
-      });
-
+    // Communication.getMethod(1, `Anime&as=0_7&oa=created`)
+    //   .then((res) => {
+    //     this.setState({ sliders: res });
+    //   })
+    //   .catch(() => {
+    //     // dispatch({
+    //     //     type: 'ERROR_USERS',
+    //     //     payload: null
+    //     // })
+    //   });
+    // Communication.getMethod(1, `Episodes&as=0_9`)
+    //   .then((res) => {
+    //     this.setState({ episodes: res });
+    //   })
+    //   .catch(() => {
+    //     // dispatch({
+    //     //     type: 'ERROR_USERS',
+    //     //     payload: null
+    //     // })
+    //   });
+    // Communication.getMethod(1, `Anime&as=0_8&od=created`)
+    //   .then((res) => {
+    //     this.setState({ animes: res });
+    //   })
+    //   .catch(() => {
+    //     // dispatch({
+    //     //     type: 'ERROR_USERS',
+    //     //     payload: null
+    //     // })
+    //   });
     /*   $data = api('Filters&aq=getFilters');
           $filters = $data['status']['code'] == 200 ? $data['data'] : null;
         

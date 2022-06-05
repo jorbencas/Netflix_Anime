@@ -1,7 +1,6 @@
-import React from "react";
 import "./Grid.css";
-import "font-awesome/css/font-awesome.min.css";
-import { Link } from "react-router-dom";
+// import "font-awesome/css/font-awesome.min.css";
+import { Link } from "wouter";
 
 const Grid = (props) => {
   const renderkindclass = (kind) => {

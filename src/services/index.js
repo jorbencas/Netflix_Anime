@@ -1,38 +1,19 @@
-import axios from 'axios';
-const BASEURL = 'http://cosasdeanime.com?r=es/api&am=';
-const APITOKEN = '???123456789Azsxdcfvgnbhknljopimuhytgrfqew127364lpñokmni**/-++89¿juhvtcfdr65es123\\~~xza_qw';
+const BASEURL = "http://localhost:3001";
+const APITOKEN =
+  "???123456789Azsxdcfvgnbhknljopimuhytgrfqew127364lpñokmni**/-++89¿juhvtcfdr65es123\\~~xza_qw";
+const headers = {
+  api_token: APITOKEN,
+  "X-Requested-With": "XMLHttpRequest",
+};
 
-const Communication = {
-    getMethod(lang, endpoint, data = null) {
-        if (data !== null) {
-            return axios.post(BASEURL + endpoint, data, {
-                headers: {
-                    'api_token': APITOKEN,
-                    'current_lang': lang,
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            }).then(response => {
-                if (response.data.data !== undefined) {
-                    return response.data.data;
-                } else {
-                    return response.data;
-                }
-            })
-        } else {
-            return axios.get(BASEURL + endpoint, {
-                headers: {
-                    'api_token': APITOKEN,
-                    'current_lang': lang,
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            }).then(response => {
-                if (response.data.data !== undefined) {
-                    return response.data.data;
-                } else {
-                    return response.data;
-                }
-            })
-        }
-    }
-}
-export default Communication;
+export const getLangs = async () => {
+  return await fetch(`${BASEURL}/api/langs/es`, {
+    headers: headers,
+  }).then((response) => response.json());
+};
+
+export const getAnime = async (id) => {
+  return await fetch(`${BASEURL}/api/animes/${id}`, {
+    headers: headers,
+  }).then((response) => response.json());
+};

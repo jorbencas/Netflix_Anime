@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import './Slider.css';
-import 'font-awesome/css/font-awesome.min.css';
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import "./Slider.css";
+// import 'font-awesome/css/font-awesome.min.css';
+import { Link } from "wouter";
 
 const Slider = (props) => {
   const [current, setCurrent] = useState(0);
@@ -20,8 +20,12 @@ const Slider = (props) => {
       <div className="slider_banner">
         <div className="banner">
           {props.animes.map((anime, i) => (
-            <Link key={i} className={current == i ? 'anime active':"anime"} to={'/AnimeDetails/' + anime.id} key={anime.id}>
-              <article className='first'>
+            <Link
+              key={i}
+              className={current == i ? "anime active" : "anime"}
+              to={"/AnimeDetails/" + anime.id}
+            >
+              <article className="first">
                 <img src={anime.src} alt={anime.titulo} />
                 <div className="titulo">
                   <h2>{anime.titulo} </h2>
@@ -30,10 +34,24 @@ const Slider = (props) => {
             </Link>
           ))}
         </div>
-        <div onClick={ () => {prevSlide()} } className="flecha-banner anterior" ><span className="fa fa-chevron-left"></span></div>
-        <div onClick={ () => {nextSlide()} } className="flecha-banner siguiente"><span className="fa fa-chevron-right"></span></div>
+        <div
+          onClick={() => {
+            prevSlide();
+          }}
+          className="flecha-banner anterior"
+        >
+          <span className="fa fa-chevron-left"></span>
+        </div>
+        <div
+          onClick={() => {
+            nextSlide();
+          }}
+          className="flecha-banner siguiente"
+        >
+          <span className="fa fa-chevron-right"></span>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 export default Slider;
