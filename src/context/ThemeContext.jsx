@@ -1,57 +1,26 @@
-export const ThemeContext = React.createContext("light");
+import { createContext, useReducer } from "react";
 
-import React, { useState } from "react";
-import MensajesIngles from "./../theme/en-US.json";
-import MensajesEspañol from "./../theme/es-MX.json";
-import { IntlProvider } from "react-intl";
+export const ThemeContext = createContext();
 
-const themeContext = React.createContext();
+const initialState = { darkMode: false };
 
-const ThemeProvider = ({ children }) => {
-  let localePorDefecto;
-  let mensajesPorDefecto;
-  const theme = localStorage.getItem("theme");
-
-  if (theme) {
-    localePorDefecto = theme;
-
-    if (theme === "es-MX") {
-      mensajesPorDefecto = MensajesEspañol;
-    } else if (theme === "en-US") {
-      mensajesPorDefecto = MensajesIngles;
-    } else {
-      localePorDefecto = "en-US";
-      mensajesPorDefecto = MensajesIngles;
-    }
+const themeReducer = (state, action) => {
+  switch (action.type) {
+    case "LIGHTMODE":
+      return { darkMode: false };
+    case "DARKMODE":
+      return { darkMode: true };
+    default:
+      return state;
   }
-
-  const [mensajes, establecerMensajes] = useState(mensajesPorDefecto);
-  const [locale, establecerLocale] = useState(localePorDefecto);
-
-  const establecerLenguaje = (lenguaje) => {
-    switch (lenguaje) {
-      case "es-MX":
-        establecerMensajes(MensajesEspañol);
-        establecerLocale("es-MX");
-        localStorage.setItem("theme", "es-MX");
-        break;
-      case "en-US":
-        establecerMensajes(MensajesIngles);
-        establecerLocale("en-US");
-        localStorage.setItem("theme", "en-US");
-        break;
-      default:
-        establecerMensajes(MensajesIngles);
-        establecerLocale("en-US");
-        localStorage.setItem("theme", "en-US");
-    }
-  };
-
-  return (
-    <themeContext.Provider value={{ establecerLenguaje: establecerLenguaje }}>
-      {children}
-    </themeContext.Provider>
-  );
 };
 
-export { ThemeProvider, themeContext };
+export function ThemeProvider(props) {
+  const [state, dispatch] = useReducer(themeReducer, initialState);
+
+  return (
+    <ThemeContext.Provider value={{ state: state, dispatch: dispatch }}>
+      {props.children}
+    </ThemeContext.Provider>
+  );
+}

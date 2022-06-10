@@ -6,9 +6,10 @@ import Langs from "../Langs/Langs.jsx";
 import { Link } from "wouter";
 // import FiltersContainer from "../Filters/FiltersContainer";
 import Buscador from "../Buscador/Buscador";
-import { ThemeContext } from "../../context/ThemeContext";
+import SwitchButton from "../../SwitchButton/SwitchButton";
+
 const Header = () => {
-  contextType = ThemeContext;
+  console.log("/Header");
   const [langVisible, setLangVisible] = useState(false);
   const [random, setRandom] = useState(0);
   const [kind, setKind] = useState("");
@@ -86,6 +87,7 @@ const Header = () => {
 
   return (
     <header>
+      <SwitchButton />
       {langVisible ? <Langs /> : null}
       <div className="menu_bar">
         <Link className="link" to="/Login">

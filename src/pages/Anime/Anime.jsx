@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Anime.css";
 import "font-awesome/css/font-awesome.min.css";
 import Grid from "components/Grid/Grid";

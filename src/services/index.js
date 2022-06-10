@@ -11,9 +11,3 @@ export const getLangs = async () => {
     headers: headers,
   }).then((response) => response.json());
 };
-
-export const getAnime = async (id) => {
-  return await fetch(`${BASEURL}/api/animes/${id}`, {
-    headers: headers,
-  }).then((response) => response.json());
-};

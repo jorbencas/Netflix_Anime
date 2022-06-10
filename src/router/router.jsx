@@ -3,20 +3,19 @@
 // import AnimeDetails from "pages/AnimeDetails/AnimeDetails";
 // import Auth from "pages/Auth/Auth";
 // import Collection from './pages/Collection';
-// import Edit from './pages/Edit';
 // import History from './pages/History';
-import Home from "../../pages/Home/Home.jsx";
-// import User from './pages/User';
-import Footer from "../Footer/Footer.jsx";
-import Header from "../Header/Header.jsx";
+import Home from "../pages/Home/Home.jsx";
+// import User from '../pages/User';
 // import Aleatory from "pages/Aleatory/Aleatory";
 import { Router, Route, Switch } from "wouter";
-import { useHashLocation } from "../../hooks/useHashLocation.jsx";
+import { useHashLocation } from "../hooks/useHashLocation.jsx";
+import Edit from "../pages/Edit/Edit.jsx";
 
-const App = () => {
+const RouterApp = () => {
   return (
     <Router hook={useHashLocation}>
       <Switch>
+        <Route path="/" component={Edit} />
         {/*<Route path="/about" component={About} />
           <Route exact path="/" component={Home} />
           <Route
@@ -50,4 +49,4 @@ const App = () => {
     </Router>
   );
 };
-export default App;
+export default RouterApp;

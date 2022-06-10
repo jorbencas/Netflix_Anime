@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+// import { combineReducers } from 'redux';
 // import { routerReducer } from 'react-router-redux';
 // import { booksdetails, productsListReducer } from './BooksReducers';
 // import { productsOfferReducer, coffeedetails } from './CoffeeReducers';
@@ -7,16 +7,16 @@ import { combineReducers } from 'redux';
 // import { ReserveReducers } from './ReserveReducer';
 
 const initialState = {
-  errors:{},
-  lang:1,
-  user:''
+  errors: {},
+  lang: 1,
+  user: "",
 };
 
-export function printerrors(state = initialState,action){
-  if (action.type === 'AUTH_ERROR') {
+export function printerrors(state = initialState, action) {
+  if (action.type === "AUTH_ERROR") {
     return [...state.errors][0];
-  }else{
-    return state
+  } else {
+    return state;
   }
 }
 
@@ -28,7 +28,7 @@ const rootReducer = combineReducers({
   // loginReducer:AuthReducers,
   // ShoppingCardReducer:ShoppingCardReducers,
   // ProfileReducer:AuthReducers,
-  printerrors:printerrors,
+  printerrors: printerrors,
   // SingUpReducer:AuthReducers,
   // ReserveReducers:ReserveReducers,
   // UsersReducers:AuthReducers

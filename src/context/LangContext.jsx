@@ -1,57 +1,30 @@
-import React, { useState } from "react";
-import MensajesIngles from "./../lang/en-US.json";
-import MensajesEspañol from "./../lang/es-MX.json";
-import { IntlProvider } from "react-intl";
+import { createContext, useReducer } from "react";
+import MensajesIngles from "../lang/en.json";
+import MensajesEspañol from "../lang/es.json";
 
-const langContext = React.createContext();
+export const LangContext = createContext();
 
-const LangProvider = ({ children }) => {
-  let localePorDefecto;
-  let mensajesPorDefecto;
-  const lang = localStorage.getItem("lang");
+const initialState = { locale: "es", mensajes: MensajesEspañol };
 
-  if (lang) {
-    localePorDefecto = lang;
-
-    if (lang === "es-MX") {
-      mensajesPorDefecto = MensajesEspañol;
-    } else if (lang === "en-US") {
-      mensajesPorDefecto = MensajesIngles;
-    } else {
-      localePorDefecto = "en-US";
-      mensajesPorDefecto = MensajesIngles;
-    }
+const LangReducer = (state, action) => {
+  switch (action.type) {
+    case "ES":
+      localStorage.setItem("lang", "es");
+      return { locale: "es", mensajes: MensajesEspañol };
+    case "EN":
+      localStorage.setItem("lang", "en");
+      return { locale: "en", darkMode: MensajesIngles };
+    default:
+      return state;
   }
-
-  const [mensajes, establecerMensajes] = useState(mensajesPorDefecto);
-  const [locale, establecerLocale] = useState(localePorDefecto);
-
-  const establecerLenguaje = (lenguaje) => {
-    switch (lenguaje) {
-      case "es-MX":
-        establecerMensajes(MensajesEspañol);
-        establecerLocale("es-MX");
-        localStorage.setItem("lang", "es-MX");
-        break;
-      case "en-US":
-        establecerMensajes(MensajesIngles);
-        establecerLocale("en-US");
-        localStorage.setItem("lang", "en-US");
-        break;
-      default:
-        establecerMensajes(MensajesIngles);
-        establecerLocale("en-US");
-        localStorage.setItem("lang", "en-US");
-    }
-  };
-
-  return (
-    <langContext.Provider value={{ establecerLenguaje: establecerLenguaje }}>
-      <IntlProvider locale={locale} messages={mensajes}>
-        {children}
-      </IntlProvider>
-    </langContext.Provider>
-  );
 };
 
-export { LangProvider, langContext };
+export function LangProvider(props) {
+  const [state, dispatch] = useReducer(LangReducer, initialState);
+
+  return (
+    <LangContext.Provider value={{ state: state, dispatch: dispatch }}>
+      {props.children}
+    </LangContext.Provider>
+  );
+}

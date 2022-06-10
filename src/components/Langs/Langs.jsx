@@ -1,9 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getLangs } from "../../services/index.js";
 import "./Langs.css";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const Langs = () => {
+  const theme = useContext(ThemeContext);
+  const langContext = theme.state.locale;
   const [langs, setLangs] = useState([]);
+
+  const onClick = (lang) => {
+    if (lang == "EN") {
+      theme.dispatch({ type: "EN" });
+    } else if (lang == "ES") {
+      theme.dispatch({ type: "ES" });
+    }
+  };
 
   useEffect(() => {
     getLangs()
@@ -23,12 +34,12 @@ const Langs = () => {
       <ul className="langs">
         {langs.length > 0 ? (
           langs.map((lang, key) => {
-            const activeClass = lang.code === "es" ? "active" : "";
+            const activeClass = lang.code === langContext ? "active" : "";
             return (
               <li key={key} className={activeClass + " list_element"}>
-                <a className="link" href={lang.code}>
+                <div className="link" onClick={onClick(`${lang.code}`)}>
                   {lang["translation"]}
-                </a>
+                </div>
               </li>
             );
           })

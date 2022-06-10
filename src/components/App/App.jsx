@@ -5,7 +5,7 @@
 // import Collection from './pages/Collection';
 // import Edit from './pages/Edit';
 // import History from './pages/History';
-import Home from "../../pages/Home/Home.jsx";
+// import Home from "../../pages/Home/Home.jsx";
 // import User from './pages/User';
 import Footer from "../Footer/Footer.jsx";
 import Header from "../Header/Header.jsx";
@@ -13,19 +13,20 @@ import Header from "../Header/Header.jsx";
 // import ProgressBar from "components/ProgressBar/ProgressBar";
 import Counter from "../../counter/counter.jsx";
 import "./App.css";
-import { Router } from "../../router/router.jsx";
-import { LangProvider } from "../../context/LangContext.jsx";
+import RouterApp from "../../router/router.jsx";
+import { ThemeContext } from "../../context/ThemeContext.jsx";
+import { useContext } from "react";
 
 const App = () => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   return (
-    <ThemeProvider>
-      <LangProvider>
-        <Header />
-        <Counter />
-        <Router />
-        <Footer />
-      </LangProvider>
-    </ThemeProvider>
+    <div data-theme={darkMode}>
+      <Header />
+      <Counter />
+      <RouterApp />
+      <Footer />
+    </div>
   );
 };
 export default App;
