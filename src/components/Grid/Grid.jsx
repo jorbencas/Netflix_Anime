@@ -23,7 +23,7 @@ const Grid = (props) => {
     <div className="tabcontent">
       {props.animes.map((anime) => (
         <Link
-          to={"/AnimeDetails/" + anime.id + "/" + anime.kind}
+          href={"/AnimeDetails/" + anime.id + "/" + anime.kind}
           className="grid-anime"
           key={anime.id}
         >

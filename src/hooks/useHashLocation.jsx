@@ -1,23 +1,20 @@
 // returns the current hash location in a normalized form
 // (excluding the leading '#' symbol)
-import { useState, useEffect } from "react";
-const currentLocation = () => {
-  return window.location.hash.replace(/^#/, "") || "/";
-};
-
-const navigate = (to) => (window.location.hash = to);
+import { useState, useEffect, useCallback } from "react";
+// returns the current hash location (excluding the '#' symbol)
+const currentLoc = () => window.location.hash.replace("#", "") || "/";
 
 export const useHashLocation = () => {
-  const [loc, setLoc] = useState(currentLocation());
+  const [loc, setLoc] = useState(currentLoc());
 
   useEffect(() => {
-    // this function is called whenever the hash changes
-    const handler = () => setLoc(currentLocation());
+    const handler = () => setLoc(currentLoc());
 
-    // subscribe to hash changes
+    // subscribe on hash changes
     window.addEventListener("hashchange", handler);
     return () => window.removeEventListener("hashchange", handler);
   }, []);
 
+  const navigate = useCallback((to) => (window.location.hash = to), []);
   return [loc, navigate];
 };

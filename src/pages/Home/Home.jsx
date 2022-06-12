@@ -4,7 +4,7 @@ import Slider from "../../components/Slider/Slider.jsx";
 import "./Home.css";
 // import Communication from "services";
 import { Link } from "wouter";
-import Loading from "../../components/Loading/Loading";
+import Loading from "../../TODO/components/Loading/Loading";
 import { Component } from "react";
 
 export class Home extends Component {
@@ -201,7 +201,7 @@ function inView(element, fullHeightInView) {
                   <li className="lista" key={episode.id}>
                     <Link
                       className="texto_line"
-                      to={"EpisodesDetail/&id=" + episode.id}
+                      href={"EpisodesDetail/&id=" + episode.id}
                     >
                       <div
                         className="img"

@@ -3,13 +3,12 @@ import { useEffect, useState } from "react";
 // import 'font-awesome/css/font-awesome.min.css';
 import "./Header.css";
 import Langs from "../Langs/Langs.jsx";
-import { Link } from "wouter";
+import { Redirect, Link, useRoute } from "wouter";
 // import FiltersContainer from "../Filters/FiltersContainer";
 import Buscador from "../Buscador/Buscador";
-import SwitchButton from "../../SwitchButton/SwitchButton";
+import SwitchButton from "../SwitchButton/SwitchButton";
 
 const Header = () => {
-  console.log("/Header");
   const [langVisible, setLangVisible] = useState(false);
   const [random, setRandom] = useState(0);
   const [kind, setKind] = useState("");
@@ -59,19 +58,19 @@ const Header = () => {
       return (
         <>
           <li className="list_element movil_disabled">
-            <Link className="link user" to="/User">
+            <Link className="link user" href="/User">
               <img src=" $avatar " alt=" $usuario " />
               <span className="texto">{user}</span>
             </Link>
           </li>
           <li className="list_element movil_disabled">
-            <Link className="link" id="salir" to="">
+            <Link className="link" id="salir" href="">
               <i className="fas fa-sign-out-alt"></i>
               <span className="texto">Salir</span>
             </Link>
           </li>
           <li className="list_element movil_disabled">
-            <Link className="link" to="/Cart">
+            <Link className="link" href="/Cart">
               <span className="badge movil_disabled"> {numProducts}</span>
               <i className="fas fa-shopping-cart"></i>
             </Link>
@@ -85,20 +84,29 @@ const Header = () => {
     return window.location.pathname.includes(page) ? " active" : "";
   };
 
+  const ActiveLink = (props) => {
+    const [isActive] = useRoute(props.href);
+    return (
+      <Link {...props}>
+        <a className={isActive ? "active" : ""}>{props.children}</a>
+      </Link>
+    );
+  };
+
   return (
     <header>
       <SwitchButton />
       {langVisible ? <Langs /> : null}
       <div className="menu_bar">
-        <Link className="link" to="/Login">
+        <Link className="link" href="/Login">
           <i className="fas fa-user-circle"></i>
           <span className="texto">iniciar_sesion</span>
         </Link>
-        <Link className="link" to="/Register">
+        <Link className="link" href="/Register">
           <i className="fas fa-user"></i>
           <span className="texto">registro</span>
         </Link>
-        <Link className="link user" to="/User">
+        <Link className="link user" href="/User">
           <img src="avatar" alt="usuario" />
           <span className="texto">usuario</span>
         </Link>
@@ -106,21 +114,21 @@ const Header = () => {
       </div>
       <nav id="navbar">
         <ul className="list">
-          <li className={"list_element" + linkActive("/")}>
-            <Link className="link" to="/">
+          <li className={"list_element" + linkActive("/edit")}>
+            <Link className="link" href="/edit">
               <i className="fa fa-home"></i>
-              <span className="texto">Inicio</span>
+              <span className="texto">Edit</span>
             </Link>
           </li>
           <li className={"list_element" + linkActive("Anime, AnimeDetails")}>
-            <Link className="link" to="/Anime">
+            <Link className="link" href="/Anime">
               <i className="fa fa-list-ul"></i>
               <span className="texto">Animes</span>
               {/* if (isLogged()) $v['menu'] .= " <!--<span className='badge movil_disabled'>3</span>--> "; */}
             </Link>
           </li>
           <li className={"list_element" + linkActive("blog")}>
-            <Link className="link" to="/blog">
+            <Link className="link" href="/blog">
               <i className="fa fa-blog"></i>
               <span className="texto">Blog</span>
               {/* if ($v['islogged']) $v['menu'] .= " <span className='badge movil_disabled'>3</span> "; */}
@@ -131,7 +139,7 @@ const Header = () => {
               "list_element movil_disabled" + linkActive("signin, signup")
             }
           >
-            <Link className="link" to="/signin">
+            <Link className="link" href="/signin">
               <i className="fa fa-user-circle"></i>
               <span className="texto">Iniciar Sessión / Registro </span>
             </Link>
@@ -143,7 +151,7 @@ const Header = () => {
               linkActive("aleatory, endings, episodes, openings")
             }
           >
-            <Link className="link" to={"/aleatory/" + random + "/" + kind}>
+            <Link className="link" href={"/aleatory/" + random + "/" + kind}>
               <i className="fa fa-random"></i>
               <span className="texto">Aleatorio</span>
             </Link>

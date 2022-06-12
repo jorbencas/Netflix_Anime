@@ -1,14 +1,14 @@
 import "./List.css";
 // import "font-awesome/css/font-awesome.min.css";
 import { Link } from "wouter";
-import Generes from "../Generes/Generes.jsx";
+import Generes from "../TODO/Generes/Generes.jsx";
 
 const List = (props) => {
   return (
     <div className="tabcontent">
       {props.animes.map((anime) => (
         <Link
-          to={"/AnimeDetails/" + anime.id + "/" + anime.kind}
+          href={"/AnimeDetails/" + anime.id + "/" + anime.kind}
           className="animes_element"
           key={anime.id}
         >

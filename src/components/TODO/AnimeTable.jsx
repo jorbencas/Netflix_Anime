@@ -40,7 +40,7 @@ export default class AnimeTable extends React.Component {
           </thead>
           <tbody className="table-tbody" role="tablist" id="idTableRankingBody">
             {this.props.animes.map((anime) => (
-              <Link to={"/Edit/" + anime.id}>
+              <Link href={"/Edit/" + anime.id}>
                 <tr key={anime.id} role="row" className="tbody-row">
                   <td role="cell" className="tbody-cell">
                     {anime.titulo_es}

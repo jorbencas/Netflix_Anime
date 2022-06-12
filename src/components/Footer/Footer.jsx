@@ -26,7 +26,7 @@ const Footer = () => {
               return (
                 <Link
                   className="element_container"
-                  to={"/AnimeDetails/" + anime.id + "/" + anime.kind}
+                  href={"/AnimeDetails/" + anime.id + "/" + anime.kind}
                   key={key}
                 >
                   <div className="element_text">
@@ -39,7 +39,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-logo">
-        <Link className="logo" to="/">
+        <Link className="logo" href="/">
           2017 - {new Date().getFullYear()}
         </Link>
         {/* <iframe width="300px" height="360px" scrolling="yes" frameborder="0" src="http://www.dailymotion.com/badge/user/kirito-kirigaya3?type=carousel"></iframe>
