@@ -41,20 +41,20 @@ function Buscador() {
   };
 
   return (
-    <div className="search_contenent">
+    <div className={styles.search_contenent}>
       <input
         type="text"
-        className="form-control"
+        className={styles.form - control}
         placeholder="Buscar"
         value={searches}
         onChange={search}
       />
-      <div className="search_icon">
+      <div className={styles.search_icon}>
         {" "}
         <i className="fa fa-search"></i>{" "}
       </div>
       {results !== null && areResult === true ? (
-        <div className="lista_resultados">
+        <div className={styles.lista_resultados}>
           <List animes={results} />
         </div>
       ) : null}

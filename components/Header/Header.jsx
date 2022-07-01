@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import Communication from "services/index";
 // import 'font-awesome/css/font-awesome.min.css';
-import "./Header.css";
+import styles from "Header.css";
 import Langs from "../Langs/Langs.jsx";
 import { Redirect, Link, useRoute } from "wouter";
 // import FiltersContainer from "../Filters/FiltersContainer";
@@ -81,16 +81,9 @@ const Header = () => {
   };
 
   const linkActive = (page) => {
+    // const [isActive] = useRoute(props.href);
+    // return isActive ? "active" : "";
     return window.location.pathname.includes(page) ? " active" : "";
-  };
-
-  const ActiveLink = (props) => {
-    const [isActive] = useRoute(props.href);
-    return (
-      <Link {...props}>
-        <a className={isActive ? "active" : ""}>{props.children}</a>
-      </Link>
-    );
   };
 
   return (
@@ -115,11 +108,48 @@ const Header = () => {
       <nav id="navbar">
         <ul className="list">
           <li className={"list_element" + linkActive("/edit")}>
+            <Link className="link" href="/">
+              <i className="fa fa-home"></i>
+              <span className="texto">Home</span>
+            </Link>
+          </li>
+          <li className={"list_element" + linkActive("/edit")}>
+            <Link className="link" href="/about">
+              <i className="fa fa-home"></i>
+              <span className="texto">What is Wouter</span>
+            </Link>
+          </li>
+          <li className={"list_element" + linkActive("/edit")}>
+            <Link className="link" href="/faq">
+              <i className="fa fa-home"></i>
+              <span className="texto">FAQ</span>
+            </Link>
+          </li>
+          <li className={"list_element" + linkActive("/edit")}>
+            <Link className="link" href="/info">
+              <i className="fa fa-home"></i>
+              <span className="texto">More Info (redirect)</span>
+            </Link>
+          </li>
+          <li className={"list_element" + linkActive("/edit")}>
             <Link className="link" href="/edit">
               <i className="fa fa-home"></i>
               <span className="texto">Edit</span>
             </Link>
           </li>
+          <li className={"list_element" + linkActive("/edit")}>
+            <Link className="link" href="/edit">
+              <i className="fa fa-home"></i>
+              <span className="texto">Edit</span>
+            </Link>
+          </li>
+          <li className={"list_element" + linkActive("/edit")}>
+            <Link className="link" href="/edit">
+              <i className="fa fa-home"></i>
+              <span className="texto">Edit</span>
+            </Link>
+          </li>
+
           <li className={"list_element" + linkActive("Anime, AnimeDetails")}>
             <Link className="link" href="/Anime">
               <i className="fa fa-list-ul"></i>

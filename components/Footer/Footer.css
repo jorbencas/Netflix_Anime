@@ -1,11 +1,11 @@
-footer{
+.footer{
   display: block;
   width:100%;
   border-top: 2px solid;
   min-height: 115px;
 }
 
-footer .footer-list {
+.footer-list {
   padding-top: 8px;
   height: 100%;
   width: 73%;
@@ -14,7 +14,7 @@ footer .footer-list {
   vertical-align:top;
 }
 
-footer .footer-list .element_container {
+.element_container {
   overflow: hidden;
   width: 19%;
   height: 24px;
@@ -24,11 +24,11 @@ footer .footer-list .element_container {
   margin: 0px 5px;
 } 
 
-footer .footer-list .element_container:hover {
+.element_container:hover {
   cursor: pointer;
 }
 
-footer .footer-list .element_container .element_text{
+.element_text{
   text-align: center;
   text-decoration: none;
   overflow: hidden;
@@ -36,7 +36,7 @@ footer .footer-list .element_container .element_text{
   vertical-align: middle;
 }
 
-footer .footer-logo {
+.footer-logo {
   padding-top: 8px;
   display: inline-block;
   width:25%;
@@ -44,35 +44,35 @@ footer .footer-logo {
   height: 100%;
 }
 
-footer .footer-logo .logo {
+.footer-logo .logo {
   display: inline-block;
   text-decoration: none;
   font-size: 25px;
 } 
 
 /*Contador*/
-footer .footer-list .contador{
+ .contador{
   height: 25px;
   display: block;
 }
 
-footer .footer-list .contador li:hover{
+.footer-list .contador li:hover{
   background-color: transparent;
 }
 
-footer .footer-list .contador li{
+.footer-list .contador li{
   display: inline-block;
   padding-right: 8px;
 }
 
-footer .footer-list .contador li i{
+.footer-list .contador li i{
   font-size: 35px;
   position: relative;
   display: inline-block;
   font-weight: 5;
 }
 
-footer .footer-list .contador li i b{
+.footer-list .contador li i b{
   position: absolute;
   top: 3px;
   left: 8px;
@@ -80,23 +80,23 @@ footer .footer-list .contador li i b{
   font-size: 20px;
 }
 
-footer .footer-logo .sidenav{
+.footer-logo .sidenav{
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 15px;
 }
 
-footer .footer-logo .sidenav .element{
+.footer-logo .sidenav .element{
   text-decoration: none;
   list-style: none;
 }
 
-footer .footer-logo .sidenav .element * {
+.footer-logo .sidenav .element * {
   display: block;
 }
 
-footer .footer-logo .sidenav .element  i{
+.footer-logo .sidenav .element  i{
   font-size: 25px;
 }
 
@@ -105,15 +105,15 @@ footer .footer-logo .sidenav .element  i{
     width: 100%;
   }
 
-  footer .footer-list .element_container{
+  .footer-list .element_container{
     display: block;
     width: 100%;
     margin: auto;
     margin-top: 7px;
   }
 
-  footer .footer-list,
-  footer .footer-logo{
+  .footer-list,
+  .footer-logo{
     display: block;
     width:100%;
     height: auto;
@@ -132,30 +132,30 @@ footer{
   color: var(--color-text);
 }
 
-footer .footer-list .element_container {
+.footer-list .element_container {
   color: var(--color-text);
   background: var(--main-green);
 } 
 
-footer .footer-list .element_container .element_text{
+.footer-list .element_container .element_text{
   background-color: var(--main-green);
   color:var(--color-text);
 }
 
-footer .footer-logo .logo {
+.footer-logo .logo {
   color: var(--color-text);
 } 
 
- footer .footer-logo .contador li:hover{
+ .footer-logo .contador li:hover{
    background-color: transparent;
  }
  
- footer .footer-logo .contador li i{
+ .footer-logo .contador li i{
   color: var(--color-text);
   background-color: linear-gradient(to bottom, #ffffff, var(--main-green))!important;
  }
 
-footer .footer-logo .sidenav .element * {
+.footer-logo .sidenav .element * {
   display: block;
   color: var(--color-text);
 }
