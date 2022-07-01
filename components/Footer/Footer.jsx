@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
-import styles from "Footer.css";
+import styles from "./Footer.module.css";
 import { Link } from "next/link";
 import Image from "next/image";
 
 const Footer = () => {
   const [animes, setAnimes] = useState(null);
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
+    fetch("/api/hello")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+
     // Communication.getMethod(1, "Anime&aq=lastanimes&as=0_9&od=id")
     //   .then((res) => {
     //     setAnimes(res);
@@ -18,6 +28,9 @@ const Footer = () => {
       setAnimes(null);
     };
   }, []);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (!data) return <p>No profile data</p>;
 
   return (
     // <footer>
@@ -88,7 +101,7 @@ const Footer = () => {
         rel="noopener noreferrer"
       >
         Powered by <h1>{data.name}</h1>{" "}
-        <span className={styles.footer - logo}>
+        <span className={styles.footer_logo}>
           <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
         </span>
       </a>

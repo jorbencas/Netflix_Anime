@@ -1,7 +1,7 @@
 import List from "../List/List.jsx";
 import { useState } from "react";
 // import Communication from 'services';
-import "./Buscador.css";
+import "./Buscador.module.css";
 
 function Buscador() {
   const [searches, setSearches] = useState("");

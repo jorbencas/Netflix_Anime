@@ -3,6 +3,7 @@ import Steeps from "../../components/Edit/Steeps.jsx";
 // import { Link, useRoute } from "next/router";
 import { useRouter } from "next/router";
 import ToolbarEdit from "../../components/Edit/ToolBarEdit.jsx";
+import styles from "./Edit.module.css";
 
 const Edit = () => {
   const href = useRouter();

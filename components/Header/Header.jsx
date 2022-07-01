@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import Communication from "services/index";
 // import 'font-awesome/css/font-awesome.min.css';
-import styles from "Header.css";
+import styles from "Header.module.css";
 import Langs from "../Langs/Langs.jsx";
 import { Redirect, Link, useRoute } from "wouter";
 // import FiltersContainer from "../Filters/FiltersContainer";

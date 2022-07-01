@@ -1,4 +1,4 @@
-import "List.css";
+import "List.module.css";
 // import "font-awesome/css/font-awesome.min.css";
 import { Link } from "wouter";
 import Generes from "../TODO/Generes/Generes.jsx";
