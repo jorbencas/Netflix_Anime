@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { ThemeContext } from "../../context/ThemeContext.jsx";
+import { ThemeContext } from "context/ThemeContext.jsx";
 import logo from "./logo.svg";
 import "./Counter.css";
 const Counter = () => {

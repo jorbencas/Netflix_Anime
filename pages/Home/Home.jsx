@@ -1,10 +1,10 @@
-import Grid from "../../components/Grid/Grid.jsx";
-import Slider from "../../components/Slider/Slider.jsx";
+import Grid from "@/components/Grid/Grid.jsx";
+import Slider from "@/components/Slider/Slider.jsx";
 // import "font-awesome/css/font-awesome.min.css";
-import "./Home.css";
+import "./Home.module.css";
 // import Communication from "services";
-import { Link } from "wouter";
-import Loading from "../../TODO/components/Loading/Loading";
+import { Link } from "next/router";
+import Loading from "@/components/Loading/Loading";
 import { Component } from "react";
 
 export class Home extends Component {
@@ -147,10 +147,10 @@ function inView(element, fullHeightInView) {
     //     this.setState({ sliders: res });
     //   })
     //   .catch(() => {
-    //     // dispatch({
-    //     //     type: 'ERROR_USERS',
-    //     //     payload: null
-    //     // })
+    // dispatch({
+    //     type: 'ERROR_USERS',
+    //     payload: null
+    // })
     //   });
     // Communication.getMethod(1, `Episodes&as=0_9`)
     //   .then((res) => {
@@ -184,7 +184,7 @@ function inView(element, fullHeightInView) {
 
   render() {
     return (
-      <div>
+      <>
         <div id="home">
           <div className="slider">
             {this.state.sliders ? (
@@ -250,7 +250,7 @@ function inView(element, fullHeightInView) {
           {/* <a href="http://www.contadorvisitasgratis.com" target="_Blank" rel="noopener noreferrer"></a><br />
                     <script type="text/javascript" src="http://counter2.fcs.ovh/private/countertab.js?c=928439c3c54d65c5411de22048a97cbe"></script> */}
         </div>
-      </div>
+      </>
     );
   }
 }

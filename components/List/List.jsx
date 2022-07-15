@@ -1,6 +1,6 @@
-import "List.module.css";
+import styles from "./List.module.css";
 // import "font-awesome/css/font-awesome.min.css";
-import { Link } from "wouter";
+import { Link } from "next/router";
 import Generes from "../TODO/Generes/Generes.jsx";
 
 const List = (props) => {

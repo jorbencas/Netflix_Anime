@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./Steeps.module.css";
 
 function Steeps() {
   const [steeps, setSteeps] = useState([
@@ -35,21 +36,27 @@ function Steeps() {
   ]);
 
   return (
-    <section className="steps">
+    <section className={styles.steps}>
       {steeps.map((item, i) => {
         return (
           <div
             key={i}
             className={
-              i == 0 ? " active content" + item.class : "content" + item.class
+              i == 0
+                ? styles.active +
+                  " " +
+                  styles.content +
+                  " " +
+                  styles[item.class]
+                : styles.content + " " + styles[item.class]
             }
           >
-            <article className="step">
-              <div className=""></div>
-              <span className="">{item.id}</span>
-              <div className=""></div>
+            <article className={styles.step}>
+              <div className={styles.div}></div>
+              <span className={styles.span}>{item.id}</span>
+              <div className={styles.div}></div>
             </article>
-            <p>{item.translate}</p>
+            <p className={styles.p}>{item.translate}</p>
           </div>
         );
       })}

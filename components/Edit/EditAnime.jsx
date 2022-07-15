@@ -85,20 +85,24 @@ export default function EditAnime() {
         </div>
     </div>
   </div> */}
-      <form onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}>
+      <form
+        className="form"
+        onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}
+      >
         <input
+          className="input"
           type="text"
           {...register("firstName")}
           placeholder="First name"
         />
-        <select {...register("category")}>
+        <select className="select" {...register("category")}>
           <option value="">Select...</option>
           <option value="A">Option A</option>
           <option value="B">Option B</option>
         </select>
         <textarea {...register("aboutYou")} placeholder="About you" />
         <p>{data}</p>
-        <input type="submit" />
+        <input className="input" type="submit" />
       </form>
     </>
   );

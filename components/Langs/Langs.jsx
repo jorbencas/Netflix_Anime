@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
-import { getLangs } from "../../services/index.js";
-import "Langs.css";
-import { ThemeContext } from "../../context/ThemeContext";
+import { getLangs } from "services/index.js";
+import styles from "./Langs.module.css";
+import { ThemeContext } from "context/ThemeContext";
 
 const Langs = () => {
   const theme = useContext(ThemeContext);

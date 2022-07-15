@@ -1,0 +1,48 @@
+
+.steps {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 75px;
+  background-color: var(--main-grey);
+  margin: 5px 40px;
+}
+
+.content p {
+  color: var(--color-text);
+}
+
+.step {
+  display: flex;
+  align-items: center;
+}
+
+.div {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin: 0 8px;
+  padding: 5px 5px;
+  transition: all 0.4s;
+}
+
+.span {
+  border: 1px solid var(--main-green);
+  border-radius: 50%;
+  z-index: 1;
+  color: var(--color-text);
+  font-size: 22px;
+  padding: 2px 10px;
+  transition: all 0.4s;
+}
+
+.active .div,
+.active .span {
+  border: 1px solid var(--main-green);
+  background-color: var(--main-green);
+}
+
+.p {
+  color: var(--main-green);
+    font-size: 12px;
+}

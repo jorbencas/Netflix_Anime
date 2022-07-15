@@ -1,9 +1,10 @@
 import { useContext } from "react";
-import { ThemeContext } from "../../context/ThemeContext.jsx";
-import "App.module.css";
+import { ThemeContext } from "context/ThemeContext.jsx";
+import "./SwitchButton.module.css";
 
 const SwitchButton = () => {
   const theme = useContext(ThemeContext);
+  console.log(theme);
   const darkMode = theme.state.darkMode;
 
   const onClick = () => {
