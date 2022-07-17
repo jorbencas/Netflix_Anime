@@ -3,6 +3,7 @@ import Head from "next/head";
 import AppLayout from "@/components/AppLayout";
 import { ThemeProvider } from "@/context/ThemeContext.jsx";
 import styles from "@/styles/Home.module.css";
+import VideoTest from "@/components/VideoTest";
 
 export default function Home() {
   const [anime, setAnime] = useState([]);
@@ -104,11 +105,14 @@ export default function Home() {
       </Head>
       <ThemeProvider>
         <AppLayout>
-          <HomeContent />
+          <VideoTest />
         </AppLayout>
       </ThemeProvider>
     </>
   );
+}
+export function HomeTest() {
+  return <div>HomeTest</div>;
 }
 
 export function HomeContent() {
