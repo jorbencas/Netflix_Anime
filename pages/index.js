@@ -111,9 +111,6 @@ export default function Home() {
     </>
   );
 }
-export function HomeTest() {
-  return <div>HomeTest</div>;
-}
 
 export function HomeContent() {
   return (

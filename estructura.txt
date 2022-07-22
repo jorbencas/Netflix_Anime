@@ -1,0 +1,78 @@
+El primer pasos per ha realitzar la creació de u nanime nou es:
+
+Les sigles es generarn de forma automatica.
+El idiomes seran un selecionable, que correspondra al idiomes disponibles
+La data de inici com la de fi, seran 2 tipus date normal.
+El state, es seleciona de 3 posibles checkbox
+El kind també es seleciona de 2 posibles inputs
+els valoraciones, son unes estrelletes, que es convertixen en un numero
+La tremporada també es de un congunt de checkbox
+
+Translations_anime
+es mostraran uns tabs, ubn per idioma, es posara la sinopsis, o 
+el titol que corresponga a cada idioma
+
+Media_anime
+Es pujara el archiu que corresponja, amb el nom, la extensió el tipus
+
+anime_generes 
+Es una taula de unio entre els animexs, i els generes que corresponen 
+o els filtres de tipus genere (per ha traurels, hi ha que consultar els filtres
+de tipus genere i obtindre del translations_filters, la traducció del idioma corresponenet)
+
+seasions
+El idi de la seasipon les sigles, mes un numero autoincremental qure es resetejara, 
+en cada anime nou.
+El title el el nom de la seasion (En un futur es posible que canvie)
+
+episodes
+El id del episode es formara amb les sigles, i el numero del epeisodi que es traura del sistema de archius
+El anime, son les sigles,
+El num el traura també amb el numero del sistema de archius
+La session es el id de la taula seassions
+El media_type (NO FA FALTA)
+El media_name es el nom del fitxer
+El meadia_extension es la extensio del fitxer
+
+translation_episodes
+es mostraran uns tabs, ubn per idioma, es posara la sinopsis, o 
+el titol que corresponga a cada idioma
+
+clips
+(El clips seran un pas mes al hora de crear el anime i es diran clip_episodes)
+El id sera autoincremental 
+EL titulo sera un tituloq eue se le de al clip (en un futuro igual se le añaden traduciones)
+El episode es el id del episodio añ que pertenece
+EL profile es el qure ha reado estos clips ya que son como una colecio mes.
+El time_start es el minut aon comensa
+El time_end es elk minut ahon acaba
+
+episode_collectiona
+el id es autoincremental 
+el episode que se afegit 
+la colecio a la que pertany
+
+
+
+
+openings
+el id son ñles sigles mes el numero del fitxer
+el nom del opening
+la deswcripció
+les sigles del anime al que pertany
+el numero del fitxer
+la sessio en la cual esta
+El media_type (NO FA FALTA)
+El media_name es el nom del fitxer
+El meadia_extension es la extensio del fitxer
+
+endings
+el id son ñles sigles mes el numero del fitxer
+el nom del ending
+la deswcripció
+les sigles del anime al que pertany
+el numero del fitxer
+la sessio en la cual esta
+El media_type (NO FA FALTA)
+El media_name es el nom del fitxer
+El meadia_extension es la extensio del fitxer

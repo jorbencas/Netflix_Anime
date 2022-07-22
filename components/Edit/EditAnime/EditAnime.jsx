@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-
+import styles from "./EditAnime.module.css";
 export default function EditAnime() {
   const { register, handleSubmit } = useForm();
   const [data, setData] = useState("");
 
+  setabform = (data) => {
+   
+  }
   return (
     <>
-      {/*<div class='wrap'>
-    <div class="contenedor-formulario">
-        <div class="formulario" action="return false">
+      {/*
             <input type="text" onchange="inputchanges(event.target)" style='display:none;' name="id" value='<?= $v['id'] ?>' placeholder='ID:'>
             <input type="text" onchange="inputchanges(event.target)" <?= $v['input-hiden'] ?> class='siglas' name="siglas" value='<?= $v['siglas'] ?>' placeholder='Siglas' required>
             <div id="titulo" class="concret">
@@ -82,28 +83,55 @@ export default function EditAnime() {
                 <?php if (isset($params['id'])) : ?> <a class="submit link" href="<?= $v["web"]->hrefMake("Anime&id={$v['id']}") ?>">Ver</a><?php endif; ?>
                 <input type="button" class='submit' onclick="handledata()" value="<?= $v['text'] ?> ">
             </div>
+         */}
+
+      <div className={styles.wrap}>
+        <div className={styles.contenedor_formulario}>
+          <form
+            className={styles.formulario}
+            onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}
+          >
+             <div id="titulo" className={styles.concret}>
+                <ul class="tab">
+                    <button className={styles.tablink +" "+ styles.active} onclick="setabform(event,'titulo_es')">ES</button>
+                    <button className={styles.tablink} onclick="setabform(event,'titulo_en')">EN</button>
+                    <button className={styles.tablink} onclick="setabform(event,'titulo_va')">VA</button>
+                    <button className={styles.tablink} onclick="setabform(event,'titulo_ca')">CA</button>
+                </ul>
+                <input type="text" onchange="inputchanges(event.target)" style='display:block;' name="titulo_es" placeholder='Titulo Español' value='<?= $v['titulo_es'] ?>'>
+                <input type="text" onchange="inputchanges(event.target)" style='display:none;' name="titulo_en" placeholder='Titulo Ingles' value='<?= $v['titulo_en'] ?>'>
+                <input type="text" onchange="inputchanges(event.target)" style='display:none;' name="titulo_va" placeholder='Titulo Valenciano' value='<?= $v['titulo_va'] ?>'>
+                <input type="text" onchange="inputchanges(event.target)" style='display:none;' name="titulo_ca" placeholder='Titulo Catalan' value='<?= $v['titulo_ca'] ?>'>
+            </div>
+            <div id='sinopsis' class="concret">
+                <ul class="tab">
+                    <button class="tablink active" onclick="setabform(event,'sinopsis_es')">ES</button>
+                    <button class="tablink" onclick="setabform(event,'sinopsis_en')">EN</button>
+                    <button class="tablink" onclick="setabform(event,'sinopsis_va')">VA</button>
+                    <button class="tablink" onclick="setabform(event,'sinopsis_ca')">CA</button>
+                </ul>
+                <input type="text" onchange="inputchanges(event.target)" style='display:block;' name="sinopsis_es" placeholder='Sinopsis Español' value='<?= $v['sinopsis_es'] ?>'>
+                <input type="text" onchange="inputchanges(event.target)" style='display:none;' name="sinopsis_en" placeholder='Sinopsis Ingles' value='<?= $v['sinopsis_en'] ?>'>
+                <input type="text" onchange="inputchanges(event.target)" style='display:none;' name="sinopsis_va" placeholder='Sinopsis Valenciano' value='<?= $v['sinopsis_va'] ?>'>
+                <input type="text" onchange="inputchanges(event.target)" style='display:none;' name="sinopsis_ca" placeholder='Sinopsis Catalan' value='<?= $v['sinopsis_ca'] ?>'>
+            </div>
+            <input
+              className={styles.input}
+              type="date"
+              {...register("date_publication")}
+              placeholder="Fecha de Publicación"
+            />
+            <input
+              className={styles.input}
+              type="date"
+              {...register("date_finalization")}
+              placeholder="Fecha de Finalización"
+            />
+            <p>{data}</p>
+            <input className={styles.input} type="submit" />
+          </form>
         </div>
-    </div>
-  </div> */}
-      <form
-        className="form"
-        onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}
-      >
-        <input
-          className="input"
-          type="text"
-          {...register("firstName")}
-          placeholder="First name"
-        />
-        <select className="select" {...register("category")}>
-          <option value="">Select...</option>
-          <option value="A">Option A</option>
-          <option value="B">Option B</option>
-        </select>
-        <textarea {...register("aboutYou")} placeholder="About you" />
-        <p>{data}</p>
-        <input className="input" type="submit" />
-      </form>
+      </div>
     </>
   );
 }
