@@ -1,101 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Head from "next/head";
 import AppLayout from "@/components/AppLayout";
 import { ThemeProvider } from "@/context/ThemeContext.jsx";
 import styles from "@/styles/Home.module.css";
 import VideoTest from "@/components/VideoTest";
 
+import { ThemeContext } from "context/ThemeContext.jsx";
+import logo from "@/public/logo.svg";
+import "@/styles/Counter.module.css";
+
 export default function Home() {
-  const [anime, setAnime] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [search, setSearch] = useState("");
-  const [searching, setSearching] = useState(false);
-  const [searchingError, setSearchingError] = useState(false);
-  const [searchingLoading, setSearchingLoading] = useState(false);
-  const [searchingAnime, setSearchingAnime] = useState([]);
-  const [searchingTotalPages, setSearchingTotalPages] = useState(1);
-
-  useEffect(() => {
-    fetch(`https://api.jikan.moe/v3/anime/${page}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setAnime(data);
-        setTotalPages(data.length);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(true);
-        setLoading(false);
-      });
-  }, [page]);
-
-  useEffect(() => {
-    if (searching) {
-      fetch(`https://api.jikan.moe/v3/search/anime?q=${search}&page=1`)
-        .then((res) => res.json())
-        .then((data) => {
-          setSearchingAnime(data.results);
-          setSearchingTotalPages(data.last_page);
-          setSearchingLoading(false);
-        })
-        .catch((err) => {
-          setSearchingError(true);
-          setSearchingLoading(false);
-        });
-    }
-  }, [searching]);
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-    setSearching(true);
-    setSearchingLoading(true);
-    setSearchingError(false);
-    setSearchingAnime([]);
-    setSearchingTotalPages(1);
-  };
-
-  const handlePage = (e) => {
-    setPage(e.target.value);
-    setLoading(true);
-    setError(false);
-    setAnime([]);
-    setTotalPages(1);
-  };
-
-  const handleSearchPage = (e) => {
-    setSearchingPage(e.target.value);
-    setSearchingLoading(true);
-    setSearchingError(false);
-    setSearchingAnime([]);
-    setSearchingTotalPages(1);
-  };
-
-  const handleSearchingPage = (e) => {
-    setSearchingPage(e.target.value);
-    setSearchingLoading(true);
-    setSearchingError(false);
-    setSearchingAnime([]);
-    setSearchingTotalPages(1);
-  };
-
-  const handleSearching = (e) => {
-    setSearching(true);
-    setSearchingLoading(true);
-    setSearchingError(false);
-    setSearchingAnime([]);
-    setSearchingTotalPages(1);
-  };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  console.log(anime);
-
   return (
     <>
       <Head>
@@ -106,6 +20,7 @@ export default function Home() {
       <ThemeProvider>
         <AppLayout>
           <VideoTest />
+          <HomeContent />
         </AppLayout>
       </ThemeProvider>
     </>
@@ -116,6 +31,7 @@ export function HomeContent() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
+        <Counter />
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -158,3 +74,21 @@ export function HomeContent() {
     </div>
   );
 }
+
+export const Counter = () => {
+  const [count, setCount] = useState(0);
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
+  return (
+    <>
+      <img src={logo} className="App-logo" alt="logo" />
+      <button
+        className={`button btn ${darkMode ? "btn-dark" : "btn-light"}`}
+        type="button"
+        onClick={() => setCount((count) => count + 1)}
+      >
+        count is: {count}
+      </button>
+    </>
+  );
+};

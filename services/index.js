@@ -11,3 +11,9 @@ export const getLangs = async () => {
     headers: headers,
   }).then((response) => response.json());
 };
+
+export const getGeneres = async (lang) => {
+  return await fetch(`${BASEURL}/api/generes/${lang}`, {
+    headers: headers,
+  }).then((response) => response.json());
+};

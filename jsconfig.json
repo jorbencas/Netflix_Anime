@@ -6,7 +6,8 @@
       "@/styles/*": ["styles/*"],
       "@/context/*": ["context/*"],
       "@/services/*": ["services/*"],
-      "@/hooks/*": ["hooks/*"]
+      "@/hooks/*": ["hooks/*"],
+      "@/public/*": ["public/*"]
     }
   }
 }

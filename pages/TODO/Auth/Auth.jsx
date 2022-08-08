@@ -9,9 +9,9 @@ const Auth = () => {
   const [mode] = useState(location.pathname);
   const [showPasswd, setShowPasswd] = useState(false);
   const [form, setForm] = useState({
-    username: "jorge",
+    username: "",
     email: undefined,
-    passwd: "Karanlik123?",
+    passwd: "",
   });
 
   const sendCredentials = () => {

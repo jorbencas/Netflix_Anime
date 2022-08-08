@@ -1,12 +1,12 @@
-import EditAnime from "@/components/Edit/EditAnime/EditAnime.jsx";
-import Steeps from "@/components/Steeps/Steeps.jsx";
+import EditAnime from "@/components/EditAnime/EditAnime.jsx";
+import Steeps from "@/components/UI/Steeps/Steeps.jsx";
 import { useRouter } from "next/router";
-import ToolbarEdit from "@/components/Edit/ToolBarEdit.jsx";
+import ToolbarEdit from "@/components/UI/ToolBarEdit.jsx";
 import styles from "./edit.module.css";
 import Head from "next/head";
 import AppLayout from "@/components/AppLayout";
 import { ThemeProvider } from "@/context/ThemeContext.jsx";
-
+//https://github.com/do-community/building-a-tabs-component-react/blob/master/src/components/Tabs.js
 const Edit = () => {
   const href = useRouter();
   const { siglas } = href.query;
@@ -20,7 +20,7 @@ const Edit = () => {
       <ThemeProvider>
         <AppLayout>
           {typeof siglas !== "undefined" ? <ToolbarEdit /> : <Steeps />}
-          <div id="anime" className="tabcontent" style={{ display: "block" }}>
+          <div className={styles.tabcontent}>
             <EditAnime />
           </div>
         </AppLayout>

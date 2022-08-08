@@ -7,7 +7,7 @@ import Communication from "services";
 // import AnimeTable from 'components/AnimeTable';
 // import Loading from "components/Loading/Loading";
 import { Link } from "react-router-dom";
-import List from "components/List/List";
+import List from "@/components/TODO/List/List";
 
 const Anime = () => {
   // const history = useHistory();

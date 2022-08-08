@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import styles from "./VideoTest.module.css";
 
 function VideoTest() {
@@ -28,10 +28,19 @@ function VideoTest() {
     videoRef.current.currentTime -= 5;
   };
 
-  window.setInterval(function () {
-    setCurrentTime(videoRef.current?.currentTime);
-    setProgress((videoRef.current?.currentTime / videoTime) * 100);
-  }, 1000);
+  useEffect(() => {
+    videoRef.current.addEventListener("timeupdate", () => {
+      setCurrentTime(videoRef.current?.currentTime);
+      setProgress(
+        (videoRef.current?.currentTime / videoRef.current.duration) * 100
+      );
+    }),
+      [videoRef.current.currentTime];
+  });
+  // window.setInterval(function () {
+  //   setCurrentTime(videoRef.current?.currentTime);
+  //   setProgress((videoRef.current?.currentTime / videoTime) * 100);
+  // }, 1000);
 
   return (
     <div className={styles.app}>
