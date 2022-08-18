@@ -1,13 +1,12 @@
 import { useContext, useState } from "react";
 import Head from "next/head";
 import AppLayout from "@/components/AppLayout";
-import { ThemeProvider } from "@/context/ThemeContext.jsx";
+import { ThemeProvider, ThemeContext } from "@/context/ThemeContext.jsx";
 import styles from "@/styles/Home.module.css";
 import VideoTest from "@/components/VideoTest";
-
-import { ThemeContext } from "context/ThemeContext.jsx";
 import logo from "@/public/logo.svg";
 import "@/styles/Counter.module.css";
+import Modal from "@/components/Modal";
 
 export default function Home() {
   return (
@@ -19,19 +18,22 @@ export default function Home() {
       </Head>
       <ThemeProvider>
         <AppLayout>
-          <VideoTest />
-          <HomeContent />
+          <HomeContent>
+            <Counter />
+            <Modal btnLabel="videoTest">
+              <VideoTest />
+            </Modal>
+          </HomeContent>
         </AppLayout>
       </ThemeProvider>
     </>
   );
 }
 
-export function HomeContent() {
+export function HomeContent({ children }) {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <Counter />
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -70,6 +72,7 @@ export function HomeContent() {
             </p>
           </a>
         </div>
+        {children}
       </main>
     </div>
   );
@@ -89,6 +92,11 @@ export const Counter = () => {
       >
         count is: {count}
       </button>
+      <style jsx>{`
+        .App {
+          text-align: center;
+        }
+      `}</style>
     </>
   );
 };

@@ -10,13 +10,24 @@ import Link from "next/link";
 // import SwitchButton from "components/SwitchButton/SwitchButton";
 
 const Header = () => {
-  // const [langVisible, setLangVisible] = useState(false);
   const [random, setRandom] = useState(0);
   const [kind, setKind] = useState("");
+
+  return (
+    <header className={styles.header}>
+      <nav className={styles.nav}>
+        <ul className={styles.list}>
+          <LinkActive url="edit" text="Edit" />
+          <LinkActive url="" text="Home" />
+        </ul>
+      </nav>
+    </header>
+  );
+
+  // const [langVisible, setLangVisible] = useState(false);
   // const [user, setUser] = useState("");
   // const [numProducts, setNumProducts] = useState(0);
   // const [urlAuth, setUrlAuth] = useState("");
-  const href = useRouter();
 
   // useEffect(() => {
   // Communication.getMethod(1, `Episodes&aq=getidrand`)
@@ -72,30 +83,6 @@ const Header = () => {
   //   }
   // };
 
-  const linkActive = (page) => {
-    // const [isActive] = useRoute(props.href);
-    // return isActive ? "active" : "";
-    return /*href.query.includes(page) ?*/ " active" /*: ""*/;
-  };
-
-  return (
-    <header className={styles.header}>
-      <nav className={styles.nav}>
-        <ul className={styles.list}>
-          <li className={styles.list_element}>
-            <Link href="/edit">
-              <a className={styles.link + styles[linkActive("/edit")]}>Edit</a>
-            </Link>
-          </li>
-          <li className={styles.list_element}>
-            <Link href="/">
-              <a className={styles.link + styles[linkActive("/")]}>Home</a>
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  );
   // return (
   //   <div className="header">
   //     {/* <SwitchButton />
@@ -214,4 +201,17 @@ const Header = () => {
   //   </div>
   // );
 };
+
+export const LinkActive = ({ url, text }) => {
+  const { route } = useRouter();
+  const active = route.includes(url) ? styles.active : "";
+  return (
+    <li className={styles.list_element + " " + active}>
+      <Link href={"/" + url} className={styles.link}>
+        <span className={styles.texto}>{text}</span>
+      </Link>
+    </li>
+  );
+};
+
 export default Header;

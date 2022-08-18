@@ -1,11 +1,14 @@
-import EditAnime from "@/components/EditAnime/EditAnime.jsx";
-import Steeps from "@/components/UI/Steeps/Steeps.jsx";
+import EditAnime from "@/components/EditAnime";
+import Steeps from "@/components/UI/Steeps/index.jsx";
 import { useRouter } from "next/router";
-import ToolbarEdit from "@/components/UI/ToolBarEdit.jsx";
+import ToolbarEdit from "@/components/UI/ToolbarEdit/index.jsx";
 import styles from "./edit.module.css";
 import Head from "next/head";
 import AppLayout from "@/components/AppLayout";
 import { ThemeProvider } from "@/context/ThemeContext.jsx";
+import EditEpisodes from "@/components/EditEpisodes";
+import EditOpenings from "@/components/EditOpenings";
+import EditEndings from "@/components/EditEndings";
 //https://github.com/do-community/building-a-tabs-component-react/blob/master/src/components/Tabs.js
 const Edit = () => {
   const href = useRouter();
@@ -19,9 +22,11 @@ const Edit = () => {
       </Head>
       <ThemeProvider>
         <AppLayout>
-          {typeof siglas !== "undefined" ? <ToolbarEdit /> : <Steeps />}
           <div className={styles.tabcontent}>
             <EditAnime />
+            <EditEpisodes />
+            <EditOpenings />
+            <EditEndings />
           </div>
         </AppLayout>
       </ThemeProvider>

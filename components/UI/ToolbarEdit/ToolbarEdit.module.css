@@ -1,0 +1,52 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar .tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--main-green);
+  background-color: var(--opacity-grey);
+  overflow: hidden;
+  margin-left: 39px;
+  margin-right: 39px;
+}
+
+.tab .tablink,
+.tab .tablinks {
+  background-color: var(--opacity-grey);
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  color: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+.tab .tablink i,
+.tab .tablinks i {
+  color: var(--main-green);
+}
+
+.tab .tablink:hover,
+.tab .tablinks:hover {
+  background-color: var(--opacity-grey);
+  color: var(--color-text);
+}
+
+.tab .tablink *,
+.tab .tablinks * {
+  font-size: 12px;
+  display: inline-block;
+}
+
+.tab .tablink.active,
+.tab .tablinks.active {
+  background: var(--main-green) !important;
+  color: var(--color-text) !important;
+}

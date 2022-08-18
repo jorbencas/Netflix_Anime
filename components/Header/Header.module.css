@@ -169,24 +169,23 @@
   color: var(--color-text);
 }
 
-.nav .list .list_element .link {
+.link {
   color: var(--color-text);
 }
 
-.logout .button {
+ .button {
   color: var(--color-text);
 }
 
-.nav .list .list_element:hover {
-  color: var(--main-grey);
+.list_element:hover {
   background-color: var(--opacity-green);
 }
 
-.nav .list .list_element.active .link {
+ .active .link {
   color: var(--main-green);
 }
 
-.nav .list .list_element.active:hover .link {
+.active:hover .link {
   color: var(--color-text);
 }
 

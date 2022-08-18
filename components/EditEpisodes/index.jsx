@@ -1,16 +1,11 @@
 import { useForm } from "react-hook-form";
-import styles from "./EditAnime.module.css";
-export default function EditAnime() {
+import styles from "./EditEpisodes.module.css";
+
+export default function EditEpisodes() {
   const { register, handleSubmit } = useForm({
     defaultValues: {
       titulo: "",
-      sinopsis: "",
-      date_publication: "",
-      date_finalization: "",
-      temporadas: [],
-      generos: [],
-      validations: 0,
-      state: "",
+      sinopsis: ""
     },
     shouldUseNativeValidation: true,
   });
@@ -25,12 +20,12 @@ export default function EditAnime() {
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
           <form
-            className={styles.formulario}
+            className={styles.concret}
             onSubmit={handleSubmit(() => {
               setabform();
             })}
           >
-            <div className={styles.concret}>
+            <div className={styles.contenedor_inputs}>
               <input
                 type="text"
                 className={styles.input}
@@ -60,7 +55,7 @@ export default function EditAnime() {
               {...register("date_finalization")}
               placeholder="Fecha de Finalización"
             />
-            <input className={styles.input} type="submit" />
+            <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>
       </div>
