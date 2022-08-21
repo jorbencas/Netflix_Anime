@@ -1,10 +1,14 @@
 import { useForm } from "react-hook-form";
 import styles from "./EditAnime.module.css";
 import Modal from "@/components/Modal";
+import { insertAnime } from "@/services/index";
+import Media from "@/components/Media/index";
+import { useState } from "react";
 
 export default function EditAnime() {
   const { register, handleSubmit } = useForm({
     defaultValues: {
+      siglas: "",
       titulo: "",
       sinopsis: "",
       date_publication: "",
@@ -13,13 +17,16 @@ export default function EditAnime() {
       generos: [],
       validations: 0,
       state: "",
+      idioma: "",
     },
     shouldUseNativeValidation: true,
   });
+  const [media, setMedia] = useState([]);
 
   const setabform = async (data) => {
     //JSON.stringify(data);
     console.log(data);
+    insertAnime(data);
   };
 
   return (
@@ -36,17 +43,15 @@ export default function EditAnime() {
               <input
                 type="text"
                 className={styles.input}
-                onchange="inputchanges(event.target)"
                 {...register("titulo")}
-                placeholder="Titulo Español"
+                placeholder="Titulo"
               />
             </div>
             <div className={styles.concret}>
               <input
                 type="text"
                 className={styles.input}
-                onchange="inputchanges(event.target)"
-                placeholder="Sinopsis Español"
+                placeholder="Sinopsis"
                 {...register("sinopsis")}
               />
             </div>
@@ -66,6 +71,15 @@ export default function EditAnime() {
             <Modal btnLabel="Añadir generos">
               <AddGeneres />
             </Modal>
+            <Media
+              media={media}
+              params={{
+                siglas: { ...register("titulo") },
+                kind: "anime",
+                idioma: "es",
+                profile: "",
+              }}
+            />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

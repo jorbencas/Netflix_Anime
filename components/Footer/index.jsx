@@ -3,6 +3,38 @@ import styles from "./Footer.module.css";
 import { Link } from "next/link";
 import Image from "next/image";
 
+function ButtonUp() {
+  const [show, setShow] = useState(false);
+  const handleScroll = () => {
+    if (window.scrollY > 100) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  };
+  const handleClick = () => {
+    window.scrollTo(0, 0);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return (
+    <div className={styles.child}>
+      <div className={styles.button_fixed}>
+        {show && (
+          <button onClick={handleClick} className={styles.ir_arriba}>
+            Subir Arriba
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
 const Footer = () => {
   const [animes, setAnimes] = useState(null);
   const [data, setData] = useState(null);
@@ -105,6 +137,7 @@ const Footer = () => {
           <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
         </span>
       </a>
+      <ButtonUp />
     </footer>
   );
 };

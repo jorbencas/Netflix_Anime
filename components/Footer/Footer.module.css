@@ -122,10 +122,6 @@
 
 }
 
-
-
-
-
 .footer{
   background:var(--main-grey);
   border-top-color: var(--main-green);
@@ -158,4 +154,40 @@
 .footer_logo .sidenav .element * {
   display: block;
   color: var(--color-text);
+}
+
+.child {
+  position: fixed;
+  bottom: 54px;
+  right: 50px;
+  width: 25px;
+  height: 0px;
+}
+
+.button_fixed {
+  position: absolute;
+  font-family: "Roboto";
+  font-size: 14px;
+  border: 1px solid;
+  padding: 2px;
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
+  transform: rotate(45deg);
+}
+
+.ir_arriba {
+  bottom: 1px;
+  left: -55%;
+}
+
+.button_fixed * {
+  font-size: 14px !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  transform: rotate(-45deg) scale(1.4);
 }

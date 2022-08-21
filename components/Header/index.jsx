@@ -202,7 +202,7 @@ const Header = () => {
   // );
 };
 
-export const LinkActive = ({ url, text }) => {
+const LinkActive = ({ url, text }) => {
   const { route } = useRouter();
   const active = route.includes(url) ? styles.active : "";
   return (

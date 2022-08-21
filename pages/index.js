@@ -30,7 +30,7 @@ export default function Home() {
   );
 }
 
-export function HomeContent({ children }) {
+function HomeContent({ children }) {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -78,7 +78,7 @@ export function HomeContent({ children }) {
   );
 }
 
-export const Counter = () => {
+const Counter = () => {
   const [count, setCount] = useState(0);
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;

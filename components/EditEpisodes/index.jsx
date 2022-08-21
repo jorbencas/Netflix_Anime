@@ -5,7 +5,7 @@ export default function EditEpisodes() {
   const { register, handleSubmit } = useForm({
     defaultValues: {
       titulo: "",
-      sinopsis: ""
+      sinopsis: "",
     },
     shouldUseNativeValidation: true,
   });
@@ -29,17 +29,15 @@ export default function EditEpisodes() {
               <input
                 type="text"
                 className={styles.input}
-                onchange="inputchanges(event.target)"
                 {...register("titulo")}
-                placeholder="Titulo Español"
+                placeholder="Titulo "
               />
             </div>
             <div className={styles.concret}>
               <input
                 type="text"
                 className={styles.input}
-                onchange="inputchanges(event.target)"
-                placeholder="Sinopsis Español"
+                placeholder="Sinopsis "
                 {...register("sinopsis")}
               />
             </div>

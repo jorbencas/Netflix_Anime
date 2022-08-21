@@ -17,3 +17,29 @@ export const getGeneres = async (lang) => {
     headers: headers,
   }).then((response) => response.json());
 };
+
+export const getAnimes = async (genre) => {
+  return await fetch(`${BASEURL}/api/animes/es/${genre}`, {
+    headers: headers,
+  }).then((response) => response.json());
+};
+
+export const getAnime = async (siglas) => {
+  return await fetch(`${BASEURL}/api/animes/es/${siglas}`, {
+    headers: headers,
+  }).then((response) => response.json());
+};
+
+export const getAnimeByName = async (name) => {
+  return await fetch(`${BASEURL}/api/animes/es/${name}`, {
+    headers: headers,
+  }).then((response) => response.json());
+};
+
+export const insertAnime = async (anime) => {
+  return await fetch(`${BASEURL}/api/animes/es`, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(anime),
+  }).then((response) => response.json());
+};
