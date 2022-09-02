@@ -29,13 +29,13 @@ function VideoTest() {
   };
 
   useEffect(() => {
-    videoRef.current.addEventListener("timeupdate", () => {
-      setCurrentTime(videoRef.current?.currentTime);
+    videoRef?.current?.addEventListener("timeupdate", () => {
+      setCurrentTime(videoRef?.current?.currentTime);
       setProgress(
-        (videoRef.current?.currentTime / videoRef.current.duration) * 100
+        (videoRef?.current?.currentTime / videoRef?.current?.duration) * 100
       );
     }),
-      [videoRef.current.currentTime];
+      [videoRef?.current?.currentTime];
   });
   // window.setInterval(function () {
   //   setCurrentTime(videoRef.current?.currentTime);

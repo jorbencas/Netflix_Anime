@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
 import styles from "./EditEpisodes.module.css";
+import Media from "@/components/Media/index";
+import { useState } from "react";
 
-export default function EditEpisodes() {
+export default function EditEpisodes({ siglas }) {
   const { register, handleSubmit } = useForm({
-    defaultValues: {
-      titulo: "",
-      sinopsis: "",
-    },
     shouldUseNativeValidation: true,
   });
+  // const { elements, setElements } = useState([]);
+  const [media, setMedia] = useState([]);
 
   const setabform = async (data) => {
     //JSON.stringify(data);
@@ -21,8 +21,8 @@ export default function EditEpisodes() {
         <div className={styles.contenedor_formulario}>
           <form
             className={styles.concret}
-            onSubmit={handleSubmit(() => {
-              setabform();
+            onSubmit={handleSubmit((data) => {
+              setabform(data);
             })}
           >
             <div className={styles.contenedor_inputs}>
@@ -52,6 +52,15 @@ export default function EditEpisodes() {
               type="date"
               {...register("date_finalization")}
               placeholder="Fecha de Finalización"
+            />
+            <Media
+              media={media}
+              params={{
+                siglas,
+                kind: "episodes",
+                idioma: "es",
+                profile: "",
+              }}
             />
             <input className={styles.input} type="submit" value="Crear" />
           </form>

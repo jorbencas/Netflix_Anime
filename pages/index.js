@@ -7,6 +7,7 @@ import VideoTest from "@/components/VideoTest";
 import logo from "@/public/logo.svg";
 import "@/styles/Counter.module.css";
 import Modal from "@/components/Modal";
+import { Countdown } from "@/components/UI/countDown";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <ThemeProvider>
         <AppLayout>
           <HomeContent>
+            <Countdown targetDate={new Date("202.-01-01T00:00:00+02:00")} />
             <Counter />
             <Modal btnLabel="videoTest">
               <VideoTest />

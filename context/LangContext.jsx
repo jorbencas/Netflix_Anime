@@ -19,12 +19,12 @@ const LangReducer = (state, action) => {
   }
 };
 
-export function LangProvider(props) {
+export function LangProvider({ children }) {
   const [state, dispatch] = useReducer(LangReducer, initialState);
 
   return (
     <LangContext.Provider value={{ state: state, dispatch: dispatch }}>
-      {props.children}
+      {children}
     </LangContext.Provider>
   );
 }

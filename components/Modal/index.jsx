@@ -1,34 +1,43 @@
-import { useRef, useEffect, useState } from "react";
+import { useContext } from "react";
 import { createPortal } from "react-dom";
 import styles from "./Modal.module.css";
+import { ModalContextProvider, ModalContext } from "@/context/ModalContext";
 
-export function ClientOnlyPortal({ children, selector }) {
-  const ref = useRef();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    ref.current = document.querySelector(selector);
-    setMounted(true);
-  }, [selector]);
-
-  return mounted ? createPortal(children, ref.current) : null;
+export function ClientOnlyPortal({ children }) {
+  return createPortal(children, document.querySelector('#modal'));
 }
 
 export default function Modal({ children, btnLabel }) {
-  const [open, setOpen] = useState();
+  return (
+    <ModalContextProvider>
+      <ModalContent children={children} btnLabel={btnLabel} />
+    </ModalContextProvider>
+  );
+}
+
+const ModalContent = ({ children, btnLabel }) => {
+  const { open, setOpen } = useContext(ModalContext);
 
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)}>
+      <button
+        className={styles.button}
+        type="button"
+        onClick={() => setOpen(true)}
+      >
         {btnLabel}
       </button>
       {open && (
-        <ClientOnlyPortal selector="#modal">
-          <div className={styles.backdrop} onDoubleClick={() => setOpen(false)}>
+        <ClientOnlyPortal>
+          <div className={styles.backdrop}>
             <div className={styles.content}>
               <div className={styles.header}>
                 <p>This modal is rendered using .</p>
-                <button type="button" onClick={() => setOpen(false)}>
+                <button
+                  className={styles.button}
+                  type="button"
+                  onClick={() => setOpen(false)}
+                >
                   Close Modal
                 </button>
               </div>
@@ -45,4 +54,4 @@ export default function Modal({ children, btnLabel }) {
       )}
     </>
   );
-}
+};

@@ -24,13 +24,11 @@ function ButtonUp() {
 
   return (
     <div className={styles.child}>
-      <div className={styles.button_fixed}>
         {show && (
           <button onClick={handleClick} className={styles.ir_arriba}>
             Subir Arriba
           </button>
         )}
-      </div>
     </div>
   );
 }

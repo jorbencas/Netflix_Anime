@@ -1,0 +1,49 @@
+.font_bold {
+  font_weight: 700;
+}
+.mb_2 {
+  margin_bottom: .5rem;
+}
+
+
+.flex {
+  display: flex;
+}
+
+.text_transparent {
+  color: transparent;
+}
+.font_bold {
+  font_weight: 700;
+}
+.text_5xl {
+  font_size: 3rem;
+  line_height: 1;
+}
+.bg_clip_text {
+  _webkit_background_clip: text;
+  background_clip: text;
+}
+/* .to_blue_700 {
+  __tw_gradient_to: #1d4ed8;
+}
+.from_cyan_600 {
+  __tw_gradient_from: #0891b2;
+  __tw_gradient_to: rgb(8 145 178 / 0);
+  __tw_gradient_stops: var(__tw_gradient_from), var(__tw_gradient_to);
+} */
+.bg_gradient_to_r {
+  background_image: linear_gradient(to right, #0891b2, #1d4ed8);
+}
+
+.text_blue_700 {
+  color: rgb(29 78 216 / 1);
+}
+
+
+.flex_col {
+  flex_direction: column;
+}
+.w_24 {
+  width: 6rem;
+}

@@ -12,15 +12,17 @@ export const getLangs = async () => {
   }).then((response) => response.json());
 };
 
-export const getGeneres = async (lang) => {
-  return await fetch(`${BASEURL}/api/generes/${lang}`, {
+export const getGeneres = async () => {
+  return await fetch(`${BASEURL}/api/generes/`, {
     headers: headers,
   }).then((response) => response.json());
 };
 
-export const getAnimes = async (genre) => {
-  return await fetch(`${BASEURL}/api/animes/es/${genre}`, {
+export const insertGeneres = async (genere) => {
+  return await fetch(`${BASEURL}/api/generes/`, {
+    method: "PUT",
     headers: headers,
+    body: JSON.stringify(genere),
   }).then((response) => response.json());
 };
 
@@ -30,16 +32,30 @@ export const getAnime = async (siglas) => {
   }).then((response) => response.json());
 };
 
-export const getAnimeByName = async (name) => {
-  return await fetch(`${BASEURL}/api/animes/es/${name}`, {
+export const getTemporadas = async () => {
+  return await fetch(`${BASEURL}/api/filters/temporadas`, {
     headers: headers,
   }).then((response) => response.json());
 };
 
 export const insertAnime = async (anime) => {
-  return await fetch(`${BASEURL}/api/animes/es`, {
-    method: "POST",
+  return await fetch(`${BASEURL}/api/animes/`, {
+    method: "PUT",
     headers: headers,
     body: JSON.stringify(anime),
+  }).then((response) => response.json());
+};
+
+export const defaultSiglas = async () => {
+  return await fetch(`${BASEURL}/api/media/`, {
+    headers: headers,
+  }).then((response) => response.json());
+};
+
+export const insertMedia = async (media) => {
+  return await fetch(`${BASEURL}/api/media/`, {
+    method: "PUT",
+    headers: headers,
+    body: JSON.stringify(media),
   }).then((response) => response.json());
 };

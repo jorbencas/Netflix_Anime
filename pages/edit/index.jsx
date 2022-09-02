@@ -1,7 +1,6 @@
 import EditAnime from "@/components/EditAnime";
-import Steeps from "@/components/UI/Steeps/index.jsx";
-import { useRouter } from "next/router";
-import ToolbarEdit from "@/components/UI/ToolbarEdit/index.jsx";
+// import Steeps from "@/components/UI/Steeps/index.jsx";
+// import ToolbarEdit from "@/components/UI/ToolbarEdit/index.jsx";
 import styles from "./edit.module.css";
 import Head from "next/head";
 import AppLayout from "@/components/AppLayout";
@@ -9,10 +8,12 @@ import { ThemeProvider } from "@/context/ThemeContext.jsx";
 import EditEpisodes from "@/components/EditEpisodes";
 import EditOpenings from "@/components/EditOpenings";
 import EditEndings from "@/components/EditEndings";
+import { useSiglas } from "../../hooks/useSiglas";
+
 //https://github.com/do-community/building-a-tabs-component-react/blob/master/src/components/Tabs.js
 const Edit = () => {
-  const href = useRouter();
-  const { siglas } = href.query;
+  const [siglas, siglasLista, siglasPage, changeSiglasList] = useSiglas();
+
   return (
     <>
       <Head>
@@ -23,14 +24,35 @@ const Edit = () => {
       <ThemeProvider>
         <AppLayout>
           <div className={styles.tabcontent}>
-            <EditAnime />
-            <EditEpisodes />
-            <EditOpenings />
-            <EditEndings />
+            <select onChange={(e) => changeSiglasList(e.target.value)}>
+              <option value="else">ninguna de ellas</option>
+              {siglasLista.map((s, i) => {
+                <option key={i} value={s}>
+                  {s}
+                </option>;
+              })}
+            </select>
+            {!siglas ? (
+              // <input
+              //   type="text"
+              //   className={styles.input}
+              //   placeholder="Siglas"
+              //   value={siglasPage}
+              // />
+              <p>Hola</p>
+            ) : (
+              ""
+            )}
+
+            <EditAnime siglas={siglasPage} />
+            <EditEpisodes siglas={siglasPage} />
+            <EditOpenings siglas={siglasPage} />
+            <EditEndings siglas={siglasPage} />
           </div>
         </AppLayout>
       </ThemeProvider>
     </>
   );
 };
+
 export default Edit;

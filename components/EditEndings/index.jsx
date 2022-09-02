@@ -1,14 +1,13 @@
 import { useForm } from "react-hook-form";
 import styles from "./EditEndings.module.css";
+import Media from "@/components/Media/index";
+import { useState } from "react";
 
-export default function EditEndings() {
+export default function EditEndings({ siglas }) {
   const { register, handleSubmit } = useForm({
-    defaultValues: {
-      nombre: "",
-      descripcion: "",
-    },
     shouldUseNativeValidation: true,
   });
+  const [media, setMedia] = useState([]);
 
   const setabform = async (data) => {
     //JSON.stringify(data);
@@ -21,8 +20,8 @@ export default function EditEndings() {
         <div className={styles.contenedor_formulario}>
           <form
             className={styles.concret}
-            onSubmit={handleSubmit(() => {
-              setabform();
+            onSubmit={handleSubmit((data) => {
+              setabform(data);
             })}
           >
             <div className={styles.contenedor_inputs}>
@@ -41,6 +40,15 @@ export default function EditEndings() {
                 {...register("descripcion")}
               />
             </div>
+            <Media
+              media={media}
+              params={{
+                siglas,
+                kind: "endings",
+                idioma: "es",
+                profile: "",
+              }}
+            />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>
