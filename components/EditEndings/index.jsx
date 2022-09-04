@@ -40,15 +40,7 @@ export default function EditEndings({ siglas }) {
                 {...register("descripcion")}
               />
             </div>
-            <Media
-              media={media}
-              params={{
-                siglas,
-                kind: "endings",
-                idioma: "es",
-                profile: "",
-              }}
-            />
+            <Media media={media} siglas={siglas} kind="endings" />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

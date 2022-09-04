@@ -20,7 +20,8 @@ export function useSiglas() {
     };
   }, []);
 
-  const changeSiglasList = (sigla) => {
+  const changeSiglasList = (e) => {
+    let sigla = e.target.value;
     if (sigla !== "else") {
       setSiglasPage(sigla);
     } else if (siglas !== sigla) {

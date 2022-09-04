@@ -40,15 +40,7 @@ export default function EditOpenings({ siglas }) {
                 {...register("descripcion")}
               />
             </div>
-            <Media
-              media={media}
-              params={{
-                siglas,
-                kind: "openings",
-                idioma: "es",
-                profile: "",
-              }}
-            />
+            <Media media={media} siglas={siglas} kind="openings" />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

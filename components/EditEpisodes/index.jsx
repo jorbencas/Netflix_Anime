@@ -53,15 +53,7 @@ export default function EditEpisodes({ siglas }) {
               {...register("date_finalization")}
               placeholder="Fecha de Finalización"
             />
-            <Media
-              media={media}
-              params={{
-                siglas,
-                kind: "episodes",
-                idioma: "es",
-                profile: "",
-              }}
-            />
+            <Media media={media} siglas={siglas} kind="episodes" />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

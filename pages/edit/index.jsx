@@ -11,7 +11,7 @@ import EditEndings from "@/components/EditEndings";
 import { useSiglas } from "../../hooks/useSiglas";
 
 //https://github.com/do-community/building-a-tabs-component-react/blob/master/src/components/Tabs.js
-const Edit = () => {
+export default function Edit() {
   const [siglas, siglasLista, siglasPage, changeSiglasList] = useSiglas();
 
   return (
@@ -24,23 +24,24 @@ const Edit = () => {
       <ThemeProvider>
         <AppLayout>
           <div className={styles.tabcontent}>
-            <select onChange={(e) => changeSiglasList(e.target.value)}>
+            <select onChange={changeSiglasList}>
               <option value="else">ninguna de ellas</option>
-              {siglasLista.map((s, i) => {
-                <option key={i} value={s}>
-                  {s}
-                </option>;
-              })}
+              {siglasLista &&
+                siglasLista.map((s, i) => {
+                  <option key={i} value={s}>
+                    {s}
+                  </option>;
+                })}
             </select>
             {!siglas ? (
-              // <input
-              //   type="text"
-              //   className={styles.input}
-              //   placeholder="Siglas"
-              //   value={siglasPage}
-              // />
-              <p>Hola</p>
+              <input
+                type="text"
+                className={styles.input}
+                placeholder="Siglas"
+                value={siglasPage}
+              />
             ) : (
+              // <p>Hola</p>
               ""
             )}
 
@@ -53,6 +54,4 @@ const Edit = () => {
       </ThemeProvider>
     </>
   );
-};
-
-export default Edit;
+}

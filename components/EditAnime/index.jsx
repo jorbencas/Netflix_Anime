@@ -10,7 +10,7 @@ import Media from "@/components/Media/index";
 import { useState, useEffect, useContext } from "react";
 import Modal from "@/components/Modal";
 import { ModalContext } from "@/context/ModalContext";
-import { useAnime } from "../../hooks/useAnime";
+import { useAnime } from "@/hooks/useAnime";
 
 export default function EditAnime({ siglas }) {
   const { register, handleSubmit } = useForm({
@@ -113,24 +113,28 @@ export default function EditAnime({ siglas }) {
               <p className={styles.label}> Generos: </p>
               {generesLista.length > 0
                 ? generesLista.map((genere, i) => {
-                    <InputCheckboxs
-                      key={i}
-                      register={register}
-                      elements={generes}
-                      element={genere}
-                      kind="generes"
-                    />;
+                    return (
+                      <InputCheckboxs
+                        key={i}
+                        register={register}
+                        elements={generes}
+                        element={genere}
+                        kind="generes"
+                      />
+                    );
                   })
                 : "No hay generos"}
               {temporadasLista.length > 0
                 ? temporadasLista.map((temporada, i) => {
-                    <InputCheckboxs
-                      key={i}
-                      register={register}
-                      elements={temporadas}
-                      element={temporada}
-                      kind="temporadas"
-                    />;
+                    return (
+                      <InputCheckboxs
+                        key={i}
+                        register={register}
+                        elements={temporadas}
+                        element={temporada}
+                        kind="temporadas"
+                      />
+                    );
                   })
                 : "No hay temporadas"}
             </div>
@@ -142,15 +146,7 @@ export default function EditAnime({ siglas }) {
                 generesLista={generesLista}
               />
             </Modal>
-            <Media
-              media={media}
-              params={{
-                siglas,
-                kind: "anime",
-                idioma: "es",
-                profile: "",
-              }}
-            />
+            <Media media={media} siglas={siglas} kind="anime" />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>
@@ -194,7 +190,7 @@ export const AddGeneres = ({ changeGeneres, generesLista }) => {
       <input
         className={styles.input}
         type="button"
-        onClick={() => increment()}
+        onClick={increment}
         value="Crear filtro"
       />
     </div>
@@ -206,15 +202,17 @@ export const InputCheckboxs = ({ register, element, elements, kind }) => {
   return (
     <>
       <input
-        key={i}
         type="checkbox"
+        className={styles.checkbox}
         id={element.code}
         {...register(`${kind}`)}
         {...classActive}
         value={element.code}
       />
 
-      <label htmlFor={element.code}>{element.tittle}</label>
+      <label className={styles.label} htmlFor={element.code}>
+        {element.tittle}
+      </label>
     </>
   );
 };
