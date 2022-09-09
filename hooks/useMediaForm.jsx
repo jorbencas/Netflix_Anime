@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ModalContext } from "@/context/ModalContext";
+import { SiglasContext } from "@/context/SiglasContext";
 
 export const useMediaForm = (
-  siglas,
   changeContent,
   changeCursorStyles,
-  addElementMediaList,
-  setOpen
+  addElementMediaList
 ) => {
   const [mediaFiles, setMediaFiles] = useState([]);
   const [mediaFiles2, setMediaFiles2] = useState([]);
@@ -13,6 +13,8 @@ export const useMediaForm = (
   const [success, setSuccess] = useState(false);
   const [kind, setKind] = useState("");
   const [message, setMessage] = useState("");
+  const { setOpen } = useContext(ModalContext);
+  const { siglasPage } = useContext(SiglasContext);
 
   function isImage(extension) {
     let valids = ["jpg", "jpeg", "png", "gif", "bmp"];
@@ -25,7 +27,7 @@ export const useMediaForm = (
 
   const readFile = (e) => {
     setMediaFiles(e);
-    if (siglas.lenght < 3) {
+    if (siglasPage.lenght < 3) {
       errors.push(
         <p>
           Debes de introducir la ssiglas del anime, episodio... antes de poder

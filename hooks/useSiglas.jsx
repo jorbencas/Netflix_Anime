@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { defaultSiglas } from "../services";
 import { useRouter } from "next/router";
+import { SiglasContext } from "@/context/SiglasContext";
 
 export function useSiglas() {
   const href = useRouter();
   const { siglas } = href.query;
-  const [siglasPage, setSiglasPage] = useState("");
   const [siglasLista, setSiglasLista] = useState([]);
+  const { siglasPage, setSiglasPage } = useContext(SiglasContext);
 
   useEffect(() => {
     defaultSiglas()

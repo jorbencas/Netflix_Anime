@@ -1,17 +1,13 @@
 import { useMediaForm } from "@/hooks/useMediaForm";
 import MediaTabs from "./MediaTabs";
 import styles from "./Media.module.css";
-import { useContext } from "react";
-import { ModalContext } from "@/context/ModalContext";
 
 export default function MediaForm({
-  siglas,
   kind,
   changeContent,
   changeCursorStyles,
   addElementMediaList,
 }) {
-  const [setOpen] = useContext(ModalContext);
   const [
     message,
     readFile,
@@ -19,13 +15,7 @@ export default function MediaForm({
     setMediaFiles2,
     setKind,
     errors,
-  ] = useMediaForm(
-    siglas,
-    changeContent,
-    changeCursorStyles,
-    addElementMediaList,
-    setOpen
-  );
+  ] = useMediaForm(changeContent, changeCursorStyles, addElementMediaList);
 
   return (
     <div className={styles.upload}>
@@ -44,6 +34,7 @@ export default function MediaForm({
           onClick={() => clickbuttonupload("subir")}
           className={styles.button}
         />
+
         {/* <i className="fas fa-cloud-upload-alt"></i> */}
       </div>
 

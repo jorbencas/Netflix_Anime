@@ -1,13 +1,16 @@
 import { useForm } from "react-hook-form";
 import styles from "./EditEndings.module.css";
 import Media from "@/components/Media/index";
-import { useState } from "react";
+import { useEnding } from "../../hooks/useEndings";
+import { useListIds } from "@/hooks/useListIfs";
+import DyamondListIds from "../DyamondListIds";
 
-export default function EditEndings({ siglas }) {
+export default function EditEndings() {
   const { register, handleSubmit } = useForm({
     shouldUseNativeValidation: true,
   });
-  const [media, setMedia] = useState([]);
+  const { id, list, setList } = useListIds("endings");
+  const [tittle, sinopsis, anime, num, seasion, media] = useEnding(id);
 
   const setabform = async (data) => {
     //JSON.stringify(data);
@@ -16,6 +19,7 @@ export default function EditEndings({ siglas }) {
 
   return (
     <>
+      <DyamondListIds list={list} changeList={(id) => setList(id)} />
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
           <form
@@ -40,7 +44,7 @@ export default function EditEndings({ siglas }) {
                 {...register("descripcion")}
               />
             </div>
-            <Media media={media} siglas={siglas} kind="endings" />
+            <Media media={media} kind="endings" />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

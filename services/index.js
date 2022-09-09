@@ -12,6 +12,24 @@ export const getLangs = async () => {
   }).then((response) => response.json());
 };
 
+export const getEpisode = async (id) => {
+  return await fetch(`${BASEURL}/api/episodes/es/${id}`, {
+    headers: headers,
+  }).then((response) => response.json());
+};
+
+export const getEnding = async (id) => {
+  return await fetch(`${BASEURL}/api/endings/es/${id}`, {
+    headers: headers,
+  }).then((response) => response.json());
+};
+
+export const getOpening = async (id) => {
+  return await fetch(`${BASEURL}/api/openings/es/${id}`, {
+    headers: headers,
+  }).then((response) => response.json());
+};
+
 export const getGeneres = async () => {
   return await fetch(`${BASEURL}/api/generes/`, {
     headers: headers,
@@ -57,5 +75,11 @@ export const insertMedia = async (media) => {
     method: "PUT",
     headers: headers,
     body: JSON.stringify(media),
+  }).then((response) => response.json());
+};
+
+export const getListIds = async ({ siglas, kind }) => {
+  return await fetch(`${BASEURL}/api/${kind}/${siglas}`, {
+    headers: headers,
   }).then((response) => response.json());
 };

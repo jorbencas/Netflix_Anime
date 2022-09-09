@@ -1,14 +1,6 @@
 import styles from "./Media.module.css";
 
-export default function MediaList({
-  mediaList,
-  siglas,
-  removeElementMediaList,
-}) {
-  if (mediaList.lenght > 0) {
-    return <p>{siglas}</p>;
-  }
-
+export default function MediaList({ mediaList, removeElementMediaList }) {
   // const deletefile = (id) => {};
   //   const handleDelete = (e) => {
   //     e.preventDefault();

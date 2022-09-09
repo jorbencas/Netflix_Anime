@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 // import FiltersContainer from "components/Filters/FiltersContainer";
 // import Buscador from "components/Buscador/Buscador";
-// import SwitchButton from "components/SwitchButton/SwitchButton";
+import SwitchButton from "@/components/UI/SwitchButton";
 
 const Header = () => {
   const [random, setRandom] = useState(0);
@@ -17,6 +17,7 @@ const Header = () => {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <ul className={styles.list}>
+          <SwitchButton />
           <LinkActive url="edit" text="Edit" />
           <LinkActive url="" text="Home" />
         </ul>

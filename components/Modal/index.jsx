@@ -4,7 +4,7 @@ import styles from "./Modal.module.css";
 import { ModalContextProvider, ModalContext } from "@/context/ModalContext";
 
 export function ClientOnlyPortal({ children }) {
-  return createPortal(children, document.querySelector('#modal'));
+  return createPortal(children, document.querySelector("#modal"));
 }
 
 export default function Modal({ children, btnLabel }) {

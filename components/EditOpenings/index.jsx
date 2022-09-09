@@ -1,13 +1,16 @@
 import { useForm } from "react-hook-form";
 import styles from "./EditOpenings.module.css";
 import Media from "@/components/Media/index";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { SiglasContext } from "@/context/SiglasContext";
+import { useOpening } from "@/hooks/useOpenings";
 
-export default function EditOpenings({ siglas }) {
+export default function EditOpenings() {
   const { register, handleSubmit } = useForm({
     shouldUseNativeValidation: true,
   });
-  const [media, setMedia] = useState([]);
+  const { id, list, setList } = useListIds("openings");
+  const [tittle, sinopsis, anime, num, seasion, media] = useOpening(id);
 
   const setabform = async (data) => {
     //JSON.stringify(data);
@@ -16,6 +19,7 @@ export default function EditOpenings({ siglas }) {
 
   return (
     <>
+      <DyamondListIds list={list} changeList={(id) => setList(id)} />
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
           <form
@@ -40,7 +44,7 @@ export default function EditOpenings({ siglas }) {
                 {...register("descripcion")}
               />
             </div>
-            <Media media={media} siglas={siglas} kind="openings" />
+            <Media media={media} kind="openings" />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

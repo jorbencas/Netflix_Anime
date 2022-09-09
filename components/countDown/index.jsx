@@ -12,13 +12,29 @@ export const Countdown = ({ targetDate }) => {
   ];
   return (
     <>
-      <div className={styles.mb_2 + ' ' + styles.font_bold}>
+      <div className={styles.mb_2 + " " + styles.font_bold}>
         {!countdownEnded ? "¡Ya falta muy poco!" : "Empieza la #miduConf 🎊"}
       </div>
       <section className={styles.flex}>
-        {time.map(({ label, value }) => (
-          <div className={styles.flex_col + ' ' + styles.w_24}>
-            <div className={styles.text_5xl + ' ' + styles.font_bold + ' ' + styles.text_transparent + ' ' + styles.bg_clip_text + ' ' + styles.bg_gradient_to_r + ' ' + styles.from_cyan_600 + ' ' + styles.to_blue_700 }>
+        {time.map(({ label, value }, i) => (
+          <div key={i} className={styles.flex_col + " " + styles.w_24}>
+            <div
+              className={
+                styles.text_5xl +
+                " " +
+                styles.font_bold +
+                " " +
+                styles.text_transparent +
+                " " +
+                styles.bg_clip_text +
+                " " +
+                styles.bg_gradient_to_r +
+                " " +
+                styles.from_cyan_600 +
+                " " +
+                styles.to_blue_700
+              }
+            >
               {value}
             </div>
             <span className={styles.text_blue_700}>{label}</span>

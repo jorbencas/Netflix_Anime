@@ -9,13 +9,18 @@ export const useMedia = ({ media }) => {
 
   useEffect(() => {
     if (media) {
+      setMediaList(media);
       setContent("");
       setcursorStyles("cursorPointer");
     } else {
       console.info(media);
-      // setContent("");
-      // setcursorStyles('cursorDefault');
     }
+
+    // return () => {
+    //   setMediaList([]);
+    //   setContent("");
+    //   setcursorStyles('cursorDefault');
+    // }
   }, []);
 
   const changeContent = (e) => {
@@ -27,9 +32,7 @@ export const useMedia = ({ media }) => {
   };
 
   const addElementMediaList = (e) => {
-    let medialist = mediaList;
-    medialist.push(e);
-    setMediaList(medialist);
+    setMediaList(mediaList.concat(e));
   };
 
   const removeElementMediaList = (id) => {

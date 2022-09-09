@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
 import styles from "./EditEpisodes.module.css";
 import Media from "@/components/Media/index";
-import { useState } from "react";
+import { useEpisode } from "@/hooks/useEpisodes";
 
-export default function EditEpisodes({ siglas }) {
+export default function EditEpisodes() {
   const { register, handleSubmit } = useForm({
     shouldUseNativeValidation: true,
   });
-  // const { elements, setElements } = useState([]);
-  const [media, setMedia] = useState([]);
+  const { id, list, setList } = useListIds("episodes");
+  const [tittle, sinopsis, anime, num, seasion, media] = useEpisode(id);
 
   const setabform = async (data) => {
     //JSON.stringify(data);
@@ -17,6 +17,7 @@ export default function EditEpisodes({ siglas }) {
 
   return (
     <>
+      <DyamondListIds list={list} changeList={(id) => setList(id)} />
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
           <form
@@ -53,7 +54,7 @@ export default function EditEpisodes({ siglas }) {
               {...register("date_finalization")}
               placeholder="Fecha de Finalización"
             />
-            <Media media={media} siglas={siglas} kind="episodes" />
+            <Media media={media} kind="episodes" />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

@@ -4,7 +4,7 @@ import { useMedia } from "@/hooks/useMedia";
 import MediaForm from "./MediaForm";
 import MediaList from "./MediaList";
 
-export default function Media({ media, siglas, kind }) {
+export default function Media({ media, kind }) {
   const [
     content,
     mediaList,
@@ -21,14 +21,12 @@ export default function Media({ media, siglas, kind }) {
       <div className={styles.sortableupload + " " + styles[cursorStyles]}>
         <MediaList
           mediaList={mediaList}
-          siglas={siglas}
           removeElementMediaList={removeElementMediaList}
         />
       </div>
       <div className={styles.buttons}>
         <Modal btnLabel="Añadir archivos">
           <MediaForm
-            siglas={siglas}
             kind={kind}
             addElementMediaList={addElementMediaList}
             changeContent={changeContent}
