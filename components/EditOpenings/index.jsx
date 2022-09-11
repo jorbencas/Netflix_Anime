@@ -1,20 +1,28 @@
 import { useForm } from "react-hook-form";
 import styles from "./EditOpenings.module.css";
 import Media from "@/components/Media/index";
-import { useContext, useState } from "react";
-import { SiglasContext } from "@/context/SiglasContext";
 import { useOpening } from "@/hooks/useOpenings";
+import { useListIds } from "@/hooks/useListIfs";
+import DyamondListIds from "../DyamondListIds";
+import { insertOpening } from "../../services/index";
 
 export default function EditOpenings() {
   const { register, handleSubmit } = useForm({
     shouldUseNativeValidation: true,
   });
-  const { id, list, setList } = useListIds("openings");
+  const [id, list, setList] = useListIds("openings");
   const [tittle, sinopsis, anime, num, seasion, media] = useOpening(id);
 
   const setabform = async (data) => {
     //JSON.stringify(data);
     console.log(data);
+    insertOpening(data)
+      .then((result) => {
+        console.log("====================================");
+        console.log(result);
+        console.log("====================================");
+      })
+      .catch((err) => console.error(err));
   };
 
   return (

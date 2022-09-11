@@ -17,10 +17,10 @@ export default function EditAnime() {
   const { register, handleSubmit } = useForm({
     shouldUseNativeValidation: true,
   });
-  const { siglasPage } = useContext(SiglasContext);
+  const { siglas, siglasPage } = useContext(SiglasContext);
   const [generesLista, setGeneresLista] = useState([]);
   const [temporadasLista, setTemporadasLista] = useState([]);
-  const {
+  const [
     tittle,
     sinopsis,
     date_publication,
@@ -30,7 +30,7 @@ export default function EditAnime() {
     state,
     idioma,
     media,
-  } = useAnime(siglasPage);
+  ] = useAnime(siglasPage);
 
   useEffect(() => {
     getGeneres()
@@ -54,10 +54,23 @@ export default function EditAnime() {
   const setabform = async (data) => {
     data.siglas = siglasPage;
     console.log(data);
-    console.log("====================================");
-    console.log("NO NONONONONONONOO");
-    console.log("====================================");
-    //insertAnime(data);
+    if (siglas) {
+      editAnime(data)
+        .then((result) => {
+          console.log("====================================");
+          console.log(result);
+          console.log("====================================");
+        })
+        .catch((err) => console.error(err));
+    } else {
+      insertAnime(data)
+        .then((result) => {
+          console.log("====================================");
+          console.log(result);
+          console.log("====================================");
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   return (

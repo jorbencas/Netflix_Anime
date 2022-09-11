@@ -52,7 +52,7 @@ export function useAnime({ siglas }) {
     };
   }, []);
 
-  return {
+  return [
     tittle,
     sinopsis,
     date_publication,
@@ -62,5 +62,5 @@ export function useAnime({ siglas }) {
     state,
     idioma,
     media,
-  };
+  ];
 }

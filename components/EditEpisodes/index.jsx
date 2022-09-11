@@ -2,17 +2,27 @@ import { useForm } from "react-hook-form";
 import styles from "./EditEpisodes.module.css";
 import Media from "@/components/Media/index";
 import { useEpisode } from "@/hooks/useEpisodes";
+import { useListIds } from "@/hooks/useListIfs";
+import DyamondListIds from "../DyamondListIds";
+import { insertEpisode } from "@/services/";
 
 export default function EditEpisodes() {
   const { register, handleSubmit } = useForm({
     shouldUseNativeValidation: true,
   });
-  const { id, list, setList } = useListIds("episodes");
+  const [id, list, setList] = useListIds("episodes");
   const [tittle, sinopsis, anime, num, seasion, media] = useEpisode(id);
 
   const setabform = async (data) => {
     //JSON.stringify(data);
     console.log(data);
+    insertEpisode(data)
+      .then((result) => {
+        console.log("====================================");
+        console.log(result);
+        console.log("====================================");
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -38,7 +48,7 @@ export default function EditEpisodes() {
               <input
                 type="text"
                 className={styles.input}
-                placeholder="Sinopsis "
+                placeholder="Sinopsis"
                 {...register("sinopsis")}
               />
             </div>

@@ -1,14 +1,15 @@
-import EditAnime from "@/components/EditAnime";
 import Head from "next/head";
 import AppLayout from "@/components/AppLayout";
+import EditAnime from "@/components/EditAnime";
 import EditEpisodes from "@/components/EditEpisodes";
 import EditOpenings from "@/components/EditOpenings";
 import EditEndings from "@/components/EditEndings";
 import SiglasList from "@/components/SiglasList";
-import Tabs from "@/components/UI/Tabs";
+import Tabs from "@/components/Tabs";
 import { useContext } from "react";
 import { SiglasContext } from "@/context/SiglasContext";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Edit() {
   const href = useRouter();
@@ -23,7 +24,7 @@ export default function Edit() {
 
       <AppLayout>
         <SiglasList>
-          <Tabs siglas={siglas}>
+          <Tabs isSteeps={siglas ? true : false}>
             <EditAnime label="Anime" />
             <EditEpisodes label="Episodes" />
             <EditOpenings label="openings" />
@@ -39,14 +40,14 @@ export default function Edit() {
 const ViewEdit = ({ siglas }) => {
   const [siglasPage] = useContext(SiglasContext);
 
-  if (siglas) {
+  if (!siglas) {
     return undefined;
   }
 
   return (
     <ul>
-      <Link to={"/edit/" + siglasPage}>Editar</Link>
-      <Link to={"/" + siglasPage}>Ver</Link>
+      <Link href={"/edit/" + siglasPage}>Editar</Link>
+      <Link href={"/" + siglasPage}>Ver</Link>
     </ul>
   );
 };

@@ -64,6 +64,30 @@ export const insertAnime = async (anime) => {
   }).then((response) => response.json());
 };
 
+export const insertEnding = async (ending) => {
+  return await fetch(`${BASEURL}/api/endings/`, {
+    method: "PUT",
+    headers: headers,
+    body: JSON.stringify(ending),
+  }).then((response) => response.json());
+};
+
+export const insertOpening = async (opening) => {
+  return await fetch(`${BASEURL}/api/openings/`, {
+    method: "PUT",
+    headers: headers,
+    body: JSON.stringify(opening),
+  }).then((response) => response.json());
+};
+
+export const insertEpisode = async (episode) => {
+  return await fetch(`${BASEURL}/api/episodes/`, {
+    method: "PUT",
+    headers: headers,
+    body: JSON.stringify(episode),
+  }).then((response) => response.json());
+};
+
 export const defaultSiglas = async () => {
   return await fetch(`${BASEURL}/api/media/`, {
     headers: headers,
@@ -79,7 +103,7 @@ export const insertMedia = async (media) => {
 };
 
 export const getListIds = async ({ siglas, kind }) => {
-  return await fetch(`${BASEURL}/api/${kind}/${siglas}`, {
+  return await fetch(`${BASEURL}/api/getListIds/${kind}/${siglas}`, {
     headers: headers,
   }).then((response) => response.json());
 };

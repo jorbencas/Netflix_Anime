@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./Tabs.module.css";
 
-const Tabs = ({ children, siglas }) => {
+const Tabs = ({ children, isSteeps = false }) => {
   const [activeTab, setActiveTab] = useState(children[0].props.label);
 
   const onClickTabItem = (tab) => {
@@ -13,13 +13,14 @@ const Tabs = ({ children, siglas }) => {
     <>
       <div className={styles.toolbar}>
         <ol className={styles.tab}>
-          {children.map((child) => {
+          {children.map((child, i) => {
             const { label } = child.props;
             return (
               <Tab
-                siglas={siglas}
+                isSteeps={isSteeps}
                 activeTab={activeTab}
-                key={label}
+                key={i}
+                id={i}
                 label={label}
                 onClick={onClickTabItem}
               />
@@ -40,18 +41,18 @@ const Tabs = ({ children, siglas }) => {
 
 export default Tabs;
 
-const Tab = ({ siglas, activeTab, label, onClick }) => {
+const Tab = ({ isSteeps, activeTab, label, onClick, id }) => {
   let className = styles.tablinks;
   if (activeTab === label) {
     className += " " + styles.active;
   }
 
-  if (!siglas) {
+  if (isSteeps) {
     return (
       <li className={className}>
         <div className={styles.step}>
           <div className={styles.div}></div>
-          <span className={styles.span}>{item.id}</span>
+          <span className={styles.span}>{id + 1}</span>
           <div className={styles.div}></div>
         </div>
         <p className={styles.p}>{label}</p>

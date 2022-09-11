@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 // import FiltersContainer from "components/Filters/FiltersContainer";
 // import Buscador from "components/Buscador/Buscador";
-import SwitchButton from "@/components/UI/SwitchButton";
+import SwitchButton from "@/components/SwitchButton";
 
 const Header = () => {
   const [random, setRandom] = useState(0);

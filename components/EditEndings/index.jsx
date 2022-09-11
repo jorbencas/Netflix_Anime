@@ -4,17 +4,25 @@ import Media from "@/components/Media/index";
 import { useEnding } from "../../hooks/useEndings";
 import { useListIds } from "@/hooks/useListIfs";
 import DyamondListIds from "../DyamondListIds";
+import { insertEnding } from "@/services/";
 
 export default function EditEndings() {
   const { register, handleSubmit } = useForm({
     shouldUseNativeValidation: true,
   });
-  const { id, list, setList } = useListIds("endings");
+  const [id, list, setList] = useListIds("endings");
   const [tittle, sinopsis, anime, num, seasion, media] = useEnding(id);
 
   const setabform = async (data) => {
     //JSON.stringify(data);
     console.log(data);
+    insertEnding(data)
+      .then((result) => {
+        console.log("====================================");
+        console.log(result);
+        console.log("====================================");
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
