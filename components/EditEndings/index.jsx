@@ -4,7 +4,7 @@ import Media from "@/components/Media/index";
 import { useEnding } from "../../hooks/useEndings";
 import { useListIds } from "@/hooks/useListIfs";
 import DyamondListIds from "../DyamondListIds";
-import { insertEnding } from "@/services/";
+import { insertEnding, editEnding } from "@/services/index";
 
 export default function EditEndings() {
   const { register, handleSubmit } = useForm({
@@ -16,13 +16,23 @@ export default function EditEndings() {
   const setabform = async (data) => {
     //JSON.stringify(data);
     console.log(data);
-    insertEnding(data)
-      .then((result) => {
-        console.log("====================================");
-        console.log(result);
-        console.log("====================================");
-      })
-      .catch((err) => console.error(err));
+    if (id) {
+      editEnding(data)
+        .then((result) => {
+          console.log("====================================");
+          console.log(result);
+          console.log("====================================");
+        })
+        .catch((err) => console.error(err));
+    } else {
+      insertEnding(data)
+        .then((result) => {
+          console.log("====================================");
+          console.log(result);
+          console.log("====================================");
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   return (

@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { SiglasContext } from "@/context/SiglasContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import editSeasions from "../../components/EditSeasions/index";
 
 export default function Edit() {
   const href = useRouter();
@@ -26,6 +27,7 @@ export default function Edit() {
         <SiglasList>
           <Tabs isSteeps={siglas ? true : false}>
             <EditAnime label="Anime" />
+            <EditSeasions label="Temporadas" />
             <EditEpisodes label="Episodes" />
             <EditOpenings label="openings" />
             <EditEndings label="Endings" />

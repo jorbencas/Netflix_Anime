@@ -56,6 +56,12 @@ export const getTemporadas = async () => {
   }).then((response) => response.json());
 };
 
+export const getSeasions = async (siglas) => {
+  return await fetch(`${BASEURL}/api/seasions/es/${siglas}`, {
+    headers: headers,
+  }).then((response) => response.json());
+};
+
 export const insertAnime = async (anime) => {
   return await fetch(`${BASEURL}/api/animes/`, {
     method: "PUT",
@@ -64,7 +70,23 @@ export const insertAnime = async (anime) => {
   }).then((response) => response.json());
 };
 
+export const editAnime = async (anime) => {
+  return await fetch(`${BASEURL}/api/animes/`, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(anime),
+  }).then((response) => response.json());
+};
+
 export const insertEnding = async (ending) => {
+  return await fetch(`${BASEURL}/api/endings/`, {
+    method: "PUT",
+    headers: headers,
+    body: JSON.stringify(ending),
+  }).then((response) => response.json());
+};
+
+export const editEnding = async (ending) => {
   return await fetch(`${BASEURL}/api/endings/`, {
     method: "PUT",
     headers: headers,
@@ -80,7 +102,23 @@ export const insertOpening = async (opening) => {
   }).then((response) => response.json());
 };
 
+export const editOpening = async (opening) => {
+  return await fetch(`${BASEURL}/api/openings/`, {
+    method: "PUT",
+    headers: headers,
+    body: JSON.stringify(opening),
+  }).then((response) => response.json());
+};
+
 export const insertEpisode = async (episode) => {
+  return await fetch(`${BASEURL}/api/episodes/`, {
+    method: "PUT",
+    headers: headers,
+    body: JSON.stringify(episode),
+  }).then((response) => response.json());
+};
+
+export const editEpisode = async (episode) => {
   return await fetch(`${BASEURL}/api/episodes/`, {
     method: "PUT",
     headers: headers,

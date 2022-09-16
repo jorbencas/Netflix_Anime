@@ -36,6 +36,17 @@ function VideoTest() {
       );
     }),
       [videoRef?.current?.currentTime];
+
+    document.addEventListener("focus", () => {
+      videoHandler("play");
+    });
+    document.addEventListener("hidden", () => {
+      videoHandler("pause");
+    });
+    // document.addEventListener("visibilityChange", () => {
+    //   let control = document.visibilityState === "hidden" ? "pause" : "play";
+    //   videoHandler(control);
+    // });
   });
   // window.setInterval(function () {
   //   setCurrentTime(videoRef.current?.currentTime);

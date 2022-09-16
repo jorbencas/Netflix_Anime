@@ -4,7 +4,7 @@ import Media from "@/components/Media/index";
 import { useOpening } from "@/hooks/useOpenings";
 import { useListIds } from "@/hooks/useListIfs";
 import DyamondListIds from "../DyamondListIds";
-import { insertOpening } from "../../services/index";
+import { insertOpening, editOpening } from "../../services/index";
 
 export default function EditOpenings() {
   const { register, handleSubmit } = useForm({
@@ -16,13 +16,24 @@ export default function EditOpenings() {
   const setabform = async (data) => {
     //JSON.stringify(data);
     console.log(data);
-    insertOpening(data)
-      .then((result) => {
-        console.log("====================================");
-        console.log(result);
-        console.log("====================================");
-      })
-      .catch((err) => console.error(err));
+    insertEpisode;
+    if (id) {
+      editOpening(data)
+        .then((result) => {
+          console.log("====================================");
+          console.log(result);
+          console.log("====================================");
+        })
+        .catch((err) => console.error(err));
+    } else {
+      insertOpening(data)
+        .then((result) => {
+          console.log("====================================");
+          console.log(result);
+          console.log("====================================");
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   return (

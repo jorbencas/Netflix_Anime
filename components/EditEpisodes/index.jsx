@@ -4,7 +4,7 @@ import Media from "@/components/Media/index";
 import { useEpisode } from "@/hooks/useEpisodes";
 import { useListIds } from "@/hooks/useListIfs";
 import DyamondListIds from "../DyamondListIds";
-import { insertEpisode } from "@/services/";
+import { insertEpisode, editEpisode } from "@/services/index";
 
 export default function EditEpisodes() {
   const { register, handleSubmit } = useForm({
@@ -16,13 +16,23 @@ export default function EditEpisodes() {
   const setabform = async (data) => {
     //JSON.stringify(data);
     console.log(data);
-    insertEpisode(data)
-      .then((result) => {
-        console.log("====================================");
-        console.log(result);
-        console.log("====================================");
-      })
-      .catch((err) => console.error(err));
+    if (id) {
+      editEpisode(data)
+        .then((result) => {
+          console.log("====================================");
+          console.log(result);
+          console.log("====================================");
+        })
+        .catch((err) => console.error(err));
+    } else {
+      insertEpisode(data)
+        .then((result) => {
+          console.log("====================================");
+          console.log(result);
+          console.log("====================================");
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   return (

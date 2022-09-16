@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import styles from "./EditAnime.module.css";
 import {
+  editAnime,
   insertAnime,
   getTemporadas,
   getGeneres,
