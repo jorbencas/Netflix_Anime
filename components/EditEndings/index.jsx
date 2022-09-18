@@ -10,7 +10,7 @@ export default function EditEndings() {
   const { register, handleSubmit } = useForm({
     shouldUseNativeValidation: true,
   });
-  const [id, list, setList] = useListIds("endings");
+  const [id, list, setId] = useListIds("endings");
   const [tittle, sinopsis, anime, num, seasion, media] = useEnding(id);
 
   const setabform = async (data) => {
@@ -37,7 +37,7 @@ export default function EditEndings() {
 
   return (
     <>
-      <DyamondListIds list={list} changeList={(id) => setList(id)} />
+      <DyamondListIds list={list} changeList={(id) => setId(id)} />
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
           <form

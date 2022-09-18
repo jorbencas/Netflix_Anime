@@ -34,20 +34,34 @@ function VideoTest() {
       setProgress(
         (videoRef?.current?.currentTime / videoRef?.current?.duration) * 100
       );
-    }),
-      [videoRef?.current?.currentTime];
-
-    document.addEventListener("focus", () => {
-      videoHandler("play");
     });
-    document.addEventListener("hidden", () => {
-      videoHandler("pause");
-    });
-    // document.addEventListener("visibilityChange", () => {
-    //   let control = document.visibilityState === "hidden" ? "pause" : "play";
-    //   videoHandler(control);
+    // document.addEventListener("visible", () => {
+    //   console.log("====================================");
+    //   console.log("visible");
+    //   console.log("====================================");
+    //   videoHandler("play");
     // });
-  });
+    // document.addEventListener("hidden", () => {
+    //   console.log("====================================");
+    //   console.log("hidden");
+    //   console.log("====================================");
+    //   videoHandler("pause");
+    // });
+    console.log('====================================');
+    console.log(document.title);
+    console.log('====================================');
+    document.addEventListener("visibilityChange", () => {
+      let control = document.visibilityState === "hidden" ? "pause" : "play";
+      if (control == "play") document.title = "Video";
+      videoHandler(control);
+    });
+  }, [videoRef?.current?.currentTime]);
+
+
+
+
+
+
   // window.setInterval(function () {
   //   setCurrentTime(videoRef.current?.currentTime);
   //   setProgress((videoRef.current?.currentTime / videoTime) * 100);

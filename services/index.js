@@ -141,7 +141,7 @@ export const insertMedia = async (media) => {
 };
 
 export const getListIds = async ({ siglas, kind }) => {
-  return await fetch(`${BASEURL}/api/getListIds/${kind}/${siglas}`, {
+  return await fetch(`${BASEURL}/api/${kind}/getListIds/${siglas}`, {
     headers: headers,
   }).then((response) => response.json());
 };

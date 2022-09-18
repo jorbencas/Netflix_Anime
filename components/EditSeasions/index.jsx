@@ -1,16 +1,16 @@
 import { useForm } from "react-hook-form";
 import styles from "./EditSeasions.module.css";
-import { editAnime, insertAnime, getSeasions } from "@/services/index";
-import { useState, useEffect, useContext } from "react";
-import { SiglasContext } from "@/context/SiglasContext";
+import { editOpening, insertOpening } from "@/services/index";
+import { useSeasion } from "@/hooks/useSeasions";
+import { useListIds } from "@/hooks/useListIfs";
+import DyamondListIds from "../DyamondListIds";
 
 export default function EditSeasions() {
-  const [seassions, setSeassions] = useState([]);
   const { register, handleSubmit } = useForm({
     shouldUseNativeValidation: true,
   });
   const [id, list, setList] = useListIds("seasions");
-  const [tittle, sinopsis, anime, num, seasion, media] = useSSeasion(id);
+  const [tittle, setTittle] = useSeasion(id);
 
   const setabform = async (data) => {
     console.log(data);
@@ -33,17 +33,6 @@ export default function EditSeasions() {
     }
   };
 
-  useEffect(() => {
-    getSeasions(siglasPage)
-      .then((seasions) => {
-        setSeasions(seasions.data);
-      })
-      .catch((err) => console.error(err));
-
-    return () => {
-      setSeasions([]);
-    };
-  }, []);
   const increment = () => {
     console.log("====================================");
     console.log(siglasPage);
@@ -60,20 +49,12 @@ export default function EditSeasions() {
 
   return (
     <>
-      <DyamondListIds list={seassions} changeList={(id) => setSeasions(id)} />
-
+      <DyamondListIds list={list} changeList={(id) => setList(id)} />
       <div className={styles.concret}>
         <input
           type="text"
           className={styles.input}
-          placeholder="code del genero"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-        />
-        <input
-          type="text"
-          className={styles.input}
-          placeholder="translation del genero"
+          placeholder="titulo de la temporada"
           value={tittle}
           onChange={(e) => setTittle(e.target.value)}
         />

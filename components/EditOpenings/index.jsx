@@ -10,7 +10,7 @@ export default function EditOpenings() {
   const { register, handleSubmit } = useForm({
     shouldUseNativeValidation: true,
   });
-  const [id, list, setList] = useListIds("openings");
+  const [id, list, setId] = useListIds("openings");
   const [tittle, sinopsis, anime, num, seasion, media] = useOpening(id);
 
   const setabform = async (data) => {
@@ -38,7 +38,7 @@ export default function EditOpenings() {
 
   return (
     <>
-      <DyamondListIds list={list} changeList={(id) => setList(id)} />
+      <DyamondListIds list={list} changeList={(id) => setId(id)} />
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
           <form

@@ -13,12 +13,11 @@ export function useListIds({ kind }) {
         if (list?.data) setList(list?.data);
       })
       .catch((err) => console.error(err));
-
     return () => {
       setList([]);
       setId(0);
     };
   }, []);
 
-  return [id, list, setList];
+  return [id, list, setId];
 }

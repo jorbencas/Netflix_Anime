@@ -10,7 +10,7 @@ export default function EditEpisodes() {
   const { register, handleSubmit } = useForm({
     shouldUseNativeValidation: true,
   });
-  const [id, list, setList] = useListIds("episodes");
+  const [id, list, setId] = useListIds("episodes");
   const [tittle, sinopsis, anime, num, seasion, media] = useEpisode(id);
 
   const setabform = async (data) => {
@@ -37,7 +37,7 @@ export default function EditEpisodes() {
 
   return (
     <>
-      <DyamondListIds list={list} changeList={(id) => setList(id)} />
+      <DyamondListIds list={list} changeList={(id) => setId(id)} />
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
           <form
