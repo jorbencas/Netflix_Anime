@@ -42,6 +42,9 @@ export default function EditAnime() {
 
     getTemporadas()
       .then((temporada) => {
+        console.log("====================================");
+        console.log(temporada);
+        console.log("====================================");
         setTemporadasLista(temporada.data);
       })
       .catch((err) => console.error(err));
@@ -123,7 +126,6 @@ export default function EditAnime() {
                 <option value="japanise">Japones</option>
               </select>
             </div>
-
             <div className={styles.input_group + " " + styles.checkbox}>
               <p className={styles.label}> Generos: </p>
               {generesLista.length > 0
@@ -157,7 +159,7 @@ export default function EditAnime() {
                 generesLista={generesLista}
               />
             </Modal>
-            <Media media={media} kind="anime" />
+            <Media media={media} kind="animes" id_external={siglasPage} />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

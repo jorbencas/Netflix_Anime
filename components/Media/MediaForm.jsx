@@ -4,6 +4,7 @@ import styles from "./Media.module.css";
 
 export default function MediaForm({
   kind,
+  id_external,
   changeContent,
   changeCursorStyles,
   addElementMediaList,
@@ -15,7 +16,13 @@ export default function MediaForm({
     setMediaFiles2,
     setKind,
     errors,
-  ] = useMediaForm(changeContent, changeCursorStyles, addElementMediaList);
+  ] = useMediaForm(
+    changeContent,
+    changeCursorStyles,
+    addElementMediaList,
+    id_external,
+    kind
+  );
 
   return (
     <div className={styles.upload}>
@@ -31,7 +38,7 @@ export default function MediaForm({
         <input
           type="button"
           value="Subir"
-          onClick={() => clickbuttonupload("subir")}
+          onClick={clickbuttonupload}
           className={styles.button}
         />
 
@@ -48,19 +55,26 @@ export default function MediaForm({
         <input
           type="button"
           value="Importar"
-          onClick={() => clickbuttonupload("importar")}
+          onClick={clickbuttonupload}
           className={styles.button}
         />
         {/* <i className="fas fa-file-import"></i> */}
       </div>
       <MediaTabs kind={kind} changeKind={(e) => setKind(e)} message={message} />
-      {errors.lenght > 0 ? (
-        <section className={styles.info}>
-          {errors.map((element, i) => {
-            <article key={i}> {element}</article>;
-          })}
-        </section>
-      ) : null}
+      <Errors errors={errors} />
     </div>
   );
 }
+
+const Errors = ({ errors }) => {
+  if (errors.length == 0) {
+    return undefined;
+  }
+  return (
+    <section className={styles.info}>
+      {errors.map((element, i) => {
+        return <article key={i}> {element}</article>;
+      })}
+    </section>
+  );
+};

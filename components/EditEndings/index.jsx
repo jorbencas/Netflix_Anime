@@ -62,7 +62,7 @@ export default function EditEndings() {
                 {...register("descripcion")}
               />
             </div>
-            <Media media={media} kind="endings" />
+            <Media media={media} kind="endings" id_external={id} />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

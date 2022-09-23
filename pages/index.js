@@ -3,7 +3,7 @@ import Head from "next/head";
 import AppLayout from "@/components/AppLayout";
 import { ThemeContext } from "@/context/ThemeContext.jsx";
 import styles from "@/styles/Home.module.css";
-import VideoTest from "@/components/VideoTest/VideoTest";
+import VideoTest from "@/components/VideoTest";
 import logo from "@/public/logo.svg";
 import "@/styles/Counter.module.css";
 import Modal from "@/components/Modal";

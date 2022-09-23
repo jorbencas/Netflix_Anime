@@ -278,3 +278,537 @@
     margin: 7px 0px 23px ;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.wrap {
+  display: block;
+  color: var(--main-green);
+  background-color: var(--main-grey);
+}
+
+.input {
+  display: inline-block;
+  border: 1px solid var(--main-green);
+  background: var(--opacity-grey);
+  margin: 22px;
+  color: var(--main-green);
+  font-family: "Roboto";
+  font-size: 18px;
+  width: 45%;
+  padding: 10px;
+}
+
+.siglas {
+  width: 25%;
+}
+
+.contenedor_formulario .formulario .input-group {
+  margin: 12px;
+  text-align: center;
+}
+
+.contenedor_formulario .formulario .input-group.checkbox,
+.contenedor_formulario .formulario .input-group.radio {
+  text-align: left;
+}
+
+.concret {
+  display: block;
+  margin: 22px;
+  text-align: left;
+}
+
+.concret .input {
+  width: -webkit-fill-available;
+  max-width: 100%;
+}
+
+.contenedor_formulario .formulario .link {
+  display: inline-block;
+  margin: 22px;
+  font-size: 18px;
+  width: 45%;
+  padding: 10px;
+}
+
+.contenedor_formulario .formulario .submit,
+.contenedor_formulario .formulario .link {
+  background: var(--main-green);
+  border: 2px solid var(--color-text);
+  color: var(--color-text);
+  cursor: pointer;
+  font-family: "Roboto";
+  max-width: 235px;
+  text-align: center;
+}
+
+.contenedor_formulario .formulario .submit:hover {
+  border: 2px solid var(--main-green);
+  background: var(--opacity-grey);
+  color: var(--color-text);
+}
+
+.checkbox ,.label {
+  display: inline-block;
+  cursor: pointer;
+  color: var(--main-green);
+  position: relative;
+  padding: 5px 15px 5px 51px;
+  font-size: 1em;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.checkbox .label:hover,
+.radio .label:hover {
+  background: var(--opacity-green);
+  color: var(--color-text);
+}
+
+.checkbox  + .label:before,
+.radio .label:before {
+  content: "";
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  position: absolute;
+  left: 15px;
+  border-radius: 50%;
+  background: none;
+  border: 2px solid var(--main-green);
+}
+
+.contenedor_formulario .formulario .input-group.radio .input[type="radio"] {
+  display: none;
+}
+
+.contenedor_formulario
+  .formulario
+  .input-group.radio
+  .input[type="radio"]:checked
+  + .label:before {
+  display: none;
+}
+
+.contenedor_formulario
+  .formulario
+  .input-group.radio
+  .input[type="radio"]:checked
+  + .label {
+  padding: 5px 15px;
+  background: var(--main-green);
+  border-radius: 2px;
+  color: var(--color-text);
+}
+
+.checkbox, .label:before {
+  border-radius: 3px;
+}
+
+.checkbox{
+  display: none;
+}
+.contenedor_formulario .checkbox:checked
+  + .label:before {
+  display: none;
+}
+.checkbox:checked
+  + .label {
+  background: var(--main-green);
+  color: var(--color-text);
+  padding: 5px 15px;
+}
+
+.star-rating {
+  font-size: 13px;
+  display: inline-block;
+}
+
+.star-rating .span .fas {
+  color: var(--main-green);
+}
+
+.star-rating .span .far {
+  color: var(--main-green);
+}
+
+.movil_list {
+  display: none;
+}
+@media screen and (max-width: 800px) {
+  .movil_list {
+    display: block;
+    width: 100%;
+    height: 175px;
+    position: relative;
+    overflow: auto;
+    color: var(--main-green);
+    background-color: var(--main-grey);
+  }
+
+  .movil_list .movil_child {
+    width: 65%;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+  }
+
+  .list {
+    display: none;
+  }
+
+  .contenedor_formulario {
+    padding: 10px;
+    max-width: 100%;
+    border-width: 0px;
+    /* max-width: 1873px; */
+    width: 100%;
+  }
+
+  .contenedor_formulario .formulario {
+    width: 90%;
+  }
+
+  .contenedor_formulario .formulario .input-group {
+    width: 100%;
+    margin: 0px;
+  }
+
+  .contenedor_formulario .formulario .input {
+    width: 100%;
+  }
+
+  .contenedor_formulario .formulario .concret {
+    width: 91%;
+    margin: 22px;
+  }
+
+  .contenedor_formulario .formulario .concret .input {
+    width: 100%;
+  }
+
+  .contenedor_formulario .formulario .input-group.checkbox,
+  .contenedor_formulario .formulario .input-group.radio {
+    margin: 0px;
+    width: 100%;
+  }
+}
+
+

@@ -4,7 +4,7 @@ import { useMedia } from "@/hooks/useMedia";
 import MediaForm from "./MediaForm";
 import MediaList from "./MediaList";
 
-export default function Media({ media, kind }) {
+export default function Media({ media, kind, id_external }) {
   const [
     content,
     mediaList,
@@ -28,6 +28,7 @@ export default function Media({ media, kind }) {
         <Modal btnLabel="Añadir archivos">
           <MediaForm
             kind={kind}
+            id_external={id_external}
             addElementMediaList={addElementMediaList}
             changeContent={changeContent}
             changeCursorStyles={changeCursorStyles}

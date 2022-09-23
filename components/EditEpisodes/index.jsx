@@ -40,12 +40,7 @@ export default function EditEpisodes() {
       <DyamondListIds list={list} changeList={(id) => setId(id)} />
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
-          <form
-            className={styles.concret}
-            onSubmit={handleSubmit((data) => {
-              setabform(data);
-            })}
-          >
+          <form className={styles.concret} onSubmit={handleSubmit(setabform)}>
             <div className={styles.contenedor_inputs}>
               <input
                 type="text"
@@ -74,7 +69,7 @@ export default function EditEpisodes() {
               {...register("date_finalization")}
               placeholder="Fecha de Finalización"
             />
-            <Media media={media} kind="episodes" />
+            <Media media={media} kind="episodes" id_external={id} />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

@@ -41,12 +41,7 @@ export default function EditOpenings() {
       <DyamondListIds list={list} changeList={(id) => setId(id)} />
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
-          <form
-            className={styles.concret}
-            onSubmit={handleSubmit((data) => {
-              setabform(data);
-            })}
-          >
+          <form className={styles.concret} onSubmit={handleSubmit(setabform)}>
             <div className={styles.contenedor_inputs}>
               <input
                 type="text"
@@ -63,7 +58,7 @@ export default function EditOpenings() {
                 {...register("descripcion")}
               />
             </div>
-            <Media media={media} kind="openings" />
+            <Media media={media} kind="openings" id_external={id} />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

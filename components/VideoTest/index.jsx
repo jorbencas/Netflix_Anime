@@ -35,41 +35,21 @@ function VideoTest() {
         (videoRef?.current?.currentTime / videoRef?.current?.duration) * 100
       );
     });
-    // document.addEventListener("visible", () => {
-    //   console.log("====================================");
-    //   console.log("visible");
-    //   console.log("====================================");
-    //   videoHandler("play");
-    // });
-    // document.addEventListener("hidden", () => {
-    //   console.log("====================================");
-    //   console.log("hidden");
-    //   console.log("====================================");
-    //   videoHandler("pause");
-    // });
-    console.log('====================================');
-    console.log(document.title);
-    console.log('====================================');
-    document.addEventListener("visibilityChange", () => {
+    document.addEventListener("visibilitychange", () => {
       let control = document.visibilityState === "hidden" ? "pause" : "play";
-      if (control == "play") document.title = "Video";
       videoHandler(control);
     });
   }, [videoRef?.current?.currentTime]);
 
-
-
-
-
-
-  // window.setInterval(function () {
-  //   setCurrentTime(videoRef.current?.currentTime);
-  //   setProgress((videoRef.current?.currentTime / videoTime) * 100);
-  // }, 1000);
+  window.setInterval(function () {
+    setCurrentTime(videoRef.current?.currentTime);
+    setProgress((videoRef.current?.currentTime / videoTime) * 100);
+  }, 1000);
 
   return (
     <div className={styles.app}>
       <video
+        autoPlay
         id="video1"
         ref={videoRef}
         className={styles.video}

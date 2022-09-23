@@ -38,10 +38,7 @@ const Tabs = ({ children, isSteeps = false }) => {
     </>
   );
 };
-// https://www.mediafire.com/folder/0a0eyjeg5vs4y/(locuranime.com)+Hai!4-13-25
-// https://www.locuranime.com/search/label/Anime%20Espa%C3%B1ol%20de%20Espa%C3%B1a?updated-max=2021-10-21T20:20:00-04:00&max-results=20&start=19&by-date=false
 
-// www.locuranime.com
 export default Tabs;
 
 const Tab = ({ isSteeps, activeTab, label, onClick, id }) => {

@@ -10,7 +10,10 @@ export function useListIds({ kind }) {
   useEffect(() => {
     getListIds(siglasPage, kind)
       .then((list) => {
-        if (list?.data) setList(list?.data);
+        if (list?.data) {
+          setId(list?.data[0]);
+          setList(list?.data);
+        }
       })
       .catch((err) => console.error(err));
     return () => {

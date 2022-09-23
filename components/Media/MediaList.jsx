@@ -37,10 +37,7 @@ export default function MediaList({ mediaList, removeElementMediaList }) {
           </td>
           <td style="text-align:right;">
             <div class="buttons">
-              <div
-                class="button"
-                onclick={() => removeElementMediaList(element.id)}
-              >
+              <div class="button" onclick={removeElementMediaList(element.id)}>
                 <i class="fa fa-trash" style="font-size:20px;"></i>
               </div>
             </div>

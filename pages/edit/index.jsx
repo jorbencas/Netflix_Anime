@@ -25,13 +25,17 @@ export default function Edit() {
 
       <AppLayout>
         <SiglasList>
-          <Tabs >
+          <Tabs>
             <EditAnime label="Anime" />
             <EditSeasions label="Temporadas" />
             <EditEpisodes label="Episodes" />
             <EditOpenings label="openings" />
             <EditEndings label="Endings" />
-            <ViewEdit isSteeps={siglas ? true : false} siglas={siglas} label="all" />
+            <ViewEdit
+              isSteeps={siglas ? true : false}
+              siglas={siglas}
+              label="all"
+            />
           </Tabs>
         </SiglasList>
       </AppLayout>
