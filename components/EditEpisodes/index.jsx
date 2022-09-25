@@ -14,7 +14,8 @@ export default function EditEpisodes() {
   const [tittle, sinopsis, anime, num, seasion, media] = useEpisode(id);
 
   const setabform = async (data) => {
-    //JSON.stringify(data);
+    if (media.length == 0) return;
+
     console.log(data);
     if (id) {
       editEpisode(data)

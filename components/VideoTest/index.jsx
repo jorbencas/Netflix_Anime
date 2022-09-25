@@ -29,16 +29,25 @@ function VideoTest() {
   };
 
   useEffect(() => {
-    videoRef?.current?.addEventListener("timeupdate", () => {
+    const timeUpdate = () => {
       setCurrentTime(videoRef?.current?.currentTime);
       setProgress(
         (videoRef?.current?.currentTime / videoRef?.current?.duration) * 100
       );
-    });
-    document.addEventListener("visibilitychange", () => {
+    };
+
+    const visibilityChange = () => {
       let control = document.visibilityState === "hidden" ? "pause" : "play";
       videoHandler(control);
-    });
+    };
+
+    videoRef?.current?.addEventListener("timeupdate", timeUpdate);
+    document.addEventListener("visibilitychange", visibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", visibilityChange);
+      videoRef?.current?.removeEventListener("timeupdate", timeUpdate);
+    };
   }, [videoRef?.current?.currentTime]);
 
   window.setInterval(function () {

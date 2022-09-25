@@ -2,13 +2,7 @@ import { useState, useContext } from "react";
 import { ModalContext } from "@/context/ModalContext";
 import { SiglasContext } from "@/context/SiglasContext";
 
-export const useMediaForm = (
-  changeContent,
-  changeCursorStyles,
-  addElementMediaList,
-  id_external,
-  k
-) => {
+export const useMediaForm = (addElementMediaList, id_external, k) => {
   const [mediaFiles, setMediaFiles] = useState([]);
   const [mediaFiles2, setMediaFiles2] = useState([]);
   const [errors, setErrors] = useState([]);
@@ -92,38 +86,16 @@ export const useMediaForm = (
     } else if (success) {
       let req = { tabla: k, mediaFiles, mediaFiles2, kind, id_external };
       if (kind === "banner" || kind == "portada") req.kind = kind;
-      changeContent(<div>Cargando...</div>);
       console.log("====================================");
       console.log(req);
       console.log("====================================");
       // insertMedia(req).then((result) => {
       //   console.info(result);
-      //   changeCursorStyles("cursorDefault");
       //   addElementMediaList(rersult.data);
       //   setOpen(false);
       // });
     }
   };
-
-  //   const handleError = (e) => {
-  //     e.preventDefault();
-  //     setLoading(false);
-  //     setError(true);
-  //     setSuccess(false);
-  //     setContent(
-  //       `<div className=${styles.sinID}> <div>Error al cargar los archivos.</div> </div>`
-  //     );
-  //     setcursorStyles(styles.cursorDefault);
-  //   };
-
-  //   const handleSuccess = (e) => {
-  //     e.preventDefault();
-  //     setSuccess(true);
-  //     setContent(
-  //       `<div className=${styles.sinID}> <div>Archivos cargados correctamente.</div> </div>`
-  //     );
-  //     setcursorStyles(styles.cursorDefault);
-  //   };
 
   return [
     message,

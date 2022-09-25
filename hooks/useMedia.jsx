@@ -1,35 +1,19 @@
 import { useEffect, useState } from "react";
 
 export const useMedia = ({ media }) => {
-  const [content, setContent] = useState(
-    <div>Para agregar archivos debe antes guardar el contenido.</div>
-  );
   const [mediaList, setMediaList] = useState([]);
-  const [cursorStyles, setcursorStyles] = useState("cursorDefault");
 
   useEffect(() => {
     if (media) {
       setMediaList(media);
-      setContent("");
-      setcursorStyles("cursorPointer");
     } else {
       console.info(media);
     }
 
-    // return () => {
-    //   setMediaList([]);
-    //   setContent("");
-    //   setcursorStyles('cursorDefault');
-    // }
+    return () => {
+      setMediaList([]);
+    };
   }, []);
-
-  const changeContent = (e) => {
-    setContent(e);
-  };
-
-  const changeCursorStyles = (e) => {
-    setcursorStyles(e);
-  };
 
   const addElementMediaList = (e) => {
     setMediaList(mediaList.concat(e));
@@ -44,13 +28,5 @@ export const useMedia = ({ media }) => {
     setMediaList(medialist);
   };
 
-  return [
-    content,
-    mediaList,
-    cursorStyles,
-    addElementMediaList,
-    removeElementMediaList,
-    changeContent,
-    changeCursorStyles,
-  ];
+  return [mediaList, addElementMediaList, removeElementMediaList];
 };

@@ -43,9 +43,9 @@ export default function EditAnime() {
     getTemporadas()
       .then((temporada) => {
         console.log("====================================");
-        console.log(temporada);
+        console.log(temporada.data);
         console.log("====================================");
-        setTemporadasLista(temporada.data);
+        setTemporadasLista(temporada?.data);
       })
       .catch((err) => console.error(err));
 
@@ -56,6 +56,7 @@ export default function EditAnime() {
   }, []);
 
   const setabform = async (data) => {
+    if (media.length == 0) return;
     data.siglas = siglasPage;
     console.log(data);
     if (siglas) {
@@ -130,24 +131,28 @@ export default function EditAnime() {
               <p className={styles.label}> Generos: </p>
               {generesLista.length > 0
                 ? generesLista.map((genere, i) => {
-                    <InputCheckboxs
-                      key={i}
-                      register={register}
-                      elements={generes}
-                      element={genere}
-                      kind="generes"
-                    />;
+                    return (
+                      <InputCheckboxs
+                        key={i}
+                        register={register}
+                        elements={generes}
+                        element={genere}
+                        kind="generes"
+                      />
+                    );
                   })
                 : "No hay generos"}
               {temporadasLista.length > 0
                 ? temporadasLista.map((temporada, i) => {
-                    <InputCheckboxs
-                      key={i}
-                      register={register}
-                      elements={temporadas}
-                      element={temporada}
-                      kind="temporadas"
-                    />;
+                    return (
+                      <InputCheckboxs
+                        key={i}
+                        register={register}
+                        elements={temporadas}
+                        element={temporada}
+                        kind="temporadas"
+                      />
+                    );
                   })
                 : "No hay temporadas"}
             </div>

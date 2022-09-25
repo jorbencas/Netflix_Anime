@@ -1,11 +1,14 @@
 import styles from "./SiglasList.module.css";
 import { useSiglas } from "@/hooks/useSiglas";
 import { SiglasListProvider } from "@/context/SiglasContext";
-
-//https://github.com/do-community/building-a-tabs-component-react/blob/master/src/components/Tabs.js
+import { useEffect } from "react";
 
 const SiglasContainer = ({ children }) => {
   const [siglas, siglasLista, siglasPage, changeSiglasList] = useSiglas();
+
+  useEffect(() => {
+    console.log("Dentro de SiglasContainer");
+  }, []);
 
   return (
     <>

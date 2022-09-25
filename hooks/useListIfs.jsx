@@ -8,7 +8,8 @@ export function useListIds({ kind }) {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    getListIds(siglasPage, kind)
+    if (siglasPage) {
+      getListIds(siglasPage, kind)
       .then((list) => {
         if (list?.data) {
           setId(list?.data[0]);
@@ -16,6 +17,8 @@ export function useListIds({ kind }) {
         }
       })
       .catch((err) => console.error(err));
+    }
+    
     return () => {
       setList([]);
       setId(0);

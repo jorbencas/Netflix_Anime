@@ -5,22 +5,33 @@ export default function MediaTabs({ kind, changeKind, message }) {
     return <div className={styles.messagesupload}>{message}</div>;
   }
   return (
-    <ul className={styles.tab}>
+    <>
       <input
         type="radio"
         value="banner"
         name="kind"
-        className={styles.tablinks}
+        id="banner"
+        className={styles.radio}
         onChange={(e) => changeKind(e.target.value)}
       />
+      <label className={styles.label} htmlFor="banner">
+        banner
+      </label>
+
       <input
         type="radio"
         value="portada"
         name="kind"
+        id="portada"
         className={styles.tablinks}
         onChange={(e) => changeKind(e.target.value)}
       />
+
+      <label className={styles.label} htmlFor="portada">
+        portada
+      </label>
+
       <div className={styles.messagesupload}>{message}</div>
-    </ul>
+    </>
   );
 }

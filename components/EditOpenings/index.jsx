@@ -14,7 +14,7 @@ export default function EditOpenings() {
   const [tittle, sinopsis, anime, num, seasion, media] = useOpening(id);
 
   const setabform = async (data) => {
-    //JSON.stringify(data);
+    if (media.length == 0) return;
     console.log(data);
     insertEpisode;
     if (id) {

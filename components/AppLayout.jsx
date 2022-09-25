@@ -9,7 +9,7 @@ export default function AppLayout({ children }) {
       <AppLayoutContainer children={children} />
     </ThemeProvider>
   );
-};
+}
 
 const AppLayoutContainer = ({ children }) => {
   const { state } = useContext(ThemeContext);
