@@ -42,9 +42,6 @@ export default function EditAnime() {
 
     getTemporadas()
       .then((temporada) => {
-        console.log("====================================");
-        console.log(temporada.data);
-        console.log("====================================");
         setTemporadasLista(temporada?.data);
       })
       .catch((err) => console.error(err));
@@ -92,8 +89,7 @@ export default function EditAnime() {
               />
             </div>
 
-            <input
-              type="text"
+            <textarea
               className={styles.input}
               placeholder="Sinopsis"
               {...register("sinopsis")}
@@ -158,6 +154,10 @@ export default function EditAnime() {
             </div>
             <Modal btnLabel="Añadir Filtros">
               <AddGeneres
+                changeTemporadas={(g) => {
+                  setTemporadasLista(g);
+                }}
+                temporadasLista={temporadasLista}
                 changeGeneres={(g) => {
                   setGeneresLista(g);
                 }}
@@ -173,23 +173,57 @@ export default function EditAnime() {
   );
 }
 
-export const AddGeneres = ({ changeGeneres, generesLista, siglasPage }) => {
+export const AddGeneres = ({
+  changeTemporadas,
+  temporadasLista,
+  changeGeneres,
+  generesLista,
+}) => {
+  let kindList = ["generes", "temporadas", "languajes", "kinds", "years"];
   const [code, setCode] = useState("");
   const [tittle, setTittle] = useState("");
+  const [kind, setKind] = useState("");
   const { setOpen } = useContext(ModalContext);
 
+  useEffect(() => {
+    setKind(
+      kindList
+        .filter((e) => {
+          return e.includes("generes");
+        })
+        .shift()
+    );
+  }, []);
+  ("");
+
   const increment = () => {
-    console.log("====================================");
-    console.log(siglasPage);
-    console.log("====================================");
-    let data = { code, tittle };
-    setTittle("");
-    setCode("");
-    // insertGeneres(data).then((res) => {
-    //   generesLista.push(res.data);
-    //   changeGeneres(generesLista);
-    setOpen(false);
-    // });
+    insertGeneres({ code, tittle, kind }).then((res) => {
+      if (kind == "generes") {
+        generesLista.push(res.data);
+        changeGeneres(generesLista);
+      } else if (kind == "temporadas") {
+        if (res.data) {
+          console.log("====================================");
+          console.log(typeof res.data);
+          console.log("====================================");
+          temporadasLista.push(res.data);
+          changeTemporadas(temporadasLista);
+        }
+      }
+      setOpen(false);
+
+      return () => {
+        setTittle("");
+        setCode("");
+        setKind(
+          kindList
+            .filter((e) => {
+              return e.includes("generes");
+            })
+            .shift()
+        );
+      };
+    });
   };
 
   return (
@@ -197,17 +231,28 @@ export const AddGeneres = ({ changeGeneres, generesLista, siglasPage }) => {
       <input
         type="text"
         className={styles.input}
-        placeholder="code del genero"
+        placeholder={`codigo del` + kind}
         value={code}
         onChange={(e) => setCode(e.target.value)}
       />
       <input
         type="text"
         className={styles.input}
-        placeholder="translation del genero"
+        placeholder={`translation del ` + kind}
         value={tittle}
         onChange={(e) => setTittle(e.target.value)}
       />
+      {kindList.map((element, i) => {
+        return (
+          <ImputKindsFilters
+            key={i}
+            changeKing={(e) => setKind(e)}
+            kind={kind}
+            element={element}
+            i={i}
+          />
+        );
+      })}
       <input
         className={styles.input}
         type="button"
@@ -218,8 +263,27 @@ export const AddGeneres = ({ changeGeneres, generesLista, siglasPage }) => {
   );
 };
 
+export const ImputKindsFilters = ({ changeKing, element, kind, i }) => {
+  return (
+    <>
+      <input
+        type="radio"
+        className={styles.checkbox}
+        id={i}
+        name="kinsfilters"
+        checked={element === kind}
+        onChange={(e) => changeKing(e.target.value)}
+        value={element}
+      />
+
+      <label className={styles.label} htmlFor={i}>
+        {element}
+      </label>
+    </>
+  );
+};
+
 export const InputCheckboxs = ({ register, element, elements, kind }) => {
-  let classActive = elements?.includes(element) ? "checked" : "";
   return (
     <>
       <input
@@ -227,7 +291,7 @@ export const InputCheckboxs = ({ register, element, elements, kind }) => {
         className={styles.checkbox}
         id={element.code}
         {...register(`${kind}`)}
-        {...classActive}
+        checked={elements?.includes(element)}
         value={element.code}
       />
 

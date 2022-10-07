@@ -2,6 +2,7 @@ const BASEURL = "http://localhost:3001";
 const APITOKEN =
   "???123456789Azsxdcfvgnbhknljopimuhytgrfqew127364lpñokmni**/-++89¿juhvtcfdr65es123\\~~xza_qw";
 const headers = {
+  "Content-Type": "application/json",
   api_token: APITOKEN,
   "X-Requested-With": "XMLHttpRequest",
 };
@@ -31,13 +32,13 @@ export const getOpening = async (id) => {
 };
 
 export const getGeneres = async () => {
-  return await fetch(`${BASEURL}/api/generes/`, {
+  return await fetch(`${BASEURL}/api/filters/generes/`, {
     headers: headers,
   }).then((response) => response.json());
 };
 
-export const insertGeneres = async (genere) => {
-  return await fetch(`${BASEURL}/api/generes/`, {
+export const insertGeneres = (genere) => {
+  return fetch(`${BASEURL}/api/filters/generes`, {
     method: "PUT",
     headers: headers,
     body: JSON.stringify(genere),
@@ -57,7 +58,7 @@ export const getTemporadas = async () => {
 };
 
 export const getSeasions = async (siglas) => {
-  return await fetch(`${BASEURL}/api/seasions/es/${siglas}`, {
+  return await fetch(`${BASEURL}/api/seasions/${siglas}`, {
     headers: headers,
   }).then((response) => response.json());
 };
