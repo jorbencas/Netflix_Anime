@@ -1,32 +1,17 @@
-import { useEffect, useState } from "react";
-
-export const useMedia = ({ media }) => {
-  const [mediaList, setMediaList] = useState([]);
-
-  useEffect(() => {
-    if (media) {
-      setMediaList(media);
-    } else {
-      console.info(media);
-    }
-
-    return () => {
-      setMediaList([]);
-    };
-  }, []);
+export const useMedia = ({ media, changeMedia }) => {
 
   const addElementMediaList = (e) => {
-    setMediaList(mediaList.concat(e));
+    changeMedia(media.concat(e));
   };
 
   const removeElementMediaList = (id) => {
-    let medialist = mediaList;
+    let medialist = media;
     let element = medialist.filter((e) => {
       e.id === id;
     });
     medialist.slice(medialist.indexOf(element), 1);
-    setMediaList(medialist);
+    changeMedia(medialist);
   };
 
-  return [mediaList, addElementMediaList, removeElementMediaList];
+  return [addElementMediaList, removeElementMediaList];
 };

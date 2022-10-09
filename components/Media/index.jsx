@@ -4,17 +4,16 @@ import { useMedia } from "@/hooks/useMedia";
 import MediaForm from "./MediaForm";
 import MediaList from "./MediaList";
 
-export default function Media({ media, kind, id_external }) {
-  const [
-    mediaList,
-    addElementMediaList,
-    removeElementMediaList,
-  ] = useMedia(media);
+export default function Media({ media, changeMedia, kind, id_external }) {
+  const [addElementMediaList, removeElementMediaList] = useMedia(
+    media,
+    changeMedia
+  );
 
   return (
     <div className={styles.upload}>
       <MediaList
-        mediaList={mediaList}
+        mediaList={media}
         removeElementMediaList={removeElementMediaList}
       />
       <div className={styles.buttons}>

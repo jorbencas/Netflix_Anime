@@ -1,4 +1,3 @@
-import { useForm } from "react-hook-form";
 import styles from "./EditSeasions.module.css";
 import { editOpening, insertOpening } from "@/services/index";
 import { useSeasion } from "@/hooks/useSeasions";
@@ -6,9 +5,6 @@ import { useListIds } from "@/hooks/useListIfs";
 import DyamondListIds from "../DyamondListIds";
 
 export default function EditSeasions() {
-  const { register, handleSubmit } = useForm({
-    shouldUseNativeValidation: true,
-  });
   const [id, list, setList] = useListIds("seasions");
   const [tittle, setTittle] = useSeasion(id);
 
@@ -37,10 +33,10 @@ export default function EditSeasions() {
     console.log("====================================");
     console.log(siglasPage);
     console.log("====================================");
-    let data = { code, tittle };
+    let data = { tittle };
     setTittle("");
     setCode("");
-    // insertGeneres(data).then((res) => {
+    // insertFilters(data).then((res) => {
     //   generesLista.push(res.data);
     //   changeGeneres(generesLista);
     setOpen(false);

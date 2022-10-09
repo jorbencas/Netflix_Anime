@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { ModalContext } from "@/context/ModalContext";
 import { SiglasContext } from "@/context/SiglasContext";
 
-export const useMediaForm = (addElementMediaList, id_external, k) => {
+export const useMediaForm = (id_external, k, addElementMediaList) => {
   const [mediaFiles, setMediaFiles] = useState([]);
   const [mediaFiles2, setMediaFiles2] = useState([]);
   const [errors, setErrors] = useState([]);
@@ -89,11 +89,8 @@ export const useMediaForm = (addElementMediaList, id_external, k) => {
       console.log("====================================");
       console.log(req);
       console.log("====================================");
-      // insertMedia(req).then((result) => {
-      //   console.info(result);
-      //   addElementMediaList(rersult.data);
-      //   setOpen(false);
-      // });
+      addElementMediaList(req);
+      setOpen(false);
     }
   };
 

@@ -1,11 +1,11 @@
-import { useForm } from "react-hook-form";
 import styles from "./EditAnime.module.css";
 import {
   editAnime,
   insertAnime,
   getTemporadas,
   getGeneres,
-  insertGeneres,
+  insertFilters,
+  getIdiomaLista,
 } from "@/services/index";
 import Media from "@/components/Media/index";
 import { useState, useEffect, useContext } from "react";
@@ -15,12 +15,10 @@ import { useAnime } from "@/hooks/useAnime";
 import { SiglasContext } from "@/context/SiglasContext";
 
 export default function EditAnime() {
-  const { register, handleSubmit } = useForm({
-    shouldUseNativeValidation: true,
-  });
   const { siglas, siglasPage } = useContext(SiglasContext);
   const [generesLista, setGeneresLista] = useState([]);
   const [temporadasLista, setTemporadasLista] = useState([]);
+  const [idiomasLista, setIdiomasLista] = useState([]);
   const [
     tittle,
     sinopsis,
@@ -31,6 +29,7 @@ export default function EditAnime() {
     state,
     idioma,
     media,
+    setMedia,
   ] = useAnime(siglasPage);
 
   useEffect(() => {
@@ -42,20 +41,29 @@ export default function EditAnime() {
 
     getTemporadas()
       .then((temporada) => {
-        setTemporadasLista(temporada?.data);
+        if (temporada?.data) setTemporadasLista(temporada?.data);
+      })
+      .catch((err) => console.error(err));
+
+    getIdiomaLista()
+      .then((idiomas) => {
+        console.log("====================================");
+        console.log(idiomas);
+        console.log("====================================");
+        if (idiomas?.data) setIdiomasLista(idiomas?.data);
       })
       .catch((err) => console.error(err));
 
     return () => {
       setGeneresLista([]);
       setTemporadasLista([]);
+      setIdiomasLista([]);
     };
   }, []);
 
   const setabform = async (data) => {
     if (media.length == 0) return;
     data.siglas = siglasPage;
-    console.log(data);
     if (siglas) {
       editAnime(data)
         .then((result) => {
@@ -79,12 +87,13 @@ export default function EditAnime() {
     <>
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
-          <form className={styles.concret} onSubmit={handleSubmit(setabform)}>
+          <form className={styles.concret} onSubmit={setabform}>
             <div className={styles.contenedor_inputs}>
               <input
                 type="text"
                 className={styles.input}
-                {...register("titulo")}
+                value={tittle}
+                onChange={(e) => setTittle(e.target.value)}
                 placeholder="titulo"
               />
             </div>
@@ -92,32 +101,33 @@ export default function EditAnime() {
             <textarea
               className={styles.input}
               placeholder="Sinopsis"
-              {...register("sinopsis")}
+              value={sinopsis}
+              onChange={(e) => setSinopsis(e.target.value)}
             />
             <input
               className={styles.input}
               type="date"
-              {...register("date_publication")}
+              value={date_publication}
               placeholder="Fecha de Publicación"
             />
             <input
               className={styles.input}
               type="date"
-              {...register("date_finalization")}
+              value={date_finalization}
               placeholder="Fecha de Finalización"
             />
             <div className={styles.concret}>
               <p>Estado: </p>
-              <select {...register("state")}>
-                <option value="pendiong">Pendiente</option>
-                <option value="continues">En Emision</option>
-                <option value="finalized">Finalizado</option>
+              <select value={state}>
+                {idiomasLista.map((e) => {
+                  return <option value={e.code}>{e.tittle}</option>;
+                })}
               </select>
             </div>
 
             <div className={styles.concret}>
               <p>Idiomas: </p>
-              <select {...register("idioma")}>
+              <select value={idioma}>
                 <option value="spanish">Español</option>
                 <option value="catalan">Catlan</option>
                 <option value="japanise">Japones</option>
@@ -153,7 +163,7 @@ export default function EditAnime() {
                 : "No hay temporadas"}
             </div>
             <Modal btnLabel="Añadir Filtros">
-              <AddGeneres
+              <AddFilters
                 changeTemporadas={(g) => {
                   setTemporadasLista(g);
                 }}
@@ -164,7 +174,14 @@ export default function EditAnime() {
                 generesLista={generesLista}
               />
             </Modal>
-            <Media media={media} kind="animes" id_external={siglasPage} />
+            <Media
+              media={media}
+              changeMedia={(m) => {
+                setMedia(m);
+              }}
+              kind="animes"
+              id_external={siglasPage}
+            />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>
@@ -173,39 +190,31 @@ export default function EditAnime() {
   );
 }
 
-export const AddGeneres = ({
+export const AddFilters = ({
   changeTemporadas,
   temporadasLista,
   changeGeneres,
   generesLista,
 }) => {
-  let kindList = ["generes", "temporadas", "languajes", "kinds", "years"];
+  let kindList = ["generes", "temporadas", "languajes", "kinds"];
   const [code, setCode] = useState("");
   const [tittle, setTittle] = useState("");
-  const [kind, setKind] = useState("");
+  const [kind, setKind] = useState(
+    kindList
+      .filter((e) => {
+        return e.includes("generes");
+      })
+      .shift()
+  );
   const { setOpen } = useContext(ModalContext);
 
-  useEffect(() => {
-    setKind(
-      kindList
-        .filter((e) => {
-          return e.includes("generes");
-        })
-        .shift()
-    );
-  }, []);
-  ("");
-
   const increment = () => {
-    insertGeneres({ code, tittle, kind }).then((res) => {
+    insertFilters({ code, tittle, kind }).then((res) => {
       if (kind == "generes") {
         generesLista.push(res.data);
         changeGeneres(generesLista);
       } else if (kind == "temporadas") {
         if (res.data) {
-          console.log("====================================");
-          console.log(typeof res.data);
-          console.log("====================================");
           temporadasLista.push(res.data);
           changeTemporadas(temporadasLista);
         }
@@ -288,6 +297,7 @@ export const InputCheckboxs = ({ register, element, elements, kind }) => {
     <>
       <input
         type="checkbox"
+        name={element.code}
         className={styles.checkbox}
         id={element.code}
         {...register(`${kind}`)}

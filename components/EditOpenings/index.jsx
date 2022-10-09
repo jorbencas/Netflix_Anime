@@ -1,4 +1,3 @@
-import { useForm } from "react-hook-form";
 import styles from "./EditOpenings.module.css";
 import Media from "@/components/Media/index";
 import { useOpening } from "@/hooks/useOpenings";
@@ -7,16 +6,13 @@ import DyamondListIds from "../DyamondListIds";
 import { insertOpening, editOpening } from "../../services/index";
 
 export default function EditOpenings() {
-  const { register, handleSubmit } = useForm({
-    shouldUseNativeValidation: true,
-  });
   const [id, list, setId] = useListIds("openings");
-  const [tittle, sinopsis, anime, num, seasion, media] = useOpening(id);
+  const [tittle, sinopsis, anime, num, seasion, media, setMedia] = useOpening(id);
 
   const setabform = async (data) => {
     if (media.length == 0) return;
+    let data = {tittle, sinopsis, anime, num, seasion, media};
     console.log(data);
-    insertEpisode;
     if (id) {
       editOpening(data)
         .then((result) => {
@@ -48,6 +44,7 @@ export default function EditOpenings() {
                 className={styles.input}
                 {...register("nombre")}
                 placeholder="nombre"
+                onChange={(e) => setTittle(e.target.value)}
               />
             </div>
             <div className={styles.concret}>
@@ -58,7 +55,14 @@ export default function EditOpenings() {
                 {...register("descripcion")}
               />
             </div>
-            <Media media={media} kind="openings" id_external={id} />
+            <Media
+              media={media}
+              changeMedia={(m) => {
+                setMedia(m);
+              }}
+              kind="openings"
+              id_external={id}
+            />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>
