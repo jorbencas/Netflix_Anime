@@ -9,45 +9,50 @@ export default function MediaList({ mediaList, removeElementMediaList }) {
         </div>
       </div>
     );
+  } else {
+    console.log("====================================");
+    console.log(mediaList);
+    console.log("====================================");
   }
 
   return (
     <div className={styles.sortableupload + " " + styles.cursorPointer}>
       <table className={styles.table} borde="0">
-        {mediaList.map((element, i) => {
-          <tr key={i}>
-            <td class="img_div">
-              <a class="descargarfoto" href={element.urldescarga} download>
-                <i class="fas fa-cloud-download-alt"></i>
-              </a>
-              <img
-                type={element.type}
-                kind={element.kind}
-                id_relative={element.id_relative}
-                siglas={element.siglas}
-                idioma={element.idiomas}
-                name={element.name + " " + element.extension}
-                src={element.urlarchivo}
-                title={element.name + " " + element.extension}
-              />
-            </td>
-            <td>
-              {element.name + " " + element.extension}
-              tamaño:
-              {element.filesize}
-            </td>
-            <td style="text-align:right;">
-              <div class="buttons">
-                <div
-                  class="button"
-                  onclick={removeElementMediaList(element.id)}
-                >
-                  <i class="fa fa-trash" style="font-size:20px;"></i>
-                </div>
-              </div>
-            </td>
-          </tr>;
-        })}
+        <tbody>
+          {mediaList.map((element, i) => {
+            return (
+              <tr key={i}>
+                <td className={styles.img_div}>
+                  {/* <a class="descargarfoto" href={element.urldescarga} download>
+                  <i class="fas fa-cloud-download-alt"></i>
+                </a> */}
+                  <img
+                    kind={element.kind}
+                    siglas={element.id_relative}
+                    name={element.name + " " + element.extension}
+                    src={element.urlarchivo}
+                    title={element.name + " " + element.extension}
+                  />
+                </td>
+                <td>
+                  {element.name + " " + element.extension}
+                  tamaño:
+                  {element.filesize}
+                </td>
+                <td style={{ textAlign: "right" }}>
+                  <div classNamw={styles.buttons}>
+                    <div
+                      classNamw={styles.button}
+                      onClick={removeElementMediaList(element.id)}
+                    >
+                      <p>Borrar</p>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getEnding } from "@/services/index";
 
-export function useEnding({ id }) {
+export function useEnding(id) {
   const [tittle, setTittle] = useState({});
   const [sinopsis, setSinopsis] = useState({});
   const [anime, setAnime] = useState({});

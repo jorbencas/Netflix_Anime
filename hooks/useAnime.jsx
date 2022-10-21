@@ -1,17 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import { getAnime } from "@/services/index";
 
-export function useAnime({ siglas }) {
-  const [tittle, setTittle] = useState({});
-  const [sinopsis, setSinopsis] = useState({});
-  const [date_publication, setDate_publicationt] = useState({});
-  const [date_finalization, setDate_finalization] = useState({});
-  const [temporadas, setTemporadas] = useState({});
-  const [generes, setGeneres] = useState({});
-  const [state, setState] = useState({});
-  const [idioma, setIdioma] = useState({});
-  const [media, setMedia] = useState([]);
+function reducer(state, action) {
+  // ...
+}
+export function useAnime(siglas) {
+  let initialState = {
+    tittle: "",
+    sinopsis: "",
+    date_publication: "",
+    date_finalization: "",
+    temporadas: [],
+    generes: ["action"],
+    state: "",
+    idioma: "",
+    media: [],
+  };
 
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+
+
+
+
+
+
+
+
+
+
+
+  
   useEffect(() => {
     if (siglas) {
       getAnime(siglas)
@@ -29,10 +48,10 @@ export function useAnime({ siglas }) {
           } = anime?.data;
           setTittle(tittle);
           setSinopsis(sinopsis);
-          setDate_publicationt(date_publication);
+          setDate_publication(date_publication);
           setDate_finalization(date_finalization);
           setTemporadas(temporadas);
-          setGeneres(generes);
+          // setGeneres(generes);
           setState(state);
           setIdioma(idioma);
           setMedia(media);
@@ -42,7 +61,7 @@ export function useAnime({ siglas }) {
     return () => {
       setTittle([]);
       setSinopsis([]);
-      setDate_publicationt([]);
+      setDate_publication([]);
       setDate_finalization([]);
       setTemporadas([]);
       setGeneres([]);
@@ -54,13 +73,22 @@ export function useAnime({ siglas }) {
 
   return [
     tittle,
+    setTittle,
     sinopsis,
+    setSinopsis,
     date_publication,
+    setDate_publication,
     date_finalization,
+    setDate_finalization,
     temporadas,
+    setTemporadas,
     generes,
+    setGeneres,
     state,
+    setState,
     idioma,
+    setIdioma,
     media,
+    setMedia,
   ];
 }

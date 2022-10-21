@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { ModalContext } from "@/context/ModalContext";
 import { SiglasContext } from "@/context/SiglasContext";
 
-export const useMediaForm = (id_external, k, addElementMediaList) => {
+export const useMediaForm = (addElementMediaList, id_external, k) => {
   const [mediaFiles, setMediaFiles] = useState([]);
   const [mediaFiles2, setMediaFiles2] = useState([]);
   const [errors, setErrors] = useState([]);
@@ -22,7 +22,6 @@ export const useMediaForm = (id_external, k, addElementMediaList) => {
   }
 
   const readFile = (e) => {
-    // setErrors({});
     if (siglasPage.length < 3) {
       errors.push(
         `Debes de introducir la ssiglas del anime, episodio... antes de poder
@@ -30,13 +29,13 @@ export const useMediaForm = (id_external, k, addElementMediaList) => {
       );
     } else if (e.length > 0) {
       var fileSize_total = 0;
-      e.forEach((file) => {
+      for (const file of e) {
         //obtenemos un array con los datos del archivo
-        var file = files[i];
         //obtenemos el nombre del archivo
         var fileName = file.name;
         //obtenemos la extensión del archivo
         var fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1);
+        file.extension = fileExtension;
         //obtenemos el tamaño del archivo
         var fileSize = file.size;
         //obtenemos el tipo de archivo image/png ejemplo
@@ -49,22 +48,28 @@ export const useMediaForm = (id_external, k, addElementMediaList) => {
           errors.push(`Solo se permite un punto (.) en el nombre`);
         } else {
           fileSize_total += fileSize;
-          errors.push(
-            `{files.length}
-              archivos para subir, peso total:
-              {Math.round((fileSize_total / 1024 / 1024) * 100) / 100}
-              Mbytes.`
-          );
-          console.info(file);
+          if (k == "animes") {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = function () {
+              file.urlarchivo = reader.result;
+            };
+          } else {
+            file.urlarchivo = "/logo.svg";
+          }
+          file.filesize =
+            Math.round((fileSize_total / 1024 / 1024) * 100) / 100;
+          console.info(fileExtension);
+          file.nombre = fileName;
         }
-      });
+      }
     }
     if (errors.length > 0) {
       setSuccess(false);
       setErrors(errors);
     } else if (e.length > 0) {
       setSuccess(true);
-      setErrors({});
+      setErrors([]);
       setMediaFiles(e);
     }
   };
@@ -84,11 +89,18 @@ export const useMediaForm = (id_external, k, addElementMediaList) => {
         }
       }
     } else if (success) {
-      let req = { tabla: k, mediaFiles, mediaFiles2, kind, id_external };
-      if (kind === "banner" || kind == "portada") req.kind = kind;
-      console.log("====================================");
-      console.log(req);
-      console.log("====================================");
+      let req = {
+        id: mediaFiles.length - 1,
+        tabla: k,
+        mediaFiles,
+        mediaFiles2,
+        kind,
+        id_external,
+        name: mediaFiles[0].nombre,
+        exteinsion: mediaFiles[0].extension,
+        filesize: mediaFiles[0].filesize,
+        urlarchivo: mediaFiles[0].urlarchivo,
+      };
       addElementMediaList(req);
       setOpen(false);
     }

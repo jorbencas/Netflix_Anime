@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { SiglasContext } from "@/context/SiglasContext";
 import { getListIds } from "../services";
 
-export function useListIds({ kind }) {
+export function useListIds( kind ) {
   const [siglasPage] = useContext(SiglasContext);
   const [id, setId] = useState(0);
   const [list, setList] = useState([]);

@@ -1,16 +1,17 @@
-export const useMedia = ({ media, changeMedia }) => {
-
+export const useMedia = (media, changeMedia) => {
   const addElementMediaList = (e) => {
-    changeMedia(media.concat(e));
+    changeMedia([
+      e,
+      ...media, // Put old items at the end
+    ]);
   };
 
   const removeElementMediaList = (id) => {
-    let medialist = media;
-    let element = medialist.filter((e) => {
-      e.id === id;
-    });
-    medialist.slice(medialist.indexOf(element), 1);
-    changeMedia(medialist);
+    changeMedia(
+      media.filter((e, i) => {
+        i !== id;
+      })
+    );
   };
 
   return [addElementMediaList, removeElementMediaList];

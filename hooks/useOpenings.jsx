@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getOpening } from "@/services/index";
 
-export function useOpening({ id }) {
+export function useOpening( id ) {
   const [tittle, setTittle] = useState({});
   const [sinopsis, setSinopsis] = useState({});
   const [anime, setAnime] = useState({});

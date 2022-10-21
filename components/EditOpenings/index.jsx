@@ -4,14 +4,16 @@ import { useOpening } from "@/hooks/useOpenings";
 import { useListIds } from "@/hooks/useListIfs";
 import DyamondListIds from "../DyamondListIds";
 import { insertOpening, editOpening } from "../../services/index";
+import { Suspense } from "react";
 
 export default function EditOpenings() {
   const [id, list, setId] = useListIds("openings");
-  const [tittle, sinopsis, anime, num, seasion, media, setMedia] = useOpening(id);
+  const [tittle, sinopsis, anime, num, seasion, media, setMedia] =
+    useOpening(id);
 
-  const setabform = async (data) => {
+  const setabform = () => {
     if (media.length == 0) return;
-    let data = {tittle, sinopsis, anime, num, seasion, media};
+    let data = { tittle, sinopsis, anime, num, seasion, media };
     console.log(data);
     if (id) {
       editOpening(data)
@@ -34,17 +36,19 @@ export default function EditOpenings() {
 
   return (
     <>
-      <DyamondListIds list={list} changeList={(id) => setId(id)} />
+      <Suspense fallback={<h1>Loading media...</h1>}>
+        <DyamondListIds list={list} changeList={(id) => setId(id)} />
+      </Suspense>
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
-          <form className={styles.concret} onSubmit={handleSubmit(setabform)}>
+          <form className={styles.concret} onSubmit={setabform}>
             <div className={styles.contenedor_inputs}>
               <input
                 type="text"
                 className={styles.input}
-                {...register("nombre")}
-                placeholder="nombre"
+                value={tittle}
                 onChange={(e) => setTittle(e.target.value)}
+                placeholder="nombre"
               />
             </div>
             <div className={styles.concret}>
@@ -52,17 +56,19 @@ export default function EditOpenings() {
                 type="text"
                 className={styles.input}
                 placeholder="descripcion"
-                {...register("descripcion")}
+                value={sinopsis}
               />
             </div>
-            <Media
-              media={media}
-              changeMedia={(m) => {
-                setMedia(m);
-              }}
-              kind="openings"
-              id_external={id}
-            />
+            <Suspense fallback={<h1>Loading media...</h1>}>
+              <Media
+                media={media}
+                changeMedia={(m) => {
+                  setMedia(m);
+                }}
+                kind="openings"
+                id_external={id}
+              />
+            </Suspense>
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

@@ -4,6 +4,7 @@ import { useEpisode } from "@/hooks/useEpisodes";
 import { useListIds } from "@/hooks/useListIfs";
 import DyamondListIds from "../DyamondListIds";
 import { insertEpisode, editEpisode } from "@/services/index";
+import { Suspense } from "react";
 
 export default function EditEpisodes() {
   const [id, list, setId] = useListIds("episodes");
@@ -35,7 +36,9 @@ export default function EditEpisodes() {
 
   return (
     <>
-      <DyamondListIds list={list} changeList={(id) => setId(id)} />
+      <Suspense fallback={<h1>Loading media...</h1>}>
+        <DyamondListIds list={list} changeList={(id) => setId(id)} />
+      </Suspense>
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
           <form className={styles.concret} onSubmit={handleSubmit(setabform)}>
@@ -68,14 +71,16 @@ export default function EditEpisodes() {
               value={date_finalization}
               placeholder="Fecha de Finalización"
             />
-            <Media
-              media={media}
-              changeMedia={(m) => {
-                setMedia(m);
-              }}
-              kind="episodes"
-              id_external={id}
-            />
+            <Suspense fallback={<h1>Loading media...</h1>}>
+              <Media
+                media={media}
+                changeMedia={(m) => {
+                  setMedia(m);
+                }}
+                kind="episodes"
+                id_external={id}
+              />
+            </Suspense>
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

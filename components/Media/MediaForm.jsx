@@ -2,7 +2,7 @@ import { useMediaForm } from "@/hooks/useMediaForm";
 import MediaTabs from "./MediaTabs";
 import styles from "./Media.module.css";
 
-export default function MediaForm({ kind, id_external, addElementMediaList }) {
+export default function MediaForm({kind, id_external, addElementMediaList }) {
   const [
     message,
     readFile,
@@ -58,11 +58,11 @@ const Errors = ({ errors }) => {
   if (errors.length == 0) {
     return undefined;
   }
-  return (
-    <section className={styles.info}>
-      {errors.map((element, i) => {
-        return <article key={i}> {element}</article>;
-      })}
-    </section>
-  );
+    return (
+      <section className={styles.info}>
+        {errors.map((element, i) => {
+          return <article key={i}> {element}</article>;
+        })}
+      </section>
+    );
 };
