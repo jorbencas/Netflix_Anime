@@ -1,8 +1,62 @@
-import { useState, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { getAnime } from "@/services/index";
 
 function reducer(state, action) {
-  // ...
+  const { type, payload } = action;
+  if (type == "setTittle") {
+    const anime = structuredClone(state);
+    const { tittle } = payload;
+    anime.tittle = tittle;
+
+    // return {
+    //   ...state,
+    //   todos: [...state.todos, { id: nextId++, text: action.text }],
+    // };
+
+    return { anime };
+  } else if (type == "setSinopsis") {
+    const anime = structuredClone(state);
+    const { tittle } = payload;
+    anime.tittle = tittle;
+    return { anime };
+  } else if (type == "setDate_publication") {
+    const anime = structuredClone(state);
+    const { tittle } = payload;
+    anime.tittle = tittle;
+    return { anime };
+  } else if (type == "setDate_finalization") {
+    const anime = structuredClone(state);
+    const { tittle } = payload;
+    anime.tittle = tittle;
+    return { anime };
+  } else if (type == "setTemporadas") {
+    const anime = structuredClone(state);
+    const { tittle } = payload;
+    anime.tittle = tittle;
+    return { anime };
+  } else if (type == "setGeneres") {
+    const anime = structuredClone(state);
+    const { tittle } = payload;
+    anime.tittle = tittle;
+    return { anime };
+  } else if (type == "setState") {
+    const anime = structuredClone(state);
+    const { tittle } = payload;
+    anime.tittle = tittle;
+    return { anime };
+  } else if (type == "setIdioma") {
+    const anime = structuredClone(state);
+    const { tittle } = payload;
+    anime.tittle = tittle;
+    return { anime };
+  } else if (type == "setMedia") {
+    const anime = structuredClone(state);
+    const { tittle } = payload;
+    anime.tittle = tittle;
+    return { anime };
+  } else {
+    return state;
+  }
 }
 export function useAnime(siglas) {
   let initialState = {
@@ -19,18 +73,6 @@ export function useAnime(siglas) {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-
-
-
-
-
-
-
-
-
-
-
-  
   useEffect(() => {
     if (siglas) {
       getAnime(siglas)
@@ -46,15 +88,15 @@ export function useAnime(siglas) {
             idioma,
             media,
           } = anime?.data;
-          setTittle(tittle);
-          setSinopsis(sinopsis);
-          setDate_publication(date_publication);
-          setDate_finalization(date_finalization);
-          setTemporadas(temporadas);
-          // setGeneres(generes);
-          setState(state);
-          setIdioma(idioma);
-          setMedia(media);
+          dispatch({ type: "setTittle" });
+          dispatch({ type: "setSinopsis" });
+          dispatch({ type: "setDate_publication" });
+          dispatch({ type: "setDate_finalization" });
+          dispatch({ type: "setTemporadas" });
+          dispatch({ type: "setGeneres" });
+          dispatch({ type: "setState" });
+          dispatch({ type: "setIdioma" });
+          dispatch({ type: "setMedia" });
         })
         .catch((err) => console.error(err));
     }
