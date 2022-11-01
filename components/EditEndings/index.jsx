@@ -1,11 +1,12 @@
 import styles from "./EditEndings.module.css";
-import Media from "@/components/Media/index";
+// import Media from "@/components/Media/index";
 import { useEnding } from "../../hooks/useEndings";
 import { useListIds } from "@/hooks/useListIfs";
-import DyamondListIds from "../DyamondListIds";
+// import DyamondListIds from "../DyamondListIds";
 import { insertEnding, editEnding } from "@/services/index";
-import { Suspense } from "react";
-
+import { Suspense, lazy } from "react";
+const Media = lazy(() => import("@/components/Media/index"));
+const DyamondListIds = lazy(() => import("../DyamondListIds"));
 export default function EditEndings() {
   const [id, list, setId] = useListIds("endings");
   const [tittle, sinopsis, anime, num, seasion, media, setMedia] =

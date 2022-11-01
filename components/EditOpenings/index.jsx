@@ -1,11 +1,13 @@
 import styles from "./EditOpenings.module.css";
-import Media from "@/components/Media/index";
+// import Media from "@/components/Media/index";
 import { useOpening } from "@/hooks/useOpenings";
 import { useListIds } from "@/hooks/useListIfs";
-import DyamondListIds from "../DyamondListIds";
+// import DyamondListIds from "";
 import { insertOpening, editOpening } from "../../services/index";
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 
+const Media = lazy(() => import("@/components/Media/index"));
+const DyamondListIds = lazy(() => import("../DyamondListIds"));
 export default function EditOpenings() {
   const [id, list, setId] = useListIds("openings");
   const [tittle, sinopsis, anime, num, seasion, media, setMedia] =

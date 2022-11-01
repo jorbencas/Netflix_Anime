@@ -7,13 +7,14 @@ import {
   insertFilters,
   getIdiomaLista,
 } from "@/services/index";
-import Media from "@/components/Media/index";
-import { useState, useEffect, useContext, Suspense } from "react";
+// import Media from "@/components/Media/index";
+import { useState, useEffect, useContext, Suspense, lazy } from "react";
 import Modal from "@/components/Modal";
 import { ModalContext } from "@/context/ModalContext";
 import { useAnime } from "@/hooks/useAnime";
 import { SiglasContext } from "@/context/SiglasContext";
 
+const Media = lazy(() => import("@/components/Media/index"));
 export default function EditAnime() {
   const { siglas, siglasPage } = useContext(SiglasContext);
   const [idiomasLista, setIdiomasLista] = useState([]);
@@ -144,17 +145,9 @@ export default function EditAnime() {
               </select>
             </div>
 
-            <ListFilters
-              key={0}
-              kind="Generos"
-              list={generes}
-            />
+            <ListFilters key={0} kind="Generos" list={generes} />
 
-            <ListFilters
-              key={1}
-              kind="Temporadas"
-              list={temporadas}
-            />
+            <ListFilters key={1} kind="Temporadas" list={temporadas} />
 
             {/* <Modal btnLabel="Añadir Filtros">
               <AddFilters

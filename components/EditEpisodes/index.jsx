@@ -1,11 +1,12 @@
 import styles from "./EditEpisodes.module.css";
-import Media from "@/components/Media/index";
+// import Media from "@/components/Media/index";
 import { useEpisode } from "@/hooks/useEpisodes";
 import { useListIds } from "@/hooks/useListIfs";
-import DyamondListIds from "../DyamondListIds";
+// import DyamondListIds from "../DyamondListIds";
 import { insertEpisode, editEpisode } from "@/services/index";
-import { Suspense } from "react";
-
+import { Suspense, lazy } from "react";
+const Media = lazy(() => import("@/components/Media/index"));
+const DyamondListIds = lazy(() => import("../DyamondListIds"));
 export default function EditEpisodes() {
   const [id, list, setId] = useListIds("episodes");
   const [tittle, sinopsis, anime, num, seasion, media, setMedia] =

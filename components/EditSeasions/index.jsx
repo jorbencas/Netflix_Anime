@@ -2,8 +2,10 @@ import styles from "./EditSeasions.module.css";
 import { editOpening, insertOpening } from "@/services/index";
 import { useSeasion } from "@/hooks/useSeasions";
 import { useListIds } from "@/hooks/useListIfs";
-import DyamondListIds from "../DyamondListIds";
-import { Suspense } from "react";
+// import DyamondListIds from "../DyamondListIds";
+import { Suspense, lazy } from "react";
+
+const DyamondListIds = lazy(() => import("../DyamondListIds"));
 
 export default function EditSeasions() {
   const [id, list, setList] = useListIds("seasions");
