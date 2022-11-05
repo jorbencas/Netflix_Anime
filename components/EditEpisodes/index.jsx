@@ -1,12 +1,12 @@
 import styles from "./EditEpisodes.module.css";
-// import Media from "@/components/Media/index";
+import Media from "@/components/Media/index";
 import { useEpisode } from "@/hooks/useEpisodes";
 import { useListIds } from "@/hooks/useListIfs";
-// import DyamondListIds from "../DyamondListIds";
+import DyamondListIds from "../DyamondListIds";
 import { insertEpisode, editEpisode } from "@/services/index";
 import { Suspense, lazy } from "react";
-const Media = lazy(() => import("@/components/Media/index"));
-const DyamondListIds = lazy(() => import("../DyamondListIds"));
+// const Media = lazy(() => import("@/components/Media/index"));
+// const DyamondListIds = lazy(() => import("../DyamondListIds"));
 export default function EditEpisodes() {
   const [id, list, setId] = useListIds("episodes");
   const [tittle, sinopsis, anime, num, seasion, media, setMedia] =
@@ -37,9 +37,9 @@ export default function EditEpisodes() {
 
   return (
     <>
-      <Suspense fallback={<h1>Loading media...</h1>}>
-        <DyamondListIds list={list} changeList={(id) => setId(id)} />
-      </Suspense>
+      {/* <Suspense fallback={<h1>Loading media...</h1>}> */}
+      <DyamondListIds list={list} changeList={(id) => setId(id)} />
+      {/* </Suspense> */}
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
           <form className={styles.concret} onSubmit={handleSubmit(setabform)}>
@@ -72,16 +72,16 @@ export default function EditEpisodes() {
               value={date_finalization}
               placeholder="Fecha de Finalización"
             />
-            <Suspense fallback={<h1>Loading media...</h1>}>
-              <Media
-                media={media}
-                changeMedia={(m) => {
-                  setMedia(m);
-                }}
-                kind="episodes"
-                id_external={id}
-              />
-            </Suspense>
+            {/* <Suspense fallback={<h1>Loading media...</h1>}> */}
+            <Media
+              media={media}
+              changeMedia={(m) => {
+                setMedia(m);
+              }}
+              kind="episodes"
+              id_external={id}
+            />
+            {/* </Suspense> */}
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

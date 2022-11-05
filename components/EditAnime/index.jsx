@@ -7,14 +7,14 @@ import {
   insertFilters,
   getIdiomaLista,
 } from "@/services/index";
-// import Media from "@/components/Media/index";
+import Media from "@/components/Media/index";
 import { useState, useEffect, useContext, Suspense, lazy } from "react";
 import Modal from "@/components/Modal";
 import { ModalContext } from "@/context/ModalContext";
 import { useAnime } from "@/hooks/useAnime";
 import { SiglasContext } from "@/context/SiglasContext";
 
-const Media = lazy(() => import("@/components/Media/index"));
+// const Media = lazy(() => import("@/components/Media/index"));
 export default function EditAnime() {
   const { siglas, siglasPage } = useContext(SiglasContext);
   const [idiomasLista, setIdiomasLista] = useState([]);
@@ -145,9 +145,19 @@ export default function EditAnime() {
               </select>
             </div>
 
-            <ListFilters key={0} kind="Generos" list={generes} />
+            <ListFilters
+              key={0}
+              kind="Generos"
+              list={generes}
+              onclick={(e) => setGeneres(e)}
+            />
 
-            <ListFilters key={1} kind="Temporadas" list={temporadas} />
+            <ListFilters
+              key={1}
+              kind="Temporadas"
+              list={temporadas}
+              onclick={(e) => setTemporadas(e)}
+            />
 
             {/* <Modal btnLabel="Añadir Filtros">
               <AddFilters
@@ -161,16 +171,16 @@ export default function EditAnime() {
                 generesLista={generesLista}
               />
             </Modal> */}
-            <Suspense fallback={<h1>Loading media...</h1>}>
-              <Media
-                media={media}
-                changeMedia={(m) => {
-                  setMedia(m);
-                }}
-                kind="animes"
-                id_external={siglasPage}
-              />
-            </Suspense>
+            {/* <Suspense fallback={<h1>Loading media...</h1>}> */}
+            <Media
+              media={media}
+              changeMedia={(m) => {
+                setMedia(m);
+              }}
+              kind="animes"
+              id_external={siglasPage}
+            />
+            {/* </Suspense> */}
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>
@@ -179,7 +189,7 @@ export default function EditAnime() {
   );
 }
 
-export const ListFilters = ({ kind, list }) => {
+export const ListFilters = ({ kind, list, onclick }) => {
   const [lista, setLista] = useState([]);
   const [listOriginal, setListOriginal] = useState(list);
 
@@ -209,12 +219,15 @@ export const ListFilters = ({ kind, list }) => {
     console.log(kind + ": " + id);
     if (listOriginal.includes(id)) {
       setListOriginal(listOriginal.filter((e) => e !== id));
+      onclick(listOriginal);
     } else {
       setListOriginal([
         id,
         ...listOriginal, // Put old items at the end
       ]);
+      onclick(listOriginal);
     }
+    console.log(listOriginal);
   };
 
   return (
@@ -226,12 +239,7 @@ export const ListFilters = ({ kind, list }) => {
             <ImputKindsFilters
               type="checkbox"
               key={i}
-              changeKing={(e, t) => {
-                console.log("====================================");
-                console.log(t);
-                console.log("====================================");
-                change(e);
-              }}
+              changeKing={e => change(e)}
               ischecked={listOriginal.includes(item.code.trim())}
               value={item.code}
               label={item.tittle}

@@ -25,18 +25,17 @@ export default function Edit() {
 
       <AppLayout>
         <SiglasList>
-          <Tabs>
-            <EditAnime label="Anime" />
-            <EditSeasions label="Temporadas" />
-            <EditEpisodes label="Episodes" />
-            <EditOpenings label="openings" />
-            <EditEndings label="Endings" />
-            <ViewEdit
-              isSteeps={siglas ? true : false}
-              siglas={siglas}
-              label="all"
-            />
-          </Tabs>
+          <Tabs
+            labels={[
+              { text: "Anime", component: <EditAnime /> },
+              { text: "Temporadas", component: <EditSeasions /> },
+              { text: "Episodes", component: <EditEpisodes /> },
+              { text: "openings", component: <EditOpenings /> },
+              { text: "Endings", component: <EditEndings /> },
+              { text: "all", component: <ViewEdit siglas={siglas} /> },
+            ]}
+            isSteeps={siglas ? true : false}
+          ></Tabs>
         </SiglasList>
       </AppLayout>
     </>

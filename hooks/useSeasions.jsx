@@ -22,7 +22,7 @@ export function useSeasion({ id }) {
       setAnime(anime);
       setMedia([]);
     };
-  }, []);
+  }, [id]);
 
   return [tittle, anime, setTittle, media];
 }

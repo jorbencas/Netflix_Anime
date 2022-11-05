@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import { defaultSiglas } from "../services";
 import { useRouter } from "next/router";
 import { SiglasContext } from "@/context/SiglasContext";
@@ -21,14 +21,14 @@ export function useSiglas() {
     };
   }, []);
 
-  const changeSiglasList = (e) => {
+  const changeSiglasList = useCallback((e) => {
     let sigla = e.target.value;
     if (sigla !== "else") {
       setSiglasPage(sigla);
     } else if (siglas !== sigla) {
       setSiglasPage("");
     }
-  };
+  }, []);
 
   return [siglas, siglasLista, siglasPage, changeSiglasList];
 }

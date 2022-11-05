@@ -2,60 +2,59 @@ import { useEffect, useReducer } from "react";
 import { getAnime } from "@/services/index";
 
 function reducer(state, action) {
-  const { type, payload } = action;
+  const { type } = action;
   if (type == "setTittle") {
-    const anime = structuredClone(state);
-    const { tittle } = payload;
-    anime.tittle = tittle;
-
-    // return {
-    //   ...state,
-    //   todos: [...state.todos, { id: nextId++, text: action.text }],
-    // };
-
-    return { anime };
+    return {
+      ...state,
+      tittle: action.tittle,
+    };
   } else if (type == "setSinopsis") {
-    const anime = structuredClone(state);
-    const { tittle } = payload;
-    anime.tittle = tittle;
-    return { anime };
+    return {
+      ...state,
+      sinopsis: action.sinopsis,
+    };
   } else if (type == "setDate_publication") {
-    const anime = structuredClone(state);
-    const { tittle } = payload;
-    anime.tittle = tittle;
-    return { anime };
+    return {
+      ...state,
+      date_publication: action.date_publication,
+    };
   } else if (type == "setDate_finalization") {
-    const anime = structuredClone(state);
-    const { tittle } = payload;
-    anime.tittle = tittle;
-    return { anime };
+    return {
+      ...state,
+      date_finalization: action.date_finalization,
+    };
   } else if (type == "setTemporadas") {
-    const anime = structuredClone(state);
-    const { tittle } = payload;
-    anime.tittle = tittle;
-    return { anime };
+    console.log("====================================");
+    console.log(type);
+    console.log(state);
+    return {
+      ...state,
+      temporadas: action.temporadas,
+    };
   } else if (type == "setGeneres") {
-    const anime = structuredClone(state);
-    const { tittle } = payload;
-    anime.tittle = tittle;
-    return { anime };
+    return {
+      ...state,
+      generes: action.generes,
+    };
   } else if (type == "setState") {
-    const anime = structuredClone(state);
-    const { tittle } = payload;
-    anime.tittle = tittle;
-    return { anime };
+    return {
+      ...state,
+      state: action.state,
+    };
   } else if (type == "setIdioma") {
-    const anime = structuredClone(state);
-    const { tittle } = payload;
-    anime.tittle = tittle;
-    return { anime };
+    return {
+      ...state,
+      idioma: action.idioma,
+    };
   } else if (type == "setMedia") {
-    const anime = structuredClone(state);
-    const { tittle } = payload;
-    anime.tittle = tittle;
-    return { anime };
+    return {
+      ...state,
+      media: action.media,
+    };
   } else {
-    return state;
+    return {
+      ...state,
+    };
   }
 }
 export function useAnime(siglas) {
@@ -71,8 +70,18 @@ export function useAnime(siglas) {
     media: [],
   };
 
-  const [state, dispatch] = useReducer(reducer, initialState);
-
+  const [s, dispatch] = useReducer(reducer, initialState);
+  const {
+    tittle,
+    sinopsis,
+    date_publication,
+    date_finalization,
+    temporadas,
+    generes,
+    state,
+    idioma,
+    media,
+  } = s;
   useEffect(() => {
     if (siglas) {
       getAnime(siglas)
@@ -88,15 +97,15 @@ export function useAnime(siglas) {
             idioma,
             media,
           } = anime?.data;
-          dispatch({ type: "setTittle" });
-          dispatch({ type: "setSinopsis" });
-          dispatch({ type: "setDate_publication" });
-          dispatch({ type: "setDate_finalization" });
-          dispatch({ type: "setTemporadas" });
-          dispatch({ type: "setGeneres" });
-          dispatch({ type: "setState" });
-          dispatch({ type: "setIdioma" });
-          dispatch({ type: "setMedia" });
+          setTittle(tittle);
+          setSinopsis(sinopsis);
+          setDate_publication(date_publication);
+          setDate_finalization(date_finalization);
+          setTemporadas(temporadas);
+          // setGeneres(generes);
+          setState(state);
+          setIdioma(idioma);
+          setMedia(media);
         })
         .catch((err) => console.error(err));
     }
@@ -113,6 +122,33 @@ export function useAnime(siglas) {
     };
   }, []);
 
+  const setTittle = (tittle) => {
+    dispatch({ type: "setTittle", tittle });
+  };
+  const setSinopsis = (sinopsis) => {
+    dispatch({ type: "setSinopsis", sinopsis });
+  };
+  const setDate_publication = (date_publication) => {
+    dispatch({ type: "setDate_publication", date_publication });
+  };
+  const setDate_finalization = (date_finalization) => {
+    dispatch({ type: "setDate_finalization", date_finalization });
+  };
+  const setTemporadas = (temporadas) => {
+    dispatch({ type: "setTemporadas", temporadas });
+  };
+  const setGeneres = (generes) => {
+    dispatch({ type: "setGeneres", generes });
+  };
+  const setState = (state) => {
+    dispatch({ type: "setState", state });
+  };
+  const setIdioma = (idioma) => {
+    dispatch({ type: "setIdioma", idioma });
+  };
+  const setMedia = (media) => {
+    dispatch({ type: "setMedia", media });
+  };
   return [
     tittle,
     setTittle,

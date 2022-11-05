@@ -3,9 +3,9 @@ import { editOpening, insertOpening } from "@/services/index";
 import { useSeasion } from "@/hooks/useSeasions";
 import { useListIds } from "@/hooks/useListIfs";
 // import DyamondListIds from "../DyamondListIds";
-import { Suspense, lazy } from "react";
+// import { Suspense, lazy } from "react";
 
-const DyamondListIds = lazy(() => import("../DyamondListIds"));
+// const DyamondListIds = lazy(() => import("../DyamondListIds"));
 
 export default function EditSeasions() {
   const [id, list, setList] = useListIds("seasions");
@@ -48,9 +48,9 @@ export default function EditSeasions() {
 
   return (
     <>
-      <Suspense fallback={<h1>Loading media...</h1>}>
-        <DyamondListIds list={list} changeList={(id) => setList(id)} />
-      </Suspense>
+      {/* <Suspense fallback={<h1>Loading media...</h1>}> */}
+      <DyamondListIds list={list} changeList={(id) => setList(id)} />
+      {/* </Suspense> */}
       <div className={styles.concret}>
         <input
           type="text"
