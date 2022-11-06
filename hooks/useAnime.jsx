@@ -102,24 +102,24 @@ export function useAnime(siglas) {
           setDate_publication(date_publication);
           setDate_finalization(date_finalization);
           setTemporadas(temporadas);
-          // setGeneres(generes);
+          setGeneres(generes);
           setState(state);
           setIdioma(idioma);
           setMedia(media);
         })
         .catch((err) => console.error(err));
     }
-    return () => {
-      setTittle([]);
-      setSinopsis([]);
-      setDate_publication([]);
-      setDate_finalization([]);
-      setTemporadas([]);
-      setGeneres([]);
-      setState([]);
-      setIdioma([]);
-      setMedia([]);
-    };
+    // return () => {
+    //   setTittle([]);
+    //   setSinopsis([]);
+    //   setDate_publication([]);
+    //   setDate_finalization([]);
+    //   setTemporadas([]);
+    //   setGeneres([]);
+    //   setState([]);
+    //   setIdioma([]);
+    //   setMedia([]);
+    // };
   }, []);
 
   const setTittle = (tittle) => {

@@ -35,7 +35,7 @@ export default function Edit() {
               { text: "all", component: <ViewEdit siglas={siglas} /> },
             ]}
             isSteeps={siglas ? true : false}
-          ></Tabs>
+          />
         </SiglasList>
       </AppLayout>
     </>

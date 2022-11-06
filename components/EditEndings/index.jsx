@@ -4,13 +4,21 @@ import { useEnding } from "../../hooks/useEndings";
 import { useListIds } from "@/hooks/useListIfs";
 import DyamondListIds from "../DyamondListIds";
 import { insertEnding, editEnding } from "@/services/index";
-// import { Suspense, lazy } from "react";
-// const Media = lazy(() => import("@/components/Media/index"));
-// const DyamondListIds = lazy(() => import("../DyamondListIds"));
+
 export default function EditEndings() {
   const [id, list, setId] = useListIds("endings");
-  const [tittle, sinopsis, anime, num, seasion, media, setMedia] =
-    useEnding(id);
+  const [
+    tittle,
+    setTittle,
+    sinopsis,
+    setSinopsis,
+    anime,
+    num,
+    seasion,
+    setSeasion,
+    media,
+    setMedia,
+  ] = useEnding(id);
 
   const setabform = () => {
     if (media.length == 0) return;
@@ -37,9 +45,7 @@ export default function EditEndings() {
 
   return (
     <>
-      {/* <Suspense fallback={<h1>Loading media...</h1>}> */}
       <DyamondListIds list={list} changeList={(id) => setId(id)} />
-      {/* </Suspense> */}
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
           <form className={styles.concret} onSubmit={setabform}>
@@ -61,7 +67,6 @@ export default function EditEndings() {
                 onChange={(e) => setSinopsis(e.target.value)}
               />
             </div>
-            {/* <Suspense fallback={<h1>Loading media...</h1>}> */}
             <Media
               media={media}
               changeMedia={(m) => {
@@ -70,7 +75,6 @@ export default function EditEndings() {
               kind="endings"
               id_external={id}
             />
-            {/* </Suspense> */}
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

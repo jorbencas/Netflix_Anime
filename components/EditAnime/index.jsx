@@ -14,7 +14,6 @@ import { ModalContext } from "@/context/ModalContext";
 import { useAnime } from "@/hooks/useAnime";
 import { SiglasContext } from "@/context/SiglasContext";
 
-// const Media = lazy(() => import("@/components/Media/index"));
 export default function EditAnime() {
   const { siglas, siglasPage } = useContext(SiglasContext);
   const [idiomasLista, setIdiomasLista] = useState([]);
@@ -39,6 +38,10 @@ export default function EditAnime() {
     setMedia,
   ] = useAnime(siglasPage);
 
+  const [filtersList, setFilterList] = useState({
+    Generos: generes,
+    Temporadas: temporadas,
+  });
   useEffect(() => {
     getIdiomaLista()
       .then((idiomas) => {
@@ -145,19 +148,7 @@ export default function EditAnime() {
               </select>
             </div>
 
-            <ListFilters
-              key={0}
-              kind="Generos"
-              list={generes}
-              onclick={(e) => setGeneres(e)}
-            />
-
-            <ListFilters
-              key={1}
-              kind="Temporadas"
-              list={temporadas}
-              onclick={(e) => setTemporadas(e)}
-            />
+            <ListFilters list={filtersList} onclick={(e) => setFilterList(e)} />
 
             {/* <Modal btnLabel="Añadir Filtros">
               <AddFilters
@@ -190,44 +181,43 @@ export default function EditAnime() {
 }
 
 export const ListFilters = ({ kind, list, onclick }) => {
-  const [lista, setLista] = useState([]);
-  const [listOriginal, setListOriginal] = useState(list);
+  const [lista, setLista] = useState({});
 
   useEffect(() => {
-    if (kind == "Generos") {
+    if (list[Generos]) {
       getGeneres()
         .then((genere) => {
-          if (genere?.data) setLista(genere?.data);
+          if (genere?.data) {
+            setLista(genere?.data);
+          }
         })
         .catch((err) => console.error(err));
-    } else {
+    } else if (list[Temporadas]) {
       getTemporadas()
         .then((genere) => {
-          if (genere?.data) setLista(genere?.data);
+          if (genere?.data) {
+            setLista(genere?.data);
+          }
         })
         .catch((err) => console.error(err));
     }
-
-    return () => {
-      setLista([]);
-    };
   }, []);
 
   if (lista.length == 0) return `No hay ${kind}`;
 
-  const change = (id) => {
+  const change = (id, kind) => {
     console.log(kind + ": " + id);
-    if (listOriginal.includes(id)) {
-      setListOriginal(listOriginal.filter((e) => e !== id));
-      onclick(listOriginal);
+    if (list[kind].includes(id)) {
+      list[kind].filter((e) => e !== id);
+      onclick(list[kind]);
     } else {
       setListOriginal([
         id,
-        ...listOriginal, // Put old items at the end
+        ...list[kind], // Put old items at the end
       ]);
-      onclick(listOriginal);
+      onclick(list[kind]);
     }
-    console.log(listOriginal);
+    console.log(list);
   };
 
   return (
@@ -239,8 +229,8 @@ export const ListFilters = ({ kind, list, onclick }) => {
             <ImputKindsFilters
               type="checkbox"
               key={i}
-              changeKing={e => change(e)}
-              ischecked={listOriginal.includes(item.code.trim())}
+              changeKing={(e) => change(e)}
+              ischecked={list.includes(item.code.trim())}
               value={item.code}
               label={item.tittle}
               i={i}

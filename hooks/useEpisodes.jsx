@@ -33,5 +33,5 @@ export function useEpisode( id ) {
     };
   }, []);
 
-  return [tittle, sinopsis, anime, num, seasion, media, setMedia];
+  return [tittle, setTittle, sinopsis, setSinopsis, anime, num, seasion, setSeasion, media, setMedia];
 }

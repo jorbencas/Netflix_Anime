@@ -4,12 +4,12 @@ import { useEpisode } from "@/hooks/useEpisodes";
 import { useListIds } from "@/hooks/useListIfs";
 import DyamondListIds from "../DyamondListIds";
 import { insertEpisode, editEpisode } from "@/services/index";
-import { Suspense, lazy } from "react";
+// import { Suspense, lazy } from "react";
 // const Media = lazy(() => import("@/components/Media/index"));
 // const DyamondListIds = lazy(() => import("../DyamondListIds"));
 export default function EditEpisodes() {
   const [id, list, setId] = useListIds("episodes");
-  const [tittle, sinopsis, anime, num, seasion, media, setMedia] =
+  const [tittle, setTittle, sinopsis, setSinopsis, anime, num, seasion, setSeasion, media, setMedia] =
     useEpisode(id);
 
   const setabform = async () => {
@@ -42,7 +42,7 @@ export default function EditEpisodes() {
       {/* </Suspense> */}
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
-          <form className={styles.concret} onSubmit={handleSubmit(setabform)}>
+          <form className={styles.concret} onSubmit={setabform}>
             <div className={styles.contenedor_inputs}>
               <input
                 type="text"
@@ -58,9 +58,10 @@ export default function EditEpisodes() {
                 className={styles.input}
                 placeholder="Sinopsis"
                 value={sinopsis}
+                onChange={(e) => setSinopsis(e.target.value)}
               />
             </div>
-            <input
+            {/* <input
               className={styles.input}
               type="date"
               value={date_publication}
@@ -71,7 +72,7 @@ export default function EditEpisodes() {
               type="date"
               value={date_finalization}
               placeholder="Fecha de Finalización"
-            />
+            /> */}
             {/* <Suspense fallback={<h1>Loading media...</h1>}> */}
             <Media
               media={media}
