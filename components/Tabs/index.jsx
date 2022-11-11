@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./Tabs.module.css";
 
 const Tabs = ({ labels, isSteeps = false }) => {
@@ -9,18 +9,23 @@ const Tabs = ({ labels, isSteeps = false }) => {
     return undefined;
   }
 
+  const isActiveClassCSS = (label) => {
+    return activeTab === label ? styles.active : "";
+  };
+
   return (
     <div key={labels.text}>
       <div className={styles.toolbar}>
         <ol className={styles.tab}>
-          {labels.map((label, i) => {
+          {labels.map(({ text }) => {
             return (
-              <Tab
-                activeTab={activeTab}
-                key={i}
-                label={label.text}
-                onClick={(tab) => setActiveTab(tab.target.id)}
-              />
+              <li
+                key={text}
+                className={styles.tablinks + " " + isActiveClassCSS(text)}
+                onClick={() => setActiveTab(text)}
+              >
+                {text}
+              </li>
             );
           })}
         </ol>
@@ -31,16 +36,3 @@ const Tabs = ({ labels, isSteeps = false }) => {
 };
 
 export default Tabs;
-
-const Tab = ({ activeTab, label, onClick }) => {
-  let className = styles.tablinks;
-  if (activeTab === label) {
-    className += " " + styles.active;
-  }
-
-  return (
-    <li className={className} id={label} onClick={onClick}>
-      {label}
-    </li>
-  );
-};
