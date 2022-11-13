@@ -70,18 +70,21 @@ export function useAnime(siglas) {
     media: [],
   };
 
-  const [s, dispatch] = useReducer(reducer, initialState);
-  const {
-    tittle,
-    sinopsis,
-    date_publication,
-    date_finalization,
-    temporadas,
-    generes,
-    state,
-    idioma,
-    media,
-  } = s;
+  const [
+    {
+      tittle,
+      sinopsis,
+      date_publication,
+      date_finalization,
+      temporadas,
+      generes,
+      state,
+      idioma,
+      media,
+    },
+    dispatch,
+  ] = useReducer(reducer, initialState);
+
   useEffect(() => {
     if (siglas) {
       getAnime(siglas)

@@ -17,6 +17,7 @@ import { SiglasContext } from "@/context/SiglasContext";
 export default function EditAnime() {
   const { siglas, siglasPage } = useContext(SiglasContext);
   const [idiomasLista, setIdiomasLista] = useState([]);
+  const [filtersList, setFiltersList] = useState([]);
   const [generesLista, setGeneresLista] = useState([]);
   const [temporadasLista, setTemporadasLista] = useState([]);
   const [
@@ -44,7 +45,11 @@ export default function EditAnime() {
     getGeneres()
       .then((genere) => {
         if (genere?.data) {
-          setGeneresLista(genere?.data);
+          setFiltersList({
+            list: genere?.data,
+            tittle: "Generos",
+            checklist: generes,
+          });
         }
       })
       .catch((err) => console.error(err));
@@ -52,7 +57,11 @@ export default function EditAnime() {
     getTemporadas()
       .then((genere) => {
         if (genere?.data) {
-          setTemporadasLista(genere?.data);
+          setFiltersList({
+            list: genere?.data,
+            tittle: "Temporadas",
+            checklist: temporadas,
+          });
         }
       })
       .catch((err) => console.error(err));
@@ -196,15 +205,17 @@ export default function EditAnime() {
               <p className={styles.label}> Generos: </p>
               {generesLista.length > 0
                 ? generesLista.map((item, i) => {
-                    return <ImputKindsFilters
-                      type="checkbox"
-                      key={i}
-                      changeKing={(e) => change(e, "generes")}
-                      ischecked={generes.includes(item.code.trim())}
-                      value={item.code}
-                      label={item.tittle}
-                      i={i}
-                    />;
+                    return (
+                      <ImputKindsFilters
+                        type="checkbox"
+                        key={i}
+                        changeKing={(e) => change(e, "generes")}
+                        ischecked={generes.includes(item.code.trim())}
+                        value={item.code}
+                        label={item.tittle}
+                        i={i}
+                      />
+                    );
                   })
                 : "No hay generos"}
             </div>
@@ -212,15 +223,17 @@ export default function EditAnime() {
               <p className={styles.label}> Temporadas: </p>
               {temporadasLista.length > 0
                 ? temporadasLista.map((item, i) => {
-                    return <ImputKindsFilters
-                      type="checkbox"
-                      key={i}
-                      changeKing={(e) => change(e, "temporadas")}
-                      ischecked={temporadas.includes(item.code.trim())}
-                      value={item.code}
-                      label={item.tittle}
-                      i={i}
-                    />;
+                    return (
+                      <ImputKindsFilters
+                        type="checkbox"
+                        key={i}
+                        changeKing={(e) => change(e, "temporadas")}
+                        ischecked={temporadas.includes(item.code.trim())}
+                        value={item.code}
+                        label={item.tittle}
+                        i={i}
+                      />
+                    );
                   })
                 : "No hay temporadas"}
             </div>
@@ -254,6 +267,71 @@ export default function EditAnime() {
     </>
   );
 }
+
+export const ListFilters = ({ kind, list }) => {
+  const [lista, setLista] = useState([]);
+  const [listOriginal, setListOriginal] = useState(list);
+
+  useEffect(() => {
+    if (kind == "Generos") {
+      getGeneres()
+        .then((genere) => {
+          if (genere?.data) setLista(genere?.data);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      getTemporadas()
+        .then((genere) => {
+          if (genere?.data) setLista(genere?.data);
+        })
+        .catch((err) => console.error(err));
+    }
+
+    return () => {
+      setLista([]);
+    };
+  }, []);
+
+  if (lista.length == 0) return `No hay ${kind}`;
+
+  const change = (id) => {
+    console.log(kind + ": " + id);
+    if (listOriginal.includes(id)) {
+      setListOriginal(listOriginal.filter((e) => e !== id));
+    } else {
+      setListOriginal([
+        id,
+        ...listOriginal, // Put old items at the end
+      ]);
+    }
+  };
+
+  return (
+    <div className={styles.concret}>
+      <p> {kind}: </p>
+      <div className={styles.input_group + " " + styles.checkbox}>
+        {lista.map((item, i) => {
+          return (
+            <ImputKindsFilters
+              type="checkbox"
+              key={i}
+              changeKing={(e, t) => {
+                console.log("====================================");
+                console.log(t);
+                console.log("====================================");
+                change(e);
+              }}
+              ischecked={listOriginal.includes(item.code.trim())}
+              value={item.code}
+              label={item.tittle}
+              i={i}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 // export const AddFilters = ({
 //   changeTemporadasList,
