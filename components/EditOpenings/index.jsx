@@ -1,54 +1,30 @@
 import styles from "./EditOpenings.module.css";
 import Media from "@/components/Media/index";
 import { useOpening } from "@/hooks/useOpenings";
-import { useListIds } from "@/hooks/useListIfs";
 import DyamondListIds from "../DyamondListIds";
-import { insertOpening, editOpening } from "../../services/index";
 
 export default function EditOpenings() {
-  const [id, list, setId] = useListIds("openings");
-  const [ tittle,
+  const [
+    id,
+    list,
+    setId,
+    tittle,
     setTittle,
     sinopsis,
     setSinopsis,
-    anime,
     num,
     setNum,
-    seasion,
-    setSeasion,
     media,
-    setMedia] =
-    useOpening(id);
-
-  const setabform = () => {
-    if (media.length == 0) return;
-    let data = { tittle, sinopsis, anime, num, seasion, media };
-    console.log(data);
-    if (id) {
-      editOpening(data)
-        .then((result) => {
-          console.log("====================================");
-          console.log(result);
-          console.log("====================================");
-        })
-        .catch((err) => console.error(err));
-    } else {
-      insertOpening(data)
-        .then((result) => {
-          console.log("====================================");
-          console.log(result);
-          console.log("====================================");
-        })
-        .catch((err) => console.error(err));
-    }
-  };
+    setMedia,
+    sendOpening,
+  ] = useOpening("openings");
 
   return (
     <>
       <DyamondListIds list={list} changeList={(id) => setId(id)} />
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
-          <form className={styles.concret} onSubmit={setabform}>
+          <form className={styles.concret} onSubmit={sendOpening}>
             <div className={styles.contenedor_inputs}>
               <input
                 type="text"

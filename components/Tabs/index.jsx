@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Tabs.module.css";
 
-const Tabs = ({ labels, isSteeps = false }) => {
-  const [activeTab, setActiveTab] = useState(labels[0].text);
-  const selectedTab = labels.find((tab) => tab.text === activeTab);
+const Tabs = ({ children, isSteeps = false }) => {
+  const [list, setList] = useState([]);
+  const [activeTab, setActiveTab] = useState(children[0].props.text);
+  const [selectedTab] = useState();
 
   if (activeTab === "all" && !isSteeps) {
     return undefined;
@@ -13,25 +14,42 @@ const Tabs = ({ labels, isSteeps = false }) => {
     return activeTab === label ? styles.active : "";
   };
 
+  useEffect(() => {
+    selectedTab = list.find((tab) => tab.props.text === activeTab);
+  }, [activeTab]);
+
+  useEffect(() => {
+    setList(
+      children.map((e) => {
+        if (e.props.children) {
+          return e.props.children;
+        } else return e;
+      })
+    );
+  }, []);
+
   return (
-    <div key={labels.text}>
+    <>
       <div className={styles.toolbar}>
         <ol className={styles.tab}>
-          {labels.map(({ text }) => {
-            return (
-              <li
-                key={text}
-                className={styles.tablinks + " " + isActiveClassCSS(text)}
-                onClick={() => setActiveTab(text)}
-              >
-                {text}
-              </li>
-            );
-          })}
+          {list.map(
+            ({ props }) =>
+              console.log(props) && (
+                <li
+                  key={props.text}
+                  className={
+                    styles.tablinks + " " + isActiveClassCSS(props.text)
+                  }
+                  onClick={() => setActiveTab(props.text)}
+                >
+                  {props.text}
+                </li>
+              )
+          )}
         </ol>
       </div>
-      <div className={styles.tabcontent}>{selectedTab?.component}</div>
-    </div>
+      <div className={styles.tabcontent}>{selectedTab}</div>
+    </>
   );
 };
 

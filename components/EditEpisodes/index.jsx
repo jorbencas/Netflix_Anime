@@ -1,48 +1,29 @@
 import styles from "./EditEpisodes.module.css";
 import Media from "@/components/Media/index";
 import { useEpisode } from "@/hooks/useEpisodes";
-import { useListIds } from "@/hooks/useListIfs";
 import DyamondListIds from "../DyamondListIds";
-import { insertEpisode, editEpisode } from "@/services/index";
-// import { Suspense, lazy } from "react";
-// const Media = lazy(() => import("@/components/Media/index"));
-// const DyamondListIds = lazy(() => import("../DyamondListIds"));
-export default function EditEpisodes() {
-  const [id, list, setId] = useListIds("episodes");
-  const [tittle, setTittle, sinopsis, setSinopsis, anime, num, seasion, setSeasion, media, setMedia] =
-    useEpisode(id);
 
-  const setabform = async () => {
-    if (media.length == 0) return;
-    let data = { tittle, sinopsis, anime, num, seasion, media };
-    console.log(data);
-    if (id) {
-      editEpisode(data)
-        .then((result) => {
-          console.log("====================================");
-          console.log(result);
-          console.log("====================================");
-        })
-        .catch((err) => console.error(err));
-    } else {
-      insertEpisode(data)
-        .then((result) => {
-          console.log("====================================");
-          console.log(result);
-          console.log("====================================");
-        })
-        .catch((err) => console.error(err));
-    }
-  };
+export default function EditEpisodes() {
+  const [
+    id,
+    list,
+    setId,
+    tittle,
+    setTittle,
+    sinopsis,
+    setSinopsis,
+    num,
+    media,
+    setMedia,
+    sendEpisode,
+  ] = useEpisode("episodes");
 
   return (
     <>
-      {/* <Suspense fallback={<h1>Loading media...</h1>}> */}
       <DyamondListIds list={list} changeList={(id) => setId(id)} />
-      {/* </Suspense> */}
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
-          <form className={styles.concret} onSubmit={setabform}>
+          <form className={styles.concret} onSubmit={sendEpisode}>
             <div className={styles.contenedor_inputs}>
               <input
                 type="text"
@@ -73,7 +54,6 @@ export default function EditEpisodes() {
               value={date_finalization}
               placeholder="Fecha de Finalización"
             /> */}
-            {/* <Suspense fallback={<h1>Loading media...</h1>}> */}
             <Media
               media={media}
               changeMedia={(m) => {
@@ -82,7 +62,6 @@ export default function EditEpisodes() {
               kind="episodes"
               id_external={id}
             />
-            {/* </Suspense> */}
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

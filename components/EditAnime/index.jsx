@@ -1,26 +1,13 @@
 import styles from "./EditAnime.module.css";
-import {
-  editAnime,
-  insertAnime,
-  getTemporadas,
-  getGeneres,
-  insertFilters,
-  getIdiomaLista,
-} from "@/services/index";
+import { insertFilters } from "@/services/index";
 import Media from "@/components/Media/index";
-import { useState, useEffect, useContext } from "react";
 import Modal from "@/components/Modal";
 import { ModalContext } from "@/context/ModalContext";
 import { useAnime } from "@/hooks/useAnime";
-import { SiglasContext } from "@/context/SiglasContext";
 
 export default function EditAnime() {
-  const { siglas, siglasPage } = useContext(SiglasContext);
-  const [idiomasLista, setIdiomasLista] = useState([]);
-  const [filtersList, setFiltersList] = useState([]);
-  const [generesLista, setGeneresLista] = useState([]);
-  const [temporadasLista, setTemporadasLista] = useState([]);
   const [
+    siglasPage,
     tittle,
     setTittle,
     sinopsis,
@@ -30,215 +17,95 @@ export default function EditAnime() {
     date_finalization,
     setDate_finalization,
     temporadas,
-    setTemporadas,
     generes,
-    setGeneres,
     state,
     setState,
     idioma,
     setIdioma,
     media,
     setMedia,
-  ] = useAnime(siglasPage);
-
-  useEffect(() => {
-    getGeneres()
-      .then((genere) => {
-        if (genere?.data) {
-          setFiltersList({
-            list: genere?.data,
-            tittle: "Generos",
-            checklist: generes,
-          });
-        }
-      })
-      .catch((err) => console.error(err));
-
-    getTemporadas()
-      .then((genere) => {
-        if (genere?.data) {
-          setFiltersList({
-            list: genere?.data,
-            tittle: "Temporadas",
-            checklist: temporadas,
-          });
-        }
-      })
-      .catch((err) => console.error(err));
-
-    getIdiomaLista()
-      .then((idiomas) => {
-        if (idiomas?.data) setIdiomasLista(idiomas?.data);
-      })
-      .catch((err) => console.error(err));
-
-    return () => {
-      setGeneresLista([]);
-      setTemporadasLista([]);
-      setIdiomasLista([]);
-    };
-  }, []);
-
-  const change = (id, kind) => {
-    console.log(kind + ": " + id);
-    let list = {};
-    if (kind == "generes") {
-      list[kind] = generes;
-    } else {
-      list[kind] = temporadas;
-    }
-    let content;
-
-    if (list[kind].includes(id)) {
-      content = list[kind].filter((e) => e !== id);
-    } else {
-      content = [
-        id,
-        ...list[kind], // Put old items at the end
-      ];
-    }
-
-    if (kind == "generes") {
-      setGeneres(content);
-    } else {
-      setTemporadas(content);
-    }
-
-    console.log(list);
-  };
-
-  const setabform = async () => {
-    if (media.length == 0) return;
-    let data = {
-      siglas: siglasPage,
-      tittle,
-      sinopsis,
-      date_publication,
-      date_finalization,
-      temporadas,
-      generes,
-      state,
-      idioma,
-      media,
-    };
-    if (siglas) {
-      // editAnime(data)
-      //   .then((result) => {
-      //     console.log("====================================");
-      //     console.log(result);
-      //     console.log("====================================");
-      //   })
-      //   .catch((err) => console.error(err));
-    } else {
-      console.log(data);
-      // insertAnime(data)
-      // .then((result) => {
-      //   console.log("====================================");
-      //   console.log(result);
-      //   console.log("====================================");
-      // })
-      // .catch((err) => console.error(err));
-    }
-  };
+    sendAnime,
+    idiomasLista,
+    generesLista,
+    temporadasLista,
+    setFilters,
+  ] = useAnime();
 
   return (
-    <>
-      <div className={styles.wrap}>
-        <div className={styles.contenedor_formulario}>
-          <form className={styles.concret} onSubmit={setabform}>
-            <div className={styles.contenedor_inputs}>
-              <input
-                type="text"
-                className={styles.input}
-                value={tittle}
-                onChange={(e) => setTittle(e.target.value)}
-                placeholder="titulo"
-              />
-            </div>
-
-            <textarea
-              className={styles.input}
-              placeholder="Sinopsis"
-              value={sinopsis}
-              onChange={(e) => setSinopsis(e.target.value)}
-            />
+    <div className={styles.wrap}>
+      <div className={styles.contenedor_formulario}>
+        <form className={styles.concret} onSubmit={sendAnime}>
+          <div className={styles.contenedor_inputs}>
             <input
+              type="text"
               className={styles.input}
-              type="date"
-              value={date_publication}
-              onChange={(e) => setDate_publication(e.target.value)}
-              placeholder="Fecha de Publicación"
+              value={tittle}
+              onChange={(e) => setTittle(e.target.value)}
+              placeholder="titulo"
             />
-            <input
-              className={styles.input}
-              type="date"
-              value={date_finalization}
-              onChange={(e) => setDate_finalization(e.target.value)}
-              placeholder="Fecha de Finalización"
-            />
-            <div className={styles.concret}>
-              <p>Idiomas: </p>
-              <select
-                value={idioma}
-                onChange={(e) => setIdioma(e.target.value)}
-              >
-                {idiomasLista.map((e, i) => {
-                  return (
-                    <option key={i} value={e.code}>
-                      {e.tittle}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
+          </div>
 
-            <div className={styles.concret}>
-              <p>Estado: </p>
-              <select value={state} onChange={(e) => setState(e.target.value)}>
-                <option value="pendiong">Pendiente</option>
-                <option value="continues">En Emision</option>
-                <option value="finalized">Finalizado</option>
-              </select>
-            </div>
+          <textarea
+            className={styles.input}
+            placeholder="Sinopsis"
+            value={sinopsis}
+            onChange={(e) => setSinopsis(e.target.value)}
+          />
+          <input
+            className={styles.input}
+            type="date"
+            value={date_publication}
+            onChange={(e) => setDate_publication(e.target.value)}
+            placeholder="Fecha de Publicación"
+          />
+          <input
+            className={styles.input}
+            type="date"
+            value={date_finalization}
+            onChange={(e) => setDate_finalization(e.target.value)}
+            placeholder="Fecha de Finalización"
+          />
+          <div className={styles.concret}>
+            <p>Idiomas: </p>
+            <select value={idioma} onChange={(e) => setIdioma(e.target.value)}>
+              {idiomasLista.map(({ tittle, code }, i) => (
+                <option key={i} value={code}>
+                  {tittle}
+                </option>
+              ))}
+            </select>
+          </div>
 
-            <div className={styles.input_group + " " + styles.checkbox}>
-              <p className={styles.label}> Generos: </p>
-              {generesLista.length > 0
-                ? generesLista.map((item, i) => {
-                    return (
-                      <ImputKindsFilters
-                        type="checkbox"
-                        key={i}
-                        changeKing={(e) => change(e, "generes")}
-                        ischecked={generes.includes(item.code.trim())}
-                        value={item.code}
-                        label={item.tittle}
-                        i={i}
-                      />
-                    );
-                  })
-                : "No hay generos"}
-            </div>
-            <div className={styles.input_group + " " + styles.checkbox}>
-              <p className={styles.label}> Temporadas: </p>
-              {temporadasLista.length > 0
-                ? temporadasLista.map((item, i) => {
-                    return (
-                      <ImputKindsFilters
-                        type="checkbox"
-                        key={i}
-                        changeKing={(e) => change(e, "temporadas")}
-                        ischecked={temporadas.includes(item.code.trim())}
-                        value={item.code}
-                        label={item.tittle}
-                        i={i}
-                      />
-                    );
-                  })
-                : "No hay temporadas"}
-            </div>
+          <div className={styles.concret}>
+            <p>Estado: </p>
+            <select value={state} onChange={(e) => setState(e.target.value)}>
+              <option value="pendiong">Pendiente</option>
+              <option value="continues">En Emision</option>
+              <option value="finalized">Finalizado</option>
+            </select>
+          </div>
 
-            {/* <Modal btnLabel="Añadir Filtros">
+          <ListFilters
+            key="0"
+            kind="Generes"
+            listOriginal={generes}
+            list={generesLista}
+            onchange={(e, kind) => {
+              setFilters(e, kind);
+            }}
+          />
+
+          <ListFilters
+            key="1"
+            kind="Temporadas"
+            listOriginal={temporadas}
+            list={temporadasLista}
+            onchange={(e, kind) => {
+              setFilters(e, kind);
+            }}
+          />
+
+          {/* <Modal btnLabel="Añadir Filtros">
               <AddFilters
                 changeTemporadasList={(g) => {
                   setTemporadasLista(g);
@@ -250,84 +117,44 @@ export default function EditAnime() {
                 generesLista={generesLista}
               />
             </Modal> */}
-            {/* <Suspense fallback={<h1>Loading media...</h1>}> */}
-            <Media
-              media={media}
-              changeMedia={(m) => {
-                setMedia(m);
-              }}
-              kind="animes"
-              id_external={siglasPage}
-            />
-            {/* </Suspense> */}
-            <input className={styles.input} type="submit" value="Crear" />
-          </form>
-        </div>
+          <Media
+            media={media}
+            changeMedia={(m) => {
+              setMedia(m);
+            }}
+            kind="animes"
+            id_external={siglasPage}
+          />
+          <input className={styles.input} type="submit" value="Crear" />
+        </form>
       </div>
-    </>
+    </div>
   );
 }
 
-export const ListFilters = ({ kind, list }) => {
-  const [lista, setLista] = useState([]);
-  const [listOriginal, setListOriginal] = useState(list);
-
-  useEffect(() => {
-    if (kind == "Generos") {
-      getGeneres()
-        .then((genere) => {
-          if (genere?.data) setLista(genere?.data);
-        })
-        .catch((err) => console.error(err));
-    } else {
-      getTemporadas()
-        .then((genere) => {
-          if (genere?.data) setLista(genere?.data);
-        })
-        .catch((err) => console.error(err));
-    }
-
-    return () => {
-      setLista([]);
-    };
-  }, []);
-
-  if (lista.length == 0) return `No hay ${kind}`;
-
-  const change = (id) => {
-    console.log(kind + ": " + id);
-    if (listOriginal.includes(id)) {
-      setListOriginal(listOriginal.filter((e) => e !== id));
-    } else {
-      setListOriginal([
-        id,
-        ...listOriginal, // Put old items at the end
-      ]);
-    }
+export const ListFilters = ({ kind, listOriginal, list, onchange }) => {
+  if (list.length == 0) return `No hay ${kind}`;
+  const changeValues = (value, id) => {
+    let k = id.split("_");
+    onchange(value, k[1]);
   };
-
   return (
     <div className={styles.concret}>
       <p> {kind}: </p>
       <div className={styles.input_group + " " + styles.checkbox}>
-        {lista.map((item, i) => {
-          return (
-            <ImputKindsFilters
-              type="checkbox"
-              key={i}
-              changeKing={(e, t) => {
-                console.log("====================================");
-                console.log(t);
-                console.log("====================================");
-                change(e);
-              }}
-              ischecked={listOriginal.includes(item.code.trim())}
-              value={item.code}
-              label={item.tittle}
-              i={i}
-            />
-          );
-        })}
+        {list.map(({ code, tittle }, i) => (
+          <ImputKindsFilters
+            type="checkbox"
+            key={i}
+            changeKing={(e) => {
+              changeValues(e.value, e.id);
+            }}
+            ischecked={listOriginal.includes(code.trim())}
+            value={code}
+            label={tittle}
+            i={i + "_" + kind}
+          />
+        ))}
       </div>
     </div>
   );
@@ -440,7 +267,7 @@ const ImputKindsFilters = ({
         className={styles.checkbox}
         id={i}
         checked={ischecked}
-        onChange={(e) => changeKing(e.target.value, type)}
+        onChange={(e) => changeKing(e.target)}
         value={value}
       />
 

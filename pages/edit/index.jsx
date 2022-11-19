@@ -11,6 +11,7 @@ import { SiglasContext } from "@/context/SiglasContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import EditSeasions from "../../components/EditSeasions/index";
+import { SeasionListProvider } from "@/context/Seasion";
 
 export default function Edit() {
   const href = useRouter();
@@ -25,17 +26,16 @@ export default function Edit() {
 
       <AppLayout>
         <SiglasList>
-          <Tabs
-            labels={[
-              { text: "Anime", component: <EditAnime /> },
-              { text: "Temporadas", component: <EditSeasions /> },
-              { text: "Episodes", component: <EditEpisodes /> },
-              { text: "openings", component: <EditOpenings /> },
-              { text: "Endings", component: <EditEndings /> },
-              { text: "all", component: <ViewEdit siglas={siglas} /> },
-            ]}
-            isSteeps={siglas ? true : false}
-          />
+          <Tabs isSteeps={siglas ? true : false}>
+            <EditAnime text="Anime" />
+            <SeasionListProvider>
+              <EditSeasions text="Temporadas" />
+              <EditEpisodes text="Episodes" />
+              <EditOpenings text="openings" />
+              <EditEndings text="Endings" />
+            </SeasionListProvider>
+            <ViewEdit siglas={siglas} text="all" />
+          </Tabs>
         </SiglasList>
       </AppLayout>
     </>

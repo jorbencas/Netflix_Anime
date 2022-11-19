@@ -1,54 +1,29 @@
 import styles from "./EditEndings.module.css";
 import Media from "@/components/Media/index";
 import { useEnding } from "../../hooks/useEndings";
-import { useListIds } from "@/hooks/useListIfs";
 import DyamondListIds from "../DyamondListIds";
-import { insertEnding, editEnding } from "@/services/index";
 
 export default function EditEndings() {
-  const [id, list, setId] = useListIds("endings");
   const [
+    id,
+    list,
+    setId,
     tittle,
     setTittle,
     sinopsis,
     setSinopsis,
-    anime,
     num,
-    seasion,
-    setSeasion,
     media,
     setMedia,
-  ] = useEnding(id);
-
-  const setabform = () => {
-    if (media.length == 0) return;
-    let data = { tittle, sinopsis, anime, num, seasion, media };
-    console.log(data);
-    if (id) {
-      editEnding(data)
-        .then((result) => {
-          console.log("====================================");
-          console.log(result);
-          console.log("====================================");
-        })
-        .catch((err) => console.error(err));
-    } else {
-      insertEnding(data)
-        .then((result) => {
-          console.log("====================================");
-          console.log(result);
-          console.log("====================================");
-        })
-        .catch((err) => console.error(err));
-    }
-  };
+    sendEnding,
+  ] = useEnding("endings");
 
   return (
     <>
       <DyamondListIds list={list} changeList={(id) => setId(id)} />
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
-          <form className={styles.concret} onSubmit={setabform}>
+          <form className={styles.concret} onSubmit={sendEnding}>
             <div className={styles.contenedor_inputs}>
               <input
                 type="text"

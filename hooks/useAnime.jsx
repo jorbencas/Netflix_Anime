@@ -1,5 +1,7 @@
-import { useEffect, useReducer } from "react";
-import { getAnime } from "@/services/index";
+import { useEffect, useReducer, useState, useContext } from "react";
+import { getAnime, editAnime, insertAnime } from "@/services/index";
+import { getTemporadas, getGeneres, getIdiomaLista } from "@/services/index";
+import { SiglasContext } from "@/context/SiglasContext";
 
 function reducer(state, action) {
   const { type } = action;
@@ -24,9 +26,6 @@ function reducer(state, action) {
       date_finalization: action.date_finalization,
     };
   } else if (type == "setTemporadas") {
-    console.log("====================================");
-    console.log(type);
-    console.log(state);
     return {
       ...state,
       temporadas: action.temporadas,
@@ -57,7 +56,7 @@ function reducer(state, action) {
     };
   }
 }
-export function useAnime(siglas) {
+export function useAnime() {
   let initialState = {
     tittle: "",
     sinopsis: "",
@@ -85,9 +84,14 @@ export function useAnime(siglas) {
     dispatch,
   ] = useReducer(reducer, initialState);
 
+  const { siglasPage } = useContext(SiglasContext);
+  const [idiomasLista, setIdiomasLista] = useState([]);
+  const [generesLista, setGeneresLista] = useState([]);
+  const [temporadasLista, setTemporadasLista] = useState([]);
+
   useEffect(() => {
-    if (siglas) {
-      getAnime(siglas)
+    if (siglasPage) {
+      getAnime(siglasPage)
         .then((anime) => {
           const {
             tittle,
@@ -112,17 +116,29 @@ export function useAnime(siglas) {
         })
         .catch((err) => console.error(err));
     }
-    // return () => {
-    //   setTittle([]);
-    //   setSinopsis([]);
-    //   setDate_publication([]);
-    //   setDate_finalization([]);
-    //   setTemporadas([]);
-    //   setGeneres([]);
-    //   setState([]);
-    //   setIdioma([]);
-    //   setMedia([]);
-    // };
+
+    getGeneres().then((genere) => {
+      if (genere?.data) {
+        setGeneresLista(genere?.data);
+      }
+    });
+
+    getTemporadas().then((temporada) => {
+      if (temporada?.data) {
+        setTemporadasLista(temporada?.data);
+      }
+    });
+    getIdiomaLista()
+      .then((idiomas) => {
+        if (idiomas?.data) setIdiomasLista(idiomas?.data);
+      })
+      .catch((err) => console.error(err));
+
+    return () => {
+      setGeneresLista([]);
+      setTemporadasLista([]);
+      setIdiomasLista([]);
+    };
   }, []);
 
   const setTittle = (tittle) => {
@@ -152,7 +168,68 @@ export function useAnime(siglas) {
   const setMedia = (media) => {
     dispatch({ type: "setMedia", media });
   };
+
+  const setFilters = (k, kind) => {
+    let list = {};
+    if (kind == "Generes") {
+      list[kind] = generes;
+    } else {
+      list[kind] = temporadas;
+    }
+    let content;
+
+    if (list[kind].includes(k)) {
+      content = list[kind].filter((e) => e !== k);
+    } else {
+      content = [
+        k,
+        ...list[kind], // Put old items at the end
+      ];
+    }
+
+    if (kind == "Generes") {
+      setGeneres(content);
+    } else {
+      setTemporadas(content);
+    }
+  };
+
+  const sendAnime = (e) => {
+    e.preventDefault();
+    if (media.length == 0) return;
+    let data = {
+      siglas,
+      tittle,
+      sinopsis,
+      date_publication,
+      date_finalization,
+      temporadas,
+      generes,
+      state,
+      idioma,
+      media,
+    };
+    if (siglas) {
+      // editAnime(data)
+      //   .then((result) => {
+      //     console.log("====================================");
+      //     console.log(result);
+      //     console.log("====================================");
+      //   })
+      //   .catch((err) => console.error(err));
+    } else {
+      console.log(data);
+      // insertAnime(data)
+      // .then((result) => {
+      //   console.log("====================================");
+      //   console.log(result);
+      //   console.log("====================================");
+      // })
+      // .catch((err) => console.error(err));
+    }
+  };
   return [
+    siglasPage,
     tittle,
     setTittle,
     sinopsis,
@@ -162,14 +239,17 @@ export function useAnime(siglas) {
     date_finalization,
     setDate_finalization,
     temporadas,
-    setTemporadas,
     generes,
-    setGeneres,
     state,
     setState,
     idioma,
     setIdioma,
     media,
     setMedia,
+    sendAnime,
+    idiomasLista,
+    generesLista,
+    temporadasLista,
+    setFilters,
   ];
 }
