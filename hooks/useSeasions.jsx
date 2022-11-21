@@ -1,32 +1,30 @@
 import { useState, useEffect, useContext } from "react";
 import { getSeasions } from "@/services/index";
-import { SeasionContext } from "../context/Seasion";
-import { SiglasContext } from "@/context/SiglasContext";
+import { SeasionContext } from "@/context/Seasion";
 import { editOpening, insertOpening } from "@/services/index";
 import { useListIds } from "@/hooks/useListIfs";
 
 export function useSeasion({ kind }) {
-  const [id, setId, list] = useListIds(kind);
-  const [seassion, setSeassion] = useContext(SeasionContext);
+  const [siglasPage, id, setId, list] = useListIds(kind);
+  const { seasion, setSeasion } = useContext(SeasionContext);
   const [tittle, setTittle] = useState({});
-  const { siglasPage, setSiglasPage } = useContext(SiglasContext);
   const [media, setMedia] = useState([]);
 
   useEffect(() => {
     if (id) {
-      setSeassion(id);
+      setSeasion(id);
       getSeasions(id)
         .then((a) => {
           const { tittle, anime, media } = a?.data;
           setTittle(tittle);
-          setAnime(anime);
+          //setAnime(anime);
           setMedia(media);
         })
         .catch((err) => console.error(err));
     }
     return () => {
       setTittle([]);
-      setAnime(anime);
+      // setAnime(anime);
       setMedia([]);
     };
   }, [id]);
@@ -63,7 +61,7 @@ export function useSeasion({ kind }) {
     setOpen(false);
     // });
 
-    setSeassion(id);
+    setSeasion(id);
   };
   return [list, setId, tittle, setTittle, media, sendSeasion];
 }

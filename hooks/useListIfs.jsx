@@ -1,9 +1,9 @@
-import { useContext, useState, useEffect } from "react";
-import { SiglasContext } from "@/context/SiglasContext";
+import { useState, useEffect } from "react";
 import { getListIds } from "../services";
+import { useSiglas } from '@/hooks/useSiglas';
 
 export function useListIds(kind) {
-  const [siglasPage] = useContext(SiglasContext);
+  const { siglasPage } = useSiglas();
   const [id, setId] = useState(0);
   const [list, setList] = useState([]);
 
@@ -25,5 +25,5 @@ export function useListIds(kind) {
     };
   }, []);
 
-  return [id, list, setId];
+  return [siglasPage,id, list, setId];
 }

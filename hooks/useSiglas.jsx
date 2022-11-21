@@ -1,34 +1,17 @@
-import { useState, useEffect, useContext, useCallback } from "react";
-import { defaultSiglas } from "../services";
-import { useRouter } from "next/router";
+import { useContext, useCallback, useEffect, useState } from "react";
 import { SiglasContext } from "@/context/SiglasContext";
+import { useRouter } from "next/router";
 
 export function useSiglas() {
   const href = useRouter();
   const { siglas } = href.query;
-  const [siglasLista, setSiglasLista] = useState([]);
   const { siglasPage, setSiglasPage } = useContext(SiglasContext);
 
-  useEffect(() => {
-    defaultSiglas()
-      .then((si) => {
-        setSiglasLista(si.data);
-      })
-      .catch((err) => console.error(err));
-
-    return () => {
-      setSiglasLista([]);
-    };
-  }, []);
-
-  const changeSiglasList = useCallback((e) => {
+  const changeSiglas = useCallback((e) => {
     let sigla = e.target.value;
-    if (sigla !== "else") {
-      setSiglasPage(sigla);
-    } else if (siglas !== sigla) {
-      setSiglasPage("");
-    }
+    let s = sigla === "else" ? "" : sigla;
+    setSiglasPage(s);
   }, []);
 
-  return [siglas, siglasLista, siglasPage, changeSiglasList];
+  return [siglas, siglasPage, changeSiglas];
 }

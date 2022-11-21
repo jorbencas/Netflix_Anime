@@ -1,17 +1,15 @@
 import { useState, useEffect, useContext } from "react";
 import { getOpening } from "@/services/index";
-import { SiglasContext } from "@/context/SiglasContext";
-import { SeasionContext } from "../context/Seasion";
+import { SeasionContext } from "@/context/Seasion";
 import { useListIds } from "@/hooks/useListIfs";
 import { insertOpening, editOpening } from "@/services/index";
 
 export function useOpening(kind) {
-  const [id, list, setId] = useListIds(kind);
-  const [seassion, setSeassion] = useContext(SeasionContext);
-  const [tittle, setTittle] = useState({});
-  const [sinopsis, setSinopsis] = useState({});
-  const { siglasPage, setSiglasPage } = useContext(SiglasContext);
-  const [num, setNum] = useState({});
+  const [siglasPage, id, list, setId] = useListIds(kind);
+  const { seasion } = useContext(SeasionContext);
+  const [tittle, setTittle] = useState("");
+  const [sinopsis, setSinopsis] = useState("");
+  const [num, setNum] = useState(0);
   const [media, setMedia] = useState([]);
 
   useEffect(() => {
@@ -21,8 +19,6 @@ export function useOpening(kind) {
           const { tittle, sinopsis, anime, num, seasion, media } = a?.data;
           setTittle(tittle);
           setSinopsis(sinopsis);
-          setAnime(anime);
-          setSeasion(seasion);
           setNum(num);
           setMedia(media);
         })
@@ -31,8 +27,6 @@ export function useOpening(kind) {
     return () => {
       setTittle([]);
       setSinopsis([]);
-      setAnime(anime);
-      setSeasion(seasion);
       setNum(num);
       setMedia([]);
     };
@@ -40,7 +34,7 @@ export function useOpening(kind) {
 
   const sendOpening = () => {
     if (media.length == 0) return;
-    let data = { tittle, sinopsis, anime, num, seasion, media };
+    let data = { tittle, sinopsis, anime: siglasPage, num, seasion, media };
     console.log(data);
     if (id) {
       editOpening(data)
@@ -70,6 +64,7 @@ export function useOpening(kind) {
     sinopsis,
     setSinopsis,
     num,
+    setNum,
     media,
     setMedia,
     sendOpening,

@@ -1,7 +1,7 @@
-import { useEffect, useReducer, useState, useContext } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { getAnime, editAnime, insertAnime } from "@/services/index";
 import { getTemporadas, getGeneres, getIdiomaLista } from "@/services/index";
-import { SiglasContext } from "@/context/SiglasContext";
+import { useSiglas } from "@/hooks/useSiglas";
 
 function reducer(state, action) {
   const { type } = action;
@@ -84,7 +84,7 @@ export function useAnime() {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  const { siglasPage } = useContext(SiglasContext);
+  const { siglas, siglasPage } = useSiglas();
   const [idiomasLista, setIdiomasLista] = useState([]);
   const [generesLista, setGeneresLista] = useState([]);
   const [temporadasLista, setTemporadasLista] = useState([]);
@@ -198,7 +198,7 @@ export function useAnime() {
     e.preventDefault();
     if (media.length == 0) return;
     let data = {
-      siglas,
+      siglas: siglasPage,
       tittle,
       sinopsis,
       date_publication,

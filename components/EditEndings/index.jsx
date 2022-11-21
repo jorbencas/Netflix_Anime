@@ -23,7 +23,7 @@ export default function EditEndings() {
       <DyamondListIds list={list} changeList={(id) => setId(id)} />
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
-          <form className={styles.concret} onSubmit={sendEnding}>
+          <form className={styles.concret} onSubmit={() => sendEnding}>
             <div className={styles.contenedor_inputs}>
               <input
                 type="text"

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import AppLayout from "@/components/AppLayout";
 import EditAnime from "@/components/EditAnime";
 import EditEpisodes from "@/components/EditEpisodes";
@@ -6,16 +7,12 @@ import EditOpenings from "@/components/EditOpenings";
 import EditEndings from "@/components/EditEndings";
 import SiglasList from "@/components/SiglasList";
 import Tabs from "@/components/Tabs";
-import { useContext } from "react";
-import { SiglasContext } from "@/context/SiglasContext";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import EditSeasions from "../../components/EditSeasions/index";
+import { SiglasListProvider } from "@/context/SiglasContext";
+import EditSeasions from "@/components/EditSeasions/index";
 import { SeasionListProvider } from "@/context/Seasion";
+import { useSiglas } from "@/hooks/useSiglas";
 
 export default function Edit() {
-  const href = useRouter();
-  const { siglas } = href.query;
   return (
     <>
       <Head>
@@ -25,8 +22,9 @@ export default function Edit() {
       </Head>
 
       <AppLayout>
-        <SiglasList>
-          <Tabs isSteeps={siglas ? true : false}>
+        <SiglasListProvider>
+          <SiglasList />
+          <Tabs>
             <EditAnime text="Anime" />
             <SeasionListProvider>
               <EditSeasions text="Temporadas" />
@@ -34,25 +32,23 @@ export default function Edit() {
               <EditOpenings text="openings" />
               <EditEndings text="Endings" />
             </SeasionListProvider>
-            <ViewEdit siglas={siglas} text="all" />
+            <ViewEdit text="all" />
           </Tabs>
-        </SiglasList>
+        </SiglasListProvider>
       </AppLayout>
     </>
   );
 }
 
-const ViewEdit = ({ siglas }) => {
-  const [siglasPage] = useContext(SiglasContext);
+const ViewEdit = () => {
+  const { siglasPage } = useSiglas();
 
-  if (!siglas) {
-    return undefined;
-  }
+  return <h1>Hola {siglasPage}</h1>;
 
-  return (
-    <ul>
-      <Link href={"/edit/" + siglasPage}>Editar</Link>
-      <Link href={"/" + siglasPage}>Ver</Link>
-    </ul>
-  );
+  // return (
+  //   <ul>
+  //     <Link href={"/edit/" + siglasPage}>Editar</Link>
+  //     <Link href={"/" + siglasPage}>Ver</Link>
+  //   </ul>
+  // );
 };

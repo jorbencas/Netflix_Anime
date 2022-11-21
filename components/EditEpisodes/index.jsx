@@ -23,7 +23,7 @@ export default function EditEpisodes() {
       <DyamondListIds list={list} changeList={(id) => setId(id)} />
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
-          <form className={styles.concret} onSubmit={sendEpisode}>
+          <form className={styles.concret} onSubmit={() => sendEpisode}>
             <div className={styles.contenedor_inputs}>
               <input
                 type="text"

@@ -9,7 +9,7 @@ export default function EditSeasions() {
   return (
     <>
       <DyamondListIds list={list} changeList={(id) => setList(id)} />
-      <div className={styles.concret}>
+      <form className={styles.concret} onSubmit={() => sendSeasion}>
         <input
           type="text"
           className={styles.input}
@@ -17,13 +17,8 @@ export default function EditSeasions() {
           value={tittle}
           onChange={(e) => setTittle(e.target.value)}
         />
-        <input
-          className={styles.input}
-          type="button"
-          onClick={sendSeasion}
-          value="Crear temporada"
-        />
-      </div>
+        <input className={styles.input} type="submit" value="Crear temporada" />
+      </form>
     </>
   );
 }

@@ -24,7 +24,7 @@ export default function EditOpenings() {
       <DyamondListIds list={list} changeList={(id) => setId(id)} />
       <div className={styles.wrap}>
         <div className={styles.contenedor_formulario}>
-          <form className={styles.concret} onSubmit={sendOpening}>
+          <form className={styles.concret} onSubmit={() => sendOpening}>
             <div className={styles.contenedor_inputs}>
               <input
                 type="text"

@@ -1,23 +1,34 @@
 import styles from "./SiglasList.module.css";
 import { useSiglas } from "@/hooks/useSiglas";
-import { SiglasListProvider } from "@/context/SiglasContext";
+import { defaultSiglas } from "../../services";
+import { useState, useEffect } from "react";
 
-const SiglasContainer = ({ children }) => {
-  const [siglas, siglasLista, siglasPage, changeSiglasList] = useSiglas();
+const SiglasList = () => {
+  const [siglas, siglasPage, changeSiglas] = useSiglas();
+  const [siglasLista, setSiglasLista] = useState([]);
+
+  useEffect(() => {
+    defaultSiglas()
+      .then((si) => {
+        setSiglasLista(si.data);
+      })
+      .catch((err) => console.error(err));
+
+    return () => {
+      setSiglasLista([]);
+    };
+  }, []);
 
   return (
     <>
-      <select onChange={changeSiglasList}>
+      <select onChange={changeSiglas}>
         <option value="else">ninguna de ellas</option>
-        {siglasLista &&
-          siglasLista.length > 0 &&
-          siglasLista.map((s, i) => {
-            return (
-              <option key={i} value={s}>
-                {s}
-              </option>
-            );
-          })}
+        {siglasLista.length > 0 &&
+          siglasLista.map((s, i) => (
+            <option key={i} value={s}>
+              {s}
+            </option>
+          ))}
       </select>
       {!siglas ? (
         <input
@@ -25,20 +36,12 @@ const SiglasContainer = ({ children }) => {
           className={styles.input}
           placeholder="Siglas"
           value={siglasPage}
-          onChange={changeSiglasList}
+          onChange={changeSiglas}
         />
       ) : (
         ""
       )}
-      {children}
     </>
   );
 };
-
-export default function SiglasList({ children }) {
-  return (
-    <SiglasListProvider>
-      <SiglasContainer children={children} />
-    </SiglasListProvider>
-  );
-}
+export default SiglasList;
