@@ -1,4 +1,4 @@
-import { useContext, useCallback, useEffect, useState } from "react";
+import { useContext, useCallback } from "react";
 import { SiglasContext } from "@/context/SiglasContext";
 import { useRouter } from "next/router";
 

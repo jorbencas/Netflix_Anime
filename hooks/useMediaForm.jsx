@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { ModalContext } from "@/context/ModalContext";
-import { SiglasContext } from "@/context/SiglasContext";
+import { useSiglas } from "@/hooks/useSiglas";
 
 export const useMediaForm = (addElementMediaList, id_external, k) => {
   const [mediaFiles, setMediaFiles] = useState([]);
@@ -10,7 +10,7 @@ export const useMediaForm = (addElementMediaList, id_external, k) => {
   const [kind, setKind] = useState("");
   const [message, setMessage] = useState("");
   const { setOpen } = useContext(ModalContext);
-  const { siglasPage } = useContext(SiglasContext);
+  const { siglasPage } = useSiglas();
 
   function isImage(extension) {
     let valids = ["jpg", "jpeg", "png", "gif", "bmp"];

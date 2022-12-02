@@ -4,7 +4,7 @@ import { useSiglas } from "@/hooks/useSiglas";
 
 const Tabs = ({ children }) => {
   const [list, setList] = useState([]);
-  const [activeTab, setActiveTab] = useState(children[0].props.text);
+  const [activeTab, setActiveTab] = useState();
   const [selectedTab, setSelectedTab] = useState();
   const { siglas } = useSiglas();
   // if (activeTab === "all" && !siglas) {
@@ -27,7 +27,7 @@ const Tabs = ({ children }) => {
       } else l.push(e);
     });
     setList(l);
-    setSelectedTab(l.find(({ props }) => props.text === activeTab));
+    setActiveTab(l[0].props.text);
   }, []);
 
   return (

@@ -1,9 +1,9 @@
 import styles from "./EditAnime.module.css";
-import { insertFilters } from "@/services/index";
 import Media from "@/components/Media/index";
 import Modal from "@/components/Modal";
-import { ModalContext } from "@/context/ModalContext";
 import { useAnime } from "@/hooks/useAnime";
+import AddFilters from "../AddFilters/index";
+import ImputKindsFilters from "../InputsFilters/index";
 
 export default function EditAnime() {
   const [
@@ -105,18 +105,18 @@ export default function EditAnime() {
             }}
           />
 
-          {/* <Modal btnLabel="Añadir Filtros">
-              <AddFilters
-                changeTemporadasList={(g) => {
-                  setTemporadasLista(g);
-                }}
-                temporadasLista={temporadasLista}
-                changeGeneresList={(g) => {
-                  setGeneresLista(g);
-                }}
-                generesLista={generesLista}
-              />
-            </Modal> */}
+          <Modal btnLabel="Añadir Filtros">
+            <AddFilters
+              changeTemporadasList={(g) => {
+                setTemporadasLista(g);
+              }}
+              temporadasLista={temporadasLista}
+              changeGeneresList={(g) => {
+                setGeneresLista(g);
+              }}
+              generesLista={generesLista}
+            />
+          </Modal>
           <Media
             media={media}
             changeMedia={(m) => {
@@ -157,123 +157,5 @@ export const ListFilters = ({ kind, listOriginal, list, onchange }) => {
         ))}
       </div>
     </div>
-  );
-};
-
-// export const AddFilters = ({
-//   changeTemporadasList,
-//   temporadasLista,
-//   changeGeneresList,
-//   generesLista,
-// }) => {
-//   let kindList = ["generes", "temporadas", "languajes", "kinds"];
-//   const [code, setCode] = useState("");
-//   const [tittle, setTittle] = useState("");
-//   const [kind, setKind] = useState(
-//     kindList
-//       .filter((e) => {
-//         return e.includes("generes");
-//       })
-//       .shift()
-//   );
-//   const { setOpen } = useContext(ModalContext);
-
-//   const increment = () => {
-//     insertFilters({ code, tittle, kind }).then((res) => {
-//       if (res.data) {
-//         if (kind == "generes") {
-//           changeGeneresList([
-//             res.data,
-//             ...generesLista, // Put old items at the end
-//           ]);
-//         } else if (kind == "temporadas") {
-//           changeTemporadasList([
-//             res.data,
-//             ...temporadasLista, // Put old items at the end
-//           ]);
-//         }
-//         setOpen(false);
-//       }
-//       return () => {
-//         setTittle("");
-//         setCode("");
-//         setKind(
-//           kindList
-//             .filter((e) => {
-//               return e.includes("generes");
-//             })
-//             .shift()
-//         );
-//       };
-//     });
-//   };
-
-//   return (
-//     <div className={styles.concret}>
-//       <input
-//         type="text"
-//         className={styles.input}
-//         placeholder={`codigo del` + kind}
-//         value={code}
-//         onChange={(e) => setCode(e.target.value)}
-//       />
-//       <input
-//         type="text"
-//         className={styles.input}
-//         placeholder={`translation del ` + kind}
-//         value={tittle}
-//         onChange={(e) => setTittle(e.target.value)}
-//       />
-//       {kindList.map((element, i) => {
-//         return (
-//           <ImputKindsFilters
-//             type="radio"
-//             key={i}
-//             changeKing={(e, t) => {
-//               console.log("====================================");
-//               console.log(t);
-//               console.log("====================================");
-//               setKind(e);
-//             }}
-//             ischecked={value === kind}
-//             value={element}
-//             label={element}
-//             i={i}
-//           />
-//         );
-//       })}
-//       <input
-//         className={styles.input}
-//         type="button"
-//         onClick={increment}
-//         value="Crear filtro"
-//       />
-//     </div>
-//   );
-// };
-
-const ImputKindsFilters = ({
-  type,
-  changeKing,
-  label,
-  value,
-  ischecked,
-  i,
-}) => {
-  return (
-    <>
-      <input
-        type={type}
-        className={styles.checkbox}
-        id={i}
-        checked={ischecked}
-        onChange={(e) => changeKing(e.target)}
-        value={value}
-      />
-
-      <label className={styles.label} htmlFor={i}>
-        {label}
-      </label>
-    </>
   );
 };

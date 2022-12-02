@@ -90,8 +90,8 @@ export function useAnime() {
   const [temporadasLista, setTemporadasLista] = useState([]);
 
   useEffect(() => {
-    if (siglasPage) {
-      getAnime(siglasPage)
+    if (siglas) {
+      getAnime(siglas)
         .then((anime) => {
           const {
             tittle,
@@ -210,22 +210,22 @@ export function useAnime() {
       media,
     };
     if (siglas) {
-      // editAnime(data)
-      //   .then((result) => {
-      //     console.log("====================================");
-      //     console.log(result);
-      //     console.log("====================================");
-      //   })
-      //   .catch((err) => console.error(err));
+      editAnime(data)
+        .then((result) => {
+          console.log("====================================");
+          console.log(result);
+          console.log("====================================");
+        })
+        .catch((err) => console.error(err));
     } else {
       console.log(data);
-      // insertAnime(data)
-      // .then((result) => {
-      //   console.log("====================================");
-      //   console.log(result);
-      //   console.log("====================================");
-      // })
-      // .catch((err) => console.error(err));
+      insertAnime(data)
+        .then((result) => {
+          console.log("====================================");
+          console.log(result);
+          console.log("====================================");
+        })
+        .catch((err) => console.error(err));
     }
   };
   return [

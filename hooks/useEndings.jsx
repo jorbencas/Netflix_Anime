@@ -7,8 +7,8 @@ import { insertEnding, editEnding } from "@/services/index";
 export function useEnding({ kind }) {
   const [siglasPage, id, list, setId] = useListIds(kind);
   const { seasion } = useContext(SeasionContext);
-  const [tittle, setTittle] = useState('');
-  const [sinopsis, setSinopsis] = useState('');
+  const [tittle, setTittle] = useState("");
+  const [sinopsis, setSinopsis] = useState("");
   const [num, setNum] = useState(0);
   const [media, setMedia] = useState([]);
 
