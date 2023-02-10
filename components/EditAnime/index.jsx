@@ -7,7 +7,6 @@ import ImputKindsFilters from "../InputsFilters/index";
 
 export default function EditAnime() {
   const [
-    siglasPage,
     tittle,
     setTittle,
     sinopsis,
@@ -22,14 +21,12 @@ export default function EditAnime() {
     setState,
     idioma,
     setIdioma,
-    media,
-    setMedia,
     sendAnime,
     idiomasLista,
     generesLista,
     temporadasLista,
     setFilters,
-  ] = useAnime();
+  ] = useAnime(true);
 
   return (
     <div className={styles.wrap}>
@@ -117,14 +114,8 @@ export default function EditAnime() {
               generesLista={generesLista}
             />
           </Modal>
-          <Media
-            media={media}
-            changeMedia={(m) => {
-              setMedia(m);
-            }}
-            kind="animes"
-            id_external={siglasPage}
-          />
+
+          <Media />
           <input className={styles.input} type="submit" value="Crear" />
         </form>
       </div>

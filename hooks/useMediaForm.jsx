@@ -1,8 +1,10 @@
 import { useState, useContext } from "react";
 import { ModalContext } from "@/context/ModalContext";
 import { useSiglas } from "@/hooks/useSiglas";
+import { MediaContext } from "@/context/Media";
 
-export const useMediaForm = (addElementMediaList, id_external, k) => {
+export const useMediaForm = () => {
+  const { media, setMedia, id_external, k } = useContext(MediaContext);
   const [mediaFiles, setMediaFiles] = useState([]);
   const [mediaFiles2, setMediaFiles2] = useState([]);
   const [errors, setErrors] = useState([]);
@@ -101,7 +103,10 @@ export const useMediaForm = (addElementMediaList, id_external, k) => {
         filesize: mediaFiles[0].filesize,
         urlarchivo: mediaFiles[0].urlarchivo,
       };
-      addElementMediaList(req);
+      setMedia([
+        req,
+        ...media, // Put old items at the end
+      ]);
       setOpen(false);
     }
   };

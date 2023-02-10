@@ -12,10 +12,6 @@ export default function EditOpenings() {
     setTittle,
     sinopsis,
     setSinopsis,
-    num,
-    setNum,
-    media,
-    setMedia,
     sendOpening,
   ] = useOpening("openings");
 
@@ -43,14 +39,7 @@ export default function EditOpenings() {
                 onChange={(e) => setSinopsis(e.target.value)}
               />
             </div>
-            <Media
-              media={media}
-              changeMedia={(m) => {
-                setMedia(m);
-              }}
-              kind="openings"
-              id_external={id}
-            />
+            <Media />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

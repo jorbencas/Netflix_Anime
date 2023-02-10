@@ -3,24 +3,27 @@ import { getEpisode } from "@/services/index";
 import { SeasionContext } from "@/context/Seasion";
 import { useListIds } from "@/hooks/useListIfs";
 import { insertEpisode, editEpisode } from "@/services/index";
+import { MediaContext } from "@/context/Media";
 
 export function useEpisode(kind) {
   const [siglasPage, id, list, setId] = useListIds(kind);
-  const { seasion } = useContext(SeasionContext);
+  const { seasion, setSeasion } = useContext(SeasionContext);
   const [tittle, setTittle] = useState("");
   const [sinopsis, setSinopsis] = useState("");
   const [num, setNum] = useState(0);
-  const [media, setMedia] = useState([]);
-
+  const { media, setMedia, setK, setId_external } = useContext(MediaContext);
   useEffect(() => {
     if (id) {
       getEpisode(id)
         .then((a) => {
-          const { tittle, sinopsis, anime, num, seasion, media } = a?.data;
+          const { tittle, sinopsis, anime, num } = a?.data;
           setTittle(tittle);
           setSinopsis(sinopsis);
           setNum(num);
-          setMedia(media);
+          setSeasion(a?.data.seasion);
+          setMedia(a?.data.media);
+          setK(kind);
+          setId_external(id);
         })
         .catch((err) => console.error(err));
     }
@@ -29,6 +32,8 @@ export function useEpisode(kind) {
       setSinopsis([]);
       setNum(num);
       setMedia([]);
+      setK("");
+      setId_external(0);
     };
   }, [id]);
 

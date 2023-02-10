@@ -13,8 +13,6 @@ export default function EditEpisodes() {
     sinopsis,
     setSinopsis,
     num,
-    media,
-    setMedia,
     sendEpisode,
   ] = useEpisode("episodes");
 
@@ -54,14 +52,7 @@ export default function EditEpisodes() {
               value={date_finalization}
               placeholder="Fecha de Finalización"
             /> */}
-            <Media
-              media={media}
-              changeMedia={(m) => {
-                setMedia(m);
-              }}
-              kind="episodes"
-              id_external={id}
-            />
+            <Media />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

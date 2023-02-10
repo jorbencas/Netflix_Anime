@@ -11,6 +11,7 @@ import { SiglasListProvider } from "@/context/SiglasContext";
 import EditSeasions from "@/components/EditSeasions/index";
 import { SeasionListProvider } from "@/context/Seasion";
 import { useSiglas } from "@/hooks/useSiglas";
+import { MediaListProvider } from "@/context/Media";
 
 export default function Edit() {
   return (
@@ -25,12 +26,20 @@ export default function Edit() {
         <SiglasListProvider>
           <SiglasList />
           <Tabs>
-            <EditAnime text="Anime" />
+            <MediaListProvider>
+              <EditAnime text="Anime" />
+            </MediaListProvider>
             <SeasionListProvider>
               <EditSeasions text="Temporadas" />
-              <EditEpisodes text="Episodes" />
-              <EditOpenings text="openings" />
-              <EditEndings text="Endings" />
+              <MediaListProvider>
+                <EditEpisodes text="Episodes" />
+              </MediaListProvider>
+              <MediaListProvider>
+                <EditOpenings text="openings" />
+              </MediaListProvider>
+              <MediaListProvider>
+                <EditEndings text="Endings" />
+              </MediaListProvider>
             </SeasionListProvider>
             <ViewEdit text="all" />
           </Tabs>

@@ -1,28 +1,31 @@
 import styles from "./Media.module.css";
 import Modal from "@/components/Modal";
-import { useMedia } from "@/hooks/useMedia";
 import MediaForm from "./MediaForm";
-import MediaList from "./MediaList";
+import MediaListElement from "./MeidaElment";
+import { MediaContext } from "@/context/Media";
 
-export default function Media({ media, changeMedia, kind, id_external }) {
-  const [addElementMediaList, removeElementMediaList] = useMedia(
-    media,
-    changeMedia
-  );
-
+export default function Media() {
+  const { media } = useContext(MediaContext);
   return (
     <div className={styles.upload}>
-      <MediaList
-        mediaList={media}
-        removeElementMediaList={removeElementMediaList}
-      />
+      <div className={styles.sortableupload + " " + styles.cursorPointer}>
+        {media.length == 0 ? (
+          <div className={styles.sinID}>
+            <div>Para agregar archivos debe antes guardar el contenido.</div>
+          </div>
+        ) : (
+          <table className={styles.table} borde="0">
+            <tbody>
+              {media.map((element, i) => {
+                <MediaListElement element={element} />;
+              })}
+            </tbody>
+          </table>
+        )}
+      </div>
       <div className={styles.buttons}>
         <Modal btnLabel="Añadir archivos">
-          <MediaForm
-            kind={kind}
-            id_external={id_external}
-            addElementMediaList={addElementMediaList}
-          />
+          <MediaForm />
         </Modal>
       </div>
     </div>

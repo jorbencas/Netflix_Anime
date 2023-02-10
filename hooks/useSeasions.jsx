@@ -6,26 +6,21 @@ import { useListIds } from "@/hooks/useListIfs";
 
 export function useSeasion({ kind }) {
   const [siglasPage, id, setId, list] = useListIds(kind);
-  const { seasion, setSeasion } = useContext(SeasionContext);
+  const { setSeasion } = useContext(SeasionContext);
   const [tittle, setTittle] = useState({});
-  const [media, setMedia] = useState([]);
 
   useEffect(() => {
     if (id) {
       setSeasion(id);
       getSeasions(id)
         .then((a) => {
-          const { tittle, anime, media } = a?.data;
+          const { tittle } = a?.data;
           setTittle(tittle);
-          //setAnime(anime);
-          setMedia(media);
         })
         .catch((err) => console.error(err));
     }
     return () => {
       setTittle([]);
-      // setAnime(anime);
-      setMedia([]);
     };
   }, [id]);
 

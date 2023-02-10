@@ -2,6 +2,7 @@ import { useEffect, useReducer, useState } from "react";
 import { getAnime, editAnime, insertAnime } from "@/services/index";
 import { getTemporadas, getGeneres, getIdiomaLista } from "@/services/index";
 import { useSiglas } from "@/hooks/useSiglas";
+import { MediaContext } from "@/context/Media";
 
 function reducer(state, action) {
   const { type } = action;
@@ -45,18 +46,13 @@ function reducer(state, action) {
       ...state,
       idioma: action.idioma,
     };
-  } else if (type == "setMedia") {
-    return {
-      ...state,
-      media: action.media,
-    };
   } else {
     return {
       ...state,
     };
   }
 }
-export function useAnime() {
+export function useAnime(edit = false) {
   let initialState = {
     tittle: "",
     sinopsis: "",
@@ -66,7 +62,6 @@ export function useAnime() {
     generes: ["action"],
     state: "",
     idioma: "",
-    media: [],
   };
 
   const [
@@ -79,7 +74,6 @@ export function useAnime() {
       generes,
       state,
       idioma,
-      media,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -88,10 +82,11 @@ export function useAnime() {
   const [idiomasLista, setIdiomasLista] = useState([]);
   const [generesLista, setGeneresLista] = useState([]);
   const [temporadasLista, setTemporadasLista] = useState([]);
+  const { media, setMedia, setK, setId_external } = useContext(MediaContext);
 
   useEffect(() => {
     if (siglas) {
-      getAnime(siglas)
+      getAnime(siglas, edit)
         .then((anime) => {
           const {
             tittle,
@@ -102,7 +97,6 @@ export function useAnime() {
             generes,
             state,
             idioma,
-            media,
           } = anime?.data;
           setTittle(tittle);
           setSinopsis(sinopsis);
@@ -112,7 +106,9 @@ export function useAnime() {
           setGeneres(generes);
           setState(state);
           setIdioma(idioma);
-          setMedia(media);
+          setMedia(anime?.data.media);
+          setK("animes");
+          setId_external(siglasPage);
         })
         .catch((err) => console.error(err));
     }
@@ -164,9 +160,6 @@ export function useAnime() {
   };
   const setIdioma = (idioma) => {
     dispatch({ type: "setIdioma", idioma });
-  };
-  const setMedia = (media) => {
-    dispatch({ type: "setMedia", media });
   };
 
   const setFilters = (k, kind) => {
@@ -244,8 +237,6 @@ export function useAnime() {
     setState,
     idioma,
     setIdioma,
-    media,
-    setMedia,
     sendAnime,
     idiomasLista,
     generesLista,

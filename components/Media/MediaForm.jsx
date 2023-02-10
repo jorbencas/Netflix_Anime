@@ -2,7 +2,7 @@ import { useMediaForm } from "@/hooks/useMediaForm";
 import MediaTabs from "./MediaTabs";
 import styles from "./Media.module.css";
 
-export default function MediaForm({ kind, id_external, addElementMediaList }) {
+export default function MediaForm() {
   const [
     message,
     readFile,
@@ -10,7 +10,7 @@ export default function MediaForm({ kind, id_external, addElementMediaList }) {
     setMediaFiles2,
     setKind,
     errors,
-  ] = useMediaForm(addElementMediaList, id_external, kind);
+  ] = useMediaForm();
 
   return (
     <div className={styles.upload}>

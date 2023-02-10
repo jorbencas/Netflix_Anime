@@ -1,13 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import styles from "./VideoTest.module.css";
 
-function VideoTest() {
+function VideoTest({ videoSrc }) {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [videoTime, setVideoTime] = useState(0);
   const [progress, setProgress] = useState(0);
-
   const videoHandler = (control) => {
     if (control === "play") {
       videoRef.current.play();
@@ -62,7 +61,7 @@ function VideoTest() {
         id="video1"
         ref={videoRef}
         className={styles.video}
-        src="http://localhost:3001/openings/CY/02.webm"
+        src={videoSrc}
       ></video>
 
       <div className={styles.controlsContainer}>

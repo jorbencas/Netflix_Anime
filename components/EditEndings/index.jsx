@@ -13,8 +13,6 @@ export default function EditEndings() {
     sinopsis,
     setSinopsis,
     num,
-    media,
-    setMedia,
     sendEnding,
   ] = useEnding("endings");
 
@@ -42,14 +40,7 @@ export default function EditEndings() {
                 onChange={(e) => setSinopsis(e.target.value)}
               />
             </div>
-            <Media
-              media={media}
-              changeMedia={(m) => {
-                setMedia(m);
-              }}
-              kind="endings"
-              id_external={id}
-            />
+            <Media />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

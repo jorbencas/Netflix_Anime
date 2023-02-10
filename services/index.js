@@ -13,6 +13,15 @@ export const getEpisode = async (id) => {
   }).then((response) => response.json());
 };
 
+export const getMedia = async (media) => {
+  headers["Content-Type"] = "video/mp4";
+  return await fetch(`${BASEURL}/media/${media}`, {
+    headers: headers,
+  })
+    .then((response) => response.blob())
+    .then((res) => URL.createObjectURL(res));
+};
+
 export const getEnding = async (id) => {
   return await fetch(`${BASEURL}/api/endings/${id}`, {
     headers: headers,
@@ -39,8 +48,8 @@ export const insertFilters = (genere) => {
   }).then((response) => response.json());
 };
 
-export const getAnime = async (siglas) => {
-  return await fetch(`${BASEURL}/api/animes/es/${siglas}`, {
+export const getAnime = async (siglas, edit = false) => {
+  return await fetch(`${BASEURL}/api/animes/${siglas}/${edit}`, {
     headers: headers,
   }).then((response) => response.json());
 };
