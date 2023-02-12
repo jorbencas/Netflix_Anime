@@ -21,37 +21,20 @@ const Tabs = ({ children }) => {
 
   useEffect(() => {
     let l = [];
-    console.log("====================================");
-    console.log(children);
-    console.log("====================================");
-    let ELEMENTS = inflateTabs(children);
-    [...l, ...ELEMENTS];
+    l = [...l, ...inflateTabs(children)];
     setList(l);
-
     setActiveTab(l[0].props.text);
   }, []);
 
   const inflateTabs = (element) => {
     let l = [];
-    console.log("FUFUFUFUFUFUFUFUFUFUFUUFUFUFUFUFUFUUF");
-    console.log(typeof element);
-    if (typeof element === "object") {
-      if (element?.props?.children && !element?.props?.text) {
-        let ele = inflateTabs(element.props.children);
-        console.log(typeof ele);
-
-        [...l, ...ele];
-      } else {
-        l.push(element);
-      }
+    if (element?.props?.text) {
+      l.push(element);
     } else {
       element.forEach((e) => {
         if (e.props.children) {
-          let ele = inflateTabs(e.props.children);
-          console.log(typeof ele);
-
-          [...l, ...ele];
-        } else l.push(e);
+          l = [...l, ...inflateTabs(e.props.children)];
+        }
       });
     }
     return l;

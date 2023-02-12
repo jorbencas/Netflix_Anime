@@ -2,8 +2,8 @@ import styles from "./EditAnime.module.css";
 import Media from "@/components/Media/index";
 import Modal from "@/components/Modal";
 import { useAnime } from "@/hooks/useAnime";
-import AddFilters from "../AddFilters/index";
-import ImputKindsFilters from "../InputsFilters/index";
+import AddFilters from "../Filters/AddFilters";
+import ListFilters from "../Filters/ListFilters";
 
 export default function EditAnime() {
   const [
@@ -65,11 +65,13 @@ export default function EditAnime() {
           <div className={styles.concret}>
             <p>Idiomas: </p>
             <select value={idioma} onChange={(e) => setIdioma(e.target.value)}>
-              {idiomasLista.map(({ tittle, code }, i) => (
-                <option key={i} value={code}>
-                  {tittle}
-                </option>
-              ))}
+              {idiomasLista.lenght > 0
+                ? idiomasLista.map(({ tittle, code }, i) => (
+                    <option key={i} value={code}>
+                      {tittle}
+                    </option>
+                  ))
+                : ""}
             </select>
           </div>
 
@@ -122,31 +124,3 @@ export default function EditAnime() {
     </div>
   );
 }
-
-export const ListFilters = ({ kind, listOriginal, list, onchange }) => {
-  if (list.length == 0) return `No hay ${kind}`;
-  const changeValues = (value, id) => {
-    let k = id.split("_");
-    onchange(value, k[1]);
-  };
-  return (
-    <div className={styles.concret}>
-      <p> {kind}: </p>
-      <div className={styles.input_group + " " + styles.checkbox}>
-        {list.map(({ code, tittle }, i) => (
-          <ImputKindsFilters
-            type="checkbox"
-            key={i}
-            changeKing={(e) => {
-              changeValues(e.value, e.id);
-            }}
-            ischecked={listOriginal.includes(code.trim())}
-            value={code}
-            label={tittle}
-            i={i + "_" + kind}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};

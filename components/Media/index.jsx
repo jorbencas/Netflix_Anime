@@ -3,6 +3,7 @@ import Modal from "@/components/Modal";
 import MediaForm from "./MediaForm";
 import MediaListElement from "./MeidaElment";
 import { MediaContext } from "@/context/Media";
+import { useContext } from "react";
 
 export default function Media() {
   const { media } = useContext(MediaContext);

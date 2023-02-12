@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useState, useContext } from "react";
 import { getAnime, editAnime, insertAnime } from "@/services/index";
 import { getTemporadas, getGeneres, getIdiomaLista } from "@/services/index";
 import { useSiglas } from "@/hooks/useSiglas";
@@ -163,26 +163,15 @@ export function useAnime(edit = false) {
   };
 
   const setFilters = (k, kind) => {
-    let list = {};
     if (kind == "Generes") {
-      list[kind] = generes;
-    } else {
-      list[kind] = temporadas;
-    }
-    let content;
-
-    if (list[kind].includes(k)) {
-      content = list[kind].filter((e) => e !== k);
-    } else {
-      content = [
-        k,
-        ...list[kind], // Put old items at the end
-      ];
-    }
-
-    if (kind == "Generes") {
+      let content = generes.includes(k)
+        ? generes.filter((e) => e !== k)
+        : [k, ...generes];
       setGeneres(content);
-    } else {
+    } else if (kind == "Temporadas") {
+      let content = temporadas.includes(k)
+        ? temporadas.filter((e) => e !== k)
+        : [k, ...temporadas];
       setTemporadas(content);
     }
   };
