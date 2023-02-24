@@ -2,17 +2,20 @@ import styles from "./Media.module.css";
 import Modal from "@/components/Modal";
 import MediaForm from "./MediaForm";
 import MediaListElement from "./MeidaElment";
-import { MediaContext } from "@/context/Media";
 import { useContext } from "react";
-
+import { MediaContext } from "@/context/Media";
 export default function Media() {
   const { media } = useContext(MediaContext);
+  console.log("====================================");
+  console.log(media);
+  console.log("====================================");
+
   return (
     <div className={styles.upload}>
       <div className={styles.sortableupload + " " + styles.cursorPointer}>
-        {media.length == 0 ? (
+        {media.lenght == 0 ? (
           <div className={styles.sinID}>
-            <div>Para agregar archivos debe antes guardar el contenido.</div>
+            <div>Para agregar archivos debe antes guardar el contenido. </div>
           </div>
         ) : (
           <table className={styles.table} borde="0">

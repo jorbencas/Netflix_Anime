@@ -2,8 +2,17 @@ import styles from "./EditEndings.module.css";
 import Media from "@/components/Media/index";
 import { useEnding } from "../../hooks/useEndings";
 import DyamondListIds from "../DyamondListIds";
+import MediaListProvider from "@/context/Media";
 
 export default function EditEndings() {
+  return (
+    <MediaListProvider>
+      <componentAnime />
+    </MediaListProvider>
+  );
+}
+
+function componentAnime() {
   const [
     id,
     list,

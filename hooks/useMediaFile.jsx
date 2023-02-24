@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { getMedia } from "@/services/index";
 
-export function useMediaFile(filepATH) {
+export function useMediaFile(filePath) {
   const [videoSrc, setVideoSrc] = useState(null);
   useEffect(() => {
-    getMedia(filepATH).then((e) => setVideoSrc(e));
+    getMedia(filePath).then((e) => setVideoSrc(e));
   }, []);
   return [videoSrc];
 }

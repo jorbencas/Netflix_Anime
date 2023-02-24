@@ -2,8 +2,17 @@ import styles from "./EditOpenings.module.css";
 import Media from "@/components/Media/index";
 import { useOpening } from "@/hooks/useOpenings";
 import DyamondListIds from "../DyamondListIds";
+import MediaListProvider from "@/context/Media";
 
 export default function EditOpenings() {
+  return (
+    <MediaListProvider>
+      <componentAnime />
+    </MediaListProvider>
+  );
+}
+
+function componentAnime() {
   const [
     id,
     list,

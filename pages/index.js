@@ -8,7 +8,7 @@ import logo from "@/public/logo.svg";
 import "@/styles/Counter.module.css";
 import Modal from "@/components/Modal";
 import { Countdown } from "@/components/countDown";
-import { useMediaFile } from '../hooks/useMediaFile';
+import { useMediaFile } from "../hooks/useMediaFile";
 
 export default function Home() {
   const [videoSrc] = useMediaFile("openings/2");

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getListIds } from "../services";
-import { useSiglas } from '@/hooks/useSiglas';
+import { useSiglas } from "@/hooks/useSiglas";
 
 export function useListIds(kind) {
   const { siglasPage } = useSiglas();
@@ -12,7 +12,7 @@ export function useListIds(kind) {
       getListIds(siglasPage, kind)
         .then((list) => {
           if (list?.data) {
-            setId(list?.data[0]);
+            setId(list?.data[0].id);
             setList(list?.data);
           }
         })
@@ -25,5 +25,5 @@ export function useListIds(kind) {
     };
   }, []);
 
-  return [siglasPage,id, list, setId];
+  return [siglasPage, id, list, setId];
 }

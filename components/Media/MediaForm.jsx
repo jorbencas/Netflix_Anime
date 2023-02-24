@@ -8,6 +8,7 @@ export default function MediaForm() {
     readFile,
     clickbuttonupload,
     setMediaFiles2,
+    kind,
     setKind,
     errors,
   ] = useMediaForm();

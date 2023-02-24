@@ -4,6 +4,14 @@ import { useEpisode } from "@/hooks/useEpisodes";
 import DyamondListIds from "../DyamondListIds";
 
 export default function EditEpisodes() {
+  return (
+    <MediaListProvider>
+      <componentAnime />
+    </MediaListProvider>
+  );
+}
+
+function componentAnime() {
   const [
     id,
     list,

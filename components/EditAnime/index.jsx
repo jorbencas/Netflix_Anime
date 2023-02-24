@@ -1,11 +1,20 @@
 import styles from "./EditAnime.module.css";
 import Media from "@/components/Media/index";
 import Modal from "@/components/Modal";
-import { useAnime } from "@/hooks/useAnime";
+import useAnime from "@/hooks/useAnime";
 import AddFilters from "../Filters/AddFilters";
 import ListFilters from "../Filters/ListFilters";
+import MediaListProvider from "@/context/Media";
 
-export default function EditAnime() {
+export default function EditAnime(){
+  return(
+    <MediaListProvider>
+      <componentAnime />
+    </MediaListProvider>
+  )
+}
+
+function componentAnime() {
   const [
     tittle,
     setTittle,
@@ -116,8 +125,9 @@ export default function EditAnime() {
               generesLista={generesLista}
             />
           </Modal>
-
-          <Media />
+          <MediaListProvider>
+            <Media />
+          </MediaListProvider>
           <input className={styles.input} type="submit" value="Crear" />
         </form>
       </div>

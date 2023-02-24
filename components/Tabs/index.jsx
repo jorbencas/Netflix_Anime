@@ -6,8 +6,8 @@ const Tabs = ({ children }) => {
   const [list, setList] = useState([]);
   const [activeTab, setActiveTab] = useState();
   const [selectedTab, setSelectedTab] = useState();
-  const { siglas } = useSiglas();
-  // if (activeTab === "all" && !siglas) {
+  //const { siglasPage } = useSiglas();
+  // if (activeTab === "all" && !siglasPage) {
   //   return undefined;
   // }
 
@@ -16,7 +16,11 @@ const Tabs = ({ children }) => {
   };
 
   useEffect(() => {
-    setSelectedTab(list.find((tab) => tab.props.text === activeTab));
+    if (typeof activeTab !== "undefined") {
+      let ele = list.find((tab) => tab.props.text === activeTab);
+      console.log(ele);
+      setSelectedTab(ele);
+    }
   }, [activeTab]);
 
   useEffect(() => {
@@ -28,14 +32,18 @@ const Tabs = ({ children }) => {
 
   const inflateTabs = (element) => {
     let l = [];
-    if (element?.props?.text) {
-      l.push(element);
-    } else {
+    if (typeof element == "Array") {
       element.forEach((e) => {
         if (e.props.children) {
+          debugger;
           l = [...l, ...inflateTabs(e.props.children)];
         }
       });
+    } else if (element?.props?.text) {
+      l.push(element);
+    } else if (element?.props?.children) {
+      l = [...l, ...inflateTabs(element.props.children)];
+      debugger;
     }
     return l;
   };

@@ -1,9 +1,13 @@
 import { createContext, useState } from "react";
+import { useRouter } from "next/router";
 
 export const SiglasContext = createContext();
 
 export function SiglasListProvider({ children }) {
-  const [siglasPage, setSiglasPage] = useState("");
+  const href = useRouter();
+  const { siglas } = href.query;
+  let s = siglas ? siglas : "z";
+  const [siglasPage, setSiglasPage] = useState(s);
 
   return (
     <SiglasContext.Provider value={{ siglasPage, setSiglasPage }}>

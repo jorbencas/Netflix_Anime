@@ -4,7 +4,7 @@ import { defaultSiglas } from "../../services";
 import { useState, useEffect } from "react";
 
 const SiglasList = () => {
-  const [siglas, siglasPage, changeSiglas] = useSiglas();
+  const [siglasPage, changeSiglas] = useSiglas();
   const [siglasLista, setSiglasLista] = useState([]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const SiglasList = () => {
             </option>
           ))}
       </select>
-      {!siglas ? (
+      {!siglasPage ? (
         <input
           type="text"
           className={styles.input}

@@ -6,7 +6,7 @@ import { ThemeProvider, ThemeContext } from "@/context/ThemeContext.jsx";
 export default function AppLayout({ children }) {
   return (
     <ThemeProvider>
-      <AppLayoutContainer> {children} </AppLayoutContainer>
+      <AppLayoutContainer>{children}</AppLayoutContainer>
     </ThemeProvider>
   );
 }

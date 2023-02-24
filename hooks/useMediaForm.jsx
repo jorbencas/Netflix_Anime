@@ -116,6 +116,7 @@ export const useMediaForm = () => {
     readFile,
     clickbuttonupload,
     setMediaFiles2,
+    kind,
     setKind,
     errors,
   ];

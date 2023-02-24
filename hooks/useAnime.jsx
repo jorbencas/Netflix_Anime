@@ -3,67 +3,9 @@ import { getAnime, editAnime, insertAnime } from "@/services/index";
 import { getTemporadas, getGeneres, getIdiomaLista } from "@/services/index";
 import { useSiglas } from "@/hooks/useSiglas";
 import { MediaContext } from "@/context/Media";
+import { anime_reducer, animeState } from "reducers/anime";
 
-function reducer(state, action) {
-  const { type } = action;
-  if (type == "setTittle") {
-    return {
-      ...state,
-      tittle: action.tittle,
-    };
-  } else if (type == "setSinopsis") {
-    return {
-      ...state,
-      sinopsis: action.sinopsis,
-    };
-  } else if (type == "setDate_publication") {
-    return {
-      ...state,
-      date_publication: action.date_publication,
-    };
-  } else if (type == "setDate_finalization") {
-    return {
-      ...state,
-      date_finalization: action.date_finalization,
-    };
-  } else if (type == "setTemporadas") {
-    return {
-      ...state,
-      temporadas: action.temporadas,
-    };
-  } else if (type == "setGeneres") {
-    return {
-      ...state,
-      generes: action.generes,
-    };
-  } else if (type == "setState") {
-    return {
-      ...state,
-      state: action.state,
-    };
-  } else if (type == "setIdioma") {
-    return {
-      ...state,
-      idioma: action.idioma,
-    };
-  } else {
-    return {
-      ...state,
-    };
-  }
-}
-export function useAnime(edit = false) {
-  let initialState = {
-    tittle: "",
-    sinopsis: "",
-    date_publication: "",
-    date_finalization: "",
-    temporadas: [],
-    generes: ["action"],
-    state: "",
-    idioma: "",
-  };
-
+export default function useAnime(edit = false) {
   const [
     {
       tittle,
@@ -76,17 +18,17 @@ export function useAnime(edit = false) {
       idioma,
     },
     dispatch,
-  ] = useReducer(reducer, initialState);
+  ] = useReducer(anime_reducer, animeState);
 
-  const { siglas, siglasPage } = useSiglas();
+  const { siglasPage } = useSiglas();
   const [idiomasLista, setIdiomasLista] = useState([]);
   const [generesLista, setGeneresLista] = useState([]);
   const [temporadasLista, setTemporadasLista] = useState([]);
-  const { media, setMedia, setK, setId_external } = useContext(MediaContext);
+  /*const { media, setMedia, setK, setId_external } = useContext(MediaContext);*/
 
   useEffect(() => {
-    if (siglas) {
-      getAnime(siglas, edit)
+    if (siglasPage) {
+      getAnime(siglasPage, edit)
         .then((anime) => {
           const {
             tittle,
@@ -191,7 +133,8 @@ export function useAnime(edit = false) {
       idioma,
       media,
     };
-    if (siglas) {
+    console.log(data);
+    if (siglasPage) {
       editAnime(data)
         .then((result) => {
           console.log("====================================");
@@ -200,7 +143,6 @@ export function useAnime(edit = false) {
         })
         .catch((err) => console.error(err));
     } else {
-      console.log(data);
       insertAnime(data)
         .then((result) => {
           console.log("====================================");
