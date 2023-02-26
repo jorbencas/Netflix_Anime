@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import styles from "./Tabs.module.css";
 import { useSiglas } from "@/hooks/useSiglas";
+import EditAnime from "@/components/EditAnime";
 
 const Tabs = ({ children }) => {
-  const [list, setList] = useState([]);
-  const [activeTab, setActiveTab] = useState();
-  const [selectedTab, setSelectedTab] = useState();
+  const [state, setState] = useState({
+    list: [],
+    activeTab: "",
+  });
+  const { list, activeTab, selectedTab } = state;
   //const { siglasPage } = useSiglas();
   // if (activeTab === "all" && !siglasPage) {
   //   return undefined;
@@ -15,35 +18,31 @@ const Tabs = ({ children }) => {
     return activeTab === label ? styles.active : "";
   };
 
-  useEffect(() => {
-    if (typeof activeTab !== "undefined") {
-      let ele = list.find((tab) => tab.props.text === activeTab);
-      console.log(ele);
-      setSelectedTab(ele);
-    }
-  }, [activeTab]);
+  const setActiveTab = (activeTab) => {
+    let s = { ...state };
+    s.activeTab = activeTab;
+    setState(s);
+  };
 
   useEffect(() => {
     let l = [];
     l = [...l, ...inflateTabs(children)];
-    setList(l);
-    setActiveTab(l[0].props.text);
+    let s = { ...state };
+    s.list = l;
+    s.activeTab = l[0].props.text;
+    setState(s);
   }, []);
 
   const inflateTabs = (element) => {
     let l = [];
-    if (typeof element == "Array") {
+    if (element?.props == null || element.props == undefined) {
       element.forEach((e) => {
-        if (e.props.children) {
-          debugger;
-          l = [...l, ...inflateTabs(e.props.children)];
-        }
+        l = [...l, ...inflateTabs(e)];
       });
-    } else if (element?.props?.text) {
-      l.push(element);
     } else if (element?.props?.children) {
       l = [...l, ...inflateTabs(element.props.children)];
-      debugger;
+    } else if (element?.props?.text) {
+      l.push(element);
     }
     return l;
   };
@@ -63,7 +62,9 @@ const Tabs = ({ children }) => {
           ))}
         </ol>
       </div>
-      <div className={styles.tabcontent}>{selectedTab}</div>
+      <div className={styles.tabcontent}>
+        {list.map((tab) => tab.props.text === activeTab)}
+      </div>
     </>
   );
 };
