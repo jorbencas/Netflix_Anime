@@ -12,7 +12,7 @@ export const useMediaForm = () => {
   const [kind, setKind] = useState("");
   const [message, setMessage] = useState("");
   const { setOpen } = useContext(ModalContext);
-  const { siglasPage } = useSiglas();
+  const [...siglasPage] = useSiglas();
 
   function isImage(extension) {
     let valids = ["jpg", "jpeg", "png", "gif", "bmp"];

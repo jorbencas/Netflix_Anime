@@ -11,7 +11,7 @@ export function useEpisode(kind) {
   const [tittle, setTittle] = useState("");
   const [sinopsis, setSinopsis] = useState("");
   const [num, setNum] = useState(0);
-  /*const { media, setMedia, setK, setId_external } = useContext(MediaContext);*/
+  const { media, setMedia, setK, setId_external } = useContext(MediaContext);
   useEffect(() => {
     if (id) {
       getEpisode(id)

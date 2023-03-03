@@ -1,32 +1,30 @@
 import { useState, useEffect } from "react";
 import styles from "./Tabs.module.css";
 import { useSiglas } from "@/hooks/useSiglas";
-import EditAnime from "@/components/EditAnime";
 
 const Tabs = ({ children }) => {
   const [state, setState] = useState({
     list: [],
     activeTab: "",
   });
-  const { list, activeTab, selectedTab } = state;
-  //const { siglasPage } = useSiglas();
-  // if (activeTab === "all" && !siglasPage) {
-  //   return undefined;
-  // }
+  const { list, activeTab } = state;
+  /*const [ siglas ] = useSiglas();
+  if (activeTab === "all" && !siglas) {
+    return undefined;
+  }*/
 
   const isActiveClassCSS = (label) => {
     return activeTab === label ? styles.active : "";
   };
 
-  const setActiveTab = (activeTab) => {
+  const setActiveTab = (tab) => {
     let s = { ...state };
-    s.activeTab = activeTab;
+    s.activeTab = tab;
     setState(s);
   };
 
   useEffect(() => {
-    let l = [];
-    l = [...l, ...inflateTabs(children)];
+    let l = inflateTabs(children);
     let s = { ...state };
     s.list = l;
     s.activeTab = l[0].props.text;
@@ -63,7 +61,7 @@ const Tabs = ({ children }) => {
         </ol>
       </div>
       <div className={styles.tabcontent}>
-        {list.map((tab) => tab.props.text === activeTab)}
+        {list.filter((tab) => tab.props.text === activeTab)}
       </div>
     </>
   );

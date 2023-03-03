@@ -2,16 +2,16 @@ import styles from "./EditEpisodes.module.css";
 import Media from "@/components/Media/index";
 import { useEpisode } from "@/hooks/useEpisodes";
 import DyamondListIds from "../DyamondListIds";
-
+import MediaListProvider from "@/context/Media";
 export default function EditEpisodes() {
   return (
     <MediaListProvider>
-      <componentAnime />
+      <ComponentEpisodes />
     </MediaListProvider>
   );
 }
 
-function componentAnime() {
+function ComponentEpisodes() {
   const [
     id,
     list,
@@ -60,7 +60,9 @@ function componentAnime() {
               value={date_finalization}
               placeholder="Fecha de Finalización"
             /> */}
-            <Media />
+            <MediaListProvider>
+              <Media />
+            </MediaListProvider>
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

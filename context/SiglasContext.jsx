@@ -6,11 +6,11 @@ export const SiglasContext = createContext();
 export function SiglasListProvider({ children }) {
   const href = useRouter();
   const { siglas } = href.query;
-  let s = siglas ? siglas : "z";
+  let s = siglas ? siglas : "";
   const [siglasPage, setSiglasPage] = useState(s);
 
   return (
-    <SiglasContext.Provider value={{ siglasPage, setSiglasPage }}>
+    <SiglasContext.Provider value={{ siglas, siglasPage, setSiglasPage }}>
       {children}
     </SiglasContext.Provider>
   );

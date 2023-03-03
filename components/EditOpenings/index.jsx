@@ -7,12 +7,12 @@ import MediaListProvider from "@/context/Media";
 export default function EditOpenings() {
   return (
     <MediaListProvider>
-      <componentAnime />
+      <ComponentOpenings />
     </MediaListProvider>
   );
 }
 
-function componentAnime() {
+function ComponentOpenings() {
   const [
     id,
     list,
@@ -48,7 +48,9 @@ function componentAnime() {
                 onChange={(e) => setSinopsis(e.target.value)}
               />
             </div>
-            <Media />
+              <MediaListProvider>
+                <Media />
+              </MediaListProvider>
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

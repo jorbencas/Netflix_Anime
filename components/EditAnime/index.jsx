@@ -6,15 +6,15 @@ import AddFilters from "../Filters/AddFilters";
 import ListFilters from "../Filters/ListFilters";
 import MediaListProvider from "@/context/Media";
 
-export default function EditAnime(){
-  return(
+export default function EditAnime() {
+  return (
     <MediaListProvider>
-      <componentAnime />
+      <ComponentAnime />
     </MediaListProvider>
-  )
+  );
 }
 
-function componentAnime() {
+function ComponentAnime() {
   const [
     tittle,
     setTittle,
@@ -40,12 +40,12 @@ function componentAnime() {
   return (
     <div className={styles.wrap}>
       <div className={styles.contenedor_formulario}>
-        <form className={styles.concret} onSubmit={sendAnime}>
+        <form className={styles.concret} onSubmit={() => sendAnime}>
           <div className={styles.contenedor_inputs}>
             <input
               type="text"
               className={styles.input}
-              value={tittle}
+              defaultValue={tittle}
               onChange={(e) => setTittle(e.target.value)}
               placeholder="titulo"
             />
@@ -54,26 +54,30 @@ function componentAnime() {
           <textarea
             className={styles.input}
             placeholder="Sinopsis"
-            value={sinopsis}
+            defaultValue={sinopsis}
             onChange={(e) => setSinopsis(e.target.value)}
           />
           <input
             className={styles.input}
             type="date"
-            value={date_publication}
+            defaultValue={date_publication}
             onChange={(e) => setDate_publication(e.target.value)}
             placeholder="Fecha de Publicación"
           />
           <input
             className={styles.input}
             type="date"
-            value={date_finalization}
+            defaultValue={date_finalization}
             onChange={(e) => setDate_finalization(e.target.value)}
             placeholder="Fecha de Finalización"
           />
           <div className={styles.concret}>
             <p>Idiomas: </p>
-            <select value={idioma} onChange={(e) => setIdioma(e.target.value)}>
+            <select
+              multiple={false}
+              defaultValue={idioma}
+              onChange={(e) => setIdioma(e.target.value)}
+            >
               {idiomasLista.lenght > 0
                 ? idiomasLista.map(({ tittle, code }, i) => (
                     <option key={i} value={code}>
@@ -86,7 +90,11 @@ function componentAnime() {
 
           <div className={styles.concret}>
             <p>Estado: </p>
-            <select value={state} onChange={(e) => setState(e.target.value)}>
+            <select
+              multiple={false}
+              defaultValue={state}
+              onChange={(e) => setState(e.target.value)}
+            >
               <option value="pendiong">Pendiente</option>
               <option value="continues">En Emision</option>
               <option value="finalized">Finalizado</option>
@@ -125,9 +133,7 @@ function componentAnime() {
               generesLista={generesLista}
             />
           </Modal>
-          <MediaListProvider>
-            <Media />
-          </MediaListProvider>
+          {/* <Media /> */}
           <input className={styles.input} type="submit" value="Crear" />
         </form>
       </div>

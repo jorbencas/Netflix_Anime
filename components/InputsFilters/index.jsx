@@ -9,7 +9,7 @@ function ImputKindsFilters({ type, changeKing, label, value, ischecked, i }) {
         id={i}
         checked={ischecked}
         onChange={(e) => changeKing(e.target)}
-        value={value}
+        defaultValue={value}
       />
 
       <label className={styles.label} htmlFor={i}>

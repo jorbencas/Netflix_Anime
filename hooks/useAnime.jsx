@@ -20,37 +20,39 @@ export default function useAnime(edit = false) {
     dispatch,
   ] = useReducer(anime_reducer, animeState);
 
-  const { siglasPage } = useSiglas();
+  const [...siglasPage] = useSiglas();
   const [idiomasLista, setIdiomasLista] = useState([]);
   const [generesLista, setGeneresLista] = useState([]);
   const [temporadasLista, setTemporadasLista] = useState([]);
-  /*const { media, setMedia, setK, setId_external } = useContext(MediaContext);*/
+  const { media, setMedia, setK, setId_external } = useContext(MediaContext);
 
   useEffect(() => {
     if (siglasPage) {
       getAnime(siglasPage, edit)
         .then((anime) => {
-          const {
-            tittle,
-            sinopsis,
-            date_publication,
-            date_finalization,
-            temporadas,
-            generes,
-            state,
-            idioma,
-          } = anime?.data;
-          setTittle(tittle);
-          setSinopsis(sinopsis);
-          setDate_publication(date_publication);
-          setDate_finalization(date_finalization);
-          setTemporadas(temporadas);
-          setGeneres(generes);
-          setState(state);
-          setIdioma(idioma);
-          setMedia(anime?.data.media);
-          setK("animes");
-          setId_external(siglasPage);
+          if (anime?.status?.code === 200) {
+            const {
+              tittle,
+              sinopsis,
+              date_publication,
+              date_finalization,
+              temporadas,
+              generes,
+              state,
+              idioma,
+            } = anime?.data;
+            setTittle(tittle);
+            setSinopsis(sinopsis);
+            setDate_publication(date_publication);
+            setDate_finalization(date_finalization);
+            setTemporadas(temporadas);
+            setGeneres(generes);
+            setState(state);
+            setIdioma(idioma);
+            setMedia(anime?.data.media);
+            setK("animes");
+            setId_external(siglasPage);
+          }
         })
         .catch((err) => console.error(err));
     }
@@ -153,7 +155,6 @@ export default function useAnime(edit = false) {
     }
   };
   return [
-    siglasPage,
     tittle,
     setTittle,
     sinopsis,

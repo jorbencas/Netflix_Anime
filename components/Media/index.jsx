@@ -4,20 +4,15 @@ import MediaForm from "./MediaForm";
 import MediaListElement from "./MeidaElment";
 import { useContext } from "react";
 import { MediaContext } from "@/context/Media";
+import { useSiglas } from "@/hooks/useSiglas";
+
 export default function Media() {
   const { media } = useContext(MediaContext);
-  console.log("====================================");
-  console.log(media);
-  console.log("====================================");
-
+  const [...siglasPage] = useSiglas();
   return (
     <div className={styles.upload}>
       <div className={styles.sortableupload + " " + styles.cursorPointer}>
-        {media.lenght == 0 ? (
-          <div className={styles.sinID}>
-            <div>Para agregar archivos debe antes guardar el contenido. </div>
-          </div>
-        ) : (
+        {media.length > 0 ? (
           <table className={styles.table} borde="0">
             <tbody>
               {media.map((element, i) => {
@@ -25,6 +20,12 @@ export default function Media() {
               })}
             </tbody>
           </table>
+        ) : (
+          <div className={styles.sinID}>
+            <div>
+              Para agregar archivos debe antes guardar el contenido.{siglasPage}
+            </div>
+          </div>
         )}
       </div>
       <div className={styles.buttons}>

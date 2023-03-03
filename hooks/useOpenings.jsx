@@ -11,7 +11,7 @@ export function useOpening(kind) {
   const [tittle, setTittle] = useState("");
   const [sinopsis, setSinopsis] = useState("");
   const [num, setNum] = useState(0);
-  /*const { media, setMedia, setK, setId_external } = useContext(MediaContext);*/
+  const { media, setMedia, setK, setId_external } = useContext(MediaContext);
   useEffect(() => {
     if (id) {
       getOpening(id)
@@ -32,7 +32,7 @@ export function useOpening(kind) {
       setSinopsis([]);
       setNum(num);
       setMedia([]);
-      etK("");
+      setK("");
       setId_external(0);
     };
   }, [id]);

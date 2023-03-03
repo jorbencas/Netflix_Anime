@@ -7,12 +7,12 @@ import MediaListProvider from "@/context/Media";
 export default function EditEndings() {
   return (
     <MediaListProvider>
-      <componentAnime />
+      <ComponentEnding />
     </MediaListProvider>
   );
 }
 
-function componentAnime() {
+function ComponentEnding() {
   const [
     id,
     list,

@@ -2,7 +2,7 @@ import { useContext, useCallback } from "react";
 import { SiglasContext } from "@/context/SiglasContext";
 
 export function useSiglas() {
-  const { siglasPage, setSiglasPage } = useContext(SiglasContext);
+  const { siglas, siglasPage, setSiglasPage } = useContext(SiglasContext);
 
   const changeSiglas = useCallback((e) => {
     let sigla = e.target.value;
@@ -10,5 +10,5 @@ export function useSiglas() {
     setSiglasPage(s);
   }, []);
 
-  return [siglasPage, changeSiglas];
+  return [siglas, siglasPage, changeSiglas];
 }

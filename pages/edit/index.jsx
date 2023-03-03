@@ -40,7 +40,7 @@ export default function Edit() {
 }
 
 const ViewEdit = () => {
-  const { siglasPage } = useSiglas();
+  const [...siglasPage] = useSiglas();
 
   return <h1>Hola {siglasPage}</h1>;
 

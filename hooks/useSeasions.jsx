@@ -58,5 +58,5 @@ export function useSeasion({ kind }) {
 
     setSeasion(id);
   };
-  return [list, setId, tittle, setTittle, media, sendSeasion];
+  return [list, setId, tittle, setTittle, sendSeasion];
 }
