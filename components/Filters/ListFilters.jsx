@@ -1,3 +1,4 @@
+import styles from "../EditAnime/EditAnime.module.css";
 import ImputKindsFilters from "../InputsFilters/index";
 
 export default function ListFilters({ kind, listOriginal, list, onchange }) {
@@ -26,4 +27,4 @@ export default function ListFilters({ kind, listOriginal, list, onchange }) {
       </div>
     </div>
   );
-};
+}
