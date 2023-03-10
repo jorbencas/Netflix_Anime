@@ -8,6 +8,7 @@ export function useListIds(kind) {
   const [list, setList] = useState([]);
 
   useEffect(() => {
+    console.log(siglasPage);
     if (siglasPage) {
       getListIds(siglasPage, kind)
         .then((list) => {

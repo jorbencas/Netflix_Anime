@@ -133,7 +133,7 @@ function ComponentAnime() {
               generesLista={generesLista}
             />
           </Modal>
-          {/* <Media /> */}
+          <Media />
           <input className={styles.input} type="submit" value="Crear" />
         </form>
       </div>
