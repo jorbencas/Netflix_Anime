@@ -22,9 +22,7 @@ export default function Media() {
           </table>
         ) : (
           <div className={styles.sinID}>
-            <div>
-              Para agregar archivos debe antes guardar el contenido.{siglasPage}
-            </div>
+            <div>No hay contenido.{siglasPage}</div>
           </div>
         )}
       </div>
@@ -36,3 +34,5 @@ export default function Media() {
     </div>
   );
 }
+
+//hola
