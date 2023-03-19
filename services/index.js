@@ -3,7 +3,7 @@ const APITOKEN =
   "???123456789Azsxdcfvgnbhknljopimuhytgrfqew127364lpñokmni**/-++89¿juhvtcfdr65es123\\~~xza_qw";
 const headers = {
   "Content-Type": "application/json",
-  api_token: APITOKEN,
+  authorization: APITOKEN,
   "X-Requested-With": "XMLHttpRequest",
 };
 

@@ -23,7 +23,7 @@ export default function MediaListElement({ element }) {
           siglas={element.id_relative}
           name={element.name + " " + element.ext}
           src={videoSrc}
-          title={element.name + " " + element.extension}
+          title={element.name + " " + element.ext}
         />
       </td>
       <td>

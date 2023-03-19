@@ -10,7 +10,9 @@ const SiglasList = () => {
   useEffect(() => {
     defaultSiglas()
       .then((si) => {
-        setSiglasLista(si.data);
+        if (si.status.code === 200) {
+          setSiglasLista(si.data);
+        }
       })
       .catch((err) => console.error(err));
     console.log("====================================");
