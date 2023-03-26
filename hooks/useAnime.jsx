@@ -57,17 +57,22 @@ export default function useAnime(edit = false) {
         .catch((err) => console.error(err));
     }
 
-    getGeneres().then((genere) => {
-      if (genere?.data) {
-        setGeneresLista(genere?.data);
-      }
-    });
+    getGeneres()
+      .then((genere) => {
+        if (genere?.data) {
+          setGeneresLista(genere?.data);
+        }
+      })
+      .catch((err) => console.error(err));
 
-    getTemporadas().then((temporada) => {
-      if (temporada?.data) {
-        setTemporadasLista(temporada?.data);
-      }
-    });
+    getTemporadas()
+      .then((temporada) => {
+        if (temporada?.data) {
+          setTemporadasLista(temporada?.data);
+        }
+      })
+      .catch((err) => console.error(err));
+
     getIdiomaLista()
       .then((idiomas) => {
         if (idiomas?.data) setIdiomasLista(idiomas?.data);

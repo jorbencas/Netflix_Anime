@@ -2,7 +2,7 @@ import { useMediaFile } from "@/hooks/useMediaFile";
 import styles from "./Media.module.css";
 
 export default function MediaListElement({ element }) {
-  const [videoSrc] = useMediaFile(element.type + "/" + element.id);
+  const [videoSrc] = useMediaFile(element);
 
   const removeElementMediaList = (id) => {
     setMedia(
