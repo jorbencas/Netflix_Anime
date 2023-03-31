@@ -13,7 +13,7 @@ export function useEnding({ kind }) {
   const [num, setNum] = useState(0);
   const { media, setMedia, setK, setId_external } = useContext(MediaContext);
   useEffect(() => {
-    if (id) {
+    if (id.length > 3) {
       getEnding(id)
         .then((a) => {
           const { tittle, sinopsis, anime, num } = a?.data;
@@ -22,11 +22,11 @@ export function useEnding({ kind }) {
           setNum(num);
           setSeasion(a?.data.seasion);
           setMedia(a?.data.media);
-          setK("endings");
           setId_external(id);
         })
         .catch((err) => console.error(err));
     }
+    setK(kind);
     return () => {
       setTittle([]);
       setSinopsis([]);
@@ -41,7 +41,7 @@ export function useEnding({ kind }) {
     if (media.length == 0) return;
     let data = { tittle, sinopsis, anime: siglasPage, num, seasion, media };
     console.log(data);
-    if (id) {
+    if (id.length > 3) {
       editEnding(data)
         .then((result) => {
           console.log("====================================");

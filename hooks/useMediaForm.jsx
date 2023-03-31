@@ -4,15 +4,13 @@ import { useSiglas } from "@/hooks/useSiglas";
 import { MediaContext } from "@/context/Media";
 
 export const useMediaForm = () => {
-  const { media, setMedia, id_external, k } = useContext(MediaContext);
-  const [mediaFiles, setMediaFiles] = useState([]);
-  const [mediaFiles2, setMediaFiles2] = useState([]);
+  const { media, setMedia, id_external, k, setId_external } =
+    useContext(MediaContext);
   const [errors, setErrors] = useState([]);
   const [success, setSuccess] = useState(false);
-  const [kind, setKind] = useState("");
-  const [message, setMessage] = useState("");
+  const [kind, setKind] = useState(ObtenerKind());
   const { setOpen } = useContext(ModalContext);
-  const [...siglasPage] = useSiglas();
+  const [siglas, siglasPage] = useSiglas();
 
   function isImage(extension) {
     let valids = ["jpg", "jpeg", "png", "gif", "bmp"];
@@ -20,13 +18,23 @@ export const useMediaForm = () => {
   }
 
   function isVideo(extension) {
-    return extension.toLowerCase() == "mp4" ? true : false;
+    return extension.toLowerCase() == "mp4";
   }
 
+  function ObtenerKind() {
+    let kindState = "";
+    if (k === "animes" && media.length > 0) {
+      let kindMedia = media.some((m) => {
+        m.kind == "portada";
+      });
+      kindState = kindMedia ? "portada" : "banner";
+    }
+    return kindState;
+  }
   const readFile = (e) => {
     if (siglasPage.length < 3) {
       errors.push(
-        `Debes de introducir la ssiglas del anime, episodio... antes de poder
+        `Debes de introducir la ssiglas del ${k} antes de poder
           subrir cualquier fichero multimedia.`
       );
     } else if (e.length > 0) {
@@ -49,75 +57,77 @@ export const useMediaForm = () => {
         } else if (fileName.split(".").length > 2) {
           errors.push(`Solo se permite un punto (.) en el nombre`);
         } else {
+          // let reader = new FileReader();
+          // reader.readAsDataURL(file);
+          // reader.onloadend = function () {
+          //   console.log("====================================");
+          //   console.log(this);
+          //   console.log("====================================");
+          //   file.urlarchivo = reader.result;
+          // };
           fileSize_total += fileSize;
-          if (k == "animes") {
-            let reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = function () {
-              file.urlarchivo = reader.result;
-            };
-          } else {
-            file.urlarchivo = "/logo.svg";
-          }
           file.filesize =
             Math.round((fileSize_total / 1024 / 1024) * 100) / 100;
-          console.info(fileExtension);
+          console.info(siglasPage);
           file.nombre = fileName;
+          if (k === "animes" && id_external !== siglasPage) {
+            setId_external(siglasPage);
+          }
         }
+        setStateSucess(file);
       }
+    } else {
+      errors.push(" Vuelva a seleccionar algún archivo");
     }
+
     if (errors.length > 0) {
       setSuccess(false);
       setErrors(errors);
-    } else if (e.length > 0) {
-      setSuccess(true);
-      setErrors([]);
-      setMediaFiles(e);
+      console.log(errors);
+    }
+  };
+
+  const setStateSucess = (file) => {
+    setSuccess(true);
+    setErrors([]);
+    let req = {
+      id: media.length,
+      tabla: k,
+      file,
+      kind,
+      id_external,
+    };
+    console.log(req);
+    setMedia([
+      req,
+      ...media, // Put old items at the end
+    ]);
+  };
+
+  const readUrl = (namefileimport) => {
+    if (namefileimport == "") {
+      errors.push("URL no válida");
+    } else {
+      var namefileimport_array = namefileimport?.split(".");
+      let ext = namefileimport_array.at(-1);
+      if (!isImage(ext) && !isVideo(ext)) {
+        errors.push("Nombre de extensión (" + ext + ") no valido");
+      } else {
+        setStateSucess(namefileimport_array);
+      }
+    }
+
+    if (errors.length > 0) {
+      setSuccess(false);
+      setErrors(errors);
     }
   };
 
   const clickbuttonupload = () => {
-    if (mediaFiles.length > 0 && !success) {
-      setMessage(" Vuelva a seleccionar algún archivo");
-    } else if (mediaFiles2.length > 0 && !success) {
-      var namefileimport = mediaFiles2;
-      if (namefileimport == "") {
-        setMessage("URL no válida");
-      } else {
-        var namefileimport_array = namefileimport?.split(".");
-        let ext = namefileimport_array.at(-1);
-        if (!isImage(ext) && !isVideo(ext)) {
-          setMessage("Nombre de extensión (" + ext + ") no valido");
-        }
-      }
-    } else if (success) {
-      let req = {
-        id: mediaFiles.length - 1,
-        tabla: k,
-        mediaFiles,
-        mediaFiles2,
-        kind,
-        id_external,
-        name: mediaFiles[0].nombre,
-        exteinsion: mediaFiles[0].extension,
-        filesize: mediaFiles[0].filesize,
-        urlarchivo: mediaFiles[0].urlarchivo,
-      };
-      setMedia([
-        req,
-        ...media, // Put old items at the end
-      ]);
+    if (success) {
       setOpen(false);
     }
   };
 
-  return [
-    message,
-    readFile,
-    clickbuttonupload,
-    setMediaFiles2,
-    kind,
-    setKind,
-    errors,
-  ];
+  return [readFile, clickbuttonupload, readUrl, k, kind, setKind, errors];
 };

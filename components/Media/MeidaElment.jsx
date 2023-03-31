@@ -1,9 +1,11 @@
 import { useMediaFile } from "@/hooks/useMediaFile";
 import styles from "./Media.module.css";
+import { MediaContext } from "@/context/Media";
+import { useContext } from "react";
 
-export default function MediaListElement({ element }) {
-  const [videoSrc] = useMediaFile(element);
-
+export default function MediaListElement({ filePath, i }) {
+  const [videoSrc, element] = useMediaFile(filePath);
+  const { media, setMedia } = useContext(MediaContext);
   const removeElementMediaList = (id) => {
     setMedia(
       media.filter((e, i) => {
@@ -15,27 +17,31 @@ export default function MediaListElement({ element }) {
   return (
     <tr key={i}>
       <td className={styles.img_div}>
-        {/* <a class="descargarfoto" href={element.urldescarga} download>
-                  <i class="fas fa-cloud-download-alt"></i>
-                </a> */}
+        {/* <a
+          href={element.urlarchivo}
+          download
+          name={element.nombre + " " + element.extension}
+        >
+          d
+        </a> */}
         <img
           kind={element.kind}
           siglas={element.id_relative}
-          name={element.name + " " + element.ext}
+          name={element.nombre + " " + element.extension}
           src={videoSrc}
-          title={element.name + " " + element.ext}
+          title={element.nombre + " " + element.extension}
         />
       </td>
       <td>
-        {element.name + " " + element.ext}
+        {element.nombre + " " + element.extension}
         tamaño:
         {element.filesize}
       </td>
       <td style={{ textAlign: "right" }}>
-        <div classNamw={styles.buttons}>
+        <div className={styles.buttons}>
           <div
-            classNamw={styles.button}
-            onClick={removeElementMediaList(element.id)}
+            className={styles.button}
+            onClick={() => removeElementMediaList(element.id)}
           >
             <p>Borrar</p>
           </div>

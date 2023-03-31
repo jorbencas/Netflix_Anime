@@ -15,9 +15,6 @@ const SiglasList = () => {
         }
       })
       .catch((err) => console.error(err));
-    console.log("====================================");
-    console.log(siglasLista.length);
-    console.log("====================================");
     return () => {
       setSiglasLista([]);
     };
@@ -25,7 +22,7 @@ const SiglasList = () => {
 
   return (
     <>
-      <select onChange={() => changeSiglas}>
+      <select onChange={changeSiglas}>
         <option value="else">ninguna de ellas</option>
         {siglasLista.length > 0 &&
           siglasLista.map((s, i) => (
@@ -40,7 +37,7 @@ const SiglasList = () => {
           className={styles.input}
           placeholder="Siglas"
           value={siglasPage}
-          onChange={() => changeSiglas}
+          onChange={changeSiglas}
         />
       )}
     </>

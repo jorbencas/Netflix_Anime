@@ -13,13 +13,7 @@ function AddFilters({
   let kindList = ["generes", "temporadas", "languajes", "kinds"];
   const [code, setCode] = useState("");
   const [tittle, setTittle] = useState("");
-  const [kind, setKind] = useState(
-    kindList
-      .filter((e) => {
-        return e.includes("generes");
-      })
-      .shift()
-  );
+  const [kind, setKind] = useState(kindList.find((e) => e === "generes"));
   const { setOpen } = useContext(ModalContext);
 
   const increment = () => {
@@ -73,8 +67,9 @@ function AddFilters({
           <ImputKindsFilters
             type="radio"
             key={i}
+            nombre="kindfilters"
             changeKing={(e, t) => {
-              setKind(e);
+              setKind(e.value);
             }}
             ischecked={element === kind}
             value={element}

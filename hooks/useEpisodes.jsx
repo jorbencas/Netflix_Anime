@@ -13,7 +13,7 @@ export function useEpisode(kind) {
   const [num, setNum] = useState(0);
   const { media, setMedia, setK, setId_external } = useContext(MediaContext);
   useEffect(() => {
-    if (id) {
+    if (id.length > 3) {
       getEpisode(id)
         .then((a) => {
           const { tittle, sinopsis, anime, num } = a?.data;
@@ -22,11 +22,12 @@ export function useEpisode(kind) {
           setNum(num);
           setSeasion(a?.data.seasion);
           setMedia(a?.data.media);
-          setK(kind);
           setId_external(id);
         })
         .catch((err) => console.error(err));
     }
+    setK(kind);
+
     return () => {
       setTittle([]);
       setSinopsis([]);
@@ -41,7 +42,7 @@ export function useEpisode(kind) {
     if (media.length == 0) return;
     let data = { tittle, sinopsis, anime: siglasPage, num, seasion, media };
     console.log(data);
-    if (id) {
+    if (id.length > 3) {
       editEpisode(data)
         .then((result) => {
           console.log("====================================");

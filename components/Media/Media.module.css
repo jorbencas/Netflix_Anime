@@ -261,6 +261,7 @@
   width: -webkit-fill-available;
 } */
 
+
 @media all and (max-width: 550px) {
   .upload .formulario {
     width: 97%;
@@ -837,7 +838,9 @@
 .messagesupload{
   width: -webkit-fill-available;
 }
-
+.errores {
+  color:white;
+}
 @media all and (max-width:550px) {
     .upload #formcreatewrap{
         width: 97%;

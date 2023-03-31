@@ -1,37 +1,29 @@
-import styles from "./Media.module.css";
+import ImputKindsFilters from "../InputsFilters/index";
 
-export default function MediaTabs({ kind, changeKind, message }) {
-  if (kind !== "animes") {
-    return <div className={styles.messagesupload}>{message}</div>;
-  }
+export default function MediaTabs({ kind, changeKind }) {
   return (
     <>
-      <input
+      <ImputKindsFilters
         type="radio"
+        key="1"
+        changeKing={(e, t) => {
+          changeKind(e.value);
+        }}
+        ischecked={kind === "banner"}
         value="banner"
-        name="kind"
-        id="banner"
-        className={styles.radio}
-        onChange={(e) => changeKind(e.target.value)}
+        label="banner"
+        i="banner"
       />
-      <label className={styles.label} htmlFor="banner">
-        banner
-      </label>
 
-      <input
+      <ImputKindsFilters
         type="radio"
+        key="2"
+        changeKing={(e) => changeKind(e.value)}
+        ischecked={kind === "portada"}
         value="portada"
-        name="kind"
-        id="portada"
-        className={styles.tablinks}
-        onChange={(e) => changeKind(e.target.value)}
+        label="portada"
+        i="portada"
       />
-
-      <label className={styles.label} htmlFor="portada">
-        portada
-      </label>
-
-      <div className={styles.messagesupload}>{message}</div>
     </>
   );
 }

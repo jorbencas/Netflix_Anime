@@ -1,17 +1,14 @@
 import { useMediaForm } from "@/hooks/useMediaForm";
 import MediaTabs from "./MediaTabs";
 import styles from "./Media.module.css";
+import { useEffect } from "react";
 
 export default function MediaForm() {
-  const [
-    message,
-    readFile,
-    clickbuttonupload,
-    setMediaFiles2,
-    kind,
-    setKind,
-    errors,
-  ] = useMediaForm();
+  const [readFile, clickbuttonupload, readUrl, k, kind, setKind, errors] =
+    useMediaForm();
+      useEffect(() => {
+        console.log("Hola");
+      }, []);
 
   return (
     <div className={styles.upload}>
@@ -33,11 +30,10 @@ export default function MediaForm() {
 
         {/* <i className="fas fa-cloud-upload-alt"></i> */}
       </div>
-
       <div className={styles.buttons}>
         <input
           className={styles.text}
-          onChange={(e) => setMediaFiles2(e.target.value)}
+          onChange={(e) => readUrl(e.target.value)}
           type="url"
           accept="image/png, .jpeg, .jpg, image/gif, .mp4, .webm"
         />
@@ -49,19 +45,23 @@ export default function MediaForm() {
         />
         {/* <i className="fas fa-file-import"></i> */}
       </div>
-      <MediaTabs kind={kind} changeKind={(e) => setKind(e)} message={message} />
+      {k === "animes" && (
+        <MediaTabs kind={kind} changeKind={(e) => setKind(e)} />
+      )}
       <Errors errors={errors} />
     </div>
   );
 }
 
 const Errors = ({ errors }) => {
-  if (errors.length == 0) return undefined;
-
+  if (errors.length == 0) return "";
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
   return (
-    <section className={styles.info}>
+    <section className={styles.info + " " + styles.errores}>
       {errors.map((element, i) => (
-        <article key={i}> {element}</article>
+        <article key={i}>{element}</article>
       ))}
     </section>
   );

@@ -27,7 +27,7 @@ export default function useAnime(edit = false) {
   const { media, setMedia, setK, setId_external } = useContext(MediaContext);
 
   useEffect(() => {
-    if (siglasPage) {
+    if (siglasPage.length > 3) {
       getAnime(siglasPage, edit)
         .then((anime) => {
           if (anime?.status?.code === 200) {
@@ -50,13 +50,12 @@ export default function useAnime(edit = false) {
             setState(state);
             setIdioma(idioma);
             setMedia(anime?.data.media);
-            setK("animes");
             setId_external(siglasPage);
           }
         })
         .catch((err) => console.error(err));
     }
-
+    setK("animes");
     getGeneres()
       .then((genere) => {
         if (genere?.data) {
@@ -141,7 +140,7 @@ export default function useAnime(edit = false) {
       media,
     };
     console.log(data);
-    if (siglasPage) {
+    if (siglasPage.length > 3) {
       editAnime(data)
         .then((result) => {
           console.log("====================================");

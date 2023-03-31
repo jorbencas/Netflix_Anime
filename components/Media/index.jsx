@@ -8,7 +8,7 @@ import { useSiglas } from "@/hooks/useSiglas";
 
 export default function Media() {
   const { media } = useContext(MediaContext);
-  const [...siglasPage] = useSiglas();
+  const [siglas, siglasPage] = useSiglas();
   return (
     <div className={styles.upload}>
       <div className={styles.sortableupload + " " + styles.cursorPointer}>
@@ -16,7 +16,9 @@ export default function Media() {
           <table className={styles.table} borde="0">
             <tbody>
               {media.map((element, i) => {
-                <MediaListElement element={element} />;
+                return (
+                  <MediaListElement filePath={element} key={element.id} i={i} />
+                );
               })}
             </tbody>
           </table>
@@ -34,5 +36,3 @@ export default function Media() {
     </div>
   );
 }
-
-//hola
