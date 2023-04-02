@@ -7,6 +7,7 @@ export let animeState = {
   generes: ["action"],
   state: "",
   idioma: "",
+  kind: "serie",
 };
 
 export function anime_reducer(state, action) {
@@ -50,6 +51,11 @@ export function anime_reducer(state, action) {
     return {
       ...state,
       idioma: action.idioma,
+    };
+  } else if (type == "setKind") {
+    return {
+      ...state,
+      kind: action.kind,
     };
   } else {
     return {

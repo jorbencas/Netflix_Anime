@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState, useContext } from "react";
-import { getAnime, editAnime, insertAnime } from "@/services/index";
+import { getAnime, inserteditAnime } from "@/services/index";
 import { getTemporadas, getGeneres, getIdiomaLista } from "@/services/index";
 import { useSiglas } from "@/hooks/useSiglas";
 import { MediaContext } from "@/context/Media";
@@ -16,11 +16,12 @@ export default function useAnime(edit = false) {
       generes,
       state,
       idioma,
+      kind,
     },
     dispatch,
   ] = useReducer(anime_reducer, animeState);
 
-  const [...siglasPage] = useSiglas();
+  const [siglas, siglasPage] = useSiglas();
   const [idiomasLista, setIdiomasLista] = useState([]);
   const [generesLista, setGeneresLista] = useState([]);
   const [temporadasLista, setTemporadasLista] = useState([]);
@@ -40,6 +41,7 @@ export default function useAnime(edit = false) {
               generes,
               state,
               idioma,
+              kind,
             } = anime?.data;
             setTittle(tittle);
             setSinopsis(sinopsis);
@@ -51,6 +53,7 @@ export default function useAnime(edit = false) {
             setIdioma(idioma);
             setMedia(anime?.data.media);
             setId_external(siglasPage);
+            setKind(kind);
           }
         })
         .catch((err) => console.error(err));
@@ -110,6 +113,9 @@ export default function useAnime(edit = false) {
     dispatch({ type: "setIdioma", idioma });
   };
 
+  const setKind = (kind) => {
+    dispatch({ type: "setKind", kind });
+  };
   const setFilters = (k, kind) => {
     if (kind == "Generes") {
       let content = generes.includes(k)
@@ -137,26 +143,16 @@ export default function useAnime(edit = false) {
       generes,
       state,
       idioma,
+      kind,
       media,
     };
-    console.log(data);
-    if (siglasPage.length > 3) {
-      editAnime(data)
-        .then((result) => {
-          console.log("====================================");
-          console.log(result);
-          console.log("====================================");
-        })
-        .catch((err) => console.error(err));
-    } else {
-      insertAnime(data)
-        .then((result) => {
-          console.log("====================================");
-          console.log(result);
-          console.log("====================================");
-        })
-        .catch((err) => console.error(err));
-    }
+    inserteditAnime(data)
+      .then((result) => {
+        console.log("====================================");
+        console.log(result);
+        console.log("====================================");
+      })
+      .catch((err) => console.error(err));
   };
   return [
     tittle,
@@ -178,5 +174,7 @@ export default function useAnime(edit = false) {
     generesLista,
     temporadasLista,
     setFilters,
+    kind,
+    setKind,
   ];
 }

@@ -72,15 +72,7 @@ export const getSeasions = async (siglas) => {
   }).then((response) => response.json());
 };
 
-export const insertAnime = async (anime) => {
-  return await fetch(`${BASEURL}/api/animes/`, {
-    method: "PUT",
-    headers: headers,
-    body: JSON.stringify(anime),
-  }).then((response) => response.json());
-};
-
-export const editAnime = async (anime) => {
+export const inserteditAnime = async (anime) => {
   return await fetch(`${BASEURL}/api/animes/`, {
     method: "POST",
     headers: headers,

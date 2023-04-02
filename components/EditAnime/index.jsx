@@ -35,12 +35,14 @@ function ComponentAnime() {
     generesLista,
     temporadasLista,
     setFilters,
+    kind,
+    setKind,
   ] = useAnime(true);
 
   return (
     <div className={styles.wrap}>
       <div className={styles.contenedor_formulario}>
-        <form className={styles.concret} onSubmit={() => sendAnime}>
+        <form className={styles.concret} onSubmit={(e) => sendAnime(e)}>
           <div className={styles.contenedor_inputs}>
             <input
               type="text"
@@ -78,7 +80,7 @@ function ComponentAnime() {
               defaultValue={idioma}
               onChange={(e) => setIdioma(e.target.value)}
             >
-              {idiomasLista.lenght > 0
+              {idiomasLista.length > 0
                 ? idiomasLista.map(({ tittle, code }, i) => (
                     <option key={i} value={code}>
                       {tittle}
@@ -95,9 +97,22 @@ function ComponentAnime() {
               defaultValue={state}
               onChange={(e) => setState(e.target.value)}
             >
-              <option value="pendiong">Pendiente</option>
+              <option value="pending">Pendiente</option>
               <option value="continues">En Emision</option>
               <option value="finalized">Finalizado</option>
+            </select>
+          </div>
+
+          <div className={styles.concret}>
+            <p>Tipo: </p>
+            <select
+              multiple={false}
+              defaultValue={kind}
+              onChange={(e) => setKind(e.target.value)}
+            >
+              <option value="serie">Serie</option>
+              <option value="movie">Pelicula</option>
+              <option value="ova">Ova/Especial</option>
             </select>
           </div>
 

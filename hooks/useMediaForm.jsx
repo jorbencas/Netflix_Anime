@@ -70,9 +70,6 @@ export const useMediaForm = () => {
             Math.round((fileSize_total / 1024 / 1024) * 100) / 100;
           console.info(siglasPage);
           file.nombre = fileName;
-          if (k === "animes" && id_external !== siglasPage) {
-            setId_external(siglasPage);
-          }
         }
         setStateSucess(file);
       }
@@ -90,6 +87,9 @@ export const useMediaForm = () => {
   const setStateSucess = (file) => {
     setSuccess(true);
     setErrors([]);
+    if (k === "animes") {
+      setId_external(siglasPage);
+    }
     let req = {
       id: media.length,
       tabla: k,
