@@ -74,7 +74,7 @@ export const useMediaForm = () => {
         setStateSucess(file);
       }
     } else {
-      errors.push(" Vuelva a seleccionar algún archivo");
+      errors.push("Vuelva a seleccionar algún archivo");
     }
 
     if (errors.length > 0) {
