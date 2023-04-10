@@ -1,11 +1,16 @@
 import styles from "../EditAnime/EditAnime.module.css";
 import ImputKindsFilters from "../InputsFilters/index";
 
-export default function ListFilters({ kind, listOriginal, list, onchange }) {
+export default function ListFilters({
+  kind,
+  listOriginal,
+  list,
+  updateFilter,
+}) {
   if (list.length == 0) return `No hay ${kind}`;
   const changeValues = (value, id) => {
     let k = id.split("_");
-    onchange(value, k[1]);
+    updateFilter(value, k[1]);
   };
   return (
     <div className={styles.concret}>

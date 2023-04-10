@@ -116,9 +116,10 @@
   line-height: 1;
   border: none;
 }
-.upload .sortableupload tr td img {
+.upload .sortableupload tr td img,
+.upload .sortableupload tr td video {
   max-width: 100%;
-  max-height: 100%;
+  max-height: 100%; 
   border-radius: 3px;
   box-shadow: 2px 2px 5px 0px var(--opacity-grey);
   cursor: pointer;

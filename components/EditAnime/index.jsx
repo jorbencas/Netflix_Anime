@@ -39,6 +39,9 @@ function ComponentAnime() {
     setKind,
   ] = useAnime(true);
 
+  const setFFilters = (e, kind) => {
+    setFilters(e, kind);
+  };
   return (
     <div className={styles.wrap}>
       <div className={styles.contenedor_formulario}>
@@ -121,9 +124,7 @@ function ComponentAnime() {
             kind="Generes"
             listOriginal={generes}
             list={generesLista}
-            onchange={(e, kind) => {
-              setFilters(e, kind);
-            }}
+            updateFilter={setFFilters}
           />
 
           <ListFilters
@@ -131,9 +132,7 @@ function ComponentAnime() {
             kind="Temporadas"
             listOriginal={temporadas}
             list={temporadasLista}
-            onchange={(e, kind) => {
-              setFilters(e, kind);
-            }}
+            updateFilter={setFFilters}
           />
 
           <Modal btnLabel="Añadir Filtros">

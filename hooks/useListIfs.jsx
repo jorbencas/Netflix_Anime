@@ -3,13 +3,12 @@ import { getListIds } from "../services";
 import { useSiglas } from "@/hooks/useSiglas";
 
 export function useListIds(kind) {
-  const [...siglasPage] = useSiglas();
+  const [siglas, siglasPage] = useSiglas();
   const [id, setId] = useState(0);
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    console.log(siglasPage);
-    if (siglasPage) {
+    if (siglasPage.length > 3) {
       getListIds(siglasPage, kind)
         .then((list) => {
           if (list?.data) {

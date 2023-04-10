@@ -15,11 +15,7 @@ export default function Media() {
         {media.length > 0 ? (
           <table className={styles.table} borde="0">
             <tbody>
-              {media.map((element, i) => {
-                return (
-                  <MediaListElement filePath={element} key={element.id} i={i} />
-                );
-              })}
+              {media.map(element => <MediaListElement filePath={element} key={element.id} />)}
             </tbody>
           </table>
         ) : (
@@ -29,7 +25,7 @@ export default function Media() {
         )}
       </div>
       <div className={styles.buttons}>
-        <Modal btnLabel="Añadir archivos">
+        <Modal btnLabel="Añadir archivos" tittleModal={siglasPage}>
           <MediaForm />
         </Modal>
       </div>

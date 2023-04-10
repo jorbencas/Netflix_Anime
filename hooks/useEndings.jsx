@@ -37,6 +37,10 @@ export function useEnding({ kind }) {
     };
   }, [id]);
 
+  const getLastId = () => {
+
+    return id
+  }
   const sendEnding = () => {
     if (media.length == 0) return;
     let data = { tittle, sinopsis, anime: siglasPage, num, seasion, media };

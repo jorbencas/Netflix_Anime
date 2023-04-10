@@ -7,15 +7,15 @@ export function ClientOnlyPortal({ children }) {
   return createPortal(children, document.querySelector("#modal"));
 }
 
-export default function Modal({ children, btnLabel }) {
+export default function Modal({ children, btnLabel, tittleModal = "This modal is rendered using ." }) {
   return (
     <ModalContextProvider>
-      <ModalContent children={children} btnLabel={btnLabel} />
+      <ModalContent children={children} btnLabel={btnLabel} tittleModal={tittleModal}/>
     </ModalContextProvider>
   );
 }
 
-const ModalContent = ({ children, btnLabel }) => {
+const ModalContent = ({ children, btnLabel, tittleModal }) => {
   const { open, setOpen } = useContext(ModalContext);
 
   return (
@@ -32,7 +32,7 @@ const ModalContent = ({ children, btnLabel }) => {
           <div className={styles.backdrop}>
             <div className={styles.content}>
               <div className={styles.header}>
-                <p>This modal is rendered using .</p>
+                <p>{tittleModal}</p>
                 <button
                   className={styles.button}
                   type="button"

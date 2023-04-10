@@ -8,8 +8,7 @@ export function useMediaFile(filePath: Object | String) {
     if (filePath === Object(filePath)) {
       const {...params} = Object(filePath);
       const {file} = params;
-      
-      setElement({params, ...file});
+      setElement({...params, ...file});
       setVideoSrc(URL.createObjectURL(file));
     } else if (filePath === String(filePath) && !String(filePath).includes("http")) {
       getMedia(filePath)
