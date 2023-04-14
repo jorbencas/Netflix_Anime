@@ -5,7 +5,7 @@ import { useContext } from "react";
 import VideoTest from "@/components/VideoTest";
 
 export default function MediaListElement({ filePath }) {
-  const [videoSrc, element] = useMediaFile(filePath);
+  const { videoSrc, element } = useMediaFile(filePath);
   const { media, setMedia } = useContext(MediaContext);
   const removeElement = (idRemove) => {
     let eleme = media.filter(({ id }) => id !== idRemove);

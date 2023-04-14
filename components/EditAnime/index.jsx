@@ -15,7 +15,7 @@ export default function EditAnime() {
 }
 
 function ComponentAnime() {
-  const [
+  const {
     tittle,
     setTittle,
     sinopsis,
@@ -37,7 +37,7 @@ function ComponentAnime() {
     setFilters,
     kind,
     setKind,
-  ] = useAnime(true);
+ } = useAnime(true);
 
   const setFFilters = (e, kind) => {
     setFilters(e, kind);

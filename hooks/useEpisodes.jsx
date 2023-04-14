@@ -6,7 +6,7 @@ import { insertEpisode, editEpisode } from "@/services/index";
 import { MediaContext } from "@/context/Media";
 
 export function useEpisode(kind) {
-  const [siglasPage, id, list, setId] = useListIds(kind);
+  const { siglasPage, id, list, setId } = useListIds(kind);
   const { seasion, setSeasion } = useContext(SeasionContext);
   const [tittle, setTittle] = useState("");
   const [sinopsis, setSinopsis] = useState("");
@@ -61,7 +61,7 @@ export function useEpisode(kind) {
     }
   };
 
-  return [
+  return {
     id,
     list,
     setId,
@@ -73,5 +73,5 @@ export function useEpisode(kind) {
     media,
     setMedia,
     sendEpisode,
-  ];
+  };
 }

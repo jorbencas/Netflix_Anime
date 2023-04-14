@@ -4,7 +4,7 @@ import { defaultSiglas } from "../../services";
 import { useState, useEffect } from "react";
 
 const SiglasList = () => {
-  const [siglas, siglasPage, changeSiglas] = useSiglas();
+  const {siglas, siglasPage, changeSiglas} = useSiglas();
   const [siglasLista, setSiglasLista] = useState([]);
 
   useEffect(() => {

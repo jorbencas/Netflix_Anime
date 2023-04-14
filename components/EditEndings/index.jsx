@@ -13,7 +13,7 @@ export default function EditEndings() {
 }
 
 function ComponentEnding() {
-  const [
+  const {
     id,
     list,
     setId,
@@ -23,7 +23,7 @@ function ComponentEnding() {
     setSinopsis,
     num,
     sendEnding,
-  ] = useEnding("endings");
+ } = useEnding("endings");
 
   return (
     <>

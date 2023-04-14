@@ -21,7 +21,7 @@ export default function useAnime(edit = false) {
     dispatch,
   ] = useReducer(anime_reducer, animeState);
 
-  const [siglas, siglasPage] = useSiglas();
+  const { siglasPage } = useSiglas();
   const [idiomasLista, setIdiomasLista] = useState([]);
   const [generesLista, setGeneresLista] = useState([]);
   const [temporadasLista, setTemporadasLista] = useState([]);
@@ -154,7 +154,7 @@ export default function useAnime(edit = false) {
       })
       .catch((err) => console.error(err));
   };
-  return [
+  return {
     tittle,
     setTittle,
     sinopsis,
@@ -176,5 +176,5 @@ export default function useAnime(edit = false) {
     setFilters,
     kind,
     setKind,
-  ];
+  };
 }

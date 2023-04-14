@@ -3,7 +3,7 @@ import { getListIds } from "../services";
 import { useSiglas } from "@/hooks/useSiglas";
 
 export function useListIds(kind) {
-  const [siglas, siglasPage] = useSiglas();
+  const { siglasPage } = useSiglas();
   const [id, setId] = useState(0);
   const [list, setList] = useState([]);
 
@@ -25,5 +25,5 @@ export function useListIds(kind) {
     };
   }, []);
 
-  return [siglasPage, id, list, setId];
+  return { siglasPage, id, list, setId };
 }

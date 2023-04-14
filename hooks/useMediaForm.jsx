@@ -9,7 +9,7 @@ export const useMediaForm = () => {
   const [errors, setErrors] = useState([]);
   const [kind, setKind] = useState("");
   const { setOpen } = useContext(ModalContext);
-  const [siglas, siglasPage] = useSiglas();
+  const { siglasPage } = useSiglas();
 
   useEffect(() => {
     if (siglasPage.length < 3) {
@@ -67,7 +67,7 @@ export const useMediaForm = () => {
           console.info(siglasPage);
           file.nombre = fileName.split(".").shift();
         }
-        setStateSucess(elements, file);
+        addElement(elements, file);
       }
     } else {
       err.push("Vuelva a seleccionar algún archivo");
@@ -84,7 +84,7 @@ export const useMediaForm = () => {
     }
   };
 
-  const setStateSucess = (elements, file) => {
+  const addElement = (elements, file) => {
     let req = {
       id: media.length + 1,
       tabla: k,
@@ -106,7 +106,7 @@ export const useMediaForm = () => {
       if (!isImage(ext) && !isVideo(ext)) {
         err.push("Nombre de extensión (" + ext + ") no valido");
       } else {
-        setStateSucess(elements, namefileimport_array);
+        addElement(elements, namefileimport_array);
       }
     }
 
@@ -121,5 +121,5 @@ export const useMediaForm = () => {
     }
   };
 
-  return [readFile, readUrl, k, kind, setKind, errors];
+  return { readFile, readUrl, k, kind, setKind, errors };
 };

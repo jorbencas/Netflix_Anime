@@ -28,7 +28,7 @@ export default function Edit() {
             <SeasionListProvider>
               <EditSeasions text="Temporadas" />
               <EditEpisodes text="Episodes" />
-              <EditOpenings text="openings" />
+              <EditOpenings text="Openings" />
               <EditEndings text="Endings" />
             </SeasionListProvider>
             <ViewEdit text="all" />
@@ -40,7 +40,7 @@ export default function Edit() {
 }
 
 const ViewEdit = () => {
-  const [...siglasPage] = useSiglas();
+  const { siglasPage } = useSiglas();
 
   return <h1>Hola {siglasPage}</h1>;
 

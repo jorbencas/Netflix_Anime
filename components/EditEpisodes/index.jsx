@@ -12,7 +12,7 @@ export default function EditEpisodes() {
 }
 
 function ComponentEpisodes() {
-  const [
+  const {
     id,
     list,
     setId,
@@ -22,7 +22,7 @@ function ComponentEpisodes() {
     setSinopsis,
     num,
     sendEpisode,
-  ] = useEpisode("episodes");
+  } = useEpisode("episodes");
 
   return (
     <>
@@ -60,9 +60,7 @@ function ComponentEpisodes() {
               value={date_finalization}
               placeholder="Fecha de Finalización"
             /> */}
-            <MediaListProvider>
-              <Media />
-            </MediaListProvider>
+            <Media />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

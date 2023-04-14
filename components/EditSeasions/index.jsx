@@ -3,7 +3,7 @@ import { useSeasion } from "@/hooks/useSeasions";
 import DyamondListIds from "../DyamondListIds";
 
 export default function EditSeasions() {
-  const [list, setList, tittle, setTittle, sendSeasion] =
+  const { list, setList, tittle, setTittle, sendSeasion } =
     useSeasion("seasions");
 
   return (

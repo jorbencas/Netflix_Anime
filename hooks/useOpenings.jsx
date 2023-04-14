@@ -6,7 +6,7 @@ import { insertOpening, editOpening } from "@/services/index";
 import { MediaContext } from "@/context/Media";
 
 export function useOpening(kind) {
-  const [siglasPage, id, list, setId] = useListIds(kind);
+  const { siglasPage, id, list, setId } = useListIds(kind);
   const { seasion, setSeasion } = useContext(SeasionContext);
   const [tittle, setTittle] = useState("");
   const [sinopsis, setSinopsis] = useState("");
@@ -61,7 +61,7 @@ export function useOpening(kind) {
     }
   };
 
-  return [
+  return {
     id,
     list,
     setId,
@@ -74,5 +74,5 @@ export function useOpening(kind) {
     media,
     setMedia,
     sendOpening,
-  ];
+  };
 }

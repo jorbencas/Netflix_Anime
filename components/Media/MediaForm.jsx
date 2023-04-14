@@ -3,7 +3,7 @@ import MediaTabs from "./MediaTabs";
 import styles from "./Media.module.css";
 
 export default function MediaForm() {
-  const [readFile, readUrl, k, kind, setKind, errors] = useMediaForm();
+  const { readFile, readUrl, k, kind, setKind, errors } = useMediaForm();
 
   return (
     <div className={styles.upload}>

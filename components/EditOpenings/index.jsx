@@ -13,7 +13,7 @@ export default function EditOpenings() {
 }
 
 function ComponentOpenings() {
-  const [
+  const {
     id,
     list,
     setId,
@@ -22,7 +22,7 @@ function ComponentOpenings() {
     sinopsis,
     setSinopsis,
     sendOpening,
-  ] = useOpening("openings");
+  } = useOpening("openings");
 
   return (
     <>
@@ -48,9 +48,7 @@ function ComponentOpenings() {
                 onChange={(e) => setSinopsis(e.target.value)}
               />
             </div>
-              <MediaListProvider>
-                <Media />
-              </MediaListProvider>
+            <Media />
             <input className={styles.input} type="submit" value="Crear" />
           </form>
         </div>

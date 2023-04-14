@@ -6,7 +6,7 @@ import { insertEnding, editEnding } from "@/services/index";
 import { MediaContext } from "@/context/Media";
 
 export function useEnding({ kind }) {
-  const [siglasPage, id, list, setId] = useListIds(kind);
+  const { siglasPage, id, list, setId } = useListIds(kind);
   const { seasion, setSeasion } = useContext(SeasionContext);
   const [tittle, setTittle] = useState("");
   const [sinopsis, setSinopsis] = useState("");
@@ -38,9 +38,8 @@ export function useEnding({ kind }) {
   }, [id]);
 
   const getLastId = () => {
-
-    return id
-  }
+    return id;
+  };
   const sendEnding = () => {
     if (media.length == 0) return;
     let data = { tittle, sinopsis, anime: siglasPage, num, seasion, media };
@@ -64,7 +63,7 @@ export function useEnding({ kind }) {
     }
   };
 
-  return [
+  return {
     id,
     list,
     setId,
@@ -76,5 +75,5 @@ export function useEnding({ kind }) {
     media,
     setMedia,
     sendEnding,
-  ];
+  };
 }

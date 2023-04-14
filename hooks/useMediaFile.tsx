@@ -18,5 +18,5 @@ export function useMediaFile(filePath: Object | String) {
       setVideoSrc(filePath);
     }
   }, []);
-  return [videoSrc, element];
+  return {videoSrc, element};
 }

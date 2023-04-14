@@ -5,7 +5,7 @@ import { editOpening, insertOpening } from "@/services/index";
 import { useListIds } from "@/hooks/useListIfs";
 
 export function useSeasion({ kind }) {
-  const [siglasPage, id, setId, list] = useListIds(kind);
+  const { siglasPage, id, setId, list } = useListIds(kind);
   const { setSeasion } = useContext(SeasionContext);
   const [tittle, setTittle] = useState({});
 
@@ -58,5 +58,5 @@ export function useSeasion({ kind }) {
 
     setSeasion(id);
   };
-  return [list, setId, tittle, setTittle, sendSeasion];
+  return { list, setId, tittle, setTittle, sendSeasion };
 }

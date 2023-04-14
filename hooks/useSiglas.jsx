@@ -11,5 +11,5 @@ export function useSiglas() {
     setSiglasPage(s);
   }, []);
 
-  return [siglas, siglasPage, changeSiglas];
+  return { siglas, siglasPage, changeSiglas };
 }
