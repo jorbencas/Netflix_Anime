@@ -57,6 +57,11 @@ export function anime_reducer(state, action) {
       ...state,
       kind: action.kind,
     };
+  } else if (type == "setSaga") {
+    return {
+      ...state,
+      saga: action.saga,
+    };
   } else {
     return {
       ...state,

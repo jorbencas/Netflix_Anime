@@ -42,6 +42,7 @@ export default function useAnime(edit = false) {
               state,
               idioma,
               kind,
+              saga,
             } = anime?.data;
             setTittle(tittle);
             setSinopsis(sinopsis);
@@ -54,6 +55,7 @@ export default function useAnime(edit = false) {
             setMedia(anime?.data.media);
             setId_external(siglasPage);
             setKind(kind);
+            setSaga(saga);
           }
         })
         .catch((err) => console.error(err));
@@ -116,6 +118,11 @@ export default function useAnime(edit = false) {
   const setKind = (kind) => {
     dispatch({ type: "setKind", kind });
   };
+
+  const setSaga = (saga) => {
+    dispatch({ type: "setSaga", saga });
+  };
+
   const setFilters = (k, kind) => {
     if (kind == "Generes") {
       let content = generes.includes(k)
@@ -135,6 +142,7 @@ export default function useAnime(edit = false) {
     if (media.length == 0) return;
     let data = {
       siglas: siglasPage,
+      saga,
       tittle,
       sinopsis,
       date_publication,
