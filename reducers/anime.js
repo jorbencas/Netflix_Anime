@@ -6,7 +6,7 @@ export let animeState = {
   temporadas: [],
   generes: ["action"],
   state: "",
-  idioma: "",
+  idioma: "es",
   kind: "serie",
 };
 

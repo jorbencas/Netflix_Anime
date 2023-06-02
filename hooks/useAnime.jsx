@@ -17,6 +17,7 @@ export default function useAnime(edit = false) {
       state,
       idioma,
       kind,
+      saga
     },
     dispatch,
   ] = useReducer(anime_reducer, animeState);
@@ -154,13 +155,14 @@ export default function useAnime(edit = false) {
       kind,
       media,
     };
-    inserteditAnime(data)
-      .then((result) => {
-        console.log("====================================");
-        console.log(result);
-        console.log("====================================");
-      })
-      .catch((err) => console.error(err));
+    console.log(data);
+    // inserteditAnime(data)
+    //   .then((result) => {
+    //     console.log("====================================");
+    //     console.log(result);
+    //     console.log("====================================");
+    //   })
+    //   .catch((err) => console.error(err));
   };
   return {
     tittle,
@@ -184,5 +186,7 @@ export default function useAnime(edit = false) {
     setFilters,
     kind,
     setKind,
+    saga,
+    setSaga,
   };
 }

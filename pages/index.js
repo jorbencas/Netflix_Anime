@@ -11,7 +11,7 @@ import { Countdown } from "@/components/countDown";
 import { useMediaFile } from "../hooks/useMediaFile";
 
 export default function Home() {
-  const [videoSrc] = useMediaFile("openings/2");
+  const { videoSrc } = useMediaFile("openings/2");
   return (
     <>
       <Head>
