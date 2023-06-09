@@ -6,9 +6,10 @@ export function useSiglas() {
 
   const changeSiglas = useCallback((e) => {
     let sigla = e.target.value;
+    let saga = e.target.attributes.first.saga;
     let s = sigla === "else" ? "" : sigla;
     console.log(s);
-    setSiglasPage(s);
+    setSiglasPage({ siglas: s, saga: saga });
   }, []);
 
   return { siglas, siglasPage, changeSiglas };

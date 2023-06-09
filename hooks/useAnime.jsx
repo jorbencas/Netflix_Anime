@@ -17,12 +17,12 @@ export default function useAnime(edit = false) {
       state,
       idioma,
       kind,
-      saga
+      saga,
     },
     dispatch,
   ] = useReducer(anime_reducer, animeState);
 
-  const { siglasPage } = useSiglas();
+  const { changeSiglas, siglasPage } = useSiglas();
   const [idiomasLista, setIdiomasLista] = useState([]);
   const [generesLista, setGeneresLista] = useState([]);
   const [temporadasLista, setTemporadasLista] = useState([]);
@@ -188,5 +188,7 @@ export default function useAnime(edit = false) {
     setKind,
     saga,
     setSaga,
+    changeSiglas,
+    siglasPage,
   };
 }

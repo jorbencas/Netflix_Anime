@@ -37,9 +37,11 @@ function ComponentAnime() {
     setFilters,
     kind,
     setKind,
-    saga, 
-    setSaga
- } = useAnime(true);
+    saga,
+    setSaga,
+    changeSiglas,
+    siglasPage,
+  } = useAnime(true);
 
   const setFFilters = (e, kind) => {
     setFilters(e, kind);
@@ -60,11 +62,19 @@ function ComponentAnime() {
             <input
               type="text"
               className={styles.input}
+              placeholder="Siglas"
+              value={siglasPage}
+              saga={saga}
+              onChange={changeSiglas}
+            />
+
+            <input
+              type="text"
+              className={styles.input}
               defaultValue={saga}
               onChange={(e) => setSaga(e.target.value)}
               placeholder="saga"
             />
-
           </div>
 
           <textarea

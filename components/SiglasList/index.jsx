@@ -4,7 +4,7 @@ import { defaultSiglas } from "../../services";
 import { useState, useEffect } from "react";
 
 const SiglasList = () => {
-  const { siglas, siglasPage, changeSiglas } = useSiglas();
+  const { changeSiglas } = useSiglas();
   const [siglasLista, setSiglasLista] = useState([]);
 
   useEffect(() => {
@@ -25,21 +25,12 @@ const SiglasList = () => {
       <select onChange={changeSiglas}>
         <option value="else">ninguna de ellas</option>
         {siglasLista.length > 0 &&
-          siglasLista.map((s, i) => (
-            <option key={i} value={s}>
-              {s}
+          siglasLista.map(({ saga, siglas }, i) => (
+            <option key={i} value={siglas} saga={saga}>
+              {sigla}
             </option>
           ))}
       </select>
-      {!siglas && (
-        <input
-          type="text"
-          className={styles.input}
-          placeholder="Siglas"
-          value={siglasPage}
-          onChange={changeSiglas}
-        />
-      )}
     </>
   );
 };

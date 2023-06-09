@@ -7,7 +7,10 @@ export function SiglasListProvider({ children }) {
   const href = useRouter();
   const { siglas } = href.query;
   let s = siglas ? siglas : "";
-  const [siglasPage, setSiglasPage] = useState(s);
+  const [siglasPage, setSiglasPage] = useState({
+    siglas: s,
+    saga: "",
+  });
 
   return (
     <SiglasContext.Provider value={{ siglas, siglasPage, setSiglasPage }}>
