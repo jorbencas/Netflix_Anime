@@ -33,7 +33,7 @@ const Tabs = ({ children }) => {
 
   const inflateTabs = (element) => {
     let l = [];
-    if (element?.props == null || element.props == undefined) {
+    if (!element.props) {
       element.forEach((e) => {
         l = [...l, ...inflateTabs(e)];
       });
