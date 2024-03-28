@@ -1,3 +1,6 @@
+import { timeEnd } from "console";
+import { clearTimeout } from "timers";
+
 const BASEURL = "http://localhost:3001";
 const APITOKEN =
   "???123456789Azsxdcfvgnbhknljopimuhytgrfqew127364lpñokmni**/-++89¿juhvtcfdr65es123\\~~xza_qw";
@@ -6,7 +9,7 @@ const headers = {
   authorization: APITOKEN,
   "X-Requested-With": "XMLHttpRequest",
 };
-
+let controller, timeout;
 export const getEpisode = async (id) => {
   return await fetch(`${BASEURL}/api/episodes/${id}`, {
     headers: headers,
@@ -138,4 +141,24 @@ export const getListIds = async ({ siglas, kind }) => {
   return await fetch(`${BASEURL}/api/${kind}/getListIds/${siglas}`, {
     headers: headers,
   }).then((response) => response.json());
+};
+
+export const search = async ({ kind, search }) => {
+  if (timeout) {
+    clearTimeout(timeout);
+  }
+  timeout = setTimeout(async () => {
+    if (controller) {
+      controller.abort();
+    }
+
+    const abort = new AbortController();
+    controller = abort;
+
+    try {
+      return await fetch(`${BASEURL}/api/${kind}/getListIds/${search}`, {
+        headers: headers,
+      }).then((response) => response.json());
+    } catch (error) {}
+  }, 500);
 };
