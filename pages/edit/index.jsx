@@ -1,4 +1,4 @@
-import Head from "next/head";
+  import Head from "next/head";
 import AppLayout from "@/components/AppLayout";
 import EditAnime from "@/components/EditAnime";
 import EditEpisodes from "@/components/EditEpisodes";

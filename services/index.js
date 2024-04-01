@@ -1,14 +1,18 @@
-import { timeEnd } from "console";
 import { clearTimeout } from "timers";
 
 const BASEURL = "http://localhost:3001";
-const APITOKEN =
-  "???123456789Azsxdcfvgnbhknljopimuhytgrfqew127364lpñokmni**/-++89¿juhvtcfdr65es123\\~~xza_qw";
 const headers = {
   "Content-Type": "application/json",
-  authorization: APITOKEN,
+  authorization: await getApiToken.tokwn,
   "X-Requested-With": "XMLHttpRequest",
 };
+
+export const getApiToken = async (id) => {
+  return await fetch(`${BASEURL}/api/getApiToken`).then((response) =>
+    response.json()
+  );
+};
+
 let controller, timeout;
 export const getEpisode = async (id) => {
   return await fetch(`${BASEURL}/api/episodes/${id}`, {
