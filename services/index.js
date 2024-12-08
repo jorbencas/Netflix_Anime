@@ -7,7 +7,7 @@ const headers = {
   "X-Requested-With": "XMLHttpRequest",
 };
 
-export const getApiToken = async (id) => {
+export const getApiToken = async (_id) => {
   return await fetch(`${BASEURL}/api/getApiToken`).then((response) =>
     response.json()
   );
@@ -124,7 +124,9 @@ export const insertEpisode = async (episode) => {
     method: "PUT",
     headers: headers,
     body: JSON.stringify(episode),
-  }).then((response) => response.json());
+  })
+    .then((response) => response.json())
+    .catch((ex) => ex);
 };
 
 export const editEpisode = async (episode) => {
