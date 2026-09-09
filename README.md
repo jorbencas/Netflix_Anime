@@ -1,124 +1,125 @@
-# Cosas de Anime
-Proyecto Anime realizado con la siguientes tecnologias, frameworks y librerias: 
-* React
-* React Native
+# Cosas de Anime — Frontend
 
-### Configuración del proyecto
+Plataforma de catálogo y streaming de anime construida con Next.js. Permite gestionar anime con metadatos completos (título, sinopsis, fechas, géneros, temporadas), administrar episodios/openings/endings, subir y reproducir contenido multimedia, y chatear en tiempo real.
 
-* Instalar node y npm en linux 
-    -   sudo apt-get install wget
-    -   wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-    -   source ~/.profile
-    -   nvm ls-remote
-    -   nvm install 12.18.4
-    -   npm -v
-    -   node -v
-    
-* Desinstalar nvm 
-    -   nvm deactivate
-    -   nvm uninstall v12.18.4
+> **Backend API**: [Netflix_Anime_Api](https://github.com/jorbencas/Netflix_Anime_Api)
 
-## Actualizar Nodejs y NPM versiones 
-NVM: https://github.com/coreybutler/nvm-windows
+---
 
+## Tech Stack
 
-### Angular Font-Awesome
-    https://github.com/FortAwesome/angular-fontawesome
+| Categoría | Tecnología |
+|-----------|------------|
+| Framework | [Next.js 12](https://nextjs.org/) |
+| UI | [React 18](https://react.dev/) |
+| Lenguaje | JavaScript + TypeScript (parcial) |
+| State | React Context (useReducer) |
+| Estilos | CSS Modules + CSS Custom Properties |
+| i18n | JSON files (es/en) |
+| Backend | [Netflix_Anime_Api](https://github.com/jorbencas/Netflix_Anime_Api) (Express + Prisma + PostgreSQL) |
+| Realtime | Socket.IO (chat) |
 
-### Angular Información 
+---
 
-### React Información
+## Características
 
-### Vue Informacion
-    https://vuejs.org
-    Core Docs
-          
-    https://forum.vuejs.org
-    Forum
-          
-    https://chat.vuejs.org
-    Community Chat
-          
-    https://twitter.com/vuejs
-    Twitter
-          
-    http://vuejs-templates.github.io/webpack/
-    Vue Templates    
-    
-    http://router.vuejs.org/
-    vue-router
-          
-    http://vuex.vuejs.org/
-    vuex
-          
-    
-    http://vue-loader.vuejs.org/
-    vue-loader
-    
-    https://github.com/vuejs/awesome-vue
-    awesome-vue
+- **CRUD de Anime**: título, abreviatura (siglas), saga, sinopsis, fechas, idioma, estado, tipo, géneros, temporadas
+- **Gestión de episodios**: CRUD con soporte de subtítulos y media
+- **Openings y Endings**: gestión de themes musicales por anime
+- **Sistema de media**: subida y visualización de imágenes (jpg/png/gif/bmp) y vídeos (mp4)
+- **Reproductor de vídeo**: controles personalizados (play/pause, skip, barra de progreso)
+- **Chat en tiempo real**: WebSocket con Socket.IO, indicadores de escritura, notificaciones de sonido
+- **Dark/Light mode**: toggle de tema con CSS Custom Properties
+- **Internacionalización**: español e inglés (useReducer + JSON)
+- **Filtros**: búsqueda por géneros y temporadas
 
-### Vue Project setup
+---
+
+## Estructura del proyecto
+
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-#### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
+Netflix_Anime/
+├── pages/                    # Rutas Next.js
+│   ├── index.js              # Home
+│   ├── edit/index.jsx        # Panel de administración (pestañas)
+│   └── api/hello.js          # API route de ejemplo
+├── components/               # Componentes React
+│   ├── Header/               # Navegación
+│   ├── Footer/               # Footer con scroll-to-top
+│   ├── Modal/                # Modal reutilizable (React Portal)
+│   ├── Tabs/                 # Sistema de pestañas
+│   ├── EditAnime/            # Formulario de anime
+│   ├── EditEpisodes/         # Formulario de episodios
+│   ├── EditOpenings/         # Formulario de openings
+│   ├── EditEndings/          # Formulario de endings
+│   ├── EditSeasions/         # Formulario de temporadas
+│   ├── Media/                # Sistema de media (upload + display)
+│   ├── VideoTest/            # Reproductor de vídeo custom
+│   ├── Filters/              # Sistema de filtros
+│   └── SwitchButton/         # Toggle dark/light mode
+├── context/                  # React Context providers
+│   ├── ThemeContext.jsx       # Estado del tema
+│   ├── LangContext.jsx        # i18n
+│   ├── ModalContext.jsx       # Estado del modal
+│   ├── SiglasContext.jsx      # Abreviaturas de anime
+│   └── Media.jsx             # Archivos media
+├── hooks/                    # Custom hooks
+│   ├── useAnime.jsx          # Lógica CRUD de anime
+│   ├── useEpisodes.jsx       # Lógica CRUD de episodios
+│   ├── useMediaFile.tsx      # Carga de archivos media
+│   └── useMediaForm.jsx      # Formulario de subida
+├── services/                 # Capa de API (conexión al backend)
+├── lang/                     # Traducciones (es.json, en.json)
+├── styles/                   # CSS (globals, themes, componentes)
+└── reducers/                 # Anime state reducer
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+---
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Requisitos
 
+- [Node.js](https://nodejs.org/) 16+
+- npm o yarn
+- [Netflix_Anime_Api](https://github.com/jorbencas/Netflix_Anime_Api) ejecutándose en `localhost:3001`
 
+---
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
+## Instalación
 
 ```bash
+# Clonar el repositorio
+git clone https://github.com/jorbencas/Netflix_Anime.git
+cd Netflix_Anime
+
+# Instalar dependencias
+npm install
+
+# Arrancar en desarrollo
 npm run dev
-# or
-yarn dev
+
+# Abrir en el navegador
+# http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Scripts disponibles
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+| Comando | Descripción |
+|---------|-------------|
+| `npm run dev` | Servidor de desarrollo con hot-reload |
+| `npm run build` | Build de producción |
+| `npm start` | Ejecutar build de producción |
+| `npm run lint` | ESLint |
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+---
 
-## Learn More
+## Backend
 
-To learn more about Next.js, take a look at the following resources:
+El frontend se conecta a una API backend en `localhost:3001`. Consulta el repositorio [Netflix_Anime_Api](https://github.com/jorbencas/Netflix_Anime_Api) para ver los endpoints, el schema de la base de datos y cómo arrancarlo.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Licencia
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Proyecto personal de [Jorge Beneyto Castelló](https://github.com/jorbencas).
